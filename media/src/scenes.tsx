@@ -9,14 +9,14 @@ import {
 } from "./ui";
 
 /** A screenshot in the window, with a camera and captions. */
-const ShotScene: React.FC<{ mode: Mode; shot: string; kicker: string; caps: { from: number; to: number; text: string }[]; keys: Key[]; scroll?: (f: number) => number; overlay?: React.ReactNode; stage?: React.ReactNode }> = ({ mode, shot, kicker, caps, keys, scroll, overlay, stage }) => {
+const ShotScene: React.FC<{ mode: Mode; shot: string; kicker: string; caps: { from: number; to: number; text: string }[]; keys: Key[]; overlay?: React.ReactNode; stage?: React.ReactNode }> = ({ mode, shot, kicker, caps, keys, overlay, stage }) => {
   const f = useCurrentFrame();
   return (
     <SceneIn>
       <Backdrop mode={mode} />
       <AbsoluteFill style={cameraStyle(f, keys)}>
         <WindowFrame mode={mode}>
-          <Shot name={shot} scroll={scroll ? scroll(f) : 0} />
+          <Shot name={shot} />
           {overlay}
         </WindowFrame>
       </AbsoluteFill>
@@ -93,7 +93,7 @@ export const Catalogue: React.FC = () => {
         const appear = prog(f, i * 2, i * 2 + 14, easeOut);
         const drift = Math.sin((f + i * 20) / 45) * 6 * (1 - g);
         return (
-          <div key={i} style={{ position: "absolute", left: sx + (tx - sx) * g, top: sy + (ty - sy) * g + drift, transform: `rotate(${rot * (1 - g)}deg) scale(${1 - 0.55 * g})`,
+          <div key={i} style={{ position: "absolute", left: 0, top: 0, transform: `translate3d(${sx + (tx - sx) * g}px, ${sy + (ty - sy) * g + drift}px, 0) rotate(${rot * (1 - g)}deg) scale(${1 - 0.55 * g})`,
             transformOrigin: "0 0", opacity: appear * (1 - prog(f, b(4) - 6, b(4) + 4)), padding: "16px 22px", borderRadius: 12, background: c.panel,
             boxShadow: "0 12px 30px -16px rgba(40,30,20,.35), 0 0 0 1px rgba(22,22,22,.08)", fontFamily: MONO, whiteSpace: "nowrap" }}>
             <div style={{ fontSize: 26, color: c.ink, display: "flex", alignItems: "center", gap: 12 }}>
@@ -108,7 +108,7 @@ export const Catalogue: React.FC = () => {
       {SONGS.map((s, i) => {
         const a = prog(f, b(3) + i * 3, b(4) + i * 3, easeOut);
         return (
-          <div key={s.title} style={{ position: "absolute", left: 1060 - (1 - a) * 30, top: 150 + i * 142, width: 690, height: 118, opacity: a, borderRadius: 16, background: c.panel,
+          <div key={s.title} style={{ position: "absolute", left: 1060, top: 150 + i * 142, transform: `translate3d(${-(1 - a) * 30}px, 0, 0)`, width: 690, height: 118, opacity: a, borderRadius: 16, background: c.panel,
             boxShadow: "0 18px 40px -22px rgba(40,30,20,.4), 0 0 0 1px rgba(22,22,22,.08)", display: "flex", alignItems: "center", gap: 22, padding: "0 26px", fontFamily: SANS }}>
             <div style={{ width: 74, height: 74, borderRadius: 12, background: `linear-gradient(135deg, ${s.art}, ${s.art}cc)`, color: "#fff", display: "grid", placeItems: "center", fontSize: 32, fontWeight: 600 }}>{s.title[0]}</div>
             <div style={{ flex: 1 }}>
@@ -215,7 +215,7 @@ export const Mood: React.FC = () => {
           </div>
         </div>
       </div>
-      <Captions mode="light" kicker="05 · Mood board" caps={[{ from: 6, to: 9999, text: "A mood board per song: images, ideas, lyrics, colours" }]} />
+      <Captions mode="light" kicker="06 · Mood board" caps={[{ from: 6, to: 9999, text: "A mood board per song: images, ideas, lyrics, colours" }]} />
     </SceneIn>
   );
 };
@@ -246,8 +246,11 @@ export const Copy: React.FC = () => {
         </div>
         {rows.map((r) => {
           const isCopy = r.kind === "copy";
+          // rows below the copy start one row up and slide down as it appears
+          const shift = r.kind === "dir" ? -(1 - appear) * 74 : 0;
           return (
-            <div key={r.name} style={{ height: isCopy ? 74 * appear : 74, overflow: "hidden", opacity: isCopy ? appear : 1, background: isCopy ? `rgba(229,53,43,${0.1 * flash + 0.04})` : "transparent" }}>
+            <div key={r.name} style={{ height: 74, overflow: "hidden", opacity: isCopy ? appear : 1, transform: `translate3d(0, ${shift}px, 0)`,
+              clipPath: isCopy ? `inset(0 0 ${(1 - appear) * 100}% 0)` : undefined, background: isCopy ? `rgba(229,53,43,${0.1 * flash + 0.04})` : "transparent" }}>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 260px 230px 140px", alignItems: "center", height: 74, padding: "0 30px", fontSize: 24, color: "#1a1a1a",
                 transform: isCopy ? `translateX(${(1 - appear) * -24}px)` : undefined }}>
                 <span style={{ display: "flex", alignItems: "center", gap: 16 }}>
@@ -271,7 +274,7 @@ export const Copy: React.FC = () => {
             opacity: prog(f, b(0.5 + i * 0.5) - 4, b(0.5 + i * 0.5) + 8), transform: `translateY(${(1 - prog(f, b(0.5 + i * 0.5) - 4, b(0.5 + i * 0.5) + 12, easeOut)) * 12}px)` }}>{t}</div>
         ))}
       </div>
-      <Captions mode="light" kicker="06 · Repair" caps={[{ from: 6, to: 9999, text: "Won't open? Spool repairs a copy, next to the original" }]} />
+      <Captions mode="light" kicker="07 · Repair" caps={[{ from: 6, to: 9999, text: "Won't open? Spool repairs a copy, next to the original" }]} />
     </SceneIn>
   );
 };
@@ -291,7 +294,7 @@ export const Release: React.FC = () => {
     </div>
   );
   return (
-    <ShotScene mode="light" shot="release-light" kicker="07 · Releases" overlay={picker}
+    <ShotScene mode="light" shot="release-light" kicker="09 · Releases" overlay={picker}
       // a lateral truck, left to right, at a fixed medium zoom
       keys={[{ f: 0, s: 1.3, u: 0.4, v: 0.33 }, { f: b(6) + 10, s: 1.3, u: 0.58, v: 0.36 }]}
       caps={[{ from: 6, to: 9999, text: "Plan a single, an EP or an album, track by track" }]} />
@@ -310,7 +313,7 @@ export const Theme: React.FC = () => {
       <AbsoluteFill style={cameraStyle(f, keys)}>
         <WindowFrame mode={mode}><Shot name={`stats-${mode}`} /></WindowFrame>
       </AbsoluteFill>
-      <Captions mode={mode} kicker={f < b(5) ? "08 · Statistics" : "09 · Appearance"}
+      <Captions mode={mode} kicker={f < b(5) ? "10 · Statistics" : "11 · Appearance"}
         caps={[{ from: 6, to: b(4), text: "Statistics on the whole catalogue" }, { from: b(5.5), to: 9999, text: "Light or dark, or as Windows is set" }]} />
     </AbsoluteFill>
   );
@@ -319,7 +322,7 @@ export const Theme: React.FC = () => {
     <SceneIn>
       {layer("light")}
       <AbsoluteFill style={{ clipPath: `inset(0 ${1920 - x}px 0 0)` }}>{layer("dark")}</AbsoluteFill>
-      {wipe > 0 && wipe < 1 && <div style={{ position: "absolute", left: x - 2, top: 0, width: 4, height: 1080, background: "#e5352b", boxShadow: "0 0 30px rgba(229,53,43,.6)" }} />}
+      {wipe > 0 && wipe < 1 && <div style={{ position: "absolute", left: 0, top: 0, width: 4, height: 1080, transform: `translate3d(${x - 2}px, 0, 0)`, background: "#e5352b", boxShadow: "0 0 30px rgba(229,53,43,.6)" }} />}
     </SceneIn>
   );
 };
@@ -339,7 +342,7 @@ export const Lang: React.FC = () => {
     </div>
   );
   return (
-    <ShotScene mode="dark" shot="home-dark" kicker="10 · Languages"
+    <ShotScene mode="dark" shot="home-dark" kicker="12 · Languages"
       overlay={<Shot name="frhome-dark" style={{ opacity: fr }} />} stage={pill}
       // close on the page title, panning right across the cards
       keys={[{ f: 0, s: 1.45, u: 0.27, v: 0.22 }, { f: b(8) + 10, s: 1.45, u: 0.6, v: 0.3 }]}
@@ -369,6 +372,75 @@ export const Outro: React.FC = () => {
         </div>
       </AbsoluteFill>
       <AbsoluteFill style={{ background: "#0b0b0b", opacity: prog(f, OUTRO_LEN - 24, OUTRO_LEN) }} />
+    </SceneIn>
+  );
+};
+
+// ---- calendar: when you worked on what -----------------------------------------------------------
+export const CalendarScene: React.FC = () => (
+  <ShotScene mode="light" shot="calendar-light" kicker="05 · Calendar"
+    // a rising diagonal: from the busy week (10-11 Nov) up to the month header
+    keys={[{ f: 0, s: 1.75, u: 0.36, v: 0.62 }, { f: b(6) + 10, s: 1.6, u: 0.5, v: 0.3 }]}
+    caps={[{ from: 6, to: 9999, text: "When you worked on what, old projects coming back included" }]} />
+);
+
+// ---- cleanup (Repair > Treatments): a tidy copy of the project ---------------------------------
+// The browser preview cannot run the treatment, so the before/after is drawn here, in the
+// Atelier's own style (colour swatch, name, role).
+type Trk = { name: string; role: string; col: string; gone?: boolean; depth?: number };
+const BEFORE: Trk[] = [
+  { name: "1-Audio", role: "", col: "#b9b7b0", gone: true },
+  { name: "808 kik final", role: "", col: "#87FF67" },
+  { name: "2-MIDI", role: "", col: "#b9b7b0", gone: true },
+  { name: "bass new", role: "", col: "#FFF034" },
+  { name: "Pad copy", role: "", col: "#FF39D4" },
+  { name: "lead idea", role: "", col: "#10A4EE" },
+  { name: "3-Audio", role: "", col: "#b9b7b0", gone: true },
+  { name: "A-Reverb", role: "", col: "#D0D0D0" },
+  { name: "B-Delay (unused)", role: "", col: "#D0D0D0", gone: true },
+];
+const AFTER: Trk[] = [
+  { name: "Drums - Kick", role: "drums", col: "#FF3636" },
+  { name: "Bass - Sub", role: "bass", col: "#007DC0" },
+  { name: "Pads - Warm Pad", role: "pad", col: "#00BFAF" },
+  { name: "Leads - Pluck", role: "lead", col: "#B677C6" },
+  { name: "A-Reverb", role: "return", col: "#D0D0D0" },
+];
+export const Cleanup: React.FC = () => {
+  const f = useCurrentFrame();
+  const c = T.light;
+  const cut = b(4); // the before/after arrives on the bar
+  const vis = prog(f, cut - 6, cut + 4);
+  const strike = prog(f, b(6), b(7), easeOut); // empty tracks and the unused return go
+  const after = prog(f, b(7), b(8), easeOut);
+  const row = (t: Trk, i: number, gone: number) => (
+    <div key={t.name + i} style={{ display: "flex", alignItems: "center", gap: 20, height: 62, fontFamily: SANS, fontSize: 30, color: c.ink,
+      opacity: t.gone ? 1 - 0.75 * gone : 1, textDecoration: t.gone && gone > 0.5 ? "line-through" : "none" }}>
+      <i style={{ width: 26, height: 26, borderRadius: 6, background: t.col, display: "inline-block", flex: "none" }} />
+      <span style={{ flex: 1 }}>{t.name}</span>
+      <span style={{ color: c.faint, fontSize: 24 }}>{t.role}</span>
+    </div>
+  );
+  const col = (title: string, body: React.ReactNode, o: number, dx: number) => (
+    <div style={{ width: 640, padding: "28px 36px", borderRadius: 18, background: c.panel, border: `1px solid ${c.line}`, boxShadow: "0 30px 70px -36px rgba(40,30,20,.45)",
+      opacity: o, transform: `translate3d(${dx}px, 0, 0)` }}>
+      <div style={{ fontFamily: MONO, fontWeight: 600, fontSize: 26, color: c.muted, marginBottom: 14 }}>{title}</div>{body}
+    </div>
+  );
+  // first bar: the Cleanup card of the Treatments page, the camera rising to Track order
+  const keys: Key[] = [{ f: 0, s: 1.75, u: 0.27, v: 0.66 }, { f: cut + 10, s: 1.75, u: 0.27, v: 0.42 }];
+  return (
+    <SceneIn>
+      <Backdrop mode="light" />
+      <AbsoluteFill style={{ ...cameraStyle(f, keys), opacity: 1 - vis }}>
+        <WindowFrame mode="light"><Shot name="treat-light" /></WindowFrame>
+      </AbsoluteFill>
+      <AbsoluteFill style={{ opacity: vis, alignItems: "center", justifyContent: "center", flexDirection: "row", gap: 56, paddingBottom: 170 }}>
+        {col("Before", BEFORE.map((t, i) => row(t, i, strike)), 1, 0)}
+        <svg width="60" height="40" viewBox="0 0 60 40" style={{ opacity: after }}><path d="M2 20h50M40 6l14 14-14 14" stroke="#e5352b" strokeWidth="4" fill="none" /></svg>
+        {col("After · Ivory Current [CNOP].als", AFTER.map((t, i) => row(t, i, 0)), after, (1 - after) * 40)}
+      </AbsoluteFill>
+      <Captions mode="light" kicker="08 · Cleanup" caps={[{ from: 6, to: cut, text: "Treatments tidy a project, on a copy" }, { from: cut, to: 9999, text: "Empty tracks and unused returns go; names, colours, order by role" }]} />
     </SceneIn>
   );
 };

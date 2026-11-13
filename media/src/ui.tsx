@@ -40,7 +40,9 @@ export const cameraStyle = (frame: number, keys: Key[]): React.CSSProperties => 
   // drifting to the middle of the window area as the zoom grows
   const w = Math.min(1, Math.max(0, (s - 1) / 0.35));
   const lx = fx + (CX - fx) * w, ly = fy + (CY - fy) * w;
-  return { transformOrigin: "0 0", transform: `translate(${lx - fx * s}px, ${ly - fy * s}px) scale(${s})` };
+  // floats, never rounded; one fixed origin; translate3d so the layer is composited and resampled
+  // from the full-size screenshot every frame (no whole-pixel layout steps)
+  return { transformOrigin: "0 0", transform: `translate3d(${lx - fx * s}px, ${ly - fy * s}px, 0) scale(${s})` };
 };
 
 // ---- the Spool mark ---------------------------------------------------------------------------
@@ -84,9 +86,10 @@ export const WindowFrame: React.FC<{ mode: Mode; title?: string; children: React
   );
 };
 
-/** A screenshot filling the window's width; `scroll` moves it up (px of the window). */
-export const Shot: React.FC<{ name: string; scroll?: number; style?: React.CSSProperties }> = ({ name, scroll = 0, style }) => (
-  <Img src={staticFile(`shots/${name}.jpg`)} style={{ position: "absolute", left: 0, top: -scroll, width: "100%", display: "block", ...style }} />
+/** A screenshot filling the window's width. The files are 5760 px wide (captured at 4x), so even
+ *  at the closest zoom the image is drawn from at least ~1.6 source pixels per screen pixel. */
+export const Shot: React.FC<{ name: string; style?: React.CSSProperties }> = ({ name, style }) => (
+  <Img src={staticFile(`shots/${name}.jpg`)} style={{ position: "absolute", left: 0, top: 0, width: "100%", display: "block", ...style }} />
 );
 
 // ---- backdrop + caption -------------------------------------------------------------------------

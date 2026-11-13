@@ -6,14 +6,10 @@
 (<name>-light.png / <name>-dark.png, plus songv-*.png and frhome-*.png). They become public/shots/*.jpg.
 
 The music is "Strung Out" by Lowpoly (SNG-911, 94 bpm). On its beat grid (see src/beat.ts:
-first beat 0.2014 s, beat 0.63829 s, bar = 4 beats) the soundtrack is
-  bars 29-47 of the track (74.245 s -> 122.756 s: the soft bar that opens the "solo" section,
-  then its groove), spliced on the downbeat into bars 52-53, the track's last phrase and its
-  final chord, which rings out (132.970 s -> the video's end).
-Bars 48-51 are left out: bar 52 is the closest match to bar 48 in the whole section (chroma +
-MFCC similarity), so the jump lands where the music would have gone. The splice is a 25 ms
-equal-power crossfade centred on the downbeat; the end fades over the last 1.5 s (already
-near silence). Normalised to -16 LUFS (two-pass loudnorm) into public/music.wav.
+first beat 0.2014 s, beat 0.63829 s, bar = 4 beats) the tour plays bars 29-53 unbroken
+(74.245 s -> the end): the soft bar that opens the "solo" section, its groove, the outro and the
+final chord, which rings out 1.2 s. Normalised to -16 LUFS (two-pass loudnorm) into
+public/music.wav. The shorts take three other 8-bar sections, see below.
 """
 import json, subprocess, sys
 from pathlib import Path
@@ -26,7 +22,7 @@ SHOTS, MUSIC = Path(sys.argv[1]), sys.argv[2]
 T0, BEAT, FPS = 0.2014, 0.6382895, 30
 BAR = 4 * BEAT
 bar = lambda n: T0 + n * BAR
-TOTAL_S = round(84 * BEAT * FPS + 2 * FPS) / FPS  # = TOTAL in src/beat.ts
+TOTAL_S = round(100 * BEAT * FPS + 1.2 * FPS) / FPS  # = TOTAL in src/beat.ts
 
 out = HERE / "public" / "shots"
 out.mkdir(parents=True, exist_ok=True)
@@ -37,13 +33,9 @@ print("shots", len(list(out.glob("*.jpg"))))
 y, sr = sf.read(MUSIC, always_2d=True)
 s = lambda t: int(round(t * sr))
 x = int(0.0125 * sr)  # half the crossfade
-a = y[s(bar(29)): s(bar(48)) + x]
-rest = TOTAL_S - (bar(48) - bar(29))
-c = y[s(bar(52)) - x: s(bar(52)) + s(rest)]
-w = np.linspace(0, np.pi / 2, 2 * x)[:, None]
-mid = a[-2 * x:] * np.cos(w) + c[:2 * x] * np.sin(w)
-music = np.concatenate([a[:-2 * x], mid, c[2 * x:]])[: s(TOTAL_S)]
-fi, fo = int(0.02 * sr), int(1.5 * sr)
+w = np.linspace(0, np.pi / 2, 2 * x)[:, None]  # equal-power crossfade, used by the shorts
+music = y[s(bar(29)): s(bar(29)) + s(TOTAL_S)].copy()
+fi, fo = int(0.02 * sr), int(0.8 * sr)
 music[:fi] *= np.linspace(0, 1, fi)[:, None]
 music[-fo:] *= np.linspace(1, 0, fo)[:, None]
 tmp = HERE / "public" / "music-raw.wav"

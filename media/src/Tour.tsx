@@ -3,12 +3,12 @@
 import React from "react";
 import { AbsoluteFill, Audio, Sequence, staticFile } from "remotion";
 import { START, TOTAL, b } from "./beat";
-import { Catalogue, Copy, Intro, Lang, Mood, Outro, Release, Song, Songs, Theme, Versions } from "./scenes";
+import { CalendarScene, Catalogue, Cleanup, Copy, Intro, Lang, Mood, Outro, Release, Song, Songs, Theme, Versions } from "./scenes";
 import { FADE } from "./ui";
 
 export const SCENES: [keyof typeof START, React.FC][] = [
-  ["intro", Intro], ["catalogue", Catalogue], ["songs", Songs], ["song", Song], ["versions", Versions], ["mood", Mood],
-  ["repair", Copy], ["release", Release], ["theme", Theme], ["lang", Lang], ["outro", Outro],
+  ["intro", Intro], ["catalogue", Catalogue], ["songs", Songs], ["song", Song], ["versions", Versions], ["calendar", CalendarScene], ["mood", Mood],
+  ["repair", Copy], ["cleanup", Cleanup], ["release", Release], ["theme", Theme], ["lang", Lang], ["outro", Outro],
 ];
 export { TOTAL };
 

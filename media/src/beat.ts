@@ -10,12 +10,13 @@ export const BEAT = BEAT_S * FPS; // 19.15 frames
 /** frame of beat n (n may be fractional) */
 export const b = (n: number) => Math.round(n * BEAT);
 
-// scene starts, in beats (4 beats = 1 bar). The outro starts on bar 19 and its last line
-// lands on beat 80: the downbeat of the track's final bar.
+// scene starts, in beats (4 beats = 1 bar). The music is bars 29-53 of the track, unbroken
+// (no splice): 25 bars = 100 beats. The outro starts on beat 92 and its last line lands on
+// beat 96, the downbeat of the track's final chord.
 export const START = {
-  intro: 0, catalogue: 8, songs: 16, song: 22, versions: 30, mood: 36, repair: 44,
-  release: 52, theme: 58, lang: 68, outro: 76,
+  intro: 0, catalogue: 8, songs: 16, song: 22, versions: 30, calendar: 36, mood: 42, repair: 50,
+  cleanup: 56, release: 66, theme: 74, lang: 84, outro: 92,
 };
-// the music runs 21 bars (84 beats) and rings out; 2 s more of tail
-export const TOTAL = Math.round(84 * BEAT + 2 * FPS);
+// 100 beats of music, then 1.2 s of the final chord ringing out
+export const TOTAL = Math.round(100 * BEAT + 1.2 * FPS);
 export const OUTRO_LEN = TOTAL - b(START.outro);

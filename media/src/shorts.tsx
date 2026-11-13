@@ -59,10 +59,13 @@ const Crop: React.FC<{ shot: string; mode: Mode; keys: CK[]; overlay?: React.Rea
   return (
     <div style={{ position: "absolute", left: PANEL.left, top: PANEL.top, width: PANEL.w, height: PANEL.h, borderRadius: 30, overflow: "hidden", background: c.bg,
       boxShadow: mode === "light" ? "0 50px 100px -40px rgba(40,30,20,.45), 0 0 0 2px rgba(22,22,22,.10)" : "0 50px 110px -40px rgba(0,0,0,.9), 0 0 0 2px rgba(255,255,255,.10)" }}>
-      <div style={{ position: "absolute", left: PANEL.w / 2 - x * z, top: PANEL.h / 2 - y * z, width: 1440 * z, height: 900 * z }}>
-        <Img src={staticFile(`shots/${shot}.jpg`)} style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }} />
-        {layers.map((l) => <Img key={l.shot} src={staticFile(`shots/${l.shot}.jpg`)} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: l.opacity }} />)}
-        {overlay && <div style={{ position: "absolute", left: 0, top: 0, width: 1440, height: 900, transform: `scale(${z})`, transformOrigin: "0 0" }}>{overlay}</div>}
+      {/* a fixed 1440x900 (css px) layer, moved by one unrounded translate3d + scale: no layout
+          changes per frame, and the 5760 px screenshot is always drawn smaller than its pixels */}
+      <div style={{ position: "absolute", left: 0, top: 0, width: 1440, height: 900, transformOrigin: "0 0",
+        transform: `translate3d(${PANEL.w / 2 - x * z}px, ${PANEL.h / 2 - y * z}px, 0) scale(${z})` }}>
+        <Img src={staticFile(`shots/${shot}.jpg`)} style={{ position: "absolute", left: 0, top: 0, width: 1440, height: 900 }} />
+        {layers.map((l) => <Img key={l.shot} src={staticFile(`shots/${l.shot}.jpg`)} style={{ position: "absolute", left: 0, top: 0, width: 1440, height: 900, opacity: l.opacity }} />)}
+        {overlay}
       </div>
     </div>
   );
@@ -147,8 +150,8 @@ const S1Files: React.FC = () => {
         const ty = 640 + (song as number) * 210;
         return (
           <FileCard key={i} name={name as string} dir={dir as string} c={c}
-            style={{ left: sx + (90 - sx) * g, top: sy + (1 - enter) * 500 + (ty - sy) * g, opacity: enter * (1 - prog(f, b(7) - 4, b(7) + 4)),
-              transform: `rotate(${(((i * 37) % 9) - 4) * 1.4 * (1 - g)}deg) scale(${1 - 0.3 * g})`, transformOrigin: "0 0" }} />
+            style={{ left: 0, top: 0, opacity: enter * (1 - prog(f, b(7) - 4, b(7) + 4)), transformOrigin: "0 0",
+              transform: `translate3d(${sx + (90 - sx) * g}px, ${sy + (1 - enter) * 500 + (ty - sy) * g}px, 0) rotate(${(((i * 37) % 9) - 4) * 1.4 * (1 - g)}deg) scale(${1 - 0.3 * g})` }} />
         );
       })}
       {SONGS1.map((s, i) => {
@@ -229,7 +232,8 @@ const S2Copy: React.FC = () => {
         {rows.map(([name, kind]) => {
           const isCopy = kind === "copy";
           return (
-            <div key={name} style={{ height: isCopy ? 120 * appear : 120, overflow: "hidden", opacity: isCopy ? appear : 1,
+            <div key={name} style={{ height: 120, overflow: "hidden", opacity: isCopy ? appear : 1,
+              transform: `translate3d(0, ${kind === "dir" ? -(1 - appear) * 120 : 0}px, 0)`, clipPath: isCopy ? `inset(0 0 ${(1 - appear) * 100}% 0)` : undefined,
               background: isCopy ? `rgba(229,53,43,${0.12 * (1 - prog(f, b(5), b(6))) + 0.04})` : "transparent" }}>
               <div style={{ height: 120, display: "flex", alignItems: "center", gap: 22, padding: "0 32px", fontSize: 38, color: "#1a1a1a" }}>
                 {kind === "dir"
@@ -297,7 +301,7 @@ const S3Wipe: React.FC = () => {
     <In first>
       {layer("light")}
       <AbsoluteFill style={{ clipPath: `inset(0 ${1080 * (1 - w)}px 0 0)` }}>{layer("dark")}</AbsoluteFill>
-      {w > 0 && w < 1 && <div style={{ position: "absolute", left: 1080 * w - 3, top: 0, width: 6, height: 1920, background: "#e5352b", boxShadow: "0 0 40px rgba(229,53,43,.6)" }} />}
+      {w > 0 && w < 1 && <div style={{ position: "absolute", left: 0, top: 0, width: 6, height: 1920, transform: `translate3d(${1080 * w - 3}px, 0, 0)`, background: "#e5352b", boxShadow: "0 0 40px rgba(229,53,43,.6)" }} />}
     </In>
   );
 };
