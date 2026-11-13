@@ -1,0 +1,90 @@
+{
+  "steps": {
+    "welcome": "Bienvenue",
+    "projects": "Projets",
+    "samples": "Samples",
+    "scan": "Analyse",
+    "artists": "Artistes"
+  },
+  "configuration": "Configuration",
+  "stepsLabel": "Étapes",
+  "back": "Retour",
+  "continue": "Continuer",
+  "welcome": {
+    "title": "Bienvenue",
+    "lead": "L'app range tes projets Ableton en morceaux, te dit lesquels s'ouvrent, et répare ceux qui peuvent l'être.",
+    "neverTouched": "Tes fichiers ne sont jamais modifiés.",
+    "copyBeside": "Une réparation écrit une copie à côté du projet.",
+    "local": "Tout reste sur cet ordinateur.",
+    "time": "La configuration prend deux minutes, plus le temps de la première analyse.",
+    "noLive": "Ableton Live ne semble pas avoir été ouvert sur cet ordinateur : sans la liste de ses plugins, l'app ne peut pas dire ce qui manque. Ouvre Live une fois, puis reviens ici (ou continue, l'analyse se refera toute seule).",
+    "start": "Commencer"
+  },
+  "projects": {
+    "title": "Où sont tes projets ?",
+    "lead": "Choisis le ou les dossiers qui contiennent tes projets Ableton (les fichiers .als). Les sous-dossiers sont lus aussi, quelle que soit ton organisation : un dossier par morceau, ou tout dans un seul dossier.",
+    "empty": "Aucun dossier pour l'instant."
+  },
+  "samples": {
+    "title": "Tes samples",
+    "lead": "Quand un projet ne trouve plus un sample, l'app le cherche ailleurs. Elle regarde déjà tes dossiers de projets et la bibliothèque d'Ableton. Ajoute les autres dossiers où tu ranges des sons : packs, banques, ancien disque.",
+    "empty": "Aucun dossier en plus (facultatif).",
+    "midi": "Dossiers MIDI en plus",
+    "optional": "(facultatif)",
+    "midiHint": "Les fichiers MIDI de tes dossiers de projets et de samples sont déjà lus. Ajoute un dossier ici seulement s'il en reste ailleurs (construction kits, packs) : l'app n'y lit que les fichiers MIDI.",
+    "midiEmpty": "Aucune bibliothèque MIDI (facultatif).",
+    "continueScan": "Continuer et analyser",
+    "skipScan": "Passer et analyser"
+  },
+  "scan": {
+    "done": "Analyse terminée",
+    "running": "Analyse de tes projets",
+    "lead": "Chaque projet est lu une fois. La suite ne relira que ce qui change. Tu peux laisser la fenêtre ouverte.",
+    "projects": {
+      "one": "projets",
+      "other": "projets"
+    },
+    "songs": {
+      "one": "morceaux",
+      "other": "morceaux"
+    },
+    "ok": {
+      "one": "s'ouvrent déjà",
+      "other": "s'ouvrent déjà"
+    },
+    "fix": {
+      "one": "réparables par l'app",
+      "other": "réparables par l'app"
+    },
+    "lost": {
+      "one": "s'ouvrent, réglages perdus",
+      "other": "s'ouvrent, réglages perdus"
+    },
+    "bad": {
+      "one": "plugin à installer",
+      "other": "plugin à installer"
+    },
+    "none": "Aucun projet trouvé dans ces dossiers. Reviens en arrière pour en choisir d'autres.",
+    "midiPhase": "Tes projets sont prêts. Les fichiers MIDI se lisent encore en arrière-plan (la barre latérale montre où ça en est) : tu peux continuer et explorer l'app pendant ce temps.",
+    "cancelled": "Analyse arrêtée : ce qui a été lu est gardé, le reste sera lu à la prochaine analyse.",
+    "around": "Et autour des projets"
+  },
+  "artists": {
+    "title": "Tes artistes",
+    "lead": "Si tu produis sous plusieurs noms (alias, groupes, collaborations), l'app range chaque morceau sous le bon.",
+    "leadGiven": "Le nom donné à l'étape Projets est déjà là.",
+    "leadFound": "Voici aussi les noms trouvés dans tes dossiers et tes fichiers : décoche ce qui n'est pas un artiste.",
+    "givenTitle": "Donné à l'étape Projets",
+    "given": "déjà donné",
+    "guessTitle": "{files} fichiers, {folders} dossiers",
+    "noneFound": "Aucun autre nom trouvé dans les dossiers.",
+    "more": "Autres noms, un par ligne (facultatif)",
+    "placeholder": "Mon alias",
+    "oldWindows": "Un ancien Windows sur un autre disque (double démarrage) ?",
+    "no": "Non",
+    "drive": "Disque {d}:",
+    "oldWindowsHint": "Ses plugins et samples aident à réparer les vieux projets.",
+    "saving": "Enregistrement...",
+    "finish": "Terminer"
+  }
+}

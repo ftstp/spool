@@ -1,0 +1,19 @@
+target/
+node_modules/
+dist/
+web/build/
+.svelte-kit/
+*.sqlite*
+/data/
+.DS_Store
+apps/desktop/gen/
+releases/
+tools/cloudflare/build/
+.wrangler/
+!crates/store/fixtures/*.sqlite
+target-selftest/
+
+# Remotion launch video (media/): dependencies and renders
+media/node_modules/
+media/out/
+media/shots/

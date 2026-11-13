@@ -1,0 +1,29 @@
+[package]
+name = "core"
+description = "The application: its base, the background scan, and the queries the interface shows (the API)"
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+
+[lib]
+name = "app_core"
+
+[dependencies]
+store = { path = "../store" }
+i18n = { path = "../i18n" }
+index = { path = "../index" }
+catalog = { path = "../catalog" }
+repair = { path = "../repair" }
+plugins = { path = "../plugins" }
+als = { path = "../als" }
+sha2 = "0.10"
+serde.workspace = true
+rayon.workspace = true
+serde_json.workspace = true
+regex.workspace = true
+chrono.workspace = true
+ts-rs.workspace = true
+notify = "8.2.2"
+ebur128 = "0.1"
+image = { version = "0.25", default-features = false, features = ["jpeg", "png", "webp", "gif"] }
+symphonia = { version = "0.5", features = ["aac", "alac", "flac", "mp3", "isomp4", "ogg", "pcm", "vorbis", "wav"] }

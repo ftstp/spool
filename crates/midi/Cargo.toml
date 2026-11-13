@@ -1,0 +1,12 @@
+[package]
+name = "midi"
+description = "Reads a Standard MIDI File and says what it is: drums, chords, bass or melody, its key, tempo, length and chord progression"
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+
+[dependencies]
+i18n = { path = "../i18n" }
+midly = "0.5"
+serde.workspace = true
+ts-rs.workspace = true

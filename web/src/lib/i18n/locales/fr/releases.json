@@ -1,0 +1,103 @@
+{
+  "kind": {
+    "single": "Single",
+    "ep": "EP",
+    "lp": "Album",
+    "compil": "Compilation"
+  },
+  "todo": {
+    "blocked": { "one": "{n} titre bloqué par un plugin à installer", "other": "{n} titres bloqués par un plugin à installer" },
+    "finishOne": "finir {a}",
+    "finishTwo": "finir {a} et {b}",
+    "toFinish": "{n} titres à finir",
+    "noAudio": "{n} sans rendu audio",
+    "missing": { "one": "{n} morceau introuvable", "other": "{n} morceaux introuvables" }
+  },
+  "countdown": {
+    "today": "sort aujourd'hui",
+    "tomorrow": "sort demain",
+    "in": "dans {n} jours",
+    "ago": { "one": "sortie il y a {n} jour", "other": "sortie il y a {n} jours" }
+  },
+  "hours": "{h} h {m}",
+  "minutes": "{n} min",
+  "nTracks": { "one": "{n} titre", "other": "{n} titres" },
+  "title": "Sorties",
+  "intro": "Tes singles, EP et albums : les titres dans l'ordre, où en est chacun, ce qui reste avant la date. Tout reste dans l'app : aucun fichier ne bouge.",
+  "new": "+ Nouvelle sortie",
+  "newTitle": "Nouvelle sortie",
+  "readyTitle": {
+    "one": "{n} titre sur {total} masterisé ou fini",
+    "other": "{n} titres sur {total} masterisés ou finis"
+  },
+  "ready": "{ready}/{count} prêts",
+  "readyDate": "{ready}/{count} prêts · {date}, {countdown}",
+  "firstTitle": "Ta première sortie",
+  "firstText": "Rassemble des morceaux en single, EP ou album pour suivre où en est chaque titre et ce qui reste avant la date de sortie.",
+  "create": "Créer une sortie",
+  "hintsTitle": "Tes dossiers qui ressemblent à des sorties",
+  "hintsText": "Leur nom dit EP, LP ou album. En faire une sortie reprend leurs morceaux dans l'ordre de leurs noms ; tu pourras les réordonner.",
+  "inFolder": "dans {path}",
+  "mainFolder": "le dossier principal",
+  "make": "En faire une sortie",
+  "page": {
+    "gone": "Cette sortie n'existe plus.",
+    "all": "Toutes les sorties",
+    "back": "‹ Sorties",
+    "coverTitle": "La pochette de quel titre ?",
+    "coverFirst": "Pochette : la première trouvée",
+    "coverOf": "Pochette de {title}",
+    "titleLabel": "Titre de la sortie",
+    "artist": "Artiste",
+    "date": "Sortie le",
+    "todo": "Reste à faire : {list}.",
+    "allReady": "Tout est prêt.",
+    "allReadyFor": "Tout est prêt pour le {date}.",
+    "addBelow": "Ajoute des morceaux ci-dessous.",
+    "listen": {
+      "single": "▶ Écouter l'Single enchaîné",
+      "ep": "▶ Écouter l'EP enchaîné",
+      "lp": "▶ Écouter l'album enchaîné",
+      "compil": "▶ Écouter l'Compilation enchaîné",
+      "other": "▶ Écouter l'{kind} enchaîné"
+    },
+    "arrangeTitle": "Mettre les dossiers de ses morceaux dans un même dossier sur le disque",
+    "arrange": "Ranger sur le disque",
+    "delete": "Supprimer",
+    "physOff": "Le rangement physique est désactivé : pour l'instant, cette sortie n'existe que dans l'app et aucun fichier ne bouge. Pour ranger ses dossiers sur le disque, active-le dans {link}.",
+    "settingsLink": "Réglages",
+    "nothingAlready": "Rien à déplacer : ses morceaux sont déjà dans « {target} ».",
+    "nothingCant": "Rien à déplacer : aucun dossier ne peut bouger.",
+    "movesExisting": {
+      "one": "Les dossiers de {n} morceau iront dans le dossier :",
+      "other": "Les dossiers de {n} morceaux iront dans le dossier :"
+    },
+    "movesNew": {
+      "one": "Les dossiers de {n} morceau iront dans un nouveau dossier :",
+      "other": "Les dossiers de {n} morceaux iront dans un nouveau dossier :"
+    },
+    "already": "{n} déjà dedans.",
+    "stay": "Restent en place : {list}.",
+    "checked": "Chaque projet est vérifié : un projet qui perdrait un sample n'est pas déplacé. Ctrl+Z remet tout comme avant.",
+    "arranging": "Rangement...",
+    "arrangeNow": "Ranger maintenant",
+    "otherFolder": "Choisir un autre dossier",
+    "suggested": "Dossier proposé",
+    "computing": "Calcul...",
+    "pickParent": "Dans quel dossier ranger la sortie ?",
+    "arrangedDone": { "one": "{n} dossier rangé", "other": "{n} dossiers rangés" },
+    "arrangedLeft": { "one": "{n} laissé en place", "other": "{n} laissés en place" },
+    "arranged": "{done}, {left} : {why}",
+    "tracks": "Titres",
+    "grip": "Glisser pour déplacer",
+    "noRenderTitle": "Pas de rendu audio",
+    "noRender": "sans rendu",
+    "bad": "plugin à installer",
+    "lost": "réglages perdus",
+    "missing": "Morceau introuvable (supprimé ou déplacé)",
+    "removeTitle": "Retirer de la sortie (le morceau n'est pas touché)",
+    "remove": "Retirer",
+    "addPh": "+ Ajouter un morceau : titre, artiste ou dossier",
+    "fromFolder": "Créée depuis le dossier {folder}"
+  }
+}

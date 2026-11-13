@@ -1,0 +1,55 @@
+{
+  "menu": "Menu",
+  "pathCopied": "Chemin copié : {path}",
+  "newReleaseTitle": "Nouvelle sortie",
+  "defaultGroup": "Groupe {n}",
+  "song": {
+    "open": "Ouvrir",
+    "openInLive": "Ouvrir dans Live",
+    "listenTemoin": "Écouter le témoin",
+    "stage": "Étape",
+    "rating": "Note",
+    "noRating": "Sans note",
+    "release": "Sortie",
+    "newRelease": "Nouvelle sortie avec ce morceau",
+    "reveal": "Afficher dans l'explorateur",
+    "copyProjectPath": "Copier le chemin du projet",
+    "copyFolderPath": "Copier le chemin du dossier",
+    "archive": "Archiver",
+    "unarchive": "Désarchiver",
+    "archiveHint": "masqué des listes, Ctrl+Z",
+    "moveFolder": "Déplacer le dossier...",
+    "sharedFolder": "dossier partagé"
+  },
+  "tab": {
+    "close": "Fermer",
+    "closeOthers": "Fermer les autres",
+    "closeLeft": "Fermer ceux de gauche",
+    "closeRight": "Fermer ceux de droite",
+    "closeAll": "Tout fermer",
+    "group": "Groupe",
+    "newGroup": "Nouveau groupe...",
+    "groupName": "Nom du groupe",
+    "ungroup": "Retirer du groupe"
+  },
+  "group": {
+    "unfold": "Déplier",
+    "fold": "Replier",
+    "rename": "Renommer...",
+    "color": "Couleur",
+    "colors": { "blue": "Bleu", "pink": "Rose", "green": "Vert", "yellow": "Jaune", "orange": "Orange", "violet": "Violet" },
+    "dissolve": "Dégrouper (garder les onglets)",
+    "closeTabs": "Fermer les onglets du groupe"
+  },
+  "folder": {
+    "reveal": "Afficher dans l'explorateur",
+    "copyPath": "Copier le chemin",
+    "move": "Déplacer ce dossier...",
+    "newSub": "Nouveau sous-dossier...",
+    "newIn": "Nouveau dossier dans « {name} »"
+  },
+  "media": {
+    "toBoard": "Ajouter au moodboard de...",
+    "listen": "Écouter"
+  }
+}

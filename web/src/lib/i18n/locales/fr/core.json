@@ -1,0 +1,272 @@
+{
+  "test": {
+    "hello": "Bonjour {name}",
+    "songs": {
+      "one": "{n} morceau",
+      "other": "{n} morceaux"
+    }
+  },
+  "suggest": {
+    "filedIn": "Rangé dans « {folder} »",
+    "limiter": "Limiteur sur la piste principale : {name}",
+    "long": "Arrangement de {min} min {sec}, {tracks} pistes",
+    "short": "Court : {s} s, {n} piste(s)",
+    "base": "Pas d'indice d'avancement fort",
+    "masterFresh": "Export « {name} » à jour",
+    "masterOld": "Export « {name} » plus ancien que le projet",
+    "mixFresh": "Export récent « {name} »"
+  },
+  "style": {
+    "folder": "Dossier « {name} »",
+    "file": "Fichier « {name} »",
+    "samples": {
+      "one": "{n} sample « {style} » (ex. {ex})",
+      "other": "{n} samples « {style} » (ex. {ex})"
+    },
+    "inProject": "Dans le projet : « {ex} »{more}",
+    "samePlugins": "mêmes plugins ({list})",
+    "closeTempo": "tempo proche ({tempo})",
+    "quoted": "« {title} »",
+    "tail": " : {list}",
+    "and": " et ",
+    "resembles": "Ressemble à {titles}{tail}",
+    "dnbTempo": "Tempo {tempo}, typique de la drum and bass"
+  },
+  "checks": {
+    "arrangement": "étape ou arrangement de plus de 2 min 30",
+    "mix": "étape Mix ou export « mix »",
+    "export": "export « {name} »",
+    "noMaster": "aucun export « master » à jour",
+    "noCover": "image carrée de 1000 px ou plus dans le moodboard",
+    "lyrics": "paroles écrites",
+    "noLyrics": "aucune note « paroles »",
+    "meta": "titre et artiste renseignés",
+    "pluginsOk": "tous les plugins sont là (ou renommés)",
+    "pluginsMissing": "plugins ou samples manquants",
+    "released": "à cocher toi-même",
+    "label": {
+      "cover": "Pochette",
+      "lyrics": "Paroles",
+      "meta": "Titre et artiste"
+    }
+  },
+  "scan": {
+    "noOldDisk": "pas d'ancien disque réglé, ou son dossier utilisateur est introuvable"
+  },
+  "als": {
+    "noLiveSet": "Pas de LiveSet dans le fichier"
+  },
+  "midi": {
+    "unreadable": "MIDI illisible : {e}"
+  },
+  "plugins": {
+    "need": {
+      "spire10": "Spire 1.0.x (la 1.1 a changé d'identifiant : Spire-1.1 et 1.5 ne remplacent pas la 1.0)",
+      "oldFile": "fichier sur l'ancien Windows",
+      "oldList": "liste de plugins de l'ancien Windows",
+      "inProject": "inscrite dans le projet (code {code})",
+      "notWritten": "le plugin ne l'inscrit pas dans le projet",
+      "knownId": "identifiant de plugin connu",
+      "au": "{name} en VST2 ou VST3 (projet fait sur Mac, en AU : Windows n'a pas d'AU)",
+      "itself": "{name} lui-même, pas {other} : c'est un autre produit pour Live (autre identifiant)",
+      "vst2": "{name} en VST2 : relance son installeur et coche VST2",
+      "anyUpdate": "n'importe quelle mise à jour de {name} (la génération est dans le nom)",
+      "anyRecent": "n'importe quelle version récente de {name}"
+    },
+    "vst3NotInstalled": "VST3 non installé pour {name}",
+    "notInstalled": "plugin non installé : {name}",
+    "noTemplate": "aucun projet ne contient {name} en VST2 : pas de modèle pour la conversion"
+  },
+  "store": {
+    "newer": "cette base vient d'une version plus récente de Spool (format {v}, celle-ci lit jusqu'au {max}) : installe la dernière version",
+    "backupFailed": "copie avant mise à jour impossible : {e}"
+  },
+  "repair": {
+    "exists": "« {name} » existe déjà",
+    "otherLive": "« {name} » vient de {live} et le cadre de {base} : Live ne convertit que des projets entiers, même entre versions mineures",
+    "badOutDir": "dossier de sortie invalide",
+    "trackNotFoundIn": "piste {track} introuvable dans « {set} »",
+    "groupOrReturn": "« {name} » est un groupe ou un retour : seules les pistes se reprennent",
+    "noBaseMasterChain": "chaîne du master du cadre introuvable",
+    "noLocators": "pas de liste de repères",
+    "copyFailed": "copie de « {name} » : {e}",
+    "noTempName": "pas de nom temporaire libre",
+    "pathExists": "{path} existe déjà",
+    "hasLocators": "le projet a déjà des repères",
+    "emptyArrangement": "rien dans l'arrangement",
+    "rackError": "rack illisible ou chaîne du master introuvable",
+    "unreadableProject": "projet illisible",
+    "trackNotFound": "piste introuvable",
+    "existsNoOverwrite": "{path} existe déjà : rien n'est écrasé",
+    "defaultPreset": "réglage par défaut",
+    "unknownVendor": "Éditeur inconnu",
+    "nothingToRepair": "rien à réparer",
+    "busy": "une réparation est déjà en cours"
+  },
+  "fs": {
+    "emptyName": "nom vide",
+    "noRoot": "pas de dossier de projets",
+    "outside": "en dehors du dossier des projets",
+    "noFolderName": "nom de dossier manquant",
+    "folderExists": "ce dossier existe déjà",
+    "moveRoot": "on ne déplace pas un dossier de projets lui-même",
+    "crossRoot": "d'un dossier de projets à un autre : pas encore possible",
+    "notFound": "introuvable : {path}",
+    "notFoundShort": "introuvable",
+    "intoItself": "un dossier ne peut pas aller dans lui-même",
+    "alreadyThere": "il y est déjà",
+    "destExists": "la destination existe déjà : {path}",
+    "locked": "fichier verrouillé : ferme le projet dans Live (ou l'Explorateur) et réessaie",
+    "baseNotUpdated": "base non mise à jour, rien n'a bougé : {e}",
+    "baseNotUpdatedStuck": "base non mise à jour ({e}), et « {path} » n'a pas pu revenir à sa place : {back}",
+    "samplesLost": "des samples seraient perdus",
+    "putBackFailed": "{e} ; et la remise en place a échoué : {back}",
+    "cannotPutBack": "impossible de remettre en place : « {path} » existe de nouveau",
+    "nothingMoved": "{e} (rien n'a bougé)",
+    "someStuck": "{e} ; certains éléments n'ont pas pu revenir : {list}",
+    "reorg": {
+      "manyArtists": "artistes différents",
+      "noArtist": "sans artiste"
+    },
+    "andThen": "{e} ; {b}",
+    "physicalOff": "Le rangement physique est désactivé : rien ne bouge sur le disque. Active-le dans Réglages pour déplacer des fichiers."
+  },
+  "undo": {
+    "field": {
+      "title": "titre",
+      "artist": "artiste",
+      "key": "tonalité",
+      "stage": "étape",
+      "archived": "archivage",
+      "temoin": "témoin"
+    },
+    "quoted": "« {title} »",
+    "aSong": "un morceau",
+    "edit": "{what} de {title}",
+    "editDefault": "Modification",
+    "stageAccepted": "Étape validée pour {title}",
+    "stageRefused": "Étape refusée pour {title}",
+    "styleAccepted": "Style validé pour {title}",
+    "styleRefused": "Style refusé pour {title}",
+    "check": "Case de fin de {title}",
+    "acceptAll": "{n} suggestions validées",
+    "physicalOff": "« {label} » ne peut être annulé qu'en remettant des fichiers en place sur le disque, et le rangement physique est désactivé : rien n'a bougé. Active-le dans Réglages pour l'annuler.",
+    "notion": "Import Notion : {n} morceaux",
+    "mkdir": "Dossier « {name} » créé",
+    "theRoot": "la racine",
+    "movedInto": "« {leaf} » déplacé dans « {into} »",
+    "movedMany": "{n} éléments déplacés",
+    "toBoard": {
+      "one": "{n} élément rangé dans le moodboard de « {title} »",
+      "other": "{n} éléments rangés dans le moodboard de « {title} »"
+    },
+    "lyricsAdded": "Paroles ajoutées au moodboard",
+    "ideaAdded": "Idée ajoutée au moodboard",
+    "noteEdited": "Note « {name} » modifiée",
+    "boardHidden": "Élément retiré du moodboard",
+    "boardLinked": {
+      "one": "{n} élément ajouté au moodboard de « {title} »",
+      "other": "{n} éléments ajoutés au moodboard de « {title} »"
+    },
+    "boardUnlinked": "Lien retiré du moodboard",
+    "releaseArranged": "Sortie « {title} » rangée dans « {target} »",
+    "releaseCreated": "Sortie « {title} » créée",
+    "releaseEdited": "Sortie « {title} » modifiée",
+    "releaseDeleted": "Sortie « {title} » supprimée"
+  },
+  "err": {
+    "songNotFound": "morceau introuvable",
+    "badTempo": "tempo invalide",
+    "badRating": "note invalide",
+    "ratingRange": "note de 1 à 5",
+    "badKinds": "types invalides",
+    "badDate": "date invalide (AAAA-MM-JJ)",
+    "unknownStage": "étape inconnue",
+    "unknownCheck": "case inconnue",
+    "suggestionNotFound": "suggestion introuvable",
+    "rootNotFound": "dossier de projets introuvable",
+    "reading": "lecture : {e}",
+    "writing": "écriture : {e}",
+    "tooManyCopies": "trop de copies retouchées",
+    "copyNotRecorded": "copie écrite, mais pas enregistrée par l'app : {e}",
+    "folderNotFound": "dossier introuvable",
+    "projectNotFound": "projet introuvable",
+    "busy": "une analyse ou une réparation est en cours, réessaie dans un instant",
+    "noName": "nom manquant",
+    "noActiveProject": "ce morceau n'a pas de projet actif",
+    "scanBusy": "une analyse est en cours, réessaie dans un instant",
+    "fileNotFound": "fichier introuvable"
+  },
+  "atelier": {
+    "notLive": "pas un projet Live lisible",
+    "nothingToDo": "rien à faire avec ce preset",
+    "atLeastOne": "au moins un preset",
+    "noProject": "aucun projet à traiter",
+    "busy": "un traitement est déjà en cours"
+  },
+  "audio": {
+    "badFormat": "format non lu : {e}",
+    "noTrack": "aucune piste audio",
+    "badCodec": "codec non lu : {e}",
+    "decoding": "décodage : {e}"
+  },
+  "board": {
+    "noteNotFound": "note introuvable",
+    "versionNotKept": "version précédente non gardée, note pas modifiée : {e}",
+    "tooBig": "fichier trop gros (300 Mo max)",
+    "itemNotFound": "élément introuvable"
+  },
+  "chains": {
+    "pluginMissing": "plugin absent : {name}",
+    "samplesOffline": {
+      "one": "{n} sample hors ligne",
+      "other": "{n} samples hors ligne"
+    }
+  },
+  "notion": {
+    "emptyFile": "fichier vide ou illisible",
+    "noTitleColumn": "aucune colonne pour le nom du morceau",
+    "nothing": "rien à importer : aucun champ nouveau pour les morceaux reconnus"
+  },
+  "settings": {
+    "resetFailed": "impossible de mettre la base de côté : {e}",
+    "folderNotFound": "Dossier introuvable : {path}",
+    "alreadyListed": "Ce dossier est déjà dans la liste.",
+    "alreadyCovered": "Ce dossier est déjà couvert par « {path} » (ou le contient).",
+    "unknownFolder": "dossier inconnu",
+    "mainFolder": "C'est le dossier principal : retire d'abord les autres dossiers.",
+    "unknownKey": "réglage inconnu : {key}"
+  },
+  "merge": {
+    "impossible": "fusion impossible",
+    "done": "« {src} » rattaché à « {dst} » (Séparer depuis sa fiche)",
+    "notFound": "fusion introuvable"
+  },
+  "releases": {
+    "notFound": "sortie introuvable",
+    "noSong": "cette sortie n'a pas de morceau",
+    "pickInsideRoots": "choisis un dossier qui se trouve dans tes dossiers de projets",
+    "outsideRoots": "dossier hors de tes dossiers de projets",
+    "sharedFolder": "dossier partagé avec des morceaux hors de la sortie",
+    "noTitle": "donne un titre à la sortie"
+  },
+  "create": {
+    "noName": "donne un nom au morceau",
+    "noRoot": "aucun dossier de projets",
+    "pickInsideRoots": "choisis un dossier qui se trouve dans tes dossiers de projets : ailleurs, l'app ne verrait pas le nouveau morceau",
+    "exists": "« {name} Project » existe déjà dans {parent} : choisis un autre nom, rien n'est écrasé",
+    "noPart": "choisis au moins une partie qui se charge dans cette version de Live",
+    "projectNotFound": "projet introuvable : {rel}"
+  },
+  "desktop": {
+    "unreadableFile": "fichier illisible",
+    "fileExpected": "fichier attendu",
+    "songMissing": "morceau manquant",
+    "cannotOpenBase": "Spool ne peut pas ouvrir sa base :\n{e}"
+  },
+  "update": {
+    "busy": "une analyse ou une réparation est en cours : la mise à jour attend qu'elle soit finie",
+    "upToDate": "Spool est déjà à jour",
+    "failed": "mise à jour impossible : {e}"
+  }
+}

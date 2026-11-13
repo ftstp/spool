@@ -1,0 +1,55 @@
+{
+  "menu": "Menu",
+  "pathCopied": "Path copied: {path}",
+  "newReleaseTitle": "New release",
+  "defaultGroup": "Group {n}",
+  "song": {
+    "open": "Open",
+    "openInLive": "Open in Live",
+    "listenTemoin": "Play the reference render",
+    "stage": "Stage",
+    "rating": "Rating",
+    "noRating": "No rating",
+    "release": "Release",
+    "newRelease": "New release with this song",
+    "reveal": "Show in Explorer",
+    "copyProjectPath": "Copy the project path",
+    "copyFolderPath": "Copy the folder path",
+    "archive": "Archive",
+    "unarchive": "Unarchive",
+    "archiveHint": "hidden from lists, Ctrl+Z",
+    "moveFolder": "Move the folder...",
+    "sharedFolder": "shared folder"
+  },
+  "tab": {
+    "close": "Close",
+    "closeOthers": "Close others",
+    "closeLeft": "Close tabs to the left",
+    "closeRight": "Close tabs to the right",
+    "closeAll": "Close all",
+    "group": "Group",
+    "newGroup": "New group...",
+    "groupName": "Group name",
+    "ungroup": "Remove from group"
+  },
+  "group": {
+    "unfold": "Expand",
+    "fold": "Collapse",
+    "rename": "Rename...",
+    "color": "Colour",
+    "colors": { "blue": "Blue", "pink": "Pink", "green": "Green", "yellow": "Yellow", "orange": "Orange", "violet": "Purple" },
+    "dissolve": "Ungroup (keep the tabs)",
+    "closeTabs": "Close the group's tabs"
+  },
+  "folder": {
+    "reveal": "Show in Explorer",
+    "copyPath": "Copy the path",
+    "move": "Move this folder...",
+    "newSub": "New subfolder...",
+    "newIn": "New folder in \"{name}\""
+  },
+  "media": {
+    "toBoard": "Add to the mood board of...",
+    "listen": "Listen"
+  }
+}

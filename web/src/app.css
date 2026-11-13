@@ -1,0 +1,58 @@
+/* Spool's tokens, after a tape machine: paper, ink, and one red light (the record lamp),
+   kept for the brand marks only. The accent is the ink itself: black buttons on paper,
+   paper buttons at night. Dark first, light follows the OS, unless Settings > Spool >
+   Appearance forces one (data-theme="light" | "dark" on <html>). */
+:root {
+  --bg: #141312; --panel: #1c1b19; --panel2: #171615; --ink: #f1ede6; --muted: #a39e95; --faint: #6e6a63; --line: #2c2a27;
+  --accent: #f1ede6; --accent-bg: #2b2824; --on-accent: #161616; --rec: #ff3b2f;
+  --ok: #5cc98a; --fix: #4fc9b0; --lost: #e6a446; --bad: #ec6b62;
+  --font: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; --mono: "IBM Plex Mono", ui-monospace, monospace;
+  --s-none: #55534e; --s-draft: #c98500; --s-arrangement: #d55181; --s-mix: #3987e5; --s-master: #d95926; --s-done: #199e70; --s-pause: #7d93a1;
+  --side: 220px; --radius: 12px;
+  --fs-mark: #5fd0c5;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f4f1ec; --panel: #fbf9f5; --panel2: #ebe7df; --ink: #161616; --muted: #5f5b54; --faint: #9c968c; --line: #ddd7cc;
+    --accent: #161616; --accent-bg: #e4ded3; --on-accent: #f4f1ec; --rec: #e5352b; --ok: #2f8a57; --fix: #1c9a86; --lost: #c27a12; --bad: #c23b32;
+    --s-none: #b9b7b0; --s-draft: #eda100; --s-arrangement: #e87ba4; --s-mix: #2a78d6; --s-master: #eb6834; --s-done: #1baf7a; --s-pause: #5f7380;
+    --fs-mark: #2a8f86;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+    --bg: #f4f1ec; --panel: #fbf9f5; --panel2: #ebe7df; --ink: #161616; --muted: #5f5b54; --faint: #9c968c; --line: #ddd7cc;
+    --accent: #161616; --accent-bg: #e4ded3; --on-accent: #f4f1ec; --rec: #e5352b; --ok: #2f8a57; --fix: #1c9a86; --lost: #c27a12; --bad: #c23b32;
+    --s-none: #b9b7b0; --s-draft: #eda100; --s-arrangement: #e87ba4; --s-mix: #2a78d6; --s-master: #eb6834; --s-done: #1baf7a; --s-pause: #5f7380;
+    --fs-mark: #2a8f86;
+    color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 13.5px/1.5 var(--font); overflow: hidden; -webkit-font-smoothing: antialiased; }
+/* titles in the typewriter face of a track sheet */
+h1, h2 { font-family: var(--mono); font-weight: 600; letter-spacing: -0.01em; }
+h1 { letter-spacing: -0.02em; }
+button, input, select { font: inherit; color: inherit; }
+a { color: var(--accent); text-decoration: none; }
+.btn { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 6px 12px; cursor: pointer; transition: border-color .15s, background-color .15s; }
+.btn:hover { border-color: var(--faint); }
+.btn:active { transform: translateY(1px); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); font-weight: 600; }
+.btn.primary:hover { border-color: var(--accent); opacity: .88; }
+.btn.sm { padding: 3px 9px; font-size: 12.5px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; }
+.small { font-size: 12px; }
+.faint { color: var(--faint); }
+.muted { color: var(--muted); }
+h1 { font-size: 24px; margin: 0 0 4px; letter-spacing: -0.01em; }
+h2 { font-size: 14px; margin: 0 0 8px; }
+input[type=search], input[type=text], input[type=number], select { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; outline: 0; }
+input:focus-visible, select:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+::-webkit-scrollbar { width: 10px; height: 10px; } ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 5px; }
+
+/* work under way (numbers being recounted) */
+.spin { display: inline-block; width: 13px; height: 13px; border-radius: 50%; border: 2px solid color-mix(in srgb, var(--accent) 25%, transparent); border-top-color: var(--accent); animation: spin .7s linear infinite; vertical-align: middle; margin-left: 10px; }
+.side .spin { margin-left: 0; }
+@keyframes spin { to { transform: rotate(360deg); } }

@@ -1,0 +1,116 @@
+{
+  "title": "Atelier",
+  "intro": "Des traitements de projets, chacun en option, réglés par des presets. L'original n'est jamais modifié : chaque passage écrit une copie « Nom [codes].als » à côté, et une copie retouchée dans Live n'est jamais écrasée. Rien ne change le son.",
+  "role": {
+    "drums": "Batterie",
+    "perc": "Percussions",
+    "bass": "Basse",
+    "keys": "Claviers / guitares",
+    "pad": "Nappes",
+    "pluck": "Plucks / arpèges",
+    "lead": "Leads / mélodies",
+    "vox": "Voix",
+    "fx": "FX",
+    "other": "Autre",
+    "return": "Retours"
+  },
+  "section": {
+    "R": "Réparer",
+    "C": "Couleurs",
+    "N": "Noms",
+    "O": "Ordre des pistes",
+    "P": "Nettoyage",
+    "M": "Marqueurs",
+    "G": "Gabarit"
+  },
+  "copySuffix": " (copie)",
+  "pickSong": "Choisis un morceau",
+  "facts": {
+    "R": "Réparation : {renamed} plugin(s) rebranché(s), {tried} remplacé(s), {samples} sample(s)",
+    "P": "Nettoyage : {tracks} piste(s) vide(s), {devices} device(s) éteint(s), {returns} retour(s) retiré(s)",
+    "Psimplified": ", {n} effet(s) regroupé(s)",
+    "O": "Ordre : {moved} piste(s) déplacée(s)",
+    "Ogroups": ", {n} groupe(s) créé(s)",
+    "C": "Couleurs : {tracks} pistes et {clips} clips",
+    "N": "Noms : {tracks} piste(s), {clips} clip(s), {scenes} scène(s)",
+    "Mnone": "Marqueurs : aucun ({why})",
+    "M": "Marqueurs : {n}",
+    "G": "Gabarit : {list}",
+    "Gnothing": "rien"
+  },
+  "noName": "(sans nom)",
+  "presetName": "Nom du preset",
+  "ok": "OK",
+  "new": "Nouveau",
+  "duplicate": "Dupliquer",
+  "rename": "Renommer",
+  "delete": "Supprimer",
+  "copiesLabel": "Copies :",
+  "copiesPattern": "Nom [{codes}].als",
+  "autosaved": "· enregistré tout seul",
+  "on": "Activé",
+  "off": "Désactivé",
+  "R": {
+    "text": "Plugins rebranchés ou remplacés, samples retrouvés copiés dans le projet : comme la page Réparer."
+  },
+  "C": {
+    "clips": "Clips aussi, une nuance par clip différent",
+    "hueAria": "{role} : teinte {i}"
+  },
+  "N": {
+    "tracks": "Pistes (Rôle - Instrument)",
+    "clips": "Clips MIDI (Rôle A, B...)",
+    "scenes": "Scènes vides numérotées",
+    "onlyAuto": "Seulement les noms automatiques",
+    "onlyAutoTitle": "Les noms que tu as écrits toi-même restent"
+  },
+  "O": {
+    "insideGroups": "Trier aussi dans les groupes",
+    "makeGroups": "Créer des groupes par rôle",
+    "makeGroupsTitle": "Groupes neutres (0 dB, centre, sans envoi ni effet) : le son ne change pas. Seulement les pistes qui vont directement au master et que rien n'écoute, si le projet contient déjà un groupe qui sert de modèle",
+    "up": "Monter",
+    "down": "Descendre"
+  },
+  "P": {
+    "emptyTracks": "Pistes vides",
+    "emptyTracksTitle": "Sans clip ni device, et que rien n'écoute",
+    "disabledDevices": "Devices désactivés",
+    "disabledDevicesTitle": "Éteints et sans automation qui les rallume",
+    "unusedReturns": "Retours inutilisés",
+    "unusedReturnsTitle": "Aucune piste n'y envoie de son",
+    "simplifyGroups": "Simplifier les groupes",
+    "simplifyGroupsTitle": "Le même EQ (mêmes réglages) au bout de chaque piste d'un groupe passe une seule fois sur le groupe. Seulement des effets qui donnent exactement le même son sur la somme",
+    "text": "Chaque règle vérifie le routing (sidechains, pistes qui en écoutent d'autres, envois, automation) et laisse en place au moindre doute. Un compresseur ou une saturation ne sont jamais déplacés."
+  },
+  "M": {
+    "onlyIfNone": "Seulement si le projet n'en a pas",
+    "sections": "Sections de {input} mesures minimum. Même combinaison de pistes = même lettre (A, B, A...)."
+  },
+  "G": {
+    "tempo": "Tempo",
+    "tempoPlaceholder": "laisser tel quel",
+    "scale": "Gamme",
+    "scalePlaceholder": "ex. Fm, C# major (Live 12)",
+    "rack": "Rack sur le master",
+    "rackPlaceholder": "chemin d'un .adg (ta chaîne de master)"
+  },
+  "target": "Sur quoi",
+  "oneSong": "Un morceau",
+  "allSongs": "Tous les morceaux ({n})",
+  "songSearch": "Titre du morceau",
+  "songLabel": "Morceau :",
+  "computing": "Calcul...",
+  "preview": "Aperçu",
+  "createN": { "one": "Créer {n} copie", "other": "Créer {n} copies" },
+  "createOne": "Créer la copie",
+  "progress": "Traitement {done} / {total}...",
+  "done": { "one": "Terminé : {n} copie créée", "other": "Terminé : {n} copies créées" },
+  "notDone": ", {n} non faite(s)",
+  "fileError": "{file} : {error}",
+  "nothingToDo": "Rien à faire",
+  "copyLabel": "Copie :",
+  "redone": "Refaite depuis l'original : la copie existante n'avait pas été retouchée.",
+  "before": "Avant",
+  "after": "Après",
+  "approxColors": "Couleurs approchées : les vraies sont celles de la palette de Live."
+}

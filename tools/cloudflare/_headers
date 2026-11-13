@@ -1,0 +1,13 @@
+/spool/download/latest.json
+  Cache-Control: no-store
+  Access-Control-Allow-Origin: *
+
+/spool/download/changelog.json
+  Cache-Control: no-store
+  Access-Control-Allow-Origin: *
+
+/spool/download/*.exe
+  Cache-Control: public, max-age=31536000, immutable
+
+/spool/download/spool-tour.mp4
+  Cache-Control: public, max-age=86400

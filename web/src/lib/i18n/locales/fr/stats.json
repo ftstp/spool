@@ -1,0 +1,83 @@
+{
+  "title": "Statistiques",
+  "nProjects": { "one": "{n} projet", "other": "{n} projets" },
+  "pct": "{n} %",
+  "of": "{n} sur {total}",
+  "progress": "Avancement",
+  "byArtist": "Par artiste",
+  "opens": "Projets qui s'ouvrent",
+  "blocking": "Plugins qui bloquent le plus",
+  "tempos": "Tempos",
+  "tempoRange": "{a} à {b} bpm",
+  "keySrc": {
+    "estimated": "{n} estimées d'après les notes MIDI",
+    "live": "{n} réglées dans Live",
+    "noted": "{n} notées"
+  },
+  "keys": "Tonalités",
+  "styles": "Styles",
+  "yearsTitle": "Date du premier fichier du projet, anciennes versions comprises",
+  "years": "Morceaux par année de création",
+  "instr": "Instruments les plus utilisés",
+  "nativeInstr": "instrument de Live",
+  "plugin": "plugin",
+  "fx": "Effets les plus utilisés",
+  "nativeFx": "effet de Live",
+  "lives": "Versions de Live",
+  "unknown": "Inconnue",
+  "liveVersion": "Live {v}",
+  "recovered": "Projets récupérés",
+  "scans": { "one": "{n} analyse", "other": "{n} analyses" },
+  "seriesOpen": "S'ouvrent (réparation comprise)",
+  "seriesComplete": "Complets (rien à installer)",
+  "ifInstall": "Si tu installes dans l'ordre conseillé",
+  "completeUnit": { "one": "{n} projet complet", "other": "{n} projets complets" },
+  "completeSeries": "Projets complets",
+  "today": "Aujourd'hui",
+  "hover": "Survole la courbe pour voir quel plugin installer à chaque étape. La liste est dans {link}.",
+  "repairLink": "Réparer",
+  "nothingToInstall": "Rien à installer.",
+  "stagesOverDays": "Étapes au fil des jours",
+  "doneByMonth": "Morceaux terminés par mois",
+  "doneUnit": { "one": "{n} terminé", "other": "{n} terminés" },
+  "chart": {
+    "empty": "Rien à montrer.",
+    "noHistory": "Pas encore d'historique : il se remplit à chaque analyse qui change quelque chose.",
+    "series": "{label} : {value}"
+  },
+  "lib": {
+    "kind": {
+      "chords": "Harmonies",
+      "melody": "Mélodies",
+      "bass": "Basses",
+      "drums": "Batteries",
+      "multi": "Morceaux complets"
+    },
+    "midi": "Fichiers MIDI",
+    "mine": "Dans tes projets",
+    "library": "Dans tes bibliothèques MIDI",
+    "files": { "one": "{n} fichier", "other": "{n} fichiers" },
+    "minor": "{pct} en mineur. Tonalités : {keys}",
+    "tempoRange": "{a} à {b} bpm ({pct} des fichiers)",
+    "topTempo": "Tempo le plus fréquent : {v}",
+    "progs": "Suites d'accords :",
+    "example": "Par exemple dans {name}",
+    "matter": "Ils servent de matière pour créer de nouveaux projets. Tes propres fichiers comptent avant ceux des bibliothèques.",
+    "reading": "Lecture des fichiers MIDI en cours (la barre latérale montre où ça en est).",
+    "noMidi": "Aucun fichier MIDI dans tes dossiers. Tu peux ajouter des bibliothèques MIDI (construction kits) dans les réglages.",
+    "media": "Médias hors projets",
+    "mediaKind": {
+      "image": { "one": "{n} image", "other": "{n} images" },
+      "gif": { "one": "{n} gif", "other": "{n} gifs" },
+      "video": { "one": "{n} vidéo", "other": "{n} vidéos" },
+      "audio": { "one": "{n} son", "other": "{n} sons" },
+      "text": { "one": "{n} note", "other": "{n} notes" },
+      "pdf": { "one": "{n} pdf", "other": "{n} pdf" }
+    },
+    "inFolders": {
+      "one": "Dans {n} dossier sans projet. Tu pourras les envoyer dans le moodboard d'un morceau (Morceaux, vue Dossiers, « Médias hors projets »).",
+      "other": "Dans {n} dossiers sans projet. Tu pourras les envoyer dans le moodboard d'un morceau (Morceaux, vue Dossiers, « Médias hors projets »)."
+    },
+    "noMedia": "Aucun média en dehors des morceaux."
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "title": "Home",
+  "inprog": "{n} in mix or master",
+  "opensPct": "{n}% of projects open",
+  "allStats": "All statistics",
+  "tile": {
+    "songs": "Songs",
+    "songsFoot": "{done} done · {inprog} in mix or master",
+    "opens": "Projects that open",
+    "opensFoot": "{fix} fixable by the app · {bad} waiting for a plugin",
+    "activity": "Activity",
+    "savedSongs": { "one": "{n} song saved", "other": "{n} songs saved" },
+    "activityFoot": "songs saved in the last 4 weeks (26 weeks shown)",
+    "week": "Week of {date}",
+    "audio": "With an audio render",
+    "audioFoot": "{n}% of songs have a render to listen to"
+  },
+  "resume": "Continue",
+  "allSongs": "All songs",
+  "almost": "Almost done",
+  "validate": "To review",
+  "acceptAllTitle": "Accepts every suggested stage (can be undone)",
+  "acceptAll": "Accept all",
+  "accept": "Accept",
+  "refuse": "Decline",
+  "styles": "Likely styles",
+  "nothing": "Nothing to review."
+}

@@ -1,0 +1,111 @@
+{
+  "title": "Réglages",
+  "sub": "Rien ici ne modifie tes projets. Seul le rangement physique, une fois activé, permet à l'app de déplacer des fichiers, et seulement quand tu le demandes.",
+  "parts": {
+    "label": "Parties",
+    "dossiers": "Dossiers",
+    "rangement": "Rangement",
+    "donnees": "Données",
+    "spool": "Spool",
+    "zero": "Repartir de zéro"
+  },
+  "folderAdded": "Dossier ajouté : ses projets arrivent à la prochaine analyse.",
+  "folderRemoved": "Dossier retiré : ses morceaux quittent l'app (rien n'est touché sur le disque).",
+  "already": "Ce dossier est déjà dans la liste.",
+  "folders": {
+    "sub": "Ce que l'app lit. Elle ne fait que lire : tes fichiers restent tels quels.",
+    "projects": "Dossiers de projets",
+    "projectsHint": "Les dossiers qui contiennent tes projets Ableton, sous-dossiers compris.",
+    "rootLabel": "Ses morceaux apparaissent sous « {label} »",
+    "mainRoot": "Dossier principal",
+    "pickProjects": "Dossier de tes projets Ableton",
+    "samples": "Dossiers de samples",
+    "samplesHint": "Où chercher un sample qu'un projet ne trouve plus, en plus des dossiers de projets et de la bibliothèque d'Ableton.",
+    "pickSamples": "Dossier de samples",
+    "samplesEmpty": "Aucun dossier en plus.",
+    "midi": "Dossiers MIDI en plus",
+    "optional": "facultatif",
+    "midiHint": "Les fichiers MIDI de tes dossiers de projets et de samples sont déjà lus. Ajoute ici d'autres dossiers (construction kits, packs) : l'app n'y lit que les fichiers MIDI.",
+    "pickMidi": "Dossier de fichiers MIDI",
+    "midiEmpty": "Aucune bibliothèque MIDI.",
+    "oldWindows": "Ancien Windows",
+    "oldWindowsHint": "Un ancien Windows sur un autre disque (double démarrage) : ses plugins et ses samples aident à réparer les vieux projets.",
+    "oldDrive": "Disque de l'ancien Windows",
+    "oldDriveSaved": "Enregistré : pris en compte à la prochaine analyse.",
+    "none": "Aucun",
+    "drive": "Disque {d}:"
+  },
+  "arrange": {
+    "sub": "Comment l'app range tes morceaux.",
+    "physical": "Rangement physique",
+    "physicalHint": "Désactivé, tout se range dans l'app seulement (sorties, moodboards, dossiers) : aucun fichier ne bouge sur ton disque, Ctrl+Z compris. Activé, tu peux aussi déplacer et créer des dossiers, et ranger une sortie dans son dossier. Chaque déplacement est vérifié (un projet qui perdrait un sample reste en place) et s'annule par Ctrl+Z, après confirmation.",
+    "physicalOn": "Activé : l'app peut déplacer des fichiers quand tu le demandes.",
+    "physicalOff": "Désactivé : rien ne bouge sur le disque.",
+    "disable": "Désactiver",
+    "enable": "Activer",
+    "physicalOnSaid": "Rangement physique activé : les déplacements de fichiers sont possibles.",
+    "physicalOffSaid": "Rangement physique désactivé : plus rien ne bouge sur le disque.",
+    "artists": "Artistes et alias",
+    "artistsHint": "Un nom par ligne. Un morceau rangé dans un dossier qui porte l'un de ces noms est à cet artiste.",
+    "artistPlaceholder": "Mon alias",
+    "artistsSaved": "Artistes enregistrés : les morceaux sont rangés à nouveau.",
+    "suggest": "Proposer depuis mes dossiers",
+    "guessTitle": "{files} fichiers, {folders} dossiers",
+    "guessTitleSure": "{files} fichiers, {folders} dossiers : sûrement un artiste",
+    "nothingMore": "Rien de plus à proposer.",
+    "words": "Mots de copie de travail",
+    "wordsHint": "Des mots que tu mets dans le nom d'une copie de travail (« test », « essai »...) : un fichier qui les porte reste une version du même morceau. Un par ligne.",
+    "wordsSaved": "Enregistré : les morceaux sont rangés à nouveau."
+  },
+  "data": {
+    "sub": "L'analyse de tes projets, et ce qui entre ou sort de l'app.",
+    "scan": "Analyse",
+    "scanHint": "L'app relit tes projets dès qu'ils changent, et au plus tard toutes les minutes. « Tout relire » ne sert qu'après une mise à jour de l'app ou de Live.",
+    "lastScan": "Dernière analyse {ago}",
+    "notScanned": "Pas encore analysé.",
+    "noLive": " Live n'a pas encore été ouvert sur cet ordinateur : la liste de ses plugins manque.",
+    "scanNow": "Analyser maintenant",
+    "rescan": "Tout relire",
+    "export": "Exporter le catalogue",
+    "exportHint": "Tes morceaux dans un fichier CSV pour un tableur (Excel, Google Sheets) ou un autre outil : titre, artiste, style, tonalité, tempo, étape, note, catalogue, état des plugins, rendu audio, dates, dossier. Tu choisis où l'enregistrer ; rien d'autre n'est écrit.",
+    "withArchived": "Avec les morceaux archivés",
+    "exportN": {
+      "one": "Exporter {n} morceau...",
+      "other": "Exporter {n} morceaux..."
+    },
+    "notion": "Importer depuis Notion",
+    "notionHint": "Exporte ta base Notion en CSV (menu ••• de la base, Exporter, « Markdown et CSV »), puis choisis le fichier. Tu vérifies quelle colonne va où avant que quoi que ce soit soit écrit, et Ctrl+Z annule l'import.",
+    "notionPick": "Choisir le fichier CSV...",
+    "notionDialog": "Export CSV de la base Notion"
+  },
+  "spool": {
+    "sub": "La version installée et ses mises à jour.",
+    "version": "Version {v}",
+    "updatesHint": "Spool regarde s'il existe une version plus récente peu après son lancement, puis toutes les 6 heures. Rien ne s'installe sans ton clic, jamais pendant une analyse ou une réparation, et seule une version signée par Fatstep est acceptée. Ta base est copiée avant toute mise à jour qui la modifie.",
+    "available": "Spool {version} est disponible.",
+    "checkedAt": "À jour (vérifié {time}).",
+    "notChecked": "Pas encore vérifié.",
+    "downloading": "Téléchargement...",
+    "install": "Installer {version}",
+    "checking": "Vérification...",
+    "check": "Rechercher une mise à jour"
+  },
+  "zero": {
+    "hint": "Vide la base de l'app : morceaux, étapes, styles, notes, regroupements, dossiers, artistes, presets de traitements et historique des réparations, puis rouvre la configuration. Tes projets, tes samples et les copies déjà écrites ne sont pas touchés. L'ancienne base est mise de côté (les 3 dernières sont gardées).",
+    "confirm": "Tout ce que tu as rangé dans l'app sera retiré. Continuer ?",
+    "yes": "Oui, repartir de zéro",
+    "start": "Repartir de zéro..."
+  },
+  "fatstep": {
+    "title": "Éditeur",
+    "body": "Spool est gratuit et open source, fait par Fatstep, un label et distributeur pour artistes indépendants. Quand tes morceaux sont prêts, on peut t'aider à les sortir.",
+    "site": "Fatstep for Artists"
+  },
+  "theme": {
+    "title": "Apparence",
+    "hint": "Clair ou sombre, ou comme Windows.",
+    "system": "Comme Windows",
+    "light": "Clair",
+    "dark": "Sombre"
+  }
+}

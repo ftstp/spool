@@ -1,0 +1,116 @@
+{
+  "title": "Treatments",
+  "intro": "Project treatments, each optional, set by presets. The original is never modified: each pass writes a copy \"Name [codes].als\" next to it, and a copy you edited in Live is never overwritten. Nothing changes the sound.",
+  "role": {
+    "drums": "Drums",
+    "perc": "Percussion",
+    "bass": "Bass",
+    "keys": "Keys / guitars",
+    "pad": "Pads",
+    "pluck": "Plucks / arps",
+    "lead": "Leads / melodies",
+    "vox": "Vocals",
+    "fx": "FX",
+    "other": "Other",
+    "return": "Returns"
+  },
+  "section": {
+    "R": "Repair",
+    "C": "Colours",
+    "N": "Names",
+    "O": "Track order",
+    "P": "Cleanup",
+    "M": "Markers",
+    "G": "Template"
+  },
+  "copySuffix": " (copy)",
+  "pickSong": "Pick a song",
+  "facts": {
+    "R": "Repair: {renamed} plugin(s) reconnected, {tried} replaced, {samples} sample(s)",
+    "P": "Cleanup: {tracks} empty track(s), {devices} disabled device(s), {returns} return(s) removed",
+    "Psimplified": ", {n} effect(s) merged",
+    "O": "Order: {moved} track(s) moved",
+    "Ogroups": ", {n} group(s) created",
+    "C": "Colours: {tracks} tracks and {clips} clips",
+    "N": "Names: {tracks} track(s), {clips} clip(s), {scenes} scene(s)",
+    "Mnone": "Markers: none ({why})",
+    "M": "Markers: {n}",
+    "G": "Template: {list}",
+    "Gnothing": "nothing"
+  },
+  "noName": "(untitled)",
+  "presetName": "Preset name",
+  "ok": "OK",
+  "new": "New",
+  "duplicate": "Duplicate",
+  "rename": "Rename",
+  "delete": "Delete",
+  "copiesLabel": "Copies:",
+  "copiesPattern": "Name [{codes}].als",
+  "autosaved": "· saved automatically",
+  "on": "On",
+  "off": "Off",
+  "R": {
+    "text": "Plugins reconnected or replaced, found samples copied into the project: same as the Repair page."
+  },
+  "C": {
+    "clips": "Clips too, one shade per different clip",
+    "hueAria": "{role}: hue {i}"
+  },
+  "N": {
+    "tracks": "Tracks (Role - Instrument)",
+    "clips": "MIDI clips (Role A, B...)",
+    "scenes": "Numbered empty scenes",
+    "onlyAuto": "Only automatic names",
+    "onlyAutoTitle": "Names you wrote yourself stay"
+  },
+  "O": {
+    "insideGroups": "Also sort inside groups",
+    "makeGroups": "Create groups by role",
+    "makeGroupsTitle": "Neutral groups (0 dB, centre, no sends or effects): the sound doesn't change. Only tracks routed straight to the master that nothing listens to, if the project already contains a group to use as a model",
+    "up": "Move up",
+    "down": "Move down"
+  },
+  "P": {
+    "emptyTracks": "Empty tracks",
+    "emptyTracksTitle": "No clip or device, and nothing listens to them",
+    "disabledDevices": "Disabled devices",
+    "disabledDevicesTitle": "Off, with no automation turning them back on",
+    "unusedReturns": "Unused returns",
+    "unusedReturnsTitle": "No track sends any sound to them",
+    "simplifyGroups": "Simplify groups",
+    "simplifyGroupsTitle": "The same EQ (same settings) at the end of every track in a group moves once onto the group. Only effects that sound exactly the same on the sum",
+    "text": "Each rule checks the routing (sidechains, tracks listening to others, sends, automation) and leaves things alone at the slightest doubt. A compressor or saturation is never moved."
+  },
+  "M": {
+    "onlyIfNone": "Only if the project has none",
+    "sections": "Sections of at least {input} bars. Same combination of tracks = same letter (A, B, A...)."
+  },
+  "G": {
+    "tempo": "Tempo",
+    "tempoPlaceholder": "leave as is",
+    "scale": "Scale",
+    "scalePlaceholder": "e.g. Fm, C# major (Live 12)",
+    "rack": "Rack on the master",
+    "rackPlaceholder": "path to an .adg (your master chain)"
+  },
+  "target": "Apply to",
+  "oneSong": "One song",
+  "allSongs": "All songs ({n})",
+  "songSearch": "Song title",
+  "songLabel": "Song:",
+  "computing": "Computing...",
+  "preview": "Preview",
+  "createN": { "one": "Create {n} copy", "other": "Create {n} copies" },
+  "createOne": "Create the copy",
+  "progress": "Processing {done} / {total}...",
+  "done": { "one": "Done: {n} copy created", "other": "Done: {n} copies created" },
+  "notDone": ", {n} not done",
+  "fileError": "{file}: {error}",
+  "nothingToDo": "Nothing to do",
+  "copyLabel": "Copy:",
+  "redone": "Redone from the original: the existing copy had not been edited.",
+  "before": "Before",
+  "after": "After",
+  "approxColors": "Approximate colours: the real ones are those of Live's palette."
+}

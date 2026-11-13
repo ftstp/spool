@@ -1,0 +1,24 @@
+[package]
+name = "plugin-fixer-desktop"
+description = "Desktop shell (Tauri 2) around the core"
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+serde.workspace = true
+serde_json.workspace = true
+als = { path = "../../crates/als" }
+app_core = { package = "core", path = "../../crates/core" }
+repair = { path = "../../crates/repair" }
+i18n = { path = "../../crates/i18n" }
+tauri-plugin-dialog = "2"
+tauri-plugin-updater = "2"
+
+[[bin]]
+name = "Spool"
+path = "src/main.rs"

@@ -1,0 +1,17 @@
+[package]
+name = "index"
+description = "The scanner: walks the projects, re-reads what changed, classifies plugins, finds samples, groups songs, refreshes suggestions"
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+
+[dependencies]
+i18n = { path = "../i18n" }
+als = { path = "../als" }
+plugins = { path = "../plugins" }
+catalog = { path = "../catalog" }
+store = { path = "../store" }
+midi = { path = "../midi" }
+rayon.workspace = true
+serde.workspace = true
+serde_json.workspace = true

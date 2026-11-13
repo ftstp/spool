@@ -1,0 +1,271 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "songs": "Morceaux",
+    "repair": "Réparer",
+    "releases": "Sorties",
+    "create": "Créer",
+    "stats": "Statistiques",
+    "settings": "Réglages",
+    "repairTitle": {
+      "one": "{label} : {n} réparables par l'app",
+      "other": "{label} : {n} réparables par l'app"
+    }
+  },
+  "side": {
+    "current": "Sorties en cours",
+    "ready": "{ready}/{count} prêts",
+    "readyWhen": "{ready}/{count} prêts · {when}",
+    "relTitle": "{title} : {ready}/{count} prêts",
+    "relTitleWhen": "{title} : {ready}/{count} prêts, {when}",
+    "open": "Ouverts",
+    "expand": "Déplier la barre",
+    "collapse": "Replier la barre",
+    "fold": "Replier"
+  },
+  "status": {
+    "running": "Analyse en cours...",
+    "error": "Erreur : {error}",
+    "upToDate": "À jour {ago}",
+    "busy": "Mise à jour des chiffres..."
+  },
+  "top": {
+    "back": "Page précédente",
+    "backTitle": "Page précédente (Alt ←)",
+    "forward": "Page suivante",
+    "forwardTitle": "Page suivante (Alt →)",
+    "undo": "Annuler",
+    "undoTitle": "Annuler : {label} (Ctrl Z)",
+    "nothingToUndo": "Rien à annuler",
+    "newSong": "Nouveau morceau",
+    "newSongTitle": "Un projet vierge avec tes sons habituels pour un style",
+    "fixable": {
+      "one": "{n} projet réparable par l'app",
+      "other": "{n} projets réparables par l'app"
+    }
+  },
+  "undo": {
+    "confirmFiles": "Annuler « {label} » remet des fichiers en place sur le disque. Appuie encore sur Ctrl+Z (ou Annuler) pour confirmer.",
+    "done": "Annulé : {label}"
+  },
+  "search": {
+    "placeholderSongs": "Filtrer les morceaux : titre, artiste, style, dossier, instrument",
+    "placeholder": "Chercher un morceau, un style, un dossier, une commande...",
+    "nothing": "Rien pour « {q} »",
+    "sec": {
+      "styles": "Styles",
+      "songs": "Morceaux",
+      "folders": "Dossiers",
+      "commands": "Commandes",
+      "releases": "Sorties"
+    },
+    "songCount": {
+      "one": "{n} morceau",
+      "other": "{n} morceaux"
+    },
+    "trackCount": {
+      "one": "{n} titre",
+      "other": "{n} titres"
+    },
+    "view": {
+      "list": "Liste",
+      "folders": "Dossiers",
+      "board": "Tableau",
+      "cal": "Calendrier",
+      "grid": "Grille"
+    },
+    "cmd": {
+      "home": "Accueil",
+      "songs": "Morceaux",
+      "repair": "Réparer",
+      "create": "Créer un morceau",
+      "releases": "Sorties (EP, albums)",
+      "atelier": "Traitements (Atelier)",
+      "stats": "Statistiques",
+      "copies": "Copies écrites par Spool",
+      "export": "Exporter le catalogue (CSV)",
+      "settings": "Réglages",
+      "songsView": "Morceaux : vue {view}",
+      "scan": "Analyser maintenant",
+      "rescan": "Relire tout (plugins de Live compris)",
+      "addProjects": "Ajouter un dossier de projets",
+      "addSamples": "Ajouter un dossier de samples",
+      "closeAll": "Fermer tous les morceaux ouverts",
+      "fold": "Replier ou déplier la barre latérale",
+      "withAudio": "Morceaux avec un témoin audio",
+      "toFix": "Morceaux à réparer"
+    },
+    "scanStarted": "Analyse lancée.",
+    "rescanStarted": "Tout est relu, liste des plugins de Live comprise."
+  },
+  "scan": {
+    "steps": {
+      "find": "Recherche des projets",
+      "read": "Lecture des projets",
+      "samples": "Indexation des samples",
+      "plugins": "Comparaison avec les plugins installés",
+      "group": "Regroupement des morceaux",
+      "temoins": "Témoins, moodboards et suggestions",
+      "midiFind": "Recherche des fichiers MIDI",
+      "midiRead": "Analyse des fichiers MIDI"
+    },
+    "found": {
+      "find": {
+        "one": "{num} fichiers (projets et rendus audio)",
+        "other": "{num} fichiers (projets et rendus audio)"
+      },
+      "read": {
+        "one": "{num} lus",
+        "other": "{num} lus"
+      },
+      "midiFind": {
+        "one": "{num} trouvés",
+        "other": "{num} trouvés"
+      },
+      "midiRead": {
+        "one": "{num} lus",
+        "other": "{num} lus"
+      }
+    },
+    "left": "encore {time}",
+    "stopping": "Arrêt...",
+    "cancel": "Annuler l'analyse",
+    "keptNote": "Ce qui est déjà lu est gardé ; la suite sera lue à la prochaine analyse.",
+    "stopped": "Analyse arrêtée. Ce qui a été lu est gardé ; le reste sera lu à la prochaine analyse (« Analyser maintenant », ou toute seule dans 30 minutes).",
+    "analysis": "Analyse",
+    "stopTitle": "Arrêter l'analyse (ce qui est lu est gardé)",
+    "stoppingShort": "arrêt...",
+    "cancelShort": "annuler",
+    "other": {
+      "update": "Mise à jour",
+      "oldDisk": "Recherche sur l'ancien disque"
+    }
+  },
+  "update": {
+    "whatsNew": "Nouveautés :\n{notes}",
+    "install": "Installer Spool {version}",
+    "isAvailable": "est disponible",
+    "downloading": "Téléchargement...",
+    "installRestart": "Installer et redémarrer",
+    "later": "Plus tard",
+    "available": "Spool {version} est disponible.",
+    "upToDate": "Spool est à jour.",
+    "checkFailed": "Impossible de vérifier les mises à jour : {error}",
+    "scanRunning": "Une analyse est en cours : installe la mise à jour quand elle est finie."
+  },
+  "csv": {
+    "head": {
+      "title": "Titre",
+      "artist": "Artiste",
+      "style": "Style",
+      "key": "Tonalité",
+      "tempo": "Tempo",
+      "stage": "Étape",
+      "rating": "Note",
+      "kinds": "Types",
+      "catalog": "Catalogue",
+      "files": "Projets",
+      "plugins": "Plugins",
+      "audio": "Rendu audio",
+      "live": "Version de Live",
+      "created": "Créé le",
+      "modified": "Modifié le",
+      "dir": "Dossier",
+      "project": "Projet"
+    },
+    "sev": {
+      "ok": "S'ouvre",
+      "fix": "Réparable par l'app",
+      "lost": "Réglages perdus",
+      "bad": "Plugin à installer"
+    },
+    "yes": "oui",
+    "no": "non",
+    "dialogTitle": "Exporter le catalogue",
+    "fileName": "catalogue",
+    "exported": {
+      "one": "{n} morceau exporté : {at}",
+      "other": "{n} morceaux exportés : {at}"
+    }
+  },
+  "api": {
+    "preview": "(aperçu)",
+    "readOnly": "Aperçu en lecture seule : les modifications se font dans l'app.",
+    "gb": "{n} Go",
+    "mb": "{n} Mo",
+    "lessThanMinute": "moins d'une minute",
+    "aboutMin": "environ {n} min",
+    "aboutHours": "environ {n} h",
+    "bigFolder": "Ce dossier contient {midi} fichiers MIDI ({size}) sur {files} fichiers. Les lire prendra {time} la première fois, au bout de l'analyse des projets ; ensuite seuls les nouveaux sont lus. Tu pourras arrêter l'analyse à tout moment.",
+    "bigFolderMore": "Ce dossier contient {midi} fichiers MIDI ({size}) sur {files} fichiers (et sans doute plus : le dossier est trop grand pour être compté en quelques secondes). Les lire prendra {time} la première fois, au bout de l'analyse des projets ; ensuite seuls les nouveaux sont lus. Tu pourras arrêter l'analyse à tout moment."
+  },
+  "folders": {
+    "pick": "Choisir un dossier",
+    "empty": "Aucun dossier.",
+    "remove": "Retirer",
+    "add": "Ajouter un dossier...",
+    "paste": "ou coller un chemin",
+    "pathPlaceholder": "C:\\Users\\...\\Musique",
+    "addTyped": "Ajouter",
+    "big": "Dossier volumineux",
+    "addAnyway": "Ajouter quand même"
+  },
+  "rootArtists": {
+    "intro": "Artiste de chaque dossier : les morceaux qu'il contient le prennent, sauf si leurs dossiers en nomment un autre. Laisse vide si le dossier mélange plusieurs artistes.",
+    "placeholder": "Artiste (facultatif)",
+    "guessed": "deviné"
+  },
+  "notion": {
+    "title": "Importer depuis Notion",
+    "reading": "Lecture...",
+    "columns": "Colonnes",
+    "columnsHint": "Chaque colonne de Notion va dans un champ du morceau. Vérifie les choix de l'app.",
+    "empty": "vide",
+    "fieldFor": "Champ pour {name}",
+    "target": {
+      "ignore": "Ignorer",
+      "title": "Nom du morceau",
+      "artist": "Artiste",
+      "style": "Style",
+      "key": "Tonalité",
+      "tempo": "Tempo",
+      "stage": "Étape",
+      "notes": "Notes",
+      "rating": "Note (étoiles)",
+      "kinds": "Type",
+      "ft": "Avec (collaborateurs)"
+    },
+    "stages": "Étapes",
+    "stagesHint": "Ce que chaque état de Notion devient dans l'app.",
+    "rows": {
+      "one": "{n} fiche",
+      "other": "{n} fiches"
+    },
+    "stageFor": "Étape pour {name}",
+    "keep": "Ne pas changer",
+    "songs": "Morceaux",
+    "matched": {
+      "one": "fiche sur {total} correspondent à un morceau, par son nom.",
+      "other": "fiches sur {total} correspondent à un morceau, par son nom."
+    },
+    "others": {
+      "one": "Les {n} autres sont laissées de côté (aucun morceau ne crée de fiche).",
+      "other": "Les {n} autres sont laissées de côté (aucun morceau ne crée de fiche)."
+    },
+    "showMatched": "Voir les reconnues",
+    "showOthers": "Voir les autres",
+    "noName": "(sans nom)",
+    "close": "{title} (nom proche)",
+    "onlyEmpty": "Compléter seulement : ne pas remplacer ce qui est déjà rempli dans l'app",
+    "noAudio": "Les fichiers audio (colonne « Track ») ne sont pas importés : l'app trouve les rendus dans tes dossiers.",
+    "importing": "Import...",
+    "import": {
+      "one": "Importer {n} fiche",
+      "other": "Importer {n} fiches"
+    },
+    "done": {
+      "one": "Import Notion : {n} morceau mis à jour",
+      "other": "Import Notion : {n} morceaux mis à jour"
+    }
+  }
+}

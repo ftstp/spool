@@ -1,0 +1,141 @@
+{
+  "title": "Morceaux",
+  "count": "{n} sur {total}",
+  "song": "Morceau",
+  "noArtist": "Sans artiste",
+  "noStyle": "Sans style",
+  "nSongs": { "one": "{n} morceau", "other": "{n} morceaux" },
+  "empty": "Aucun morceau avec ces filtres.",
+  "more": "+ {n} (affine les filtres)",
+  "checks": "Étapes de fin cochées",
+  "views": {
+    "label": "Vue",
+    "list": "Liste",
+    "folders": "Dossiers",
+    "board": "Tableau",
+    "cal": "Calendrier",
+    "grid": "Grille"
+  },
+  "sev": {
+    "ok": "S'ouvrent",
+    "fix": "Réparables par l'app",
+    "lost": "Réglages perdus",
+    "bad": "Plugin à installer"
+  },
+  "filter": {
+    "artistAll": "Artiste : tous",
+    "styleAll": "Style : tous",
+    "keyAll": "Tonalité : toutes",
+    "to": "à",
+    "bpm": "bpm",
+    "half": "Compte aussi la moitié et le double du tempo",
+    "plugins": "Plugins",
+    "pluginsAll": "Plugins : tous",
+    "activity": "Activité",
+    "activityAll": "Activité : toute",
+    "recent": "Travaillés ces 6 mois",
+    "idle": "Pas touchés depuis un an",
+    "audio": "Témoin audio",
+    "audioAll": "Témoin : tous",
+    "audioYes": "Avec un rendu audio",
+    "audioNo": "Sans rendu",
+    "rating": "Note",
+    "ratingAll": "Note : toutes",
+    "andUp": " et plus",
+    "kind": "Type",
+    "kindAll": "Type : tous",
+    "archived": "Archivés",
+    "onlyArchived": "Seulement archivés",
+    "reset": "Effacer les filtres"
+  },
+  "sort": {
+    "label": "Tri",
+    "recent": "Tri : modifiés récemment",
+    "created": "Tri : créés récemment",
+    "stage": "Tri : par étape",
+    "audio": "Tri : avec témoin d'abord",
+    "rating": "Tri : mieux notés d'abord",
+    "key": "Tri : tonalité",
+    "style": "Tri : style",
+    "title": "Tri : titre",
+    "tempo": "Tri : tempo"
+  },
+  "item": {
+    "archived": "archivé",
+    "blocked": "bloqué",
+    "settings": "réglages"
+  },
+  "tabs": {
+    "label": "Morceaux ouverts",
+    "groupUnfold": "{name} : clic pour déplier, clic droit pour plus",
+    "groupFold": "{name} : clic pour replier, clic droit pour plus",
+    "tab": "{title} (clic droit : fermer, grouper...)",
+    "close": "Fermer {title}",
+    "closeAllTitle": "Fermer tous les morceaux ouverts",
+    "closeAll": "Tout fermer"
+  },
+  "ov": {
+    "title": "Vue d'ensemble",
+    "intro": {
+      "one": "{n} morceau avec ces filtres. Clique un morceau pour l'ouvrir ici, clic droit pour ses actions.",
+      "other": "{n} morceaux avec ces filtres. Clique un morceau pour l'ouvrir ici, clic droit pour ses actions."
+    },
+    "stages": "Où en sont-ils",
+    "plugins": "Plugins",
+    "audio": "avec un rendu audio ({pct} %)",
+    "median": "bpm médian",
+    "medianRange": "bpm médian ({min} à {max})",
+    "styles": "Styles",
+    "keys": "Tonalités",
+    "recent": "Travaillés récemment"
+  },
+  "board": {
+    "sugg": "Étape proposée par l'app",
+    "suggLabel": "{stage} ?",
+    "dropHere": "Glisse un morceau ici."
+  },
+  "cal": {
+    "prev": "Mois précédent",
+    "next": "Mois suivant",
+    "today": "Aujourd'hui",
+    "workTitle": "Sous chaque jour, les morceaux dont un projet a été enregistré ce jour-là",
+    "work": "Morceaux travaillés",
+    "workedDay": { "one": "{n} morceau travaillé ce jour", "other": "{n} morceaux travaillés ce jour" },
+    "dated": "{title} (date)",
+    "saved": "{title} : enregistré ce jour",
+    "others": { "one": "+ {n} autre", "other": "+ {n} autres" },
+    "less": "Réduire",
+    "upcoming": "À venir",
+    "undated": "Sans date",
+    "hint": "Glisse un morceau sur un jour pour lui donner une date (sortie, échéance). Glisse-le ici pour la retirer."
+  },
+  "folders": {
+    "byFolder": "Par dossier",
+    "byArtist": "Par artiste",
+    "byStyle": "Par style",
+    "physicalOn": "Tes vrais dossiers. Glisse un morceau sur une carte pour déplacer son dossier.",
+    "physicalOff": "Tes vrais dossiers, tels qu'ils sont sur le disque. Pour en déplacer, active le rangement physique dans Réglages.",
+    "newPlaceholder": "Nom du dossier (ou Parent/Nom)",
+    "create": "Créer",
+    "newFolder": "Nouveau dossier",
+    "reorgTitle": "Propose de ranger chaque dossier de morceau sous le dossier de son artiste (tu choisis ce qui bouge)",
+    "reorg": "Ranger par artiste...",
+    "mediaTitle": "Les images, vidéos, sons et notes rangés dans des dossiers sans projet, à envoyer dans le moodboard d'un morceau",
+    "media": "Médias hors projets",
+    "root": "Racine",
+    "rootTitle": "racine",
+    "reveal": "Afficher dans l'explorateur",
+    "move": "Déplacer ce dossier",
+    "stageCount": "{stage} : {n}",
+    "dragHint": "Glisse sur une autre carte pour déplacer son dossier",
+    "shared": "Dossier partagé avec d'autres morceaux : déplace la carte entière",
+    "risk": {
+      "one": "« {title} » reste en place : {n} sample(s) seraient perdus.",
+      "other": "« {title} » reste en place : {n} sample(s) seraient perdus."
+    }
+  },
+  "grid": {
+    "openTitle": "Ouvrir le projet dans Live",
+    "open": "Ouvrir dans Live"
+  }
+}

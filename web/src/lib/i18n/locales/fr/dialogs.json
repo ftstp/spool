@@ -1,0 +1,47 @@
+{
+  "board": {
+    "label": "Choisir le morceau",
+    "title": "Dans le moodboard de quel morceau ?",
+    "items": { "one": "{n} élément", "other": "{n} éléments" },
+    "moveText": "Le fichier est déplacé dans le dossier du moodboard (un son qu'un projet utilise comme sample y est copié, jamais déplacé). Ctrl+Z annule.",
+    "linkText": "Le fichier reste à sa place : il s'affiche simplement dans le moodboard. Ctrl+Z annule.",
+    "moveCheck": "Déplacer le fichier dans le dossier du moodboard",
+    "search": "Chercher un morceau"
+  },
+  "ok": "OK",
+  "move": {
+    "label": "Déplacer {name}",
+    "title": "Déplacer « {name} »",
+    "intro": "Le dossier part entier (samples compris). Rien n'est écrasé : si le nom est pris, il devient « Nom (2) ». Le morceau garde son étape, ses notes et son moodboard. Ctrl+Z le remet en place.",
+    "search": "Chercher un dossier",
+    "none": "Aucun dossier.",
+    "newIn": "Nouveau dossier dans « {name} »",
+    "newRoot": "Nouveau dossier à la racine",
+    "create": "Créer",
+    "arrival": "Arrivée :",
+    "renamed": " (nom déjà pris : renommé)",
+    "impossible": { "one": "Impossible : {n} sample serait perdu ({list}).", "other": "Impossible : {n} samples seraient perdus ({list})." },
+    "sampleIn": "{sample} dans {project}",
+    "skipped": "{name} : {why}",
+    "joiner": " ; ",
+    "moving": "Déplacement...",
+    "go": "Déplacer"
+  },
+  "reorg": {
+    "title": "Réorganiser les dossiers",
+    "intro": "Range chaque dossier de morceau sous son artiste, dans ton dossier principal. Un dossier d'artiste qui existe déjà est réutilisé (« - ODA KEEL » pour Oda Keel). Un dossier dont un projet perdrait un sample reste en place. Ctrl+Z remet tout.",
+    "templates": {
+      "artist": "Artiste / Morceau",
+      "artist_style": "Artiste / Style / Morceau",
+      "artist_album": "Artiste / Dossier actuel / Morceau"
+    },
+    "model": "Modèle",
+    "computing": "Calcul...",
+    "toSort": { "one": "{n} dossier à ranger", "other": "{n} dossiers à ranger" },
+    "left": { "one": "{n} laissé (sans artiste, ou plusieurs artistes)", "other": "{n} laissés (sans artiste, ou plusieurs artistes)" },
+    "partial": "{done} déplacés, {skipped} laissés : {list}",
+    "empty": "Tout est déjà rangé ainsi.",
+    "moving": "Déplacement...",
+    "go": { "one": "Déplacer {n} dossier", "other": "Déplacer {n} dossiers" }
+  }
+}

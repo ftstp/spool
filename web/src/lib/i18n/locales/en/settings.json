@@ -1,0 +1,111 @@
+{
+  "title": "Settings",
+  "sub": "Nothing here changes your projects. Only physical arranging, once turned on, lets the app move files, and only when you ask.",
+  "parts": {
+    "label": "Sections",
+    "dossiers": "Folders",
+    "rangement": "Arranging",
+    "donnees": "Data",
+    "spool": "Spool",
+    "zero": "Start over"
+  },
+  "folderAdded": "Folder added: its projects come in at the next scan.",
+  "folderRemoved": "Folder removed: its songs leave the app (nothing is touched on disk).",
+  "already": "This folder is already in the list.",
+  "folders": {
+    "sub": "What the app reads. It only reads: your files stay as they are.",
+    "projects": "Projects folders",
+    "projectsHint": "The folders that hold your Ableton projects, subfolders included.",
+    "rootLabel": "Its songs appear under \"{label}\"",
+    "mainRoot": "Main folder",
+    "pickProjects": "Your Ableton projects folder",
+    "samples": "Samples folders",
+    "samplesHint": "Where to look for a sample a project can no longer find, on top of the projects folders and Ableton's library.",
+    "pickSamples": "Samples folder",
+    "samplesEmpty": "No extra folders.",
+    "midi": "Extra MIDI folders",
+    "optional": "optional",
+    "midiHint": "The MIDI files in your projects and samples folders are already read. Add other folders here (construction kits, packs): the app only reads the MIDI files in them.",
+    "pickMidi": "MIDI files folder",
+    "midiEmpty": "No MIDI library.",
+    "oldWindows": "Old Windows",
+    "oldWindowsHint": "An old Windows on another drive (dual boot): its plugins and samples help repair old projects.",
+    "oldDrive": "Drive of the old Windows",
+    "oldDriveSaved": "Saved: used from the next scan.",
+    "none": "None",
+    "drive": "Drive {d}:"
+  },
+  "arrange": {
+    "sub": "How the app arranges your songs.",
+    "physical": "Physical arranging",
+    "physicalHint": "Off, everything is arranged in the app only (releases, mood boards, folders): no file moves on your disk, Ctrl+Z included. On, you can also move and create folders, and put a release in its own folder. Every move is checked (a project that would lose a sample stays put) and can be undone with Ctrl+Z, after confirming.",
+    "physicalOn": "On: the app can move files when you ask.",
+    "physicalOff": "Off: nothing moves on disk.",
+    "disable": "Turn off",
+    "enable": "Turn on",
+    "physicalOnSaid": "Physical arranging on: files can be moved.",
+    "physicalOffSaid": "Physical arranging off: nothing moves on disk any more.",
+    "artists": "Artists and aliases",
+    "artistsHint": "One name per line. A song in a folder carrying one of these names belongs to that artist.",
+    "artistPlaceholder": "My alias",
+    "artistsSaved": "Artists saved: the songs are arranged again.",
+    "suggest": "Suggest from my folders",
+    "guessTitle": "{files} files, {folders} folders",
+    "guessTitleSure": "{files} files, {folders} folders: probably an artist",
+    "nothingMore": "Nothing more to suggest.",
+    "words": "Working copy words",
+    "wordsHint": "Words you put in the name of a working copy (\"test\", \"try\"...): a file carrying them stays a version of the same song. One per line.",
+    "wordsSaved": "Saved: the songs are arranged again."
+  },
+  "data": {
+    "sub": "Scanning your projects, and what goes in or out of the app.",
+    "scan": "Scan",
+    "scanHint": "The app rereads your projects as soon as they change, and at least every minute. \"Reread everything\" is only needed after an update of the app or of Live.",
+    "lastScan": "Last scan {ago}",
+    "notScanned": "Not scanned yet.",
+    "noLive": " Live hasn't been opened on this computer yet: its plugin list is missing.",
+    "scanNow": "Scan now",
+    "rescan": "Reread everything",
+    "export": "Export the catalogue",
+    "exportHint": "Your songs in a CSV file for a spreadsheet (Excel, Google Sheets) or another tool: title, artist, style, key, tempo, stage, rating, catalogue, plugin status, reference render, dates, folder. You choose where to save it; nothing else is written.",
+    "withArchived": "Include archived songs",
+    "exportN": {
+      "one": "Export {n} song...",
+      "other": "Export {n} songs..."
+    },
+    "notion": "Import from Notion",
+    "notionHint": "Export your Notion database as CSV (the database's ••• menu, Export, \"Markdown & CSV\"), then choose the file. You check which column goes where before anything is written, and Ctrl+Z undoes the import.",
+    "notionPick": "Choose the CSV file...",
+    "notionDialog": "CSV export of the Notion database"
+  },
+  "spool": {
+    "sub": "The installed version and its updates.",
+    "version": "Version {v}",
+    "updatesHint": "Spool checks for a newer version shortly after it starts, then every 6 hours. Nothing installs without your click, never during a scan or a repair, and only a version signed by Fatstep is accepted. Your database is copied before any update that changes it.",
+    "available": "Spool {version} is available.",
+    "checkedAt": "Up to date (checked {time}).",
+    "notChecked": "Not checked yet.",
+    "downloading": "Downloading...",
+    "install": "Install {version}",
+    "checking": "Checking...",
+    "check": "Check for updates"
+  },
+  "zero": {
+    "hint": "Empties the app's database: songs, stages, styles, notes, groupings, folders, artists, processing presets and repair history, then reopens the setup. Your projects, your samples and the copies already written are not touched. The old database is set aside (the last 3 are kept).",
+    "confirm": "Everything you arranged in the app will be removed. Continue?",
+    "yes": "Yes, start over",
+    "start": "Start over..."
+  },
+  "fatstep": {
+    "title": "Publisher",
+    "body": "Spool is free and open source, made by Fatstep, a label and distributor for independent artists. When your songs are ready, we can help you release them.",
+    "site": "Fatstep for Artists"
+  },
+  "theme": {
+    "title": "Appearance",
+    "hint": "Light or dark, or as Windows is set.",
+    "system": "Like Windows",
+    "light": "Light",
+    "dark": "Dark"
+  }
+}

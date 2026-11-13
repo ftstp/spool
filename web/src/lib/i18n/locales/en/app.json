@@ -1,0 +1,271 @@
+{
+  "nav": {
+    "home": "Home",
+    "songs": "Songs",
+    "repair": "Repair",
+    "releases": "Releases",
+    "create": "Create",
+    "stats": "Statistics",
+    "settings": "Settings",
+    "repairTitle": {
+      "one": "{label}: {n} the app can repair",
+      "other": "{label}: {n} the app can repair"
+    }
+  },
+  "side": {
+    "current": "Upcoming releases",
+    "ready": "{ready}/{count} ready",
+    "readyWhen": "{ready}/{count} ready · {when}",
+    "relTitle": "{title}: {ready}/{count} ready",
+    "relTitleWhen": "{title}: {ready}/{count} ready, {when}",
+    "open": "Open",
+    "expand": "Expand the sidebar",
+    "collapse": "Collapse the sidebar",
+    "fold": "Collapse"
+  },
+  "status": {
+    "running": "Scanning...",
+    "error": "Error: {error}",
+    "upToDate": "Up to date, scanned {ago}",
+    "busy": "Updating the numbers..."
+  },
+  "top": {
+    "back": "Previous page",
+    "backTitle": "Previous page (Alt ←)",
+    "forward": "Next page",
+    "forwardTitle": "Next page (Alt →)",
+    "undo": "Undo",
+    "undoTitle": "Undo: {label} (Ctrl Z)",
+    "nothingToUndo": "Nothing to undo",
+    "newSong": "New song",
+    "newSongTitle": "A blank project with your usual sounds for a style",
+    "fixable": {
+      "one": "{n} project the app can repair",
+      "other": "{n} projects the app can repair"
+    }
+  },
+  "undo": {
+    "confirmFiles": "Undoing \"{label}\" moves files back on disk. Press Ctrl+Z again (or Undo) to confirm.",
+    "done": "Undone: {label}"
+  },
+  "search": {
+    "placeholderSongs": "Filter songs: title, artist, style, folder, instrument",
+    "placeholder": "Search for a song, a style, a folder, a command...",
+    "nothing": "Nothing for \"{q}\"",
+    "sec": {
+      "styles": "Styles",
+      "songs": "Songs",
+      "folders": "Folders",
+      "commands": "Commands",
+      "releases": "Releases"
+    },
+    "songCount": {
+      "one": "{n} song",
+      "other": "{n} songs"
+    },
+    "trackCount": {
+      "one": "{n} track",
+      "other": "{n} tracks"
+    },
+    "view": {
+      "list": "List",
+      "folders": "Folders",
+      "board": "Board",
+      "cal": "Calendar",
+      "grid": "Grid"
+    },
+    "cmd": {
+      "home": "Home",
+      "songs": "Songs",
+      "repair": "Repair",
+      "create": "Create a song",
+      "releases": "Releases (EPs, albums)",
+      "atelier": "Treatments (Atelier)",
+      "stats": "Statistics",
+      "copies": "Copies written by Spool",
+      "export": "Export the catalogue (CSV)",
+      "settings": "Settings",
+      "songsView": "Songs: {view} view",
+      "scan": "Scan now",
+      "rescan": "Reread everything (Live's plugins included)",
+      "addProjects": "Add a projects folder",
+      "addSamples": "Add a samples folder",
+      "closeAll": "Close all open songs",
+      "fold": "Collapse or expand the sidebar",
+      "withAudio": "Songs with a reference render",
+      "toFix": "Songs to repair"
+    },
+    "scanStarted": "Scan started.",
+    "rescanStarted": "Rereading everything, Live's plugin list included."
+  },
+  "scan": {
+    "steps": {
+      "find": "Finding projects",
+      "read": "Reading projects",
+      "samples": "Indexing samples",
+      "plugins": "Checking against installed plugins",
+      "group": "Grouping songs",
+      "temoins": "Reference renders, mood boards and suggestions",
+      "midiFind": "Finding MIDI files",
+      "midiRead": "Analysing MIDI files"
+    },
+    "found": {
+      "find": {
+        "one": "{num} file (projects and reference renders)",
+        "other": "{num} files (projects and reference renders)"
+      },
+      "read": {
+        "one": "{num} read",
+        "other": "{num} read"
+      },
+      "midiFind": {
+        "one": "{num} found",
+        "other": "{num} found"
+      },
+      "midiRead": {
+        "one": "{num} read",
+        "other": "{num} read"
+      }
+    },
+    "left": "{time} left",
+    "stopping": "Stopping...",
+    "cancel": "Cancel the scan",
+    "keptNote": "What has been read is kept; the rest will be read at the next scan.",
+    "stopped": "Scan stopped. What was read is kept; the rest will be read at the next scan (\"Scan now\", or on its own in 30 minutes).",
+    "analysis": "Scan",
+    "stopTitle": "Stop the scan (what was read is kept)",
+    "stoppingShort": "stopping...",
+    "cancelShort": "cancel",
+    "other": {
+      "update": "Updating",
+      "oldDisk": "Searching the old disk"
+    }
+  },
+  "update": {
+    "whatsNew": "What's new:\n{notes}",
+    "install": "Install Spool {version}",
+    "isAvailable": "is available",
+    "downloading": "Downloading...",
+    "installRestart": "Install and restart",
+    "later": "Later",
+    "available": "Spool {version} is available.",
+    "upToDate": "Spool is up to date.",
+    "checkFailed": "Couldn't check for updates: {error}",
+    "scanRunning": "A scan is running: install the update once it's done."
+  },
+  "csv": {
+    "head": {
+      "title": "Title",
+      "artist": "Artist",
+      "style": "Style",
+      "key": "Key",
+      "tempo": "Tempo",
+      "stage": "Stage",
+      "rating": "Rating",
+      "kinds": "Types",
+      "catalog": "Catalogue",
+      "files": "Projects",
+      "plugins": "Plugins",
+      "audio": "Reference render",
+      "live": "Live version",
+      "created": "Created",
+      "modified": "Modified",
+      "dir": "Folder",
+      "project": "Project"
+    },
+    "sev": {
+      "ok": "Opens",
+      "fix": "Repairable by the app",
+      "lost": "Settings lost",
+      "bad": "Plugin to install"
+    },
+    "yes": "yes",
+    "no": "no",
+    "dialogTitle": "Export the catalogue",
+    "fileName": "catalogue",
+    "exported": {
+      "one": "{n} song exported: {at}",
+      "other": "{n} songs exported: {at}"
+    }
+  },
+  "api": {
+    "preview": "(preview)",
+    "readOnly": "Read-only preview: changes are made in the app.",
+    "gb": "{n} GB",
+    "mb": "{n} MB",
+    "lessThanMinute": "less than a minute",
+    "aboutMin": "about {n} min",
+    "aboutHours": "about {n} h",
+    "bigFolder": "This folder holds {midi} MIDI files ({size}) out of {files} files. Reading them will take {time} the first time, after the projects are scanned; after that only new ones are read. You can stop the scan at any time.",
+    "bigFolderMore": "This folder holds {midi} MIDI files ({size}) out of {files} files (and probably more: the folder is too big to count in a few seconds). Reading them will take {time} the first time, after the projects are scanned; after that only new ones are read. You can stop the scan at any time."
+  },
+  "folders": {
+    "pick": "Choose a folder",
+    "empty": "No folders.",
+    "remove": "Remove",
+    "add": "Add a folder...",
+    "paste": "or paste a path",
+    "pathPlaceholder": "C:\\Users\\...\\Music",
+    "addTyped": "Add",
+    "big": "Large folder",
+    "addAnyway": "Add anyway"
+  },
+  "rootArtists": {
+    "intro": "Artist of each folder: the songs in it get this artist, unless their own folders name another. Leave empty if the folder mixes several artists.",
+    "placeholder": "Artist (optional)",
+    "guessed": "guessed"
+  },
+  "notion": {
+    "title": "Import from Notion",
+    "reading": "Reading...",
+    "columns": "Columns",
+    "columnsHint": "Each Notion column goes into a song field. Check the app's choices.",
+    "empty": "empty",
+    "fieldFor": "Field for {name}",
+    "target": {
+      "ignore": "Ignore",
+      "title": "Song name",
+      "artist": "Artist",
+      "style": "Style",
+      "key": "Key",
+      "tempo": "Tempo",
+      "stage": "Stage",
+      "notes": "Notes",
+      "rating": "Rating (stars)",
+      "kinds": "Type",
+      "ft": "With (collaborators)"
+    },
+    "stages": "Stages",
+    "stagesHint": "What each Notion status becomes in the app.",
+    "rows": {
+      "one": "{n} row",
+      "other": "{n} rows"
+    },
+    "stageFor": "Stage for {name}",
+    "keep": "Don't change",
+    "songs": "Songs",
+    "matched": {
+      "one": "of {total} rows matches a song, by its name.",
+      "other": "of {total} rows match a song, by their name."
+    },
+    "others": {
+      "one": "The other {n} is left aside (no song is created from a row).",
+      "other": "The other {n} are left aside (no song is created from a row)."
+    },
+    "showMatched": "Show matched",
+    "showOthers": "Show the others",
+    "noName": "(no name)",
+    "close": "{title} (similar name)",
+    "onlyEmpty": "Fill in only: don't replace what is already filled in the app",
+    "noAudio": "Audio files (the \"Track\" column) are not imported: the app finds the bounces in your folders.",
+    "importing": "Importing...",
+    "import": {
+      "one": "Import {n} row",
+      "other": "Import {n} rows"
+    },
+    "done": {
+      "one": "Notion import: {n} song updated",
+      "other": "Notion import: {n} songs updated"
+    }
+  }
+}

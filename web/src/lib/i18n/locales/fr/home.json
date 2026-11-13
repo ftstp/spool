@@ -1,0 +1,28 @@
+{
+  "title": "Accueil",
+  "inprog": "{n} en mix ou master",
+  "opensPct": "{n} % des projets s'ouvrent",
+  "allStats": "Toutes les statistiques",
+  "tile": {
+    "songs": "Morceaux",
+    "songsFoot": "{done} terminés · {inprog} en mix ou master",
+    "opens": "Projets qui s'ouvrent",
+    "opensFoot": "{fix} réparables par l'app · {bad} attendent un plugin",
+    "activity": "Activité",
+    "savedSongs": { "one": "{n} morceau enregistré", "other": "{n} morceaux enregistrés" },
+    "activityFoot": "morceaux enregistrés ces 4 semaines (26 semaines affichées)",
+    "week": "Semaine du {date}",
+    "audio": "Avec un témoin audio",
+    "audioFoot": "{n} % des morceaux ont un rendu à écouter"
+  },
+  "resume": "Reprendre",
+  "allSongs": "Tous les morceaux",
+  "almost": "Presque finis",
+  "validate": "À valider",
+  "acceptAllTitle": "Valide toutes les étapes proposées (annulable)",
+  "acceptAll": "Tout valider",
+  "accept": "Valider",
+  "refuse": "Refuser",
+  "styles": "Styles probables",
+  "nothing": "Rien à valider."
+}

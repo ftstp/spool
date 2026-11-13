@@ -1,0 +1,141 @@
+{
+  "title": "Songs",
+  "count": "{n} of {total}",
+  "song": "Song",
+  "noArtist": "No artist",
+  "noStyle": "No style",
+  "nSongs": { "one": "{n} song", "other": "{n} songs" },
+  "empty": "No songs match these filters.",
+  "more": "+ {n} (narrow the filters)",
+  "checks": "Finishing steps ticked",
+  "views": {
+    "label": "View",
+    "list": "List",
+    "folders": "Folders",
+    "board": "Board",
+    "cal": "Calendar",
+    "grid": "Grid"
+  },
+  "sev": {
+    "ok": "Open fine",
+    "fix": "Fixable by the app",
+    "lost": "Settings lost",
+    "bad": "Plugin to install"
+  },
+  "filter": {
+    "artistAll": "Artist: all",
+    "styleAll": "Style: all",
+    "keyAll": "Key: all",
+    "to": "to",
+    "bpm": "bpm",
+    "half": "Also count half and double the tempo",
+    "plugins": "Plugins",
+    "pluginsAll": "Plugins: all",
+    "activity": "Activity",
+    "activityAll": "Activity: any",
+    "recent": "Worked on in the last 6 months",
+    "idle": "Untouched for a year",
+    "audio": "Audio render",
+    "audioAll": "Render: all",
+    "audioYes": "With an audio render",
+    "audioNo": "No render",
+    "rating": "Rating",
+    "ratingAll": "Rating: all",
+    "andUp": " and up",
+    "kind": "Type",
+    "kindAll": "Type: all",
+    "archived": "Archived",
+    "onlyArchived": "Only archived",
+    "reset": "Clear filters"
+  },
+  "sort": {
+    "label": "Sort",
+    "recent": "Sort: recently modified",
+    "created": "Sort: recently created",
+    "stage": "Sort: by stage",
+    "audio": "Sort: with a render first",
+    "rating": "Sort: highest rated first",
+    "key": "Sort: key",
+    "style": "Sort: style",
+    "title": "Sort: title",
+    "tempo": "Sort: tempo"
+  },
+  "item": {
+    "archived": "archived",
+    "blocked": "blocked",
+    "settings": "settings"
+  },
+  "tabs": {
+    "label": "Open songs",
+    "groupUnfold": "{name}: click to expand, right-click for more",
+    "groupFold": "{name}: click to collapse, right-click for more",
+    "tab": "{title} (right-click: close, group...)",
+    "close": "Close {title}",
+    "closeAllTitle": "Close all open songs",
+    "closeAll": "Close all"
+  },
+  "ov": {
+    "title": "Overview",
+    "intro": {
+      "one": "{n} song matches these filters. Click a song to open it here, right-click for its actions.",
+      "other": "{n} songs match these filters. Click a song to open it here, right-click for its actions."
+    },
+    "stages": "Where they stand",
+    "plugins": "Plugins",
+    "audio": "with an audio render ({pct}%)",
+    "median": "median bpm",
+    "medianRange": "median bpm ({min} to {max})",
+    "styles": "Styles",
+    "keys": "Keys",
+    "recent": "Recently worked on"
+  },
+  "board": {
+    "sugg": "Stage suggested by the app",
+    "suggLabel": "{stage}?",
+    "dropHere": "Drag a song here."
+  },
+  "cal": {
+    "prev": "Previous month",
+    "next": "Next month",
+    "today": "Today",
+    "workTitle": "Under each day, the songs that had a project saved that day",
+    "work": "Songs worked on",
+    "workedDay": { "one": "{n} song worked on this day", "other": "{n} songs worked on this day" },
+    "dated": "{title} (date)",
+    "saved": "{title}: saved this day",
+    "others": { "one": "+ {n} more", "other": "+ {n} more" },
+    "less": "Show less",
+    "upcoming": "Upcoming",
+    "undated": "No date",
+    "hint": "Drag a song onto a day to give it a date (release, deadline). Drag it back here to remove the date."
+  },
+  "folders": {
+    "byFolder": "By folder",
+    "byArtist": "By artist",
+    "byStyle": "By style",
+    "physicalOn": "Your real folders. Drag a song onto a card to move its folder.",
+    "physicalOff": "Your real folders, as they are on disk. To move them, turn on physical arranging in Settings.",
+    "newPlaceholder": "Folder name (or Parent/Name)",
+    "create": "Create",
+    "newFolder": "New folder",
+    "reorgTitle": "Suggests filing each song folder under its artist's folder (you choose what moves)",
+    "reorg": "File by artist...",
+    "mediaTitle": "Pictures, videos, sounds and notes in folders with no project, ready to send to a song's mood board",
+    "media": "Media outside projects",
+    "root": "Root",
+    "rootTitle": "root",
+    "reveal": "Show in Explorer",
+    "move": "Move this folder",
+    "stageCount": "{stage}: {n}",
+    "dragHint": "Drag onto another card to move its folder",
+    "shared": "Folder shared with other songs: move the whole card",
+    "risk": {
+      "one": "\"{title}\" stays put: {n} sample would be lost.",
+      "other": "\"{title}\" stays put: {n} samples would be lost."
+    }
+  },
+  "grid": {
+    "openTitle": "Open the project in Live",
+    "open": "Open in Live"
+  }
+}

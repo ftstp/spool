@@ -1,0 +1,25 @@
+{
+  "ago": {
+    "today": "aujourd'hui",
+    "yesterday": "hier",
+    "days": { "one": "il y a {n} j", "other": "il y a {n} j" },
+    "months": { "one": "il y a {n} mois", "other": "il y a {n} mois" },
+    "years": { "one": "il y a {n} an", "other": "il y a {n} ans" }
+  },
+  "stage": {
+    "draft": "Brouillon",
+    "arrangement": "Arrangement",
+    "mix": "Mix",
+    "master": "Master",
+    "done": "Terminé",
+    "pause": "En pause",
+    "none": "Non classé"
+  },
+  "bpm": "{n} bpm",
+  "language": "Langue",
+  "languageHint": "La langue de l'interface et des messages de Spool.",
+  "close": "Fermer",
+  "cancel": "Annuler",
+  "save": "Enregistrer",
+  "loading": "Chargement..."
+}

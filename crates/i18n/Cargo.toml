@@ -1,0 +1,9 @@
+[package]
+name = "i18n"
+description = "Spool's words in each language, read from the same locale files as the interface"
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+
+[dependencies]
+serde_json.workspace = true

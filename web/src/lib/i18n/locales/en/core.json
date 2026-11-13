@@ -1,0 +1,284 @@
+{
+  "test": {
+    "hello": "Hello {name}",
+    "songs": {
+      "one": "{n} song",
+      "other": "{n} songs"
+    }
+  },
+  "suggest": {
+    "filedIn": "Filed in \"{folder}\"",
+    "limiter": "Limiter on the main track: {name}",
+    "long": "{min}:{sec} arrangement, {tracks} tracks",
+    "short": {
+      "one": "Short: {s} s, {n} track",
+      "other": "Short: {s} s, {n} tracks"
+    },
+    "base": "No strong sign of progress",
+    "masterFresh": "Up-to-date export \"{name}\"",
+    "masterOld": "Export \"{name}\" older than the project",
+    "mixFresh": "Recent export \"{name}\""
+  },
+  "style": {
+    "folder": "Folder \"{name}\"",
+    "file": "File \"{name}\"",
+    "samples": {
+      "one": "{n} \"{style}\" sample (e.g. {ex})",
+      "other": "{n} \"{style}\" samples (e.g. {ex})"
+    },
+    "inProject": "In the project: \"{ex}\"{more}",
+    "samePlugins": "same plugins ({list})",
+    "closeTempo": "similar tempo ({tempo})",
+    "quoted": "\"{title}\"",
+    "tail": ": {list}",
+    "and": " and ",
+    "resembles": "Sounds like {titles}{tail}",
+    "dnbTempo": "Tempo {tempo}, typical of drum and bass"
+  },
+  "checks": {
+    "arrangement": "stage, or an arrangement longer than 2:30",
+    "mix": "Mix stage or a \"mix\" export",
+    "export": "export \"{name}\"",
+    "noMaster": "no up-to-date \"master\" export",
+    "noCover": "square image of 1000 px or more in the mood board",
+    "lyrics": "lyrics written",
+    "noLyrics": "no \"lyrics\" note",
+    "meta": "title and artist filled in",
+    "pluginsOk": "all plugins are there (or renamed)",
+    "pluginsMissing": "missing plugins or samples",
+    "released": "tick it yourself",
+    "label": {
+      "cover": "Cover",
+      "lyrics": "Lyrics",
+      "meta": "Title and artist"
+    }
+  },
+  "scan": {
+    "noOldDisk": "no old disk set, or its user folder cannot be found"
+  },
+  "als": {
+    "noLiveSet": "No LiveSet in the file"
+  },
+  "midi": {
+    "unreadable": "Unreadable MIDI: {e}"
+  },
+  "plugins": {
+    "need": {
+      "spire10": "Spire 1.0.x (1.1 changed its id: Spire-1.1 and 1.5 do not replace 1.0)",
+      "oldFile": "file on the old Windows",
+      "oldList": "plugin list of the old Windows",
+      "inProject": "written in the project (code {code})",
+      "notWritten": "the plugin does not write it in the project",
+      "knownId": "known plugin id",
+      "au": "{name} as VST2 or VST3 (project made on a Mac, as AU: Windows has no AU)",
+      "itself": "{name} itself, not {other}: that is another product for Live (different id)",
+      "vst2": "{name} as VST2: run its installer again and tick VST2",
+      "anyUpdate": "any update of {name} (the generation is in the name)",
+      "anyRecent": "any recent version of {name}"
+    },
+    "vst3NotInstalled": "VST3 not installed for {name}",
+    "notInstalled": "plugin not installed: {name}",
+    "noTemplate": "no project holds {name} as VST2: no template for the conversion"
+  },
+  "store": {
+    "newer": "this database comes from a newer version of Spool (format {v}, this one reads up to {max}): install the latest version",
+    "backupFailed": "could not make a copy before the update: {e}"
+  },
+  "repair": {
+    "exists": "\"{name}\" already exists",
+    "otherLive": "\"{name}\" comes from {live} and the base from {base}: Live only converts whole projects, even between minor versions",
+    "badOutDir": "invalid output folder",
+    "trackNotFoundIn": "track {track} not found in \"{set}\"",
+    "groupOrReturn": "\"{name}\" is a group or a return: only tracks can be reused",
+    "noBaseMasterChain": "master chain of the base not found",
+    "noLocators": "no locator list",
+    "copyFailed": "copying \"{name}\": {e}",
+    "noTempName": "no free temporary name",
+    "pathExists": "{path} already exists",
+    "hasLocators": "the project already has locators",
+    "emptyArrangement": "nothing in the arrangement",
+    "rackError": "unreadable rack or master chain not found",
+    "unreadableProject": "unreadable project",
+    "trackNotFound": "track not found",
+    "existsNoOverwrite": "{path} already exists: nothing is overwritten",
+    "defaultPreset": "default setting",
+    "unknownVendor": "Unknown vendor",
+    "nothingToRepair": "nothing to repair",
+    "busy": "a repair is already running"
+  },
+  "fs": {
+    "emptyName": "empty name",
+    "noRoot": "no projects folder",
+    "outside": "outside the projects folder",
+    "noFolderName": "missing folder name",
+    "folderExists": "this folder already exists",
+    "moveRoot": "a projects folder itself cannot be moved",
+    "crossRoot": "from one projects folder to another: not possible yet",
+    "notFound": "not found: {path}",
+    "notFoundShort": "not found",
+    "intoItself": "a folder cannot go inside itself",
+    "alreadyThere": "it is already there",
+    "destExists": "the destination already exists: {path}",
+    "locked": "file locked: close the project in Live (or File Explorer) and try again",
+    "baseNotUpdated": "database not updated, nothing moved: {e}",
+    "baseNotUpdatedStuck": "database not updated ({e}), and \"{path}\" could not go back to its place: {back}",
+    "samplesLost": "samples would be lost",
+    "putBackFailed": "{e}; and putting things back failed: {back}",
+    "cannotPutBack": "cannot put it back: \"{path}\" exists again",
+    "nothingMoved": "{e} (nothing moved)",
+    "someStuck": "{e}; some items could not go back: {list}",
+    "reorg": {
+      "manyArtists": "different artists",
+      "noArtist": "no artist"
+    },
+    "andThen": "{e}; {b}",
+    "physicalOff": "Physical arranging is off: nothing moves on the disk. Turn it on in Settings to move files."
+  },
+  "undo": {
+    "field": {
+      "title": "title",
+      "artist": "artist",
+      "key": "key",
+      "stage": "stage",
+      "archived": "archive",
+      "temoin": "reference render"
+    },
+    "quoted": "\"{title}\"",
+    "aSong": "a song",
+    "edit": "{what} of {title}",
+    "editDefault": "Edit",
+    "stageAccepted": "Stage accepted for {title}",
+    "stageRefused": "Stage refused for {title}",
+    "styleAccepted": "Style accepted for {title}",
+    "styleRefused": "Style refused for {title}",
+    "check": "Finishing check of {title}",
+    "acceptAll": {
+      "one": "{n} suggestion accepted",
+      "other": "{n} suggestions accepted"
+    },
+    "physicalOff": "\"{label}\" can only be undone by putting files back on the disk, and physical arranging is off: nothing moved. Turn it on in Settings to undo it.",
+    "notion": {
+      "one": "Notion import: {n} song",
+      "other": "Notion import: {n} songs"
+    },
+    "mkdir": "Folder \"{name}\" created",
+    "theRoot": "the root",
+    "movedInto": "\"{leaf}\" moved into \"{into}\"",
+    "movedMany": {
+      "one": "{n} item moved",
+      "other": "{n} items moved"
+    },
+    "toBoard": {
+      "one": "{n} item put in the mood board of \"{title}\"",
+      "other": "{n} items put in the mood board of \"{title}\""
+    },
+    "lyricsAdded": "Lyrics added to the mood board",
+    "ideaAdded": "Idea added to the mood board",
+    "noteEdited": "Note \"{name}\" edited",
+    "boardHidden": "Item removed from the mood board",
+    "boardLinked": {
+      "one": "{n} item added to the mood board of \"{title}\"",
+      "other": "{n} items added to the mood board of \"{title}\""
+    },
+    "boardUnlinked": "Link removed from the mood board",
+    "releaseArranged": "Release \"{title}\" put in \"{target}\"",
+    "releaseCreated": "Release \"{title}\" created",
+    "releaseEdited": "Release \"{title}\" edited",
+    "releaseDeleted": "Release \"{title}\" deleted"
+  },
+  "err": {
+    "songNotFound": "song not found",
+    "badTempo": "invalid tempo",
+    "badRating": "invalid rating",
+    "ratingRange": "rating from 1 to 5",
+    "badKinds": "invalid types",
+    "badDate": "invalid date (YYYY-MM-DD)",
+    "unknownStage": "unknown stage",
+    "unknownCheck": "unknown checkbox",
+    "suggestionNotFound": "suggestion not found",
+    "rootNotFound": "projects folder not found",
+    "reading": "reading: {e}",
+    "writing": "writing: {e}",
+    "tooManyCopies": "too many edited copies",
+    "copyNotRecorded": "copy written, but not recorded by the app: {e}",
+    "folderNotFound": "folder not found",
+    "projectNotFound": "project not found",
+    "busy": "an analysis or a repair is running, try again in a moment",
+    "noName": "missing name",
+    "noActiveProject": "this song has no active project",
+    "scanBusy": "an analysis is running, try again in a moment",
+    "fileNotFound": "file not found"
+  },
+  "atelier": {
+    "notLive": "not a readable Live project",
+    "nothingToDo": "nothing to do with this preset",
+    "atLeastOne": "at least one preset",
+    "noProject": "no project to process",
+    "busy": "a processing run is already going"
+  },
+  "audio": {
+    "badFormat": "format not read: {e}",
+    "noTrack": "no audio track",
+    "badCodec": "codec not read: {e}",
+    "decoding": "decoding: {e}"
+  },
+  "board": {
+    "noteNotFound": "note not found",
+    "versionNotKept": "previous version not kept, note not changed: {e}",
+    "tooBig": "file too big (300 MB max)",
+    "itemNotFound": "item not found"
+  },
+  "chains": {
+    "pluginMissing": "missing plugin: {name}",
+    "samplesOffline": {
+      "one": "{n} sample offline",
+      "other": "{n} samples offline"
+    }
+  },
+  "notion": {
+    "emptyFile": "empty or unreadable file",
+    "noTitleColumn": "no column for the song name",
+    "nothing": "nothing to import: no new field for the recognised songs"
+  },
+  "settings": {
+    "resetFailed": "could not set the database aside: {e}",
+    "folderNotFound": "Folder not found: {path}",
+    "alreadyListed": "This folder is already in the list.",
+    "alreadyCovered": "This folder is already covered by \"{path}\" (or holds it).",
+    "unknownFolder": "unknown folder",
+    "mainFolder": "This is the main folder: remove the other folders first.",
+    "unknownKey": "unknown setting: {key}"
+  },
+  "merge": {
+    "impossible": "cannot merge",
+    "done": "\"{src}\" attached to \"{dst}\" (Split from its sheet)",
+    "notFound": "merge not found"
+  },
+  "releases": {
+    "notFound": "release not found",
+    "noSong": "this release has no song",
+    "pickInsideRoots": "pick a folder inside your projects folders",
+    "outsideRoots": "folder outside your projects folders",
+    "sharedFolder": "folder shared with songs outside the release",
+    "noTitle": "give the release a title"
+  },
+  "create": {
+    "noName": "give the song a name",
+    "noRoot": "no projects folder",
+    "pickInsideRoots": "pick a folder inside your projects folders: anywhere else, the app would not see the new song",
+    "exists": "\"{name} Project\" already exists in {parent}: choose another name, nothing is overwritten",
+    "noPart": "choose at least one part that loads in this version of Live",
+    "projectNotFound": "project not found: {rel}"
+  },
+  "desktop": {
+    "unreadableFile": "unreadable file",
+    "fileExpected": "file expected",
+    "songMissing": "missing song",
+    "cannotOpenBase": "Spool cannot open its database:\n{e}"
+  },
+  "update": {
+    "busy": "an analysis or a repair is running: the update waits until it is done",
+    "upToDate": "Spool is already up to date",
+    "failed": "update failed: {e}"
+  }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "version": "0.1.0",
+    "date": "2026-11-13",
+    "notes": {
+      "en": [
+        "First public release of Spool.",
+        "Interface in English and French (Settings > Spool).",
+        "Your Ableton catalogue sorted by song, stage, style and key.",
+        "Repairs for projects that no longer open: a copy next to the original, which is never modified.",
+        "Mood boards, releases (EPs, albums), a starting project for a style, statistics."
+      ],
+      "fr": [
+        "Première version publique de Spool.",
+        "Interface en français et en anglais (Réglages > Spool).",
+        "Ton catalogue Ableton rangé par morceau, étape, style et tonalité.",
+        "Réparation des projets qui ne s'ouvrent plus : une copie à côté, l'original n'est jamais modifié.",
+        "Moodboards, sorties (EP, albums), création d'un projet de départ, statistiques."
+      ]
+    }
+  }
+]

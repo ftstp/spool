@@ -1,0 +1,90 @@
+{
+  "steps": {
+    "welcome": "Welcome",
+    "projects": "Projects",
+    "samples": "Samples",
+    "scan": "Scan",
+    "artists": "Artists"
+  },
+  "configuration": "Setup",
+  "stepsLabel": "Steps",
+  "back": "Back",
+  "continue": "Continue",
+  "welcome": {
+    "title": "Welcome",
+    "lead": "The app sorts your Ableton projects into songs, tells you which ones open, and repairs the ones that can be.",
+    "neverTouched": "Your files are never changed.",
+    "copyBeside": "A repair writes a copy next to the project.",
+    "local": "Everything stays on this computer.",
+    "time": "Setup takes two minutes, plus the time of the first scan.",
+    "noLive": "Ableton Live doesn't seem to have been opened on this computer: without its plugin list, the app can't tell what is missing. Open Live once, then come back here (or carry on, the scan will run again by itself).",
+    "start": "Get started"
+  },
+  "projects": {
+    "title": "Where are your projects?",
+    "lead": "Choose the folder or folders that hold your Ableton projects (the .als files). Subfolders are read too, however you organise them: one folder per song, or everything in a single folder.",
+    "empty": "No folders yet."
+  },
+  "samples": {
+    "title": "Your samples",
+    "lead": "When a project can no longer find a sample, the app looks for it elsewhere. It already looks in your projects folders and Ableton's library. Add the other folders where you keep sounds: packs, banks, an old drive.",
+    "empty": "No extra folders (optional).",
+    "midi": "Extra MIDI folders",
+    "optional": "(optional)",
+    "midiHint": "The MIDI files in your projects and samples folders are already read. Only add a folder here if there are more elsewhere (construction kits, packs): the app only reads the MIDI files in it.",
+    "midiEmpty": "No MIDI library (optional).",
+    "continueScan": "Continue and scan",
+    "skipScan": "Skip and scan"
+  },
+  "scan": {
+    "done": "Scan complete",
+    "running": "Scanning your projects",
+    "lead": "Each project is read once. After that, only what changes is read again. You can leave the window open.",
+    "projects": {
+      "one": "project",
+      "other": "projects"
+    },
+    "songs": {
+      "one": "song",
+      "other": "songs"
+    },
+    "ok": {
+      "one": "already opens",
+      "other": "already open"
+    },
+    "fix": {
+      "one": "repairable by the app",
+      "other": "repairable by the app"
+    },
+    "lost": {
+      "one": "opens, settings lost",
+      "other": "open, settings lost"
+    },
+    "bad": {
+      "one": "plugin to install",
+      "other": "plugin to install"
+    },
+    "none": "No projects found in these folders. Go back to choose others.",
+    "midiPhase": "Your projects are ready. MIDI files are still being read in the background (the sidebar shows the progress): you can carry on and explore the app meanwhile.",
+    "cancelled": "Scan stopped: what was read is kept, the rest will be read at the next scan.",
+    "around": "And around the projects"
+  },
+  "artists": {
+    "title": "Your artists",
+    "lead": "If you produce under several names (aliases, groups, collaborations), the app files each song under the right one.",
+    "leadGiven": "The name given at the Projects step is already there.",
+    "leadFound": "Here are also the names found in your folders and files: untick what isn't an artist.",
+    "givenTitle": "Given at the Projects step",
+    "given": "already given",
+    "guessTitle": "{files} files, {folders} folders",
+    "noneFound": "No other names found in the folders.",
+    "more": "Other names, one per line (optional)",
+    "placeholder": "My alias",
+    "oldWindows": "An old Windows on another drive (dual boot)?",
+    "no": "No",
+    "drive": "Drive {d}:",
+    "oldWindowsHint": "Its plugins and samples help repair old projects.",
+    "saving": "Saving...",
+    "finish": "Finish"
+  }
+}

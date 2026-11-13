@@ -1,0 +1,47 @@
+{
+  "board": {
+    "label": "Choose the song",
+    "title": "Into which song's mood board?",
+    "items": { "one": "{n} item", "other": "{n} items" },
+    "moveText": "The file is moved into the mood board's folder (a sound a project uses as a sample is copied there, never moved). Ctrl+Z undoes it.",
+    "linkText": "The file stays where it is: it simply shows on the mood board. Ctrl+Z undoes it.",
+    "moveCheck": "Move the file into the mood board's folder",
+    "search": "Search for a song"
+  },
+  "ok": "OK",
+  "move": {
+    "label": "Move {name}",
+    "title": "Move \"{name}\"",
+    "intro": "The whole folder moves (samples included). Nothing is overwritten: if the name is taken, it becomes \"Name (2)\". The song keeps its stage, notes and mood board. Ctrl+Z puts it back.",
+    "search": "Search for a folder",
+    "none": "No folder.",
+    "newIn": "New folder in \"{name}\"",
+    "newRoot": "New folder at the root",
+    "create": "Create",
+    "arrival": "Destination:",
+    "renamed": " (name already taken: renamed)",
+    "impossible": { "one": "Not possible: {n} sample would be lost ({list}).", "other": "Not possible: {n} samples would be lost ({list})." },
+    "sampleIn": "{sample} in {project}",
+    "skipped": "{name}: {why}",
+    "joiner": "; ",
+    "moving": "Moving...",
+    "go": "Move"
+  },
+  "reorg": {
+    "title": "Reorganise the folders",
+    "intro": "Puts each song folder under its artist, in your main folder. An artist folder that already exists is reused (\"- ODA KEEL\" for Oda Keel). A folder where a project would lose a sample stays in place. Ctrl+Z puts everything back.",
+    "templates": {
+      "artist": "Artist / Song",
+      "artist_style": "Artist / Style / Song",
+      "artist_album": "Artist / Current folder / Song"
+    },
+    "model": "Template",
+    "computing": "Working it out...",
+    "toSort": { "one": "{n} folder to sort", "other": "{n} folders to sort" },
+    "left": { "one": "{n} left out (no artist, or several artists)", "other": "{n} left out (no artist, or several artists)" },
+    "partial": "{done} moved, {skipped} left: {list}",
+    "empty": "Everything is already sorted this way.",
+    "moving": "Moving...",
+    "go": { "one": "Move {n} folder", "other": "Move {n} folders" }
+  }
+}
