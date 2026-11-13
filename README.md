@@ -11,7 +11,7 @@ Free, open source, in English and French. Windows for now.
 
 [![A tour of Spool: the catalogue, a song, mood boards, releases, light and dark](docs/media/spool-tour-loop.webp)](https://artists.fatstep.com/spool)
 
-*A 20-second look. The full tour, with sound, is on [the download page](https://artists.fatstep.com/spool).*
+*A short look. The full tour, with sound, is on [the download page](https://artists.fatstep.com/spool).*
 
 ## Your files are never modified
 
