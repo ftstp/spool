@@ -6,7 +6,9 @@
   "scripts": {
     "studio": "remotion studio",
     "render": "remotion render SpoolTour out/spool-tour-raw.mkv --crf=14 --audio-codec=pcm-16",
-    "poster": "remotion still SpoolPoster out/poster.png"
+    "poster": "remotion still SpoolPoster out/poster.png",
+    "shorts": "remotion render SpoolShort1 out/shorts/raw-1.mkv --crf=14 --audio-codec=pcm-16 && remotion render SpoolShort2 out/shorts/raw-2.mkv --crf=14 --audio-codec=pcm-16 && remotion render SpoolShort3 out/shorts/raw-3.mkv --crf=14 --audio-codec=pcm-16 && python finish.py shorts",
+    "covers": "remotion still SpoolShort1 out/shorts/spool-short-1-catalogue.jpg --frame=38 --image-format=jpeg --jpeg-quality=90 && remotion still SpoolShort2 out/shorts/spool-short-2-files.jpg --frame=38 --image-format=jpeg --jpeg-quality=90 && remotion still SpoolShort3 out/shorts/spool-short-3-themes.jpg --frame=38 --image-format=jpeg --jpeg-quality=90"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "5.2.5",

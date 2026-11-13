@@ -58,3 +58,25 @@ r = run("-af", ln, "-ar", "48000", "-ac", "2", str(HERE / "public" / "music.wav"
 assert r.returncode == 0, r.stderr[-500:]
 tmp.unlink()
 print("music", round(len(music) / sr, 3), "s,", m["input_i"], "LUFS -> -16")
+
+# ---- the vertical shorts: 8 bars from three different parts of the track, each joined on the
+# downbeat to bar 53 (the final chord, which rings out), louder for phones (-14 LUFS).
+SHORT_S = (round(36 * BEAT * FPS) + 30) / FPS  # = SHORT_TOTAL in src/shorts.tsx
+SHORTS = {1: (10, 18), 2: (21, 29), 3: (45, 53)}  # [first bar, bar after the last]: intro build, the "inst" section, the outro
+for n, (b0, b1) in SHORTS.items():
+    a = y[s(bar(b0)): s(bar(b1)) + x]
+    c = y[s(bar(53)) - x: s(bar(53)) + s(SHORT_S - (bar(b1) - bar(b0)))]
+    mid = a[-2 * x:] * np.cos(w) + c[:2 * x] * np.sin(w)
+    clip = np.concatenate([a[:-2 * x], mid, c[2 * x:]])[: s(SHORT_S)]
+    clip[:fi] *= np.linspace(0, 1, fi)[:, None]
+    fo2 = int(0.6 * sr)
+    clip[-fo2:] *= np.linspace(1, 0, fo2)[:, None]
+    sf.write(tmp, clip, sr, subtype="PCM_24")
+    probe = run("-af", "loudnorm=I=-14:TP=-1.0:LRA=11:print_format=json", "-f", "null", "-").stderr
+    m = json.loads(probe[probe.rindex("{"):probe.rindex("}") + 1])
+    ln = (f"loudnorm=I=-14:TP=-1.0:LRA=11:measured_I={m['input_i']}:measured_TP={m['input_tp']}"
+          f":measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true")
+    r = run("-af", ln, "-ar", "48000", "-ac", "2", str(HERE / "public" / f"music-short-{n}.wav"))
+    assert r.returncode == 0, r.stderr[-500:]
+    tmp.unlink()
+    print(f"short {n}: track {bar(b0):.3f}-{bar(b1):.3f} s + {bar(53):.3f} s to the end, {len(clip) / sr:.3f} s")

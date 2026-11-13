@@ -9,6 +9,9 @@ can also be run alone:
     python tools/mirror.py            the snapshot of HEAD, committed and pushed
     python tools/mirror.py --dry      the snapshot only, nothing committed
 
+The repository is PUBLIC since the 0.1.0 launch (2026-11-13): commits only go on top, never
+a force-push. SPOOL_MIRROR_MESSAGE sets the commit message (default "Spool <version>").
+
 The working copy of the public repository is ../spool-public (cloned on first use).
 """
 import os, shutil, subprocess, sys, tarfile, io, json
@@ -54,7 +57,7 @@ def main():
     if not git('status', '--porcelain'):
         print('nothing new for the public repository')
         return
-    git('-c', 'user.name=Fatstep', '-c', 'user.email=35991543+ftstp@users.noreply.github.com', 'commit', '-q', '--author', AUTHOR, '-m', 'Spool ' + v)
+    git('-c', 'user.name=Fatstep', '-c', 'user.email=35991543+ftstp@users.noreply.github.com', 'commit', '-q', '--author', AUTHOR, '-m', os.environ.get('SPOOL_MIRROR_MESSAGE') or ('Spool ' + v))
     git('tag', '-f', 'v' + v)
     git('push', '-u', 'origin', 'main')
     # the version's tag follows the snapshot (re-mirroring before a new version moves it)

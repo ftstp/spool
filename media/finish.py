@@ -34,3 +34,15 @@ run("-i", RAW.name, "-filter_complex", ";".join(fc), "-map", "[v]", "-an", "-c:v
     "-quality", "68", "-compression_level", "6", "-loop", "0", "spool-tour-loop.webp")
 for f in ("spool-tour.mp4", "spool-tour-poster.webp", "spool-tour-loop.webp"):
     print(f, round((OUT / f).stat().st_size / 1e6, 2), "MB")
+
+# ---- the vertical shorts (python finish.py shorts): out/shorts/raw-N.mkv -> spool-short-N-*.mp4
+import sys
+if len(sys.argv) > 1 and sys.argv[1] == "shorts":
+    S = OUT / "shorts"
+    for n, name in ((1, "catalogue"), (2, "files"), (3, "themes")):
+        sv = ["-vf", "scale=in_range=full:out_range=tv,format=yuv420p", "-c:v", "libx264", "-preset", "slower", "-crf", "19",
+              "-profile:v", "high", "-level", "4.1", "-color_range", "tv"]
+        subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", f"raw-{n}.mkv", *sv, "-movflags", "+faststart",
+                        "-c:a", "aac", "-b:a", "192k", "-ar", "48000", f"spool-short-{n}-{name}.mp4"], check=True, cwd=S)
+        (S / f"raw-{n}.mkv").unlink()
+        print(f"spool-short-{n}-{name}.mp4", round((S / f"spool-short-{n}-{name}.mp4").stat().st_size / 1e6, 2), "MB")
