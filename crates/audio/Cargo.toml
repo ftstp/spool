@@ -1,0 +1,15 @@
+[package]
+name = "audio"
+description = "Audio analysis: CLAP embedding (LAION larger_clap_general via ONNX Runtime), zero-shot styles, tempo and key"
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+rust-version = "1.92"
+
+[dependencies]
+symphonia = { version = "0.5", features = ["aac", "alac", "flac", "mp3", "isomp4", "aiff", "pcm", "wav"] }
+rubato = "0.16"
+realfft = "3"
+ort = { version = "=2.0.0-rc.15", default-features = false, features = ["std", "load-dynamic", "api-31"] }
+serde.workspace = true
+serde_json.workspace = true

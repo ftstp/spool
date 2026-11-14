@@ -65,8 +65,19 @@ export const progress = () => (inTauri ? invoke<Progress>("progress") : devData(
 export const scanState = () =>
   inTauri
     ? invoke<ScanState>("scan_state")
-    : Promise.resolve({ running: false, stage: "", done: 0, total: 0, detail: "", last: Date.now() / 1000, error: null, cancelled: false, version: 0 } as ScanState);
+    : Promise.resolve({ running: false, stage: "", done: 0, total: 0, detail: "", last: Date.now() / 1000, error: null, cancelled: false, version: 0, audio: devAudio() } as ScanState);
 export const scan = (full = false) => invoke<boolean>("scan", { full });
+// The audio analysis of reference renders (opt-in): its state, on/off (on downloads the
+// model once), pause, removing the downloaded files.
+import type { AudioState } from "./bindings/AudioState";
+import type { SoundInfo } from "./bindings/SoundInfo";
+import type { SimilarSong } from "./bindings/SimilarSong";
+export type { AudioState, SoundInfo, SimilarSong };
+export const devAudio = (): AudioState => ({ enabled: false, ready: false, paused: false, downloading: false, dl_done: 0, dl_total: 0, running: false, done: 0, total: 0, analysed: 0, renders: 0, detail: "", error: null, download_mb: 78, disk_mb: 0 });
+export const audioState = () => (inTauri ? invoke<AudioState>("audio_state") : Promise.resolve(devAudio()));
+export const audioEnable = (on: boolean) => (inTauri ? invoke<AudioState>("audio_enable", { on }) : readOnly());
+export const audioPause = (paused: boolean) => (inTauri ? invoke<AudioState>("audio_pause", { paused }) : readOnly());
+export const audioRemove = () => (inTauri ? invoke<AudioState>("audio_remove") : readOnly());
 /** Stops the analysis in progress (what it read is kept). */
 export const cancelScan = () => (inTauri ? invoke<void>("cancel_scan") : Promise.resolve());
 import type { FolderPeek } from "./bindings/FolderPeek";

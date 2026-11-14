@@ -27,3 +27,9 @@ notify = "8.2.2"
 ebur128 = "0.1"
 image = { version = "0.25", default-features = false, features = ["jpeg", "png", "webp", "gif"] }
 symphonia = { version = "0.5", features = ["aac", "alac", "flac", "mp3", "isomp4", "ogg", "pcm", "vorbis", "wav"] }
+audio = { path = "../audio" }
+flate2.workspace = true
+ureq = "3"
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { workspace = true, features = ["Win32_System_Threading"] }

@@ -30,7 +30,8 @@
     "tail": " : {list}",
     "and": " et ",
     "resembles": "Ressemble à {titles}{tail}",
-    "dnbTempo": "Tempo {tempo}, typique de la drum and bass"
+    "dnbTempo": "Tempo {tempo}, typique de la drum and bass",
+    "soundsLike": "Le témoin sonne comme {titles} ({n} morceaux proches)"
   },
   "checks": {
     "arrangement": "étape ou arrangement de plus de 2 min 30",
@@ -268,5 +269,13 @@
     "busy": "une analyse ou une réparation est en cours : la mise à jour attend qu'elle soit finie",
     "upToDate": "Spool est déjà à jour",
     "failed": "mise à jour impossible : {e}"
+  },
+  "sound": {
+    "network": "téléchargement impossible : {e}",
+    "stopped": "téléchargement arrêté",
+    "badHash": "le fichier téléchargé {name} n'est pas celui attendu (somme de contrôle différente) : il a été supprimé, réessaie",
+    "badArchive": "l'archive d'ONNX Runtime n'a pas pu être lue",
+    "loadFailed": "le moteur d'analyse n'a pas pu démarrer ({e}). Le reste de Spool n'est pas touché. Le runtime Microsoft Visual C++ manque peut-être.",
+    "crashed": "l'analyse de ce fichier a échoué"
   }
 }

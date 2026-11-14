@@ -10,6 +10,10 @@
 //! Ported from the prototype (`apf/indexer.py`, `apf/suggest.py`, `apf/style.py`).
 mod songs;
 mod suggestions;
+
+/// The audio model whose analyses (`audio_analysis.model`) the suggestions and the song
+/// sheet use (core's `sound`): LAION CLAP larger_clap_general at revision ada0c23.
+pub const AUDIO_MODEL: &str = "laion/larger_clap_general@ada0c23";
 pub mod walk;
 
 use plugins::{Matcher, Ref, trial_key};

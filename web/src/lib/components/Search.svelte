@@ -20,7 +20,7 @@
   type Item = { sec: string; title: string; meta?: string; mark?: string; h?: number; run: () => void };
 
   const go = (h: string) => (location.hash = h);
-  const VIEWS = ["list", "folders", "board", "cal", "grid"] as const;
+  const VIEWS = ["list", "folders", "board", "cal"] as const;
   // built at render time: the labels follow a change of language
   const COMMANDS = $derived<[string, () => void][]>([
     [t("app.search.cmd.home"), () => go("#/home")],

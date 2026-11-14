@@ -107,5 +107,33 @@
     "system": "Like Windows",
     "light": "Light",
     "dark": "Dark"
+  },
+  "audio": {
+    "title": "Audio analysis",
+    "hint": "Listens to your reference renders to find the songs that sound alike, measure their tempo and suggest a style from the songs you have already sorted. Turning it on downloads about {mb} MB, once: the CLAP audio model (from Spool's page on GitHub) and Microsoft's ONNX Runtime (from Microsoft's page on GitHub), each file checked before use.",
+    "privacy": "The analysis runs on this computer only: nothing about your music is sent anywhere. Your renders are only read, never changed. It works in the background, one render at a time, and waits while a scan or a repair runs.",
+    "credit": "Model: CLAP larger_clap_general by LAION (laion.ai), Apache-2.0 licence. Runtime: ONNX Runtime by Microsoft, MIT licence.",
+    "enable": "Turn on (downloads about {mb} MB once)",
+    "disable": "Turn off (the analyses already made are kept)",
+    "downloading": "Downloading... {done} / {total} MB",
+    "retry": "Try again",
+    "running": "Analysing the reference renders: {done} / {total}",
+    "analysed": {
+      "one": "{n} reference render analysed out of {total}",
+      "other": "{n} reference renders analysed out of {total}"
+    },
+    "paused": {
+      "one": "Paused. {n} reference render analysed out of {total}",
+      "other": "Paused. {n} reference renders analysed out of {total}"
+    },
+    "kept": "Turned off. The model is still on disk ({mb} MB).",
+    "pause": "Pause",
+    "resume": "Resume",
+    "remove": "Remove the model ({mb} MB)",
+    "removeHint": "Deletes the downloaded files to free the disk. What was already analysed stays.",
+    "removed": "Model removed",
+    "onSaid": "Audio analysis on",
+    "offSaid": "Audio analysis off",
+    "downloadStarted": "Audio analysis on: downloading the model"
   }
 }

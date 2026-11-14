@@ -275,6 +275,8 @@ pub struct SongDetail {
     pub near_temoin: Vec<Near>,
     pub siblings: Vec<Sibling>,
     pub log: Vec<StageStep>,
+    /// What the audio analysis of its reference render says (None: not analysed).
+    pub sound: Option<crate::sound::SoundInfo>,
 }
 
 use plugins::status_severity as severity;
@@ -797,6 +799,7 @@ pub fn song_detail(con: &Connection, sid: i64) -> rusqlite::Result<Option<SongDe
         near_temoin: near,
         siblings,
         log,
+        sound: crate::sound::song_sound(con, sid).ok().flatten(),
         song,
     }))
 }

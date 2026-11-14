@@ -33,7 +33,8 @@
     "tail": ": {list}",
     "and": " and ",
     "resembles": "Sounds like {titles}{tail}",
-    "dnbTempo": "Tempo {tempo}, typical of drum and bass"
+    "dnbTempo": "Tempo {tempo}, typical of drum and bass",
+    "soundsLike": "The render sounds like {titles} ({n} close songs)"
   },
   "checks": {
     "arrangement": "stage, or an arrangement longer than 2:30",
@@ -280,5 +281,13 @@
     "busy": "an analysis or a repair is running: the update waits until it is done",
     "upToDate": "Spool is already up to date",
     "failed": "update failed: {e}"
+  },
+  "sound": {
+    "network": "download failed: {e}",
+    "stopped": "download stopped",
+    "badHash": "the downloaded file {name} is not the expected one (checksum differs): it was deleted, try again",
+    "badArchive": "the ONNX Runtime archive could not be read",
+    "loadFailed": "the analysis engine could not start ({e}). The rest of Spool is not affected. The Microsoft Visual C++ runtime may be missing.",
+    "crashed": "the analysis of this file failed"
   }
 }

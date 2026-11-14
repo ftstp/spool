@@ -102,6 +102,30 @@
     document.getElementById("part-" + k)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  // the audio analysis (opt-in): its state comes with the scan's, asked once on opening
+  const au = $derived(app.scan?.audio);
+  $effect(() => {
+    api.audioState().then((a) => app.scan && (app.scan.audio = a), () => {});
+  });
+  async function audio(on: boolean) {
+    try {
+      const a = await api.audioEnable(on);
+      if (app.scan) app.scan.audio = a;
+      app.say(on ? (a.ready ? t("settings.audio.onSaid") : t("settings.audio.downloadStarted")) : t("settings.audio.offSaid"));
+    } catch (e) {
+      app.say(String(e), { error: true });
+    }
+  }
+  async function removeModel() {
+    try {
+      const a = await api.audioRemove();
+      if (app.scan) app.scan.audio = a;
+      app.say(t("settings.audio.removed"));
+    } catch (e) {
+      app.say(String(e), { error: true });
+    }
+  }
+
   let notionFile = $state<string | null>(null);
   async function pickNotion() {
     try {
@@ -243,6 +267,36 @@
               {:else}<button class="btn" disabled={updates.checking} onclick={() => updates.check(true)}>{updates.checking ? t("settings.spool.checking") : t("settings.spool.check")}</button>{/if}
             </div>
           </div>
+          <div class="item" class:live={au?.enabled && au?.ready} class:stack={au?.downloading}>
+            <div class="it">
+              <h3>{t("settings.audio.title")}</h3>
+              <p class="small muted">{t("settings.audio.hint", { mb: au?.download_mb ?? 0 })}</p>
+              <p class="small muted">{t("settings.audio.privacy")}</p>
+              <p class="small faint">{t("settings.audio.credit")}</p>
+              {#if au?.error}<p class="small warn">{au.error}</p>{/if}
+              {#if au?.enabled && au.ready}
+                <p class="small state">{au.running ? t("settings.audio.running", { done: au.done, total: au.total }) : au.paused ? t("settings.audio.paused", { n: au.analysed, total: au.renders }) : t("settings.audio.analysed", { n: au.analysed, total: au.renders })}</p>
+              {:else if au?.ready}
+                <p class="small state">{t("settings.audio.kept", { mb: au.disk_mb })}</p>
+              {/if}
+            </div>
+            {#if au?.downloading}
+              <div class="dl">
+                <div class="bar" aria-hidden="true"><i style:width={au.dl_total ? Math.round((au.dl_done / au.dl_total) * 100) + "%" : "0%"}></i></div>
+                <div class="row small"><span class="muted">{t("settings.audio.downloading", { done: Math.round(au.dl_done / 1048576), total: Math.round(au.dl_total / 1048576) })}</span><button class="btn sm" onclick={() => audio(false)}>{t("common.cancel")}</button></div>
+              </div>
+            {:else}
+              <div class="ctl">
+                {#if au?.enabled && au.ready}<button class="btn" onclick={() => api.audioPause(!au.paused)}>{au.paused ? t("settings.audio.resume") : t("settings.audio.pause")}</button>{/if}
+                {#if au?.enabled && !au.ready}<button class="btn" onclick={() => audio(true)}>{t("settings.audio.retry")}</button>{/if}
+                {#if au?.ready || au?.disk_mb}<button class="btn" onclick={removeModel} title={t("settings.audio.removeHint")}>{t("settings.audio.remove", { mb: au.disk_mb })}</button>{/if}
+                <label class="switch" title={au?.enabled ? t("settings.audio.disable") : t("settings.audio.enable", { mb: au?.download_mb ?? 0 })}>
+                  <input type="checkbox" role="switch" aria-label={t("settings.audio.title")} checked={!!au?.enabled} onchange={(e) => audio(e.currentTarget.checked)} />
+                  <i></i>
+                </label>
+              </div>
+            {/if}
+          </div>
           <div class="item">
             <div class="it"><h3>{t("settings.theme.title")}</h3><p class="small muted">{t("settings.theme.hint")}</p></div>
             <div class="ctl">
@@ -341,6 +395,10 @@
   .switch input:checked + i::after { transform: translateX(18px); }
   .switch input:focus-visible + i { outline: 2px solid var(--accent); outline-offset: 2px; }
 
+  .dl { display: flex; flex-direction: column; gap: 6px; }
+  .dl .bar { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+  .dl .bar i { display: block; height: 100%; background: var(--accent); border-radius: inherit; transition: width .3s ease-out; }
+  .dl .row { justify-content: space-between; align-items: center; }
   .row { display: flex; flex-wrap: wrap; gap: 8px; }
   .row input { flex: 1; min-width: 200px; }
   textarea { width: 100%; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font: inherit; color: inherit; resize: vertical; }

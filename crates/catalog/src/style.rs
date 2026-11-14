@@ -80,6 +80,15 @@ const STOP: &[&str] = &[
 const NEIGHBOURS: usize = 5;
 /// Less than that is a hunch, not a suggestion.
 const MIN_POINTS: f64 = 2.0;
+/// The audio vote: the `SOUND_K` closest renders among the songs with a style, each
+/// weighing its similarity; counted only when one style holds `SOUND_SHARE` of the weight.
+/// Chosen by leave-one-out on a real catalogue of 110 songs with a style (see
+/// crates/audio/README.md): 5 and 80 % gave a vote for 33 % of them, right 83 % of the time
+/// (always guessing the commonest style: 22 %).
+pub const SOUND_K: usize = 5;
+pub const SOUND_SHARE: f64 = 0.8;
+/// Points of a unanimous audio vote (MIN_POINTS is 2: alone, it is enough to suggest).
+const SOUND_POINTS: f64 = 4.0;
 const SHOW: usize = 3;
 
 static PHRASE: LazyLock<FRegex> = LazyLock::new(|| {
@@ -201,6 +210,11 @@ pub struct StyleSong {
     pub shared: bool,
     /// The newest active project.
     pub data: StyleData,
+    /// The songs whose reference render sounds closest to this one's (audio analysis,
+    /// opt-in): (song id, cosine similarity), closest first, songs of the same folder left
+    /// out. Empty when its render was not analysed.
+    #[serde(default)]
+    pub sound: Vec<(i64, f64)>,
 }
 
 #[derive(Debug, Clone, Serialize, PartialEq)]
@@ -338,11 +352,43 @@ fn guess(song: &Prepared, known: &[(&Prepared, String)]) -> Vec<(String, f64, Ve
         let tail = if what.is_empty() { String::new() } else { i18n::tr!("style.tail", list = what.join(", ")) };
         p.add(&st, round2(weight * share), i18n::tr!("style.resembles", titles = titles.join(&i18n::tr!("style.and")), tail = tail));
     }
-    // 4. tempo, drum and bass only
+    // 4. the sound of the reference render: a vote of the closest songs with a style
+    if let Some((st, share, titles, n)) = sound_vote(&s.sound, known) {
+        let titles: Vec<String> = titles.into_iter().take(2).map(|t| i18n::tr!("style.quoted", title = t)).collect();
+        p.add(&st, round2(SOUND_POINTS * share), i18n::tr!("style.soundsLike", titles = titles.join(&i18n::tr!("style.and")), n = n));
+    }
+    // 5. tempo, drum and bass only
     if let Some(t) = tempo.filter(|t| *t != 0.0 && (165.0..=180.0).contains(t)) {
         p.add("dnb", 1.5, i18n::tr!("style.dnbTempo", tempo = round_int(t)));
     }
     p.ranked()
+}
+
+/// The audio vote for a song: (canonical style, its share of the weight, titles of the songs
+/// that voted for it, how many), or None when the closest songs do not agree enough.
+fn sound_vote(near: &[(i64, f64)], known: &[(&Prepared, String)]) -> Option<(String, f64, Vec<String>, usize)> {
+    let voters: Vec<(f64, &Prepared, &String)> = near
+        .iter()
+        .filter_map(|(id, sim)| known.iter().find(|(k, _)| k.s.id == *id).map(|(k, st)| (sim.max(0.0), *k, st)))
+        .take(SOUND_K)
+        .collect();
+    if voters.len() < SOUND_K.min(3) {
+        return None;
+    }
+    let total: f64 = voters.iter().map(|v| v.0).sum();
+    let mut best: Option<(&String, f64)> = None;
+    for (_, _, st) in &voters {
+        let w: f64 = voters.iter().filter(|v| v.2 == *st).map(|v| v.0).sum();
+        if best.is_none_or(|b| w > b.1) {
+            best = Some((st, w));
+        }
+    }
+    let (st, w) = best?;
+    let share = if total > 0.0 { w / total } else { 0.0 };
+    (share >= SOUND_SHARE).then(|| {
+        let mine: Vec<&(f64, &Prepared, &String)> = voters.iter().filter(|v| v.2 == st).collect();
+        (st.clone(), share, mine.iter().map(|v| v.1.s.title.clone().unwrap_or_default()).collect(), mine.len())
+    })
 }
 
 /// The 2-3 best with their share of all the points, or [] when the clues are too thin.

@@ -68,6 +68,15 @@ const MIGRATIONS: &[&str] = &[
     r#"
     create table midi (rel text primary key, size integer, mtime real, data text);
     "#,
+    // 4: the audio analysis of reference renders (opt-in, crates/audio): the CLAP embedding
+    // (512 f32, little-endian), measured tempo and key, per render and model; a render whose
+    // size, date or model changed is analysed again. `error` set: it could not be read.
+    r#"
+    create table audio_analysis (
+      rel text primary key, size integer, mtime real, model text,
+      embedding blob, bpm real, key text, duration real, analyzed_at real, error text
+    );
+    "#,
 ];
 
 /// Tables carried over from the prototype, in an order that keeps ids.

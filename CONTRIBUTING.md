@@ -55,8 +55,10 @@ A new language is a new folder of locale files: translations are very welcome.
 
 ### 4. Nothing leaves the user's computer
 
-Spool sends nothing about the user or their projects anywhere. Its only network request is the
-update check. A change that adds any other network request needs to be discussed first.
+Spool sends nothing about the user or their projects anywhere. Its only network requests are the
+update check and, if the user turns on the audio analysis, the one-time download of its model
+(`crates/core/src/sound.rs`: fixed URLs, every file checked against a pinned SHA-256). A change
+that adds any other network request needs to be discussed first.
 
 ## Licence and sign-off
 

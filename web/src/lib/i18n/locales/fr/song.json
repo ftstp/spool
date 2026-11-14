@@ -31,7 +31,10 @@
     "native": "Appareil de Live",
     "ignored": "ignoré dans Réparer",
     "here": "ici : {name}",
-    "instances": { "one": "{n} instance", "other": "{n} instances" },
+    "instances": {
+      "one": "{n} instance",
+      "other": "{n} instances"
+    },
     "clickHint": "Clic : sa fiche dans Réparer"
   },
   "hint": {
@@ -79,21 +82,36 @@
     "byYou": "choisi par toi",
     "byApp": "choisi par l'app",
     "none": "Aucun rendu audio retenu pour ce morceau.",
-    "renders": { "one": "{n} rendu dans le dossier", "other": "{n} rendus dans le dossier" },
+    "renders": {
+      "one": "{n} rendu dans le dossier",
+      "other": "{n} rendus dans le dossier"
+    },
     "listen": "Écouter",
     "tag": "témoin",
     "choose": "Choisir",
     "letApp": "Laisser l'app choisir",
-    "otherAudio": { "one": "{n} autre fichier audio dans le dossier", "other": "{n} autres fichiers audio dans le dossier" },
+    "otherAudio": {
+      "one": "{n} autre fichier audio dans le dossier",
+      "other": "{n} autres fichiers audio dans le dossier"
+    },
     "otherAudioHint": "Des fichiers que l'app n'a pas reliés à ce morceau par leur nom. Si l'un est son rendu, choisis-le.",
     "near": "Projets enregistrés le plus près du témoin :",
-    "nearDays": { "one": "{d} j", "other": "{d} j" },
+    "nearDays": {
+      "one": "{d} j",
+      "other": "{d} j"
+    },
     "oldVersion": "ancienne version"
   },
   "projects": {
     "title": "Projets",
-    "oldVersions": { "one": "{n} ancienne version", "other": "{n} anciennes versions" },
-    "backups": { "one": "{n} sauvegarde", "other": "{n} sauvegardes" },
+    "oldVersions": {
+      "one": "{n} ancienne version",
+      "other": "{n} anciennes versions"
+    },
+    "backups": {
+      "one": "{n} sauvegarde",
+      "other": "{n} sauvegardes"
+    },
     "latest": "dernier",
     "repairComplete": "Écrit une copie réparée à côté, qui s'ouvrira sans rien de manquant",
     "repairPartial": "Écrit une copie réparée à côté (il restera des manques)",
@@ -102,7 +120,10 @@
     "copyPath": "Copier le chemin",
     "reveal": "Afficher dans l'explorateur",
     "unreadable": "Illisible : {error}",
-    "samplesLost": { "one": "{n} sample introuvable", "other": "{n} samples introuvables" }
+    "samplesLost": {
+      "one": "{n} sample introuvable",
+      "other": "{n} samples introuvables"
+    }
   },
   "checks": {
     "title": "Finitions",
@@ -134,7 +155,10 @@
     "enlarge": "Agrandir {name}",
     "setAside": "Mettre de côté",
     "setAsideName": "Mettre de côté {name}",
-    "moreImages": { "one": "+ {n} image", "other": "+ {n} images" },
+    "moreImages": {
+      "one": "+ {n} image",
+      "other": "+ {n} images"
+    },
     "lyrics": "Paroles",
     "newIdea": "Nouvelle idée",
     "lyricsPh": "Les paroles du morceau...",
@@ -153,8 +177,21 @@
     "widen": "Agrandir le panneau",
     "intro": "Les images, vidéos, sons et notes rangés hors de tes morceaux. Clique un élément pour l'ajouter au moodboard d'un morceau : il reste à sa place.",
     "searching": "Recherche dans tes dossiers...",
-    "kinds": { "image": "Images", "video": "Vidéos", "audio": "Sons", "text": "Notes", "all": "Tout" },
-    "kind": { "image": "image", "gif": "gif", "video": "vidéo", "audio": "son", "text": "note", "pdf": "pdf" },
+    "kinds": {
+      "image": "Images",
+      "video": "Vidéos",
+      "audio": "Sons",
+      "text": "Notes",
+      "all": "Tout"
+    },
+    "kind": {
+      "image": "image",
+      "gif": "gif",
+      "video": "vidéo",
+      "audio": "son",
+      "text": "note",
+      "pdf": "pdf"
+    },
     "search": "Nom ou dossier",
     "sort": "Tri",
     "sortRecent": "Récents d'abord",
@@ -168,7 +205,10 @@
     "itemTip": "{name}\n{dir}\n{size} · {date}\nClic : l'ajouter à un moodboard. Clic droit : plus",
     "mb": "{n} Mo",
     "kb": "{n} Ko",
-    "showMore": { "one": "Afficher {k} de plus ({n} restants)", "other": "Afficher {k} de plus ({n} restants)" }
+    "showMore": {
+      "one": "Afficher {k} de plus ({n} restants)",
+      "other": "Afficher {k} de plus ({n} restants)"
+    }
   },
   "merges": {
     "sameFolder": "Même dossier :",
@@ -201,12 +241,25 @@
   },
   "stars": {
     "label": "Note",
-    "star": { "one": "{n} étoile", "other": "{n} étoiles" },
+    "star": {
+      "one": "{n} étoile",
+      "other": "{n} étoiles"
+    },
     "clear": "Retirer la note",
     "outOf5": "{n} sur 5"
   },
   "field": {
     "clickToEdit": "{hint}\n\nCliquer pour modifier",
     "edit": "Modifier"
+  },
+  "sound": {
+    "title": "Sonne comme",
+    "untitled": "(sans titre)",
+    "veryClose": "très proche",
+    "close": "proche",
+    "related": "apparenté",
+    "simTitle": "Ressemblance des deux témoins : {pct} %",
+    "measured": "témoin : {n} bpm",
+    "tempoTitle": "Tempo mesuré sur le témoin (analyse audio), différent de celui du projet"
   }
 }

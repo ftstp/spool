@@ -107,5 +107,33 @@
     "system": "Comme Windows",
     "light": "Clair",
     "dark": "Sombre"
+  },
+  "audio": {
+    "title": "Analyse audio",
+    "hint": "Écoute tes témoins pour trouver les morceaux qui sonnent pareil, mesurer leur tempo et proposer un style d'après les morceaux que tu as déjà rangés. L'activer télécharge environ {mb} Mo, une seule fois : le modèle audio CLAP (depuis la page de Spool sur GitHub) et ONNX Runtime de Microsoft (depuis la page de Microsoft sur GitHub), chaque fichier vérifié avant usage.",
+    "privacy": "L'analyse se fait sur cet ordinateur uniquement : rien de ta musique n'est envoyé nulle part. Tes témoins sont seulement lus, jamais modifiés. Elle travaille en arrière-plan, un témoin à la fois, et attend pendant une analyse des projets ou une réparation.",
+    "credit": "Modèle : CLAP larger_clap_general de LAION (laion.ai), licence Apache-2.0. Moteur : ONNX Runtime de Microsoft, licence MIT.",
+    "enable": "Activer (télécharge environ {mb} Mo une fois)",
+    "disable": "Désactiver (les analyses déjà faites sont gardées)",
+    "downloading": "Téléchargement... {done} / {total} Mo",
+    "retry": "Réessayer",
+    "running": "Analyse des témoins : {done} / {total}",
+    "analysed": {
+      "one": "{n} témoin analysé sur {total}",
+      "other": "{n} témoins analysés sur {total}"
+    },
+    "paused": {
+      "one": "En pause. {n} témoin analysé sur {total}",
+      "other": "En pause. {n} témoins analysés sur {total}"
+    },
+    "kept": "Désactivée. Le modèle est encore sur le disque ({mb} Mo).",
+    "pause": "Pause",
+    "resume": "Reprendre",
+    "remove": "Supprimer le modèle ({mb} Mo)",
+    "removeHint": "Efface les fichiers téléchargés pour libérer le disque. Ce qui a déjà été analysé reste.",
+    "removed": "Modèle supprimé",
+    "onSaid": "Analyse audio activée",
+    "offSaid": "Analyse audio désactivée",
+    "downloadStarted": "Analyse audio activée : téléchargement du modèle"
   }
 }

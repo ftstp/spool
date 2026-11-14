@@ -170,7 +170,7 @@
     <!-- the analysis: its own small block, the fold button below it like a nav entry -->
     <div class="status" class:run={app.scan?.running} class:err={!!app.scan?.error}
       title={mini ? (app.scan?.running ? scanStageText(app.scan.stage) : app.busy ? t("app.status.busy") : status) : undefined}>
-      {#if app.scan?.running && !mini}<ScanProgress />
+      {#if (app.scan?.running || app.scan?.audio?.running) && !mini}<ScanProgress />
       {:else}
         {#if app.busy && !app.scan?.running}<span class="spin"></span>{:else}<i class="sd" class:run={app.scan?.running}></i>{/if}
         {#if !mini}<span class="st" title={app.busy && !app.scan?.running ? t("app.status.busy") : status}>{app.busy && !app.scan?.running ? t("app.status.busy") : status}</span>{/if}

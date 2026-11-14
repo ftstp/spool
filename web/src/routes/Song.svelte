@@ -49,6 +49,23 @@
   });
 
   const s = $derived(d?.song);
+  // the audio analysis of the reference render (opt-in): measured tempo beside the project's
+  // when they differ by more than 3 %, and the songs that sound alike
+  const tempoHint = $derived.by(() => {
+    const b = d?.sound?.bpm;
+    const p = d?.song.tempo ?? d?.files.find((f) => f.latest)?.tempo ?? d?.files[0]?.tempo;
+    if (!b || !p) return "";
+    const near = (x: number) => Math.abs(x - 1) <= 0.03;
+    // half or double the project's tempo is the same groove counted differently (a 174 drum and
+    // bass track measures 87): not worth a hint, only a real difference is
+    if (near(b / p) || near(b / (2 * p)) || near((2 * b) / p)) return "";
+    return t("song.sound.measured", { n: Math.round(b * 10) / 10 });
+  });
+  // measured on a real catalogue: two unrelated renders score about 0.55, 1 pair in 100
+  // reaches 0.87; a song's closest other render is about 0.87
+  const SIM_VERY = 0.9;
+  const SIM_CLOSE = 0.8;
+  const simWord = (x: number) => t(x >= SIM_VERY ? "song.sound.veryClose" : x >= SIM_CLOSE ? "song.sound.close" : "song.sound.related");
   /** What the app would suggest for the style and the key, shown on hover even once noted. */
   let guess = $state<api.StyleOpt[]>([]);
   $effect(() => {
@@ -157,6 +174,7 @@
           <Field value={s.key} placeholder={keyHint ? t("song.ph.keyProject", { key: keyHint }) : t("song.ph.key")} options={keyOpts} hint={keyHintText} save={(v) => edit({ key: v })} />
           <span class="dot">·</span>
           <Field kind="tempo" value={s.tempo} placeholder={main?.tempo ? t("song.ph.tempoProject", { n: Math.round(main.tempo * 10) / 10 }) : t("song.ph.tempo")} save={(v) => edit({ tempo: v })} />
+          {#if tempoHint}<span class="measured small" title={t("song.sound.tempoTitle")}>{tempoHint}</span>{/if}
           <span class="dot">·</span>
           <Field kind="date" value={s.date} placeholder={t("song.ph.date")} save={(v) => edit({ date: v })} />
         </div>
@@ -244,6 +262,16 @@
                 </div>
               {/each}
             </details>
+          {/if}
+          {#if d.sound?.similar.length}
+            <div class="sounds">
+              <h3 class="small">{t("song.sound.title")}</h3>
+              <ul>
+                {#each d.sound.similar as o (o.id)}
+                  <li><a href="#/song/{o.id}">{o.title || t("song.sound.untitled")}</a>{#if o.artist}<span class="faint"> · {o.artist}</span>{/if}{#if o.style}<span class="faint"> · {o.style}</span>{/if}<span class="small sim" title={t("song.sound.simTitle", { pct: Math.round(o.sim * 100) })}>{simWord(o.sim)}</span></li>
+                {/each}
+              </ul>
+            </div>
           {/if}
           {#if d.near_temoin.length}
             <div class="small faint near">{t("song.temoin.near")}
@@ -381,6 +409,13 @@
   .more { margin-top: 8px; }
   .more summary { cursor: pointer; padding: 3px 0; }
   .near { margin-top: 8px; }
+  .sounds { margin-top: 12px; }
+  .sounds h3 { margin: 0 0 4px; font-weight: 600; color: var(--muted); }
+  .sounds ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 3px; }
+  .sounds li { display: flex; align-items: baseline; gap: 2px; min-width: 0; }
+  .sounds a { color: var(--ink); }
+  .sounds .sim { margin-left: auto; padding-left: 10px; color: var(--muted); flex: none; }
+  .measured { color: var(--muted); }
   .link { border: 0; background: none; color: var(--accent); cursor: pointer; padding: 0; }
   .file { padding: 4px 0; border-bottom: 1px solid var(--line); }
   .file:last-of-type { border-bottom: 0; }

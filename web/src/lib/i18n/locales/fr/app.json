@@ -71,8 +71,7 @@
       "list": "Liste",
       "folders": "Dossiers",
       "board": "Tableau",
-      "cal": "Calendrier",
-      "grid": "Grille"
+      "cal": "Calendrier"
     },
     "cmd": {
       "home": "Accueil",
@@ -139,6 +138,11 @@
     "other": {
       "update": "Mise à jour",
       "oldDisk": "Recherche sur l'ancien disque"
+    },
+    "audio": {
+      "line": "Analyse audio",
+      "pause": "pause",
+      "pauseTitle": "Mettre l'analyse audio en pause (elle reprend où elle s'est arrêtée, depuis les Réglages)"
     }
   },
   "update": {

@@ -31,7 +31,10 @@
     "native": "Live device",
     "ignored": "ignored in Repair",
     "here": "here: {name}",
-    "instances": { "one": "{n} instance", "other": "{n} instances" },
+    "instances": {
+      "one": "{n} instance",
+      "other": "{n} instances"
+    },
     "clickHint": "Click: its sheet in Repair"
   },
   "hint": {
@@ -79,21 +82,36 @@
     "byYou": "picked by you",
     "byApp": "picked by the app",
     "none": "No audio render picked for this song.",
-    "renders": { "one": "{n} render in the folder", "other": "{n} renders in the folder" },
+    "renders": {
+      "one": "{n} render in the folder",
+      "other": "{n} renders in the folder"
+    },
     "listen": "Listen",
     "tag": "reference",
     "choose": "Choose",
     "letApp": "Let the app choose",
-    "otherAudio": { "one": "{n} other audio file in the folder", "other": "{n} other audio files in the folder" },
+    "otherAudio": {
+      "one": "{n} other audio file in the folder",
+      "other": "{n} other audio files in the folder"
+    },
     "otherAudioHint": "Files the app did not link to this song by their name. If one is its render, choose it.",
     "near": "Projects saved closest to the reference render:",
-    "nearDays": { "one": "{d} day", "other": "{d} days" },
+    "nearDays": {
+      "one": "{d} day",
+      "other": "{d} days"
+    },
     "oldVersion": "old version"
   },
   "projects": {
     "title": "Projects",
-    "oldVersions": { "one": "{n} old version", "other": "{n} old versions" },
-    "backups": { "one": "{n} backup", "other": "{n} backups" },
+    "oldVersions": {
+      "one": "{n} old version",
+      "other": "{n} old versions"
+    },
+    "backups": {
+      "one": "{n} backup",
+      "other": "{n} backups"
+    },
     "latest": "latest",
     "repairComplete": "Writes a repaired copy next to it, which will open with nothing missing",
     "repairPartial": "Writes a repaired copy next to it (some things will still be missing)",
@@ -102,7 +120,10 @@
     "copyPath": "Copy the path",
     "reveal": "Show in Explorer",
     "unreadable": "Unreadable: {error}",
-    "samplesLost": { "one": "{n} sample not found", "other": "{n} samples not found" }
+    "samplesLost": {
+      "one": "{n} sample not found",
+      "other": "{n} samples not found"
+    }
   },
   "checks": {
     "title": "Finishing",
@@ -134,7 +155,10 @@
     "enlarge": "Enlarge {name}",
     "setAside": "Set aside",
     "setAsideName": "Set aside {name}",
-    "moreImages": { "one": "+ {n} image", "other": "+ {n} images" },
+    "moreImages": {
+      "one": "+ {n} image",
+      "other": "+ {n} images"
+    },
     "lyrics": "Lyrics",
     "newIdea": "New idea",
     "lyricsPh": "The song's lyrics...",
@@ -153,8 +177,21 @@
     "widen": "Widen the panel",
     "intro": "Pictures, videos, sounds and notes stored outside your songs. Click an item to add it to a song's mood board: it stays where it is.",
     "searching": "Searching your folders...",
-    "kinds": { "image": "Images", "video": "Videos", "audio": "Sounds", "text": "Notes", "all": "All" },
-    "kind": { "image": "image", "gif": "gif", "video": "video", "audio": "sound", "text": "note", "pdf": "pdf" },
+    "kinds": {
+      "image": "Images",
+      "video": "Videos",
+      "audio": "Sounds",
+      "text": "Notes",
+      "all": "All"
+    },
+    "kind": {
+      "image": "image",
+      "gif": "gif",
+      "video": "video",
+      "audio": "sound",
+      "text": "note",
+      "pdf": "pdf"
+    },
     "search": "Name or folder",
     "sort": "Sort",
     "sortRecent": "Newest first",
@@ -168,7 +205,10 @@
     "itemTip": "{name}\n{dir}\n{size} · {date}\nClick: add it to a mood board. Right-click: more",
     "mb": "{n} MB",
     "kb": "{n} KB",
-    "showMore": { "one": "Show {k} more ({n} left)", "other": "Show {k} more ({n} left)" }
+    "showMore": {
+      "one": "Show {k} more ({n} left)",
+      "other": "Show {k} more ({n} left)"
+    }
   },
   "merges": {
     "sameFolder": "Same folder:",
@@ -201,12 +241,25 @@
   },
   "stars": {
     "label": "Rating",
-    "star": { "one": "{n} star", "other": "{n} stars" },
+    "star": {
+      "one": "{n} star",
+      "other": "{n} stars"
+    },
     "clear": "Clear the rating",
     "outOf5": "{n} out of 5"
   },
   "field": {
     "clickToEdit": "{hint}\n\nClick to edit",
     "edit": "Edit"
+  },
+  "sound": {
+    "title": "Sounds like",
+    "untitled": "(untitled)",
+    "veryClose": "very close",
+    "close": "close",
+    "related": "related",
+    "simTitle": "Similarity of the two reference renders: {pct} %",
+    "measured": "render: {n} bpm",
+    "tempoTitle": "Tempo measured on the reference render (audio analysis), different from the project's"
   }
 }

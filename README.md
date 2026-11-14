@@ -25,6 +25,8 @@ This is the rule everything else follows.
   lose a sample stays put), journaled and undoable with Ctrl+Z.
 - Every copy Spool wrote is listed in Repair > Written copies, so you can find them and
   tidy up yourself.
+- The audio analysis (optional, off by default) **only reads** your reference renders. What
+  it measures is kept in Spool's own base, never written into your files.
 
 These guarantees are covered by tests (`cargo test --workspace`): a repair leaves the
 original byte for byte, a second repair never overwrites the first, a move that fails
@@ -45,7 +47,7 @@ Light or dark, as you like (Settings > Spool > Appearance):
 
 
 - **Catalogue**: every project grouped into songs (versions, working copies, renders),
-  with stage, style, key, tempo, rating, notes. List, board, calendar, folders and grid
+  with stage, style, key, tempo, rating, notes. List, board, calendar and folders
   views; global search; statistics.
 - **Repair**: when a project will not open (samples moved, a plugin renamed after a
   reinstall or a move to VST3, a project from another computer), Spool shows why and
@@ -57,6 +59,11 @@ Light or dark, as you like (Settings > Spool > Appearance):
 - **Releases**: group songs into a single, EP or album, see what is ready.
 - **Create**: a starting project for a style, built from the devices and samples you
   actually use.
+- **Audio analysis** (optional, off by default): from each song's reference render, the
+  songs that sound alike, the measured tempo, and a style suggestion from the songs you
+  already sorted. It runs on your computer with LAION's CLAP model
+  ([`larger_clap_general`](https://huggingface.co/laion/larger_clap_general), Apache-2.0),
+  downloaded once when you turn it on. See [crates/audio](crates/audio/README.md).
 
 ## Download
 
@@ -81,7 +88,12 @@ What protects you meanwhile:
   Spool refuses an update that does not carry that signature.
 
 Spool sends nothing about you or your projects anywhere. Its only network request is that
-update check (`artists.fatstep.com/spool/download/latest.json`).
+update check (`artists.fatstep.com/spool/download/latest.json`), plus one download if you
+turn on the audio analysis in Settings > Spool (off by default): about 80 MB, once, the CLAP
+audio model from this repository's releases on GitHub and Microsoft's ONNX Runtime from
+Microsoft's releases on GitHub, each file checked against a SHA-256 written in the source.
+Nothing is uploaded: the analysis runs on your computer, and "Remove the model" deletes the
+download.
 
 ## Build from source
 
@@ -103,3 +115,8 @@ GPL-3.0-or-later (see [LICENSE](LICENSE)). You may use, study, change and share 
 modified version you distribute must stay under the same licence, with its source.
 
 "Spool" and "Fatstep" are names of Fatstep; a fork must use another name.
+
+The optional audio analysis downloads a model that is not part of Spool's source: LAION's
+CLAP `larger_clap_general` (Apache-2.0, by LAION, <https://github.com/LAION-AI/CLAP>),
+converted to ONNX by [`tools/clap/export.py`](tools/clap/export.py), and Microsoft's ONNX
+Runtime (MIT). Their notices ship with the download.

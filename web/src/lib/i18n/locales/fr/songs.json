@@ -4,7 +4,10 @@
   "song": "Morceau",
   "noArtist": "Sans artiste",
   "noStyle": "Sans style",
-  "nSongs": { "one": "{n} morceau", "other": "{n} morceaux" },
+  "nSongs": {
+    "one": "{n} morceau",
+    "other": "{n} morceaux"
+  },
   "empty": "Aucun morceau avec ces filtres.",
   "more": "+ {n} (affine les filtres)",
   "checks": "Étapes de fin cochées",
@@ -13,8 +16,7 @@
     "list": "Liste",
     "folders": "Dossiers",
     "board": "Tableau",
-    "cal": "Calendrier",
-    "grid": "Grille"
+    "cal": "Calendrier"
   },
   "sev": {
     "ok": "S'ouvrent",
@@ -100,10 +102,16 @@
     "today": "Aujourd'hui",
     "workTitle": "Sous chaque jour, les morceaux dont un projet a été enregistré ce jour-là",
     "work": "Morceaux travaillés",
-    "workedDay": { "one": "{n} morceau travaillé ce jour", "other": "{n} morceaux travaillés ce jour" },
+    "workedDay": {
+      "one": "{n} morceau travaillé ce jour",
+      "other": "{n} morceaux travaillés ce jour"
+    },
     "dated": "{title} (date)",
     "saved": "{title} : enregistré ce jour",
-    "others": { "one": "+ {n} autre", "other": "+ {n} autres" },
+    "others": {
+      "one": "+ {n} autre",
+      "other": "+ {n} autres"
+    },
     "less": "Réduire",
     "upcoming": "À venir",
     "undated": "Sans date",
@@ -133,9 +141,5 @@
       "one": "« {title} » reste en place : {n} sample(s) seraient perdus.",
       "other": "« {title} » reste en place : {n} sample(s) seraient perdus."
     }
-  },
-  "grid": {
-    "openTitle": "Ouvrir le projet dans Live",
-    "open": "Ouvrir dans Live"
   }
 }

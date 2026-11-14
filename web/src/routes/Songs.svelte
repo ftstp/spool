@@ -4,7 +4,6 @@
   import { STAGES, ago, bpm, dur } from "../lib/format";
   import type { SongItem } from "../lib/api";
   import { f, setView } from "../lib/filters.svelte";
-  import Grid from "../lib/views/Grid.svelte";
   import Board from "../lib/views/Board.svelte";
   import Calendar from "../lib/views/Calendar.svelte";
   import Folders from "../lib/views/Folders.svelte";
@@ -16,7 +15,7 @@
   import { tabs, openSong, closeSong, closeAll, prune, ordered, editGroup } from "../lib/tabs.svelte";
   import { t, compare } from "../lib/i18n/index.svelte";
 
-  const VIEWS = ["list", "folders", "board", "cal", "grid"] as const;
+  const VIEWS = ["list", "folders", "board", "cal"] as const;
 
   const all = $derived(app.songs);
   const noArtist = $derived(t("songs.noArtist"));
@@ -132,8 +131,7 @@
   <!-- the list always keeps its narrow column: beside it the song open, else an overview -->
   <div class="split" class:open={tabs.active !== null || f.view === "list"} class:narrow={f.view === "list"}>
   <div class="viewcol">
-  {#if f.view === "grid"}<Grid {list} />
-  {:else if f.view === "board"}<Board {list} />
+  {#if f.view === "board"}<Board {list} />
   {:else if f.view === "cal"}<Calendar {list} />
   {:else if f.view === "folders"}<Folders {list} />
   {:else}

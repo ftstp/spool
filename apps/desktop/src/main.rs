@@ -51,6 +51,32 @@ async fn scan_state(app: State<'_, Arc<App>>) -> Res<ScanState> {
     run(move || Ok(app.scan_state())).await
 }
 
+/// The audio analysis (opt-in): its state, turning it on (downloads the model once) or off,
+/// pausing it, removing the downloaded files.
+#[tauri::command]
+async fn audio_state(app: State<'_, Arc<App>>) -> Res<app_core::sound::AudioState> {
+    let app = Arc::clone(&app);
+    run(move || Ok(app.audio_state())).await
+}
+
+#[tauri::command]
+async fn audio_enable(app: State<'_, Arc<App>>, on: bool) -> Res<app_core::sound::AudioState> {
+    let app = Arc::clone(&app);
+    run(move || app.audio_enable(on)).await
+}
+
+#[tauri::command]
+async fn audio_pause(app: State<'_, Arc<App>>, paused: bool) -> Res<app_core::sound::AudioState> {
+    let app = Arc::clone(&app);
+    run(move || app.audio_pause(paused)).await
+}
+
+#[tauri::command]
+async fn audio_remove(app: State<'_, Arc<App>>) -> Res<app_core::sound::AudioState> {
+    let app = Arc::clone(&app);
+    run(move || app.audio_remove()).await
+}
+
 /// A scan pass, off the interface's thread.
 #[tauri::command]
 async fn scan(app: State<'_, Arc<App>>, full: bool) -> Res<bool> {
@@ -806,6 +832,10 @@ fn main() {
             style_guess,
             stats,
             scan_state,
+            audio_state,
+            audio_enable,
+            audio_pause,
+            audio_remove,
             scan,
             root,
             set_root,

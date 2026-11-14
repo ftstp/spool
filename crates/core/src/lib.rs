@@ -17,6 +17,7 @@ pub mod notion;
 pub mod repair_view;
 pub mod releases;
 pub mod repairs;
+pub mod sound;
 pub mod structure;
 pub mod views;
 
@@ -71,6 +72,8 @@ pub struct ScanState {
     /// Bumped after every change: the interface reloads what it shows.
     #[ts(type = "number")]
     pub version: u64,
+    /// The audio analysis of reference renders (opt-in), its download and its progress.
+    pub audio: sound::AudioState,
 }
 
 /// The settings the setup and Settings pages edit.
@@ -141,6 +144,8 @@ pub struct App {
     /// A stop by the user also quiets the background scans for a while (they would start
     /// again on what was just stopped).
     stopped_at: Mutex<Option<std::time::Instant>>,
+    /// The audio analysis (sound.rs).
+    sound: sound::Sound,
     pub data_dir: PathBuf,
 }
 
@@ -210,6 +215,7 @@ impl App {
         std::fs::create_dir_all(data_dir).map_err(err)?;
         let path = data_dir.join("plugin-fixer.sqlite");
         let store = open_or_drop_stale_wal(data_dir, &path)?;
+        App::audio_cleanup_on_start(data_dir);
         restore_choices(&store, &data_dir.join("choices.json"));
         let reader = Store::open(&path).map_err(err)?;
         // messages in the language the user chose (French until the interface says)
@@ -231,6 +237,7 @@ impl App {
             fs_gen: std::sync::atomic::AtomicU64::new(0),
             cancel,
             stopped_at: Mutex::new(None),
+            sound: sound::Sound::default(),
             data_dir: data_dir.to_path_buf(),
         }))
     }
@@ -340,6 +347,7 @@ impl App {
     /// seconds after the last change, so a save in progress is read once, whole), and at the
     /// latest every `every`.
     pub fn start_background(self: &Arc<Self>, every: Duration) {
+        self.start_audio();
         let app = Arc::clone(self);
         std::thread::spawn(move || {
             let dirty = Arc::new(Mutex::new(None::<std::time::Instant>));

@@ -7,6 +7,7 @@
   import * as api from "../api";
   import { app } from "../state.svelte";
   import { t, fmtNum } from "../i18n/index.svelte";
+  import { scanStageText } from "../scanStage";
   import frApp from "../i18n/locales/fr/app.json";
   import enApp from "../i18n/locales/en/app.json";
 
@@ -126,6 +127,14 @@
     <div class="row"><span class="ell">{step ? t(`app.scan.steps.${step}`) : scanStageText(s.stage) || t("app.scan.analysis")}</span>{#if count}<span class="faint">{count}</span>{/if}</div>
     <div class="bar thin" class:indet={pct === null} aria-hidden="true"><i style:width={pct === null ? "" : pct + "%"}></i></div>
     <div class="row"><span class="faint ell" title={s.detail}>{left || detail}</span><button class="link" disabled={stopping} onclick={stop} title={t("app.scan.stopTitle")}>{stopping ? t("app.scan.stoppingShort") : t("app.scan.cancelShort")}</button></div>
+  </div>
+{:else if s?.audio?.running}
+  <!-- the audio analysis of reference renders (opt-in): its own line, never during a scan -->
+  {@const a = s.audio}
+  <div class="mini small">
+    <div class="row"><span class="ell">{t("app.scan.audio.line")}</span><span class="faint">{fmtNum(a.done)} / {fmtNum(a.total)}</span></div>
+    <div class="bar thin" aria-hidden="true"><i style:width={a.total ? Math.min(100, Math.round((a.done / a.total) * 100)) + "%" : "0%"}></i></div>
+    <div class="row"><span class="faint ell" title={a.detail}>{a.detail.split("/").slice(-1)[0]}</span><button class="link" onclick={() => api.audioPause(true)} title={t("app.scan.audio.pauseTitle")}>{t("app.scan.audio.pause")}</button></div>
   </div>
 {/if}
 

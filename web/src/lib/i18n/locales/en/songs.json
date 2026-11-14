@@ -4,7 +4,10 @@
   "song": "Song",
   "noArtist": "No artist",
   "noStyle": "No style",
-  "nSongs": { "one": "{n} song", "other": "{n} songs" },
+  "nSongs": {
+    "one": "{n} song",
+    "other": "{n} songs"
+  },
   "empty": "No songs match these filters.",
   "more": "+ {n} (narrow the filters)",
   "checks": "Finishing steps ticked",
@@ -13,8 +16,7 @@
     "list": "List",
     "folders": "Folders",
     "board": "Board",
-    "cal": "Calendar",
-    "grid": "Grid"
+    "cal": "Calendar"
   },
   "sev": {
     "ok": "Open fine",
@@ -100,10 +102,16 @@
     "today": "Today",
     "workTitle": "Under each day, the songs that had a project saved that day",
     "work": "Songs worked on",
-    "workedDay": { "one": "{n} song worked on this day", "other": "{n} songs worked on this day" },
+    "workedDay": {
+      "one": "{n} song worked on this day",
+      "other": "{n} songs worked on this day"
+    },
     "dated": "{title} (date)",
     "saved": "{title}: saved this day",
-    "others": { "one": "+ {n} more", "other": "+ {n} more" },
+    "others": {
+      "one": "+ {n} more",
+      "other": "+ {n} more"
+    },
     "less": "Show less",
     "upcoming": "Upcoming",
     "undated": "No date",
@@ -133,9 +141,5 @@
       "one": "\"{title}\" stays put: {n} sample would be lost.",
       "other": "\"{title}\" stays put: {n} samples would be lost."
     }
-  },
-  "grid": {
-    "openTitle": "Open the project in Live",
-    "open": "Open in Live"
   }
 }

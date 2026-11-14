@@ -71,8 +71,7 @@
       "list": "List",
       "folders": "Folders",
       "board": "Board",
-      "cal": "Calendar",
-      "grid": "Grid"
+      "cal": "Calendar"
     },
     "cmd": {
       "home": "Home",
@@ -139,6 +138,11 @@
     "other": {
       "update": "Updating",
       "oldDisk": "Searching the old disk"
+    },
+    "audio": {
+      "line": "Audio analysis",
+      "pause": "pause",
+      "pauseTitle": "Pause the audio analysis (it resumes where it stopped, from Settings)"
     }
   },
   "update": {

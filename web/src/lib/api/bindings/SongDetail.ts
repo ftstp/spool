@@ -10,6 +10,7 @@ import type { OpenStage } from "./OpenStage";
 import type { OpenStyle } from "./OpenStyle";
 import type { Sibling } from "./Sibling";
 import type { SongRow } from "./SongRow";
+import type { SoundInfo } from "./SoundInfo";
 import type { StageStep } from "./StageStep";
 import type { Version } from "./Version";
 
@@ -27,4 +28,8 @@ backups: number, versions: Array<Version>, merged: Array<Merged>, files: Array<F
  * by their name (a folder shared by many songs, an export named otherwise). Any can be
  * chosen as the reference render.
  */
-other_audio: Array<Candidate>, suggestions: Array<OpenStage>, style_sugg: OpenStyle | null, near_temoin: Array<Near>, siblings: Array<Sibling>, log: Array<StageStep>, };
+other_audio: Array<Candidate>, suggestions: Array<OpenStage>, style_sugg: OpenStyle | null, near_temoin: Array<Near>, siblings: Array<Sibling>, log: Array<StageStep>, 
+/**
+ * What the audio analysis of its reference render says (None: not analysed).
+ */
+sound: SoundInfo | null, };

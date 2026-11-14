@@ -380,6 +380,7 @@ fn style_songs(tx: &rusqlite::Connection) -> rusqlite::Result<Vec<StyleSong>> {
     for r in &rows {
         *per_dir.entry(r.3.as_str()).or_default() += 1;
     }
+    let sound = sound_neighbours(tx, &rows)?;
     let songs: Vec<StyleSong> = rows
         .iter()
         .filter_map(|(id, title, style, dir)| {
@@ -394,9 +395,49 @@ fn style_songs(tx: &rusqlite::Connection) -> rusqlite::Result<Vec<StyleSong>> {
                 audio: if dir.is_empty() { Vec::new() } else { audio.get(dir).cloned().unwrap_or_default() },
                 shared: per_dir[dir.as_str()] > 1,
                 data,
+                sound: sound.get(id).cloned().unwrap_or_default(),
             })
         })
         .collect();
     Ok(songs)
 }
 
+/// For every song whose reference render was analysed (audio analysis, opt-in, current
+/// model): the other analysed songs, closest render first, those of the same folder or with
+/// the same render left out (other versions of the same idea would vote for themselves).
+fn sound_neighbours(
+    con: &rusqlite::Connection,
+    rows: &[(i64, Option<String>, Option<String>, String)],
+) -> rusqlite::Result<HashMap<i64, Vec<(i64, f64)>>> {
+    let mut emb: Vec<(i64, &str, String, Vec<f32>)> = Vec::new();
+    {
+        let dirs: HashMap<i64, &str> = rows.iter().map(|r| (r.0, r.3.as_str())).collect();
+        let mut s = con.prepare(
+            "select s.id, a.embedding, a.rel from songs s join audio_analysis a on a.rel = s.temoin \
+             where s.gone = 0 and a.model = ? and a.embedding is not null",
+        )?;
+        let rows = s.query_map([crate::AUDIO_MODEL], |r| {
+            Ok((r.get::<_, i64>(0)?, r.get::<_, Vec<u8>>(1)?, r.get::<_, String>(2)?))
+        })?;
+        for r in rows {
+            let (id, blob, rel) = r?;
+            if let Some(d) = dirs.get(&id) {
+                let v: Vec<f32> = blob.chunks_exact(4).map(|c| f32::from_le_bytes([c[0], c[1], c[2], c[3]])).collect();
+                emb.push((id, d, rel, v));
+            }
+        }
+    }
+    let dot = |a: &[f32], b: &[f32]| a.iter().zip(b).map(|(x, y)| (*x as f64) * (*y as f64)).sum::<f64>();
+    let mut out = HashMap::new();
+    for (id, dir, rel, v) in &emb {
+        let mut near: Vec<(i64, f64)> = emb
+            .iter()
+            .filter(|(o, d, r, _)| o != id && r != rel && (dir.is_empty() || d != dir))
+            .map(|(o, _, _, w)| (*o, dot(v, w)))
+            .collect();
+        near.sort_by(|a, b| b.1.total_cmp(&a.1));
+        near.truncate(20);
+        out.insert(*id, near);
+    }
+    Ok(out)
+}

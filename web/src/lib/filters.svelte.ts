@@ -2,14 +2,16 @@
 // launches).
 const saved = (() => {
   try {
-    return localStorage.getItem("pf:view") ?? "list";
+    const v = localStorage.getItem("pf:view") ?? "list";
+    // the grid view is gone: a launch that remembered it opens the list
+    return ["list", "folders", "board", "cal"].includes(v) ? v : "list";
   } catch {
     return "list";
   }
 })();
 
 export const f = $state({
-  view: saved as "list" | "folders" | "board" | "cal" | "grid",
+  view: saved as "list" | "folders" | "board" | "cal",
   stages: [] as string[],
   artist: "",
   style: "",
