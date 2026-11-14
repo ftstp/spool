@@ -91,7 +91,7 @@
     "check": "Check for updates"
   },
   "zero": {
-    "hint": "Empties the app's database: songs, stages, styles, notes, groupings, folders, artists, processing presets and repair history, then reopens the setup. Your projects, your samples and the copies already written are not touched. The old database is set aside (the last 3 are kept).",
+    "hint": "Empties the app's database: songs, stages, styles, notes, groupings, folders, artists, processing presets and repair history, then reopens the setup. Your projects, your samples and the copies already written are not touched. The old database is set aside (the last 2 are kept).",
     "confirm": "Everything you arranged in the app will be removed. Continue?",
     "yes": "Yes, start over",
     "start": "Start over..."
@@ -135,5 +135,26 @@
     "onSaid": "Audio analysis on",
     "offSaid": "Audio analysis off",
     "downloadStarted": "Audio analysis on: downloading the model"
+  },
+  "storage": {
+    "title": "Storage",
+    "hint": "What Spool keeps on this computer, in its own folder. Your projects are not in it: they are neither counted nor touched here. Do not change anything in it by hand while Spool is open.",
+    "base": "Catalogue: {size}",
+    "midi": " (of which {size} for the index of your MIDI files)",
+    "backups": {
+      "one": "Safety copies: {n} copy, {size}",
+      "other": "Safety copies: {n} copies, {size}"
+    },
+    "backupsHint": "Made before a Spool update that changes the format, and when you start over. The two newest of each kind are kept.",
+    "cache": "Thumbnails, project templates, audio previews: {size}",
+    "model": "Audio analysis: {size}",
+    "total": "Total: {size}",
+    "open": "Open the folder",
+    "trim": "Free {size}...",
+    "trimConfirm": "Delete the safety copies except the newest one? Your catalogue and your projects do not change.",
+    "trimYes": "Delete the older copies",
+    "trimmed": "Copies deleted: {size} freed.",
+    "mb": "{n} MB",
+    "gb": "{n} GB"
   }
 }

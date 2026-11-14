@@ -455,6 +455,29 @@ async fn remove_root(app: State<'_, Arc<App>>, path: String) -> Res<app_core::Co
 }
 
 #[tauri::command]
+async fn storage(app: State<'_, Arc<App>>) -> Res<app_core::Storage> {
+    let app = Arc::clone(&app);
+    run(move || Ok(app.storage())).await
+}
+
+#[tauri::command]
+async fn trim_backups(app: State<'_, Arc<App>>) -> Res<app_core::Storage> {
+    let app = Arc::clone(&app);
+    run(move || app.trim_backups()).await
+}
+
+/// Opens Spool's data folder in the Explorer (only that folder: nothing chosen by the page).
+#[tauri::command]
+fn open_data_dir(app: State<'_, Arc<App>>) -> Res<()> {
+    let dir = PathBuf::from(app.storage().dir);
+    #[cfg(windows)]
+    std::process::Command::new("explorer").arg(&dir).spawn().map_err(|e| e.to_string())?;
+    #[cfg(not(windows))]
+    let _ = dir;
+    Ok(())
+}
+
+#[tauri::command]
 async fn written_copies(app: State<'_, Arc<App>>) -> Res<Vec<app_core::repairs::WrittenCopy>> {
     let app = Arc::clone(&app);
     run(move || app.written_copies()).await
@@ -786,6 +809,32 @@ fn update_selftest(app: tauri::AppHandle, dir: PathBuf) {
     });
 }
 
+/// Where the start is: the window shows at once and says it while the base opens (an
+/// update of an old catalogue copies it first, then converts it: a minute on a large one).
+#[derive(Clone, serde::Serialize)]
+struct BootStatus {
+    /// "opening", "creating", "upgrading", "ready" or "error"
+    stage: &'static str,
+    /// the base's size, in MB, when there is one
+    mb: u64,
+    from: usize,
+    to: usize,
+    error: Option<String>,
+    secs: f64,
+}
+
+struct Boot {
+    status: std::sync::Mutex<BootStatus>,
+    started: std::time::Instant,
+}
+
+#[tauri::command]
+fn boot_status(boot: State<'_, Boot>) -> BootStatus {
+    let mut s = boot.status.lock().unwrap().clone();
+    s.secs = boot.started.elapsed().as_secs_f64();
+    s
+}
+
 fn main() {
     tauri::Builder::default()
         .plugin(tauri_plugin_dialog::init())
@@ -796,7 +845,11 @@ fn main() {
         .register_asynchronous_uri_scheme_protocol("media", |ctx, req, responder| {
             let handle = ctx.app_handle().clone();
             tauri::async_runtime::spawn_blocking(move || {
-                let app: State<Arc<App>> = handle.state();
+                // nothing to serve while the base opens
+                let Some(app) = handle.try_state::<Arc<App>>() else {
+                    responder.respond(tauri::http::Response::builder().status(503).body(Vec::new()).unwrap());
+                    return;
+                };
                 responder.respond(media(&app, &req));
             });
         })
@@ -806,24 +859,48 @@ fn main() {
                 Some(d) => PathBuf::from(d),
                 None => app.path().app_data_dir()?,
             };
-            let core = match App::open(&dir) {
-                Ok(c) => c,
-                Err(e) => {
-                    // said plainly, not a silent crash (a base from a newer Spool, a disk full...)
-                    use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
-                    app.dialog().message(tr!("desktop.cannotOpenBase", e = e)).kind(MessageDialogKind::Error).title("Spool").blocking_show();
-                    return Err(e.into());
-                }
+            // The base opens on its own thread: done here, before the window's first paint, a
+            // large old catalogue (a copy, then the conversion) left a black window for a
+            // minute with no word. The page asks `boot_status` until "ready".
+            let (found, to) = App::base_formats(&dir);
+            let stage = match found {
+                None => "creating",
+                Some(v) if v > 0 && v < to => "upgrading",
+                Some(_) => "opening",
             };
+            app.manage(Boot {
+                status: std::sync::Mutex::new(BootStatus { stage, mb: App::base_bytes(&dir) / 1_000_000, from: found.unwrap_or(0), to, error: None, secs: 0.0 }),
+                started: std::time::Instant::now(),
+            });
             let handle = app.handle().clone();
-            core.on_change(Arc::new(move |st: &ScanState| {
-                let _ = handle.emit("changed", st.clone());
-            }));
-            core.start_background(Duration::from_secs(60));
-            app.manage(core);
-            if std::env::var_os("SPOOL_UPDATE_SELFTEST").is_some() {
-                update_selftest(app.handle().clone(), dir.clone());
-            }
+            std::thread::spawn(move || {
+                let boot = handle.state::<Boot>();
+                match App::open(&dir) {
+                    Ok(core) => {
+                        let h = handle.clone();
+                        core.on_change(Arc::new(move |st: &ScanState| {
+                            let _ = h.emit("changed", st.clone());
+                        }));
+                        core.start_background(Duration::from_secs(60));
+                        handle.manage(core);
+                        boot.status.lock().unwrap().stage = "ready";
+                        if std::env::var_os("SPOOL_UPDATE_SELFTEST").is_some() {
+                            update_selftest(handle.clone(), dir.clone());
+                        }
+                    }
+                    Err(e) => {
+                        {
+                            let mut s = boot.status.lock().unwrap();
+                            s.stage = "error";
+                            s.error = Some(e.clone());
+                        }
+                        // said plainly, not a silent crash (a base from a newer Spool, a disk full...)
+                        use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
+                        handle.dialog().message(tr!("desktop.cannotOpenBase", e = e)).kind(MessageDialogKind::Error).title("Spool").blocking_show();
+                        handle.exit(1);
+                    }
+                }
+            });
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -888,6 +965,10 @@ fn main() {
             repair_plan,
             repair_state,
             written_copies,
+            boot_status,
+            storage,
+            trim_backups,
+            open_data_dir,
             update_check,
             open_fatstep,
             update_install,

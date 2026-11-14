@@ -109,8 +109,10 @@ def build(v):
     leaked = [f for f in os.listdir(dist) if f.startswith('dev-') and f.endswith('.json')]
     if leaked:
         stop('preview data in the build (%s): the installer would carry them' % ', '.join(leaked))
-    nsis = os.path.join(ROOT, 'target', 'release', 'bundle', 'nsis')
-    exe = [f for f in os.listdir(nsis) if f.endswith('-setup.exe') and '_%s_' % v in f]
+    # CARGO_TARGET_DIR: build beside a Spool that is running from target/ (Windows cannot
+    # replace a running exe)
+    nsis = os.path.join(os.environ.get('CARGO_TARGET_DIR') or os.path.join(ROOT, 'target'), 'release', 'bundle', 'nsis')
+    exe = [f for f in os.listdir(nsis) if f.startswith('Spool_%s_' % v) and f.endswith('-setup.exe')]
     if len(exe) != 1:
         stop('installer for %s not found in %s' % (v, nsis))
     src = os.path.join(nsis, exe[0])

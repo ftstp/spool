@@ -271,5 +271,16 @@
       "one": "Notion import: {n} song updated",
       "other": "Notion import: {n} songs updated"
     }
+  },
+  "boot": {
+    "openTitle": "Opening your catalogue",
+    "open": "Reading your base ({mb} MB)...",
+    "create": "Getting ready...",
+    "slow": "A large catalogue takes a moment to open. Nothing is changed.",
+    "upgradeTitle": "Updating your catalogue",
+    "upgrade": "Spool found an existing catalogue ({mb} MB), made by an earlier version. It first makes a safety copy, then converts it to the new format. On a large catalogue this can take a minute or two.",
+    "safe": "Nothing is deleted: the copy stays in Spool's folder, and your projects are not touched.",
+    "errorTitle": "Spool could not open your catalogue",
+    "elapsed": "{s} s"
   }
 }

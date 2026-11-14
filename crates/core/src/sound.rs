@@ -898,6 +898,21 @@ mod tests {
         std::fs::remove_dir_all(&dir).unwrap();
     }
 
+    /// Network: everything the opt-in downloads, from the real release and from Microsoft,
+    /// each file hash-checked. `cargo test -p core -- --ignored the_whole_download_works`
+    #[test]
+    #[ignore]
+    fn the_whole_download_works() {
+        assert!(std::env::var_os(DIR_ENV).is_none(), "unset {DIR_ENV}: this checks the network");
+        let dir = std::env::temp_dir().join(format!("spool-dl-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        download(&dir, &|_| true).unwrap();
+        for f in all_files() {
+            assert_eq!(sha256_file(&dir.join(f.name)).unwrap(), f.sha256, "{}", f.name);
+        }
+        std::fs::remove_dir_all(&dir).unwrap();
+    }
+
     #[test]
     fn embedding_blob_round_trip() {
         let v = vec![0.5f32, -1.25, 3.0];

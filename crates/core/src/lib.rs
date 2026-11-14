@@ -33,6 +33,81 @@ use ts_rs::TS;
 pub use catalog::StyleOption;
 pub use views::{Overview, SongItem, Stats};
 
+/// What Spool keeps on this computer, in bytes, for Settings: nothing outside its own folder
+/// is counted (the projects and the copies written beside them are the user's).
+#[derive(Debug, Clone, Default, Serialize, TS)]
+#[ts(export)]
+pub struct Storage {
+    /// Spool's data folder.
+    pub dir: String,
+    /// The catalogue (the base and its journal).
+    #[ts(type = "number")]
+    pub base: u64,
+    /// Of which the index of the MIDI files found (rebuilt by a scan if it went missing).
+    #[ts(type = "number")]
+    pub midi: u64,
+    /// The safety copies: before an update, before a start over.
+    #[ts(type = "number")]
+    pub backups: u64,
+    pub backup_count: u32,
+    /// What removing the copies but the newest would free.
+    #[ts(type = "number")]
+    pub trimmable: u64,
+    /// Picture thumbnails, the templates, the audio previews, the sound model (opt-in).
+    #[ts(type = "number")]
+    pub cache: u64,
+    #[ts(type = "number")]
+    pub model: u64,
+    #[ts(type = "number")]
+    pub total: u64,
+}
+
+/// Bytes under `p` (a file or a folder, links not followed).
+fn size_of(p: &Path) -> u64 {
+    let Ok(md) = std::fs::symlink_metadata(p) else { return 0 };
+    if md.is_dir() {
+        std::fs::read_dir(p).into_iter().flatten().flatten().map(|e| size_of(&e.path())).sum()
+    } else {
+        md.len()
+    }
+}
+
+/// The safety copies in `backups/`, newest first: each one a base (`.sqlite`) with the files
+/// that share its name (journal, choices), or a journal set aside (`journal-*`).
+fn backup_sets(dir: &Path) -> Vec<(std::time::SystemTime, Vec<PathBuf>)> {
+    let Ok(rd) = std::fs::read_dir(dir) else { return vec![] };
+    let names: Vec<PathBuf> = rd.flatten().map(|e| e.path()).collect();
+    let mut sets: Vec<(std::time::SystemTime, Vec<PathBuf>)> = vec![];
+    for p in &names {
+        let n = p.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
+        let modified = |p: &Path| std::fs::symlink_metadata(p).and_then(|m| m.modified()).unwrap_or(std::time::UNIX_EPOCH);
+        if let Some(stem) = n.strip_suffix(".sqlite") {
+            // "plugin-fixer-<stamp>" goes with "choices-<stamp>.json"
+            let stamp = stem.strip_prefix("plugin-fixer-").map(|s| format!("choices-{s}.json"));
+            let mut set = vec![p.clone()];
+            for q in &names {
+                let m = q.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
+                if m != n && (m.starts_with(&format!("{n}-")) || stamp.as_deref() == Some(m.as_str())) {
+                    set.push(q.clone());
+                }
+            }
+            sets.push((modified(p), set));
+        } else if n.starts_with("journal-") {
+            sets.push((modified(p), vec![p.clone()]));
+        }
+    }
+    sets.sort_by(|a, b| b.0.cmp(&a.0));
+    sets
+}
+
+/// The copies `trim_backups` removes: all but the newest whole base (a journal set aside is
+/// not a base by itself).
+fn trimmable_sets(dir: &Path) -> Vec<Vec<PathBuf>> {
+    let sets = backup_sets(dir);
+    let keep = sets.iter().position(|(_, set)| set[0].extension().is_some_and(|e| e == "sqlite"));
+    sets.into_iter().enumerate().filter(|(i, _)| Some(*i) != keep).map(|(_, (_, set))| set).collect()
+}
+
 /// After a change: what the undo button can offer.
 #[derive(Debug, Clone, Default, Serialize, TS)]
 #[ts(export)]
@@ -400,7 +475,7 @@ impl App {
     }
 
     /// Starts over with an empty base. Nothing is deleted: the base and the choices mirror
-    /// move to `backups/` under one date stamp (the last 3 resets are kept), so the mirror
+    /// move to `backups/` under one date stamp (the last 2 resets are kept), so the mirror
     /// cannot refill the new base. The projects, the copies written and the templates stay.
     /// Returns the backup's file name.
     pub fn reset(&self) -> Result<String> {
@@ -437,7 +512,7 @@ impl App {
         if ch.exists() {
             let _ = std::fs::rename(&ch, dir.join(format!("choices-{stamp}.json")));
         }
-        prune_backups(&dir, 3);
+        prune_backups(&dir, 2);
         *store = Store::open(&base).map_err(err)?;
         *reader = Store::open(&base).map_err(err)?;
         drop((store, reader));
@@ -1180,6 +1255,53 @@ impl App {
     }
 
     /// Every copy the app wrote, so the user can find them (and tidy up themselves).
+    /// The format of the base in `data_dir` before it is opened (`None`: no base yet), and the
+    /// format this version writes: the start screen says when an older catalogue is updated.
+    pub fn base_formats(data_dir: &Path) -> (Option<usize>, usize) {
+        (Store::peek(&data_dir.join("plugin-fixer.sqlite")), Store::format())
+    }
+
+    /// The base's size on disk (with its journal), before it is opened.
+    pub fn base_bytes(data_dir: &Path) -> u64 {
+        ["", "-wal"].iter().map(|x| size_of(&data_dir.join(format!("plugin-fixer.sqlite{x}")))).sum()
+    }
+
+    /// What Spool keeps on disk, for Settings > Storage.
+    pub fn storage(&self) -> Storage {
+        let d = &self.data_dir;
+        let base: u64 = ["", "-wal", "-shm"].iter().map(|x| size_of(&d.join(format!("plugin-fixer.sqlite{x}")))).sum();
+        let midi = {
+            let st = self.reader.lock().unwrap();
+            st.con
+                .query_row("select coalesce(sum(length(rel) + length(data) + 16), 0) from midi", [], |r| r.get::<_, i64>(0))
+                .unwrap_or(0) as u64
+        };
+        let backups = size_of(&d.join("backups"));
+        let backup_count = backup_sets(&d.join("backups")).len() as u32;
+        let trimmable = trimmable_sets(&d.join("backups")).iter().flatten().map(|p| size_of(p)).sum();
+        let cache = ["thumbs", "templates", "audio"].iter().map(|x| size_of(&d.join(x))).sum();
+        let model = size_of(&d.join("models"));
+        let total = size_of(d);
+        Storage { dir: d.to_string_lossy().into_owned(), base, midi: midi.min(base), backups, backup_count, trimmable, cache, model, total }
+    }
+
+    /// Frees the room taken by the safety copies, keeping the newest one (a step back stays
+    /// possible). Only inside `backups/`; the base in use and the projects are not touched.
+    pub fn trim_backups(&self) -> Result<Storage> {
+        let dir = self.data_dir.join("backups");
+        for set in trimmable_sets(&dir) {
+            for p in set {
+                // never anything else than Spool's own folder of copies
+                if p.parent() != Some(dir.as_path()) {
+                    continue;
+                }
+                let r = if p.is_dir() { std::fs::remove_dir_all(&p) } else { std::fs::remove_file(&p) };
+                r.map_err(err)?;
+            }
+        }
+        Ok(self.storage())
+    }
+
     pub fn written_copies(&self) -> Result<Vec<repairs::WrittenCopy>> {
         let st = self.reader.lock().unwrap();
         repairs::written(&st.con, &store::Roots::load(&st.con)).map_err(err)
@@ -2144,6 +2266,41 @@ fn watch(root: &str, dirty: Arc<Mutex<Option<std::time::Instant>>>) -> Option<no
 #[cfg(test)]
 mod stale_wal_tests {
     /// A sound journal left by a crash is kept (its commits are not lost).
+    #[test]
+    fn trimming_keeps_the_newest_copy_and_only_touches_backups() {
+        let d = std::env::temp_dir().join(format!("pf-trim-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&d);
+        let app = crate::App::open(&d).unwrap();
+        let b = d.join("backups");
+        std::fs::create_dir_all(b.join("journal-2026-01-01_10h00m00")).unwrap();
+        std::fs::write(b.join("journal-2026-01-01_10h00m00").join("plugin-fixer.sqlite-wal"), "j").unwrap();
+        let put = |n: &str, age: u64| {
+            std::fs::write(b.join(n), vec![0u8; 1000]).unwrap();
+            let t = std::time::SystemTime::now() - std::time::Duration::from_secs(age);
+            std::fs::File::options().write(true).open(b.join(n)).unwrap().set_modified(t).unwrap();
+        };
+        put("before-v3-1.sqlite", 9000);
+        put("plugin-fixer-2026-02-01_10h00m00.sqlite", 5000);
+        put("plugin-fixer-2026-02-01_10h00m00.sqlite-wal", 5000);
+        put("choices-2026-02-01_10h00m00.json", 5000);
+        put("before-v4-2.sqlite", 10);
+        // a file of the user's that strayed in: not a copy, never removed
+        put("notes.txt", 20000);
+        let before = app.storage();
+        assert_eq!(before.backup_count, 4);
+        assert!(before.backups >= 5000);
+        assert_eq!(before.trimmable, before.backups - 1000 - 1000, "all but the newest copy and the stray file");
+        let after = app.trim_backups().unwrap();
+        assert_eq!(after.backup_count, 1);
+        let mut left: Vec<String> = std::fs::read_dir(&b).unwrap().flatten().map(|e| e.file_name().to_string_lossy().into_owned()).collect();
+        left.sort();
+        assert_eq!(left, ["before-v4-2.sqlite", "notes.txt"]);
+        assert!(d.join("plugin-fixer.sqlite").exists(), "the base in use is not touched");
+        assert!(after.total < before.total);
+        drop(app);
+        let _ = std::fs::remove_dir_all(&d);
+    }
+
     #[test]
     fn a_sound_journal_is_kept() {
         let d = std::env::temp_dir().join(format!("pf-wal-{}", std::process::id()));

@@ -131,9 +131,22 @@ impl Store {
                 // the base is not changed
                 con.execute("vacuum into ?", [to.to_string_lossy()])?;
             }
-            prune_before(&dir, 5);
+            // each copy is the whole base (hundreds of MB with a large MIDI library): the two
+            // newest are enough to step back over the last update
+            prune_before(&dir, 2);
         }
         Self::init(con)
+    }
+
+    /// The format of the base at `path`, read without changing anything (no journal folded,
+    /// nothing created): `None` when there is no base yet.
+    pub fn peek(path: &Path) -> Option<usize> {
+        use rusqlite::OpenFlags;
+        if !path.exists() {
+            return None;
+        }
+        let con = Connection::open_with_flags(path, OpenFlags::SQLITE_OPEN_READ_ONLY | OpenFlags::SQLITE_OPEN_NO_MUTEX).ok()?;
+        con.pragma_query_value(None, "user_version", |r| r.get(0)).ok()
     }
 
     /// The format this version writes (what `user_version` reaches once open).
@@ -148,6 +161,9 @@ impl Store {
     fn init(con: Connection) -> rusqlite::Result<Store> {
         con.pragma_update(None, "journal_mode", "WAL")?;
         con.pragma_update(None, "synchronous", "NORMAL")?;
+        // the journal is emptied as it goes but its file kept its largest size (43 MB seen
+        // after a full scan): cut back to 8 MB at each checkpoint
+        con.pragma_update(None, "journal_size_limit", 8 * 1024 * 1024)?;
         let v: usize = con.pragma_query_value(None, "user_version", |r| r.get(0))?;
         for (i, m) in MIGRATIONS.iter().enumerate().skip(v) {
             let tx = con.unchecked_transaction()?;
@@ -252,9 +268,15 @@ mod update_tests {
             con.pragma_update(None, "user_version", MIGRATIONS.len() - 2).unwrap();
             con.execute("insert into settings(k, v) values('root', '\"C:/x\"')", []).unwrap();
         }
+        // what the start screen reads first: the format, nothing changed by reading it
+        assert_eq!(Store::peek(&dir.join("none.sqlite")), None);
+        assert_eq!(Store::peek(&p), Some(MIGRATIONS.len() - 2));
+        assert_eq!(Store::peek(&p), Some(MIGRATIONS.len() - 2));
+        assert!(!dir.join("backups").exists());
         let st = Store::open(&p).unwrap();
         assert_eq!(st.version(), MIGRATIONS.len());
         drop(st);
+        assert_eq!(Store::peek(&p), Some(MIGRATIONS.len()));
         let copies: Vec<_> = std::fs::read_dir(dir.join("backups")).unwrap().flatten().collect();
         assert_eq!(copies.len(), 1);
         let old = Connection::open(copies[0].path()).unwrap();

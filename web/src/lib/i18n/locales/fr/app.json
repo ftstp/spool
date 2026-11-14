@@ -271,5 +271,16 @@
       "one": "Import Notion : {n} morceau mis à jour",
       "other": "Import Notion : {n} morceaux mis à jour"
     }
+  },
+  "boot": {
+    "openTitle": "Ouverture de ton catalogue",
+    "open": "Lecture de ta base ({mb} Mo)...",
+    "create": "Préparation...",
+    "slow": "Un gros catalogue prend un moment à s'ouvrir. Rien n'est modifié.",
+    "upgradeTitle": "Mise à jour de ton catalogue",
+    "upgrade": "Spool a retrouvé un catalogue existant ({mb} Mo), créé par une version précédente. Il en fait d'abord une copie de sécurité, puis le convertit au nouveau format. Sur un gros catalogue, cela peut prendre une minute ou deux.",
+    "safe": "Rien n'est effacé : la copie reste dans le dossier de Spool, et tes projets ne sont pas touchés.",
+    "errorTitle": "Spool n'a pas pu ouvrir ton catalogue",
+    "elapsed": "{s} s"
   }
 }

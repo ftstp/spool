@@ -91,7 +91,7 @@
     "check": "Rechercher une mise à jour"
   },
   "zero": {
-    "hint": "Vide la base de l'app : morceaux, étapes, styles, notes, regroupements, dossiers, artistes, presets de traitements et historique des réparations, puis rouvre la configuration. Tes projets, tes samples et les copies déjà écrites ne sont pas touchés. L'ancienne base est mise de côté (les 3 dernières sont gardées).",
+    "hint": "Vide la base de l'app : morceaux, étapes, styles, notes, regroupements, dossiers, artistes, presets de traitements et historique des réparations, puis rouvre la configuration. Tes projets, tes samples et les copies déjà écrites ne sont pas touchés. L'ancienne base est mise de côté (les 2 dernières sont gardées).",
     "confirm": "Tout ce que tu as rangé dans l'app sera retiré. Continuer ?",
     "yes": "Oui, repartir de zéro",
     "start": "Repartir de zéro..."
@@ -135,5 +135,26 @@
     "onSaid": "Analyse audio activée",
     "offSaid": "Analyse audio désactivée",
     "downloadStarted": "Analyse audio activée : téléchargement du modèle"
+  },
+  "storage": {
+    "title": "Stockage",
+    "hint": "Ce que Spool garde sur cet ordinateur, dans son propre dossier. Tes projets n'y sont pas : ils ne sont ni comptés ni touchés ici. N'y change rien à la main pendant que Spool est ouvert.",
+    "base": "Catalogue : {size}",
+    "midi": " (dont {size} pour l'index de tes fichiers MIDI)",
+    "backups": {
+      "one": "Copies de sécurité : {n} copie, {size}",
+      "other": "Copies de sécurité : {n} copies, {size}"
+    },
+    "backupsHint": "Faites avant une mise à jour de Spool qui change le format, et quand tu repars de zéro. Les deux plus récentes de chaque sorte sont gardées.",
+    "cache": "Vignettes, modèles de projet, extraits audio : {size}",
+    "model": "Analyse audio : {size}",
+    "total": "Total : {size}",
+    "open": "Ouvrir le dossier",
+    "trim": "Libérer {size}...",
+    "trimConfirm": "Supprimer les copies de sécurité, sauf la plus récente ? Ton catalogue et tes projets ne changent pas.",
+    "trimYes": "Supprimer les anciennes copies",
+    "trimmed": "Copies supprimées : {size} libérés.",
+    "mb": "{n} Mo",
+    "gb": "{n} Go"
   }
 }

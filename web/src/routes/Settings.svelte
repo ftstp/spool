@@ -13,7 +13,27 @@
   import FatstepLogo from "../lib/components/FatstepLogo.svelte";
   import { theme, THEMES } from "../lib/theme.svelte";
   import { updates } from "../lib/update.svelte";
-  import { t, fmtTime, i18n, LANGS, type Lang } from "../lib/i18n/index.svelte";
+  import { t, fmtTime, fmtNum, i18n, LANGS, type Lang } from "../lib/i18n/index.svelte";
+  import { onMount } from "svelte";
+
+  // what Spool keeps on disk: read when the page opens, its own folder only
+  let disk = $state<api.Storage | null>(null);
+  let trimming = $state(false);
+  onMount(() => {
+    api.storage().then((s) => (disk = s)).catch(() => {});
+  });
+  const size = (b: number) =>
+    b >= 1e9 ? t("settings.storage.gb", { n: fmtNum(Math.round(b / 1e8) / 10) }) : t("settings.storage.mb", { n: fmtNum(Math.max(1, Math.round(b / 1e6))) });
+  async function trim() {
+    const before = disk?.total ?? 0;
+    try {
+      disk = await api.trimBackups();
+      app.say(t("settings.storage.trimmed", { size: size(Math.max(0, before - disk.total)) }));
+    } catch (e) {
+      app.say(String(e), { error: true });
+    }
+    trimming = false;
+  }
   // the export: every song, or with the archived ones too
   let withArchived = $state(false);
   const toExport = $derived(app.songs.filter((s) => withArchived || !s.archived));
@@ -251,6 +271,34 @@
             <div class="ctl"><button class="btn" onclick={pickNotion}>{t("settings.data.notionPick")}</button></div>
           </div>
 
+          {#if disk}
+            <div class="item" class:stack={trimming}>
+              <div class="it">
+                <h3>{t("settings.storage.title")}</h3>
+                <p class="small muted">{t("settings.storage.hint")}</p>
+                <ul class="disk small">
+                  <li>{t("settings.storage.base", { size: size(disk.base) })}{#if disk.midi > 50e6}<span class="muted">{t("settings.storage.midi", { size: size(disk.midi) })}</span>{/if}</li>
+                  {#if disk.backup_count}<li>{t("settings.storage.backups", { n: disk.backup_count, size: size(disk.backups) })}<br /><span class="muted">{t("settings.storage.backupsHint")}</span></li>{/if}
+                  {#if disk.cache > 0}<li>{t("settings.storage.cache", { size: size(disk.cache) })}</li>{/if}
+                  {#if disk.model > 0}<li>{t("settings.storage.model", { size: size(disk.model) })}</li>{/if}
+                  <li class="tot">{t("settings.storage.total", { size: size(disk.total) })}</li>
+                </ul>
+                {#if trimming}<p class="small warn">{t("settings.storage.trimConfirm")}</p>{/if}
+              </div>
+              {#if trimming}
+                <div class="row">
+                  <button class="btn danger" onclick={trim}>{t("settings.storage.trimYes")}</button>
+                  <button class="btn" onclick={() => (trimming = false)}>{t("common.cancel")}</button>
+                </div>
+              {:else}
+                <div class="ctl">
+                  <button class="btn" onclick={() => api.openDataDir().catch((e) => app.say(String(e), { error: true }))} title={disk.dir}>{t("settings.storage.open")}</button>
+                  {#if disk.trimmable > 0}<button class="btn" onclick={() => (trimming = true)}>{t("settings.storage.trim", { size: size(disk.trimmable) })}</button>{/if}
+                </div>
+              {/if}
+            </div>
+          {/if}
+
         </section>
 
         <section class="group" id="part-spool" data-part="spool">
@@ -412,6 +460,8 @@
   .btn.danger { border-color: color-mix(in srgb, var(--bad) 60%, var(--line)); color: var(--bad); }
   .btn.danger:hover { background: color-mix(in srgb, var(--bad) 12%, transparent); }
 
+  .disk { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 4px; font-variant-numeric: tabular-nums; }
+  .disk .tot { font-weight: 600; margin-top: 2px; }
   /* starting over, set apart */
   .danger-zone { border: 1px solid color-mix(in srgb, var(--bad) 35%, var(--line)); border-radius: var(--radius); padding: 14px 18px 2px; }
   .danger-zone h2 { color: var(--bad); }

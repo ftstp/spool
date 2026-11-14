@@ -1,5 +1,25 @@
 [
   {
+    "version": "0.1.1",
+    "date": "2026-11-14",
+    "notes": {
+      "en": [
+        "A catalogue from an earlier Spool is now updated behind a start screen that says what is happening (a safety copy first, then the new format), instead of a black window.",
+        "Settings > Data > Storage: what Spool keeps on your computer, a button to open its folder, and one to free the older safety copies.",
+        "Lighter on disk: two safety copies of each kind are kept instead of up to eight, and the database journal stays small.",
+        "Optional audio analysis (Settings > Spool): 'sounds like', the measured tempo and a style clue, from your renders. Off by default, runs on your computer only.",
+        "Songs: the grid view is gone (list, folders, board and calendar stay)."
+      ],
+      "fr": [
+        "Un catalogue d'une version précédente de Spool est maintenant mis à jour derrière un écran de démarrage qui dit ce qui se passe (une copie de sécurité, puis le nouveau format), au lieu d'une fenêtre noire.",
+        "Réglages > Données > Stockage : ce que Spool garde sur ton ordinateur, un bouton pour ouvrir son dossier et un pour libérer les anciennes copies de sécurité.",
+        "Plus léger sur le disque : deux copies de sécurité de chaque sorte au lieu de huit au plus, et le journal de la base reste petit.",
+        "Analyse audio en option (Réglages > Spool) : « ça sonne comme », le tempo mesuré et un indice de style, à partir de tes rendus. Désactivée par défaut, elle tourne sur ton ordinateur uniquement.",
+        "Morceaux : la vue en grille disparaît (liste, dossiers, tableau et calendrier restent)."
+      ]
+    }
+  },
+  {
     "version": "0.1.0",
     "date": "2026-11-13",
     "notes": {

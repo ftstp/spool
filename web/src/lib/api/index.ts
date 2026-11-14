@@ -39,6 +39,25 @@ export const updateCheck = () => (inTauri ? invoke<UpdateInfo | null>("update_ch
 export const updateInstall = () => (inTauri ? invoke<void>("update_install") : readOnly());
 export const appVersion = () => (inTauri ? import("@tauri-apps/api/app").then((m) => m.getVersion()) : Promise.resolve("dev"));
 import type { WrittenCopy } from "./bindings/WrittenCopy";
+import type { Storage } from "./bindings/Storage";
+export type { Storage };
+/** What Spool keeps on this computer (its own folder only). */
+export const storage = () => (inTauri ? invoke<Storage>("storage") : Promise.resolve(devStorage()));
+/** Removes the safety copies but the newest. */
+export const trimBackups = () => (inTauri ? invoke<Storage>("trim_backups") : readOnly());
+export const openDataDir = () => (inTauri ? invoke<void>("open_data_dir") : readOnly());
+const devStorage = (): Storage => ({ dir: "C:\Users\you\AppData\Roaming\app.pluginfixer.desktop", base: 309e6, midi: 180e6, backups: 577e6, backup_count: 4, trimmable: 302e6, cache: 8e6, model: 0, total: 894e6 });
+/** Where the start is: the base opens (or is converted) while the window shows. */
+export type BootStatus = { stage: "opening" | "creating" | "upgrading" | "ready" | "error"; mb: number; from: number; to: number; error: string | null; secs: number };
+export const bootStatus = () => (inTauri ? invoke<BootStatus>("boot_status") : Promise.resolve(devBoot()));
+// the browser preview: "?boot=upgrading" (or opening, error) shows the start screen for 8 s
+const bootT0 = Date.now();
+function devBoot(): BootStatus {
+  const want = new URLSearchParams(location.search).get("boot") as BootStatus["stage"] | null;
+  const secs = (Date.now() - bootT0) / 1000;
+  const stage = want && (secs < 8 || want === "error") ? want : "ready";
+  return { stage, mb: 275, from: 3, to: 4, error: stage === "error" ? "base made by a newer Spool (format 9, this one reads up to 4)" : null, secs };
+}
 export const writtenCopies = () => (inTauri ? invoke<WrittenCopy[]>("written_copies") : Promise.resolve([] as WrittenCopy[]));
 /** "Save as": the text written where the user picks. Null: cancelled. */
 export const saveText = (title: string, name: string, ext: string, text: string) =>
