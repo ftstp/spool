@@ -1,5 +1,21 @@
 [
   {
+    "version": "0.1.3",
+    "date": "2026-11-14",
+    "notes": {
+      "en": [
+        "Audio analysis is now on by default: Spool downloads its model once in the background after the first setup (about 80 MB) and tells you when. Nothing of your music leaves your computer, and you can turn it off in Settings > Spool.",
+        "A development build serving a newer page no longer stays on a black window.",
+        "The scan's progress names the samples' steps."
+      ],
+      "fr": [
+        "L'analyse audio est maintenant activée par défaut : Spool télécharge son modèle une seule fois en arrière-plan après la configuration (environ 80 Mo) et te le signale. Rien de ta musique ne quitte ton ordinateur, et tu peux la désactiver dans Réglages > Spool.",
+        "Une version de développement qui sert une page plus récente ne reste plus sur une fenêtre noire.",
+        "La progression de l'analyse nomme les étapes des samples."
+      ]
+    }
+  },
+  {
     "version": "0.1.2",
     "date": "2026-11-14",
     "notes": {

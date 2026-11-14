@@ -25,7 +25,7 @@ This is the rule everything else follows.
   lose a sample stays put), journaled and undoable with Ctrl+Z.
 - Every copy Spool wrote is listed in Repair > Written copies, so you can find them and
   tidy up yourself.
-- The audio analysis (optional, off by default) **only reads** your reference renders. What
+- The audio analysis (on by default, one switch to turn it off) **only reads** your reference renders. What
   it measures is kept in Spool's own base, never written into your files.
 
 These guarantees are covered by tests (`cargo test --workspace`): a repair leaves the
@@ -59,11 +59,11 @@ Light or dark, as you like (Settings > Spool > Appearance):
 - **Releases**: group songs into a single, EP or album, see what is ready.
 - **Create**: a starting project for a style, built from the devices and samples you
   actually use.
-- **Audio analysis** (optional, off by default): from each song's reference render, the
+- **Audio analysis** (on by default, can be turned off): from each song's reference render, the
   songs that sound alike, the measured tempo, and a style suggestion from the songs you
   already sorted. It runs on your computer with LAION's CLAP model
   ([`larger_clap_general`](https://huggingface.co/laion/larger_clap_general), Apache-2.0),
-  downloaded once when you turn it on. See [crates/audio](crates/audio/README.md).
+  downloaded once in the background after the first setup. See [crates/audio](crates/audio/README.md).
 
 ## Download
 
@@ -88,8 +88,9 @@ What protects you meanwhile:
   Spool refuses an update that does not carry that signature.
 
 Spool sends nothing about you or your projects anywhere. Its only network request is that
-update check (`artists.fatstep.com/spool/download/latest.json`), plus one download if you
-turn on the audio analysis in Settings > Spool (off by default): about 80 MB, once, the CLAP
+update check (`artists.fatstep.com/spool/download/latest.json`), plus one download for the
+audio analysis, in the background after the first setup unless you turn it off in Settings >
+Spool: about 80 MB, once, the CLAP
 audio model from this repository's releases on GitHub and Microsoft's ONNX Runtime from
 Microsoft's releases on GitHub, each file checked against a SHA-256 written in the source.
 Nothing is uploaded: the analysis runs on your computer, and "Remove the model" deletes the

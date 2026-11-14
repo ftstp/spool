@@ -1,6 +1,7 @@
-//! Audio analysis of reference renders (opt-in: Settings > Spool > Audio analysis).
+//! Audio analysis of reference renders (Settings > Spool > Audio analysis).
 //!
-//! Off by default. Turned on, it downloads once, into `<data>/models/<MODEL_TAG>/`, the
+//! On by default (since 0.1.3; a user who turned it off keeps it off): once the first setup
+//! is done, Spool downloads in the background, once, into `<data>/models/<MODEL_TAG>/`, the
 //! CLAP audio model (LAION `larger_clap_general`, Apache-2.0, exported by
 //! `tools/clap/export.py`) and Microsoft's ONNX Runtime library, every file checked against
 //! a SHA-256 written below. Then, in the background, one render at a time on one low
@@ -550,8 +551,9 @@ fn lower_priority() {
 fn lower_priority() {}
 
 impl App {
+    /// On unless the user turned it off (the setting is written only by that switch).
     pub fn audio_enabled(&self) -> bool {
-        self.reader.lock().unwrap().get::<bool>("audio_analysis").unwrap_or(false)
+        self.reader.lock().unwrap().get::<bool>("audio_analysis").unwrap_or(true)
     }
 
     fn audio_paused(&self) -> bool {
@@ -751,9 +753,19 @@ impl App {
             .spawn(move || {
                 lower_priority();
                 app.audio_refresh_state();
+                // on by default: what is missing downloads once per session, after the first
+                // setup (offline: tried again at the next start, not in a loop)
+                let mut fetched = false;
                 loop {
                     std::thread::sleep(Duration::from_secs(3));
-                    if !app.setup_done() || !app.audio_may_run() {
+                    if !app.setup_done() {
+                        continue;
+                    }
+                    if !fetched && app.audio_enabled() && !files_present(&model_dir(&app.data_dir)) {
+                        fetched = true;
+                        app.audio_download();
+                    }
+                    if !app.audio_may_run() {
                         continue;
                     }
                     let _ = app.audio_round();

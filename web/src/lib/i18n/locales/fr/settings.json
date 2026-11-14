@@ -110,7 +110,7 @@
   },
   "audio": {
     "title": "Analyse audio",
-    "hint": "Écoute tes témoins pour trouver les morceaux qui sonnent pareil, mesurer leur tempo et proposer un style d'après les morceaux que tu as déjà rangés. L'activer télécharge environ {mb} Mo, une seule fois : le modèle audio CLAP (depuis la page de Spool sur GitHub) et ONNX Runtime de Microsoft (depuis la page de Microsoft sur GitHub), chaque fichier vérifié avant usage.",
+    "hint": "Écoute tes témoins pour trouver les morceaux qui sonnent pareil, confirmer leur tempo et leur tonalité et proposer un style. Activée par défaut : Spool télécharge environ {mb} Mo, une seule fois et en arrière-plan, le modèle audio CLAP (depuis la page de Spool sur GitHub) et ONNX Runtime de Microsoft (depuis la page de Microsoft sur GitHub), chaque fichier vérifié avant usage. Tu peux la désactiver ici à tout moment.",
     "privacy": "L'analyse se fait sur cet ordinateur uniquement : rien de ta musique n'est envoyé nulle part. Tes témoins sont seulement lus, jamais modifiés. Elle travaille en arrière-plan, un témoin à la fois, et attend pendant une analyse des projets ou une réparation.",
     "credit": "Modèle : CLAP larger_clap_general de LAION (laion.ai), licence Apache-2.0. Moteur : ONNX Runtime de Microsoft, licence MIT.",
     "enable": "Activer (télécharge environ {mb} Mo une fois)",
@@ -134,7 +134,8 @@
     "removed": "Modèle supprimé",
     "onSaid": "Analyse audio activée",
     "offSaid": "Analyse audio désactivée",
-    "downloadStarted": "Analyse audio activée : téléchargement du modèle"
+    "downloadStarted": "Analyse audio activée : téléchargement du modèle",
+    "notice": "Spool télécharge son modèle d'analyse audio (environ {mb} Mo, une seule fois). Rien de ta musique ne quitte l'ordinateur. Réglages > Spool pour le désactiver."
   },
   "storage": {
     "title": "Stockage",

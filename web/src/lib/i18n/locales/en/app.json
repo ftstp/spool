@@ -107,7 +107,9 @@
       "group": "Grouping songs",
       "temoins": "Reference renders, mood boards and suggestions",
       "midiFind": "Finding MIDI files",
-      "midiRead": "Analysing MIDI files"
+      "midiRead": "Analysing MIDI files",
+      "samplesFind": "Finding samples",
+      "samplesRead": "Reading samples"
     },
     "found": {
       "find": {

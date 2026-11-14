@@ -2318,6 +2318,20 @@ fn watch(root: &str, dirty: Arc<Mutex<Option<std::time::Instant>>>) -> Option<no
 mod stale_wal_tests {
     /// A sound journal left by a crash is kept (its commits are not lost).
     #[test]
+    fn audio_analysis_is_on_by_default_and_a_no_stays_a_no() {
+        let d = std::env::temp_dir().join(format!("pf-audio-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&d);
+        let app = crate::App::open(&d).unwrap();
+        assert!(app.audio_enabled(), "on for a new catalogue");
+        app.audio_enable(false).unwrap();
+        drop(app);
+        let app = crate::App::open(&d).unwrap();
+        assert!(!app.audio_enabled(), "the user's off survives a restart");
+        drop(app);
+        let _ = std::fs::remove_dir_all(&d);
+    }
+
+    #[test]
     fn a_sample_plays_only_from_a_library_folder() {
         let d = std::env::temp_dir().join(format!("pf-lib-{}", std::process::id()));
         let _ = std::fs::remove_dir_all(&d);

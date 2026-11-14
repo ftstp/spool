@@ -87,6 +87,17 @@ class AppState {
     this.scan = await api.scanState();
     await api.onChanged((s) => {
       const changed = !this.scan || s.version !== this.scan.version;
+      // the audio model downloading by itself (on by default): said once, ever
+      if (s.audio?.downloading && !this.scan?.audio?.downloading) {
+        try {
+          if (!localStorage.getItem("spool:audioNotice")) {
+            localStorage.setItem("spool:audioNotice", "1");
+            this.say(t("settings.audio.notice", { mb: s.audio.download_mb || 80 }));
+          }
+        } catch {
+          /* not remembered: said each time is better than never */
+        }
+      }
       this.scan = s;
       if (changed) this.reload();
     });

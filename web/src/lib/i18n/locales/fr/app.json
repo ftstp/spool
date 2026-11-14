@@ -107,7 +107,9 @@
       "group": "Regroupement des morceaux",
       "temoins": "Témoins, moodboards et suggestions",
       "midiFind": "Recherche des fichiers MIDI",
-      "midiRead": "Analyse des fichiers MIDI"
+      "midiRead": "Analyse des fichiers MIDI",
+      "samplesFind": "Recherche des samples",
+      "samplesRead": "Lecture des samples"
     },
     "found": {
       "find": {
