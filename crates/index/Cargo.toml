@@ -12,6 +12,11 @@ plugins = { path = "../plugins" }
 catalog = { path = "../catalog" }
 store = { path = "../store" }
 midi = { path = "../midi" }
+audio = { path = "../audio" }
+regex.workspace = true
 rayon.workspace = true
 serde.workspace = true
 serde_json.workspace = true
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { workspace = true, features = ["Win32_System_Threading"] }

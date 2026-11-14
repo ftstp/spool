@@ -77,7 +77,7 @@
   }
   const toggle = (k: string) => (f.stages = f.stages.includes(k) ? f.stages.filter((x) => x !== k) : [...f.stages, k]);
   const meta = (s: SongItem) =>
-    [s.artist, s.style || (s.ssugg && "~" + s.ssugg.style), bpm(s.tempo), s.key && (s.key_src === "estimé" ? "~" + s.key : s.key), dur(Number(s.len))]
+    [s.artist, s.style, bpm(s.tempo), s.key, dur(Number(s.len))]
       .filter(Boolean)
       .join(" · ");
 </script>

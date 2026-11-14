@@ -77,6 +77,19 @@ const MIGRATIONS: &[&str] = &[
       embedding blob, bpm real, key text, duration real, analyzed_at real, error text
     );
     "#,
+    // 5: the samples of the sample folders (crates/index samples.rs): what their name and
+    // folders say (category, loop or one-shot, tempo, key, note) and their length. `path` is
+    // absolute ("/" separated); `cat_src` says where the category comes from (name, folder).
+    r#"
+    create table samples (
+      path text primary key, size integer, mtime real,
+      name text, folder text, pack text,
+      cat text, cat_src text, family text,
+      is_loop integer, dur real, bpm real, key text, note text,
+      read_at real
+    );
+    create index samples_family on samples(family, cat);
+    "#,
 ];
 
 /// Tables carried over from the prototype, in an order that keeps ids.
@@ -110,6 +123,24 @@ fn prune_before(dir: &Path, keep: usize) {
     }
 }
 
+/// A copy made before an update is kept 30 days: past that, nobody goes back to the version
+/// before, and a large catalogue's copy (GBs) must not stay on the disk for nothing.
+pub const BEFORE_UPDATE_DAYS: u64 = 30;
+
+fn expire_before(dir: &Path, now: std::time::SystemTime) {
+    let max = std::time::Duration::from_secs(BEFORE_UPDATE_DAYS * 86_400);
+    for e in std::fs::read_dir(dir).into_iter().flatten().flatten() {
+        let n = e.file_name().to_string_lossy().into_owned();
+        if !(n.starts_with("before-v") && n.ends_with(".sqlite")) {
+            continue;
+        }
+        let old = e.metadata().ok().and_then(|m| m.modified().ok()).and_then(|t| now.duration_since(t).ok()).is_some_and(|age| age > max);
+        if old {
+            let _ = std::fs::remove_file(e.path());
+        }
+    }
+}
+
 impl Store {
     /// Opens the base. A base made by a newer Spool is refused (an older version would not
     /// know what it holds). A base an update is about to change is copied first, whole, into
@@ -131,11 +162,16 @@ impl Store {
                 // the base is not changed
                 con.execute("vacuum into ?", [to.to_string_lossy()])?;
             }
-            // each copy is the whole base (hundreds of MB with a large MIDI library): the two
-            // newest are enough to step back over the last update
-            prune_before(&dir, 2);
+            // each copy is the whole base (hundreds of MB, GB with a large MIDI library): the
+            // newest is enough to step back over the last update
+            prune_before(&dir, 1);
         }
-        Self::init(con)
+        expire_before(&path.parent().unwrap_or(Path::new(".")).join("backups"), std::time::SystemTime::now());
+        let st = Self::init(con)?;
+        // a journal left large (0.1.0 never cut it back: GBs seen after long scans) is
+        // folded into the base and emptied, once, before anything else reads it
+        let _ = st.con.query_row("pragma wal_checkpoint(TRUNCATE)", [], |_| Ok(()));
+        Ok(st)
     }
 
     /// The format of the base at `path`, read without changing anything (no journal folded,
@@ -252,6 +288,50 @@ mod tests {
 #[cfg(test)]
 mod update_tests {
     use super::*;
+
+    #[test]
+    fn a_copy_before_an_update_goes_after_30_days() {
+        let dir = std::env::temp_dir().join(format!("spool-expire-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(&dir).unwrap();
+        let now = std::time::SystemTime::now();
+        for (n, days) in [("before-v3-1.sqlite", 31), ("before-v4-2.sqlite", 2), ("plugin-fixer-2026-01-01_10h00m00.sqlite", 400), ("notes.txt", 400)] {
+            let p = dir.join(n);
+            std::fs::write(&p, "x").unwrap();
+            std::fs::File::options().write(true).open(&p).unwrap().set_modified(now - std::time::Duration::from_secs(days * 86_400)).unwrap();
+        }
+        expire_before(&dir, now);
+        let mut left: Vec<String> = std::fs::read_dir(&dir).unwrap().flatten().map(|e| e.file_name().to_string_lossy().into_owned()).collect();
+        left.sort();
+        // a start-over copy and anything else stay: only old update copies go
+        assert_eq!(left, ["before-v4-2.sqlite", "notes.txt", "plugin-fixer-2026-01-01_10h00m00.sqlite"]);
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    #[test]
+    fn a_large_journal_is_emptied_at_open() {
+        let dir = std::env::temp_dir().join(format!("spool-wal-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(&dir).unwrap();
+        let p = dir.join("base.sqlite");
+        let wal = dir.join("base.sqlite-wal");
+        {
+            let st = Store::open(&p).unwrap();
+            // a session that never checkpointed, left without a clean close
+            st.con.execute_batch("pragma wal_autocheckpoint=0; pragma journal_size_limit=-1; create table big(x);").unwrap();
+            for _ in 0..200 {
+                st.con.execute("insert into big values (randomblob(10000))", []).unwrap();
+            }
+            assert!(wal.metadata().unwrap().len() > 1_000_000);
+            std::mem::forget(st);
+        }
+        let st = Store::open(&p).unwrap();
+        assert_eq!(wal.metadata().map(|m| m.len()).unwrap_or(0), 0, "the journal is folded and emptied");
+        let n: i64 = st.con.query_row("select count(*) from big", [], |r| r.get(0)).unwrap();
+        assert_eq!(n, 200, "nothing lost");
+        drop(st);
+        let _ = std::fs::remove_dir_all(&dir);
+    }
 
     #[test]
     fn an_update_copies_the_base_first_and_a_newer_base_is_refused() {

@@ -277,7 +277,7 @@
                 <h3>{t("settings.storage.title")}</h3>
                 <p class="small muted">{t("settings.storage.hint")}</p>
                 <ul class="disk small">
-                  <li>{t("settings.storage.base", { size: size(disk.base) })}{#if disk.midi > 50e6}<span class="muted">{t("settings.storage.midi", { size: size(disk.midi) })}</span>{/if}</li>
+                  <li>{t("settings.storage.base", { size: size(disk.base) })}{#if disk.midi > 50e6}<span class="muted">{t("settings.storage.midi", { size: size(disk.midi) })}</span>{/if}{#if disk.journal > 50e6}<span class="muted">{t("settings.storage.journal", { size: size(disk.journal) })}</span>{/if}</li>
                   {#if disk.backup_count}<li>{t("settings.storage.backups", { n: disk.backup_count, size: size(disk.backups) })}<br /><span class="muted">{t("settings.storage.backupsHint")}</span></li>{/if}
                   {#if disk.cache > 0}<li>{t("settings.storage.cache", { size: size(disk.cache) })}</li>{/if}
                   {#if disk.model > 0}<li>{t("settings.storage.model", { size: size(disk.model) })}</li>{/if}

@@ -10,7 +10,8 @@
     "repairTitle": {
       "one": "{label} : {n} réparables par l'app",
       "other": "{label} : {n} réparables par l'app"
-    }
+    },
+    "samples": "Samples"
   },
   "side": {
     "current": "Sorties en cours",

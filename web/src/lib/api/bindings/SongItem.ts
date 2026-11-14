@@ -12,7 +12,16 @@ rating: number | null,
 /**
  * "Original", "Remix", "Collab"...
  */
-kinds: Array<string>, id: number, title: string | null, artist: string | null, style: string | null, key: string | null, key_src: string | null, tempo: number | null, len: number | null, stage: string | null, 
+kinds: Array<string>, id: number, title: string | null, artist: string | null, 
+/**
+ * Shown: the user's, else detected (`style_src` says which, as `key_src`, `tempo_src`;
+ * crate::detect).
+ */
+style: string | null, style_src: string | null, key: string | null, key_src: string | null, tempo: number | null, tempo_src: string | null, 
+/**
+ * Fields whose detections disagree ("style", "key", "tempo"): worth a look.
+ */
+doubt: Array<string>, len: number | null, stage: string | null, 
 /**
  * An open stage suggestion.
  */

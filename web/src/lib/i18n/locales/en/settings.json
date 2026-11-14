@@ -145,7 +145,7 @@
       "one": "Safety copies: {n} copy, {size}",
       "other": "Safety copies: {n} copies, {size}"
     },
-    "backupsHint": "Made before a Spool update that changes the format, and when you start over. The two newest of each kind are kept.",
+    "backupsHint": "Made before a Spool update that changes the format (the newest is kept 30 days), and when you start over (the two newest).",
     "cache": "Thumbnails, project templates, audio previews: {size}",
     "model": "Audio analysis: {size}",
     "total": "Total: {size}",
@@ -155,6 +155,7 @@
     "trimYes": "Delete the older copies",
     "trimmed": "Copies deleted: {size} freed.",
     "mb": "{n} MB",
-    "gb": "{n} GB"
+    "gb": "{n} GB",
+    "journal": " (of which {size} of journal, emptied at the next start)"
   }
 }

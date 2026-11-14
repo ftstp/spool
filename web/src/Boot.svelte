@@ -16,7 +16,10 @@
       try {
         s = await bootStatus();
       } catch {
-        /* the shell is not answering yet */
+        // a core without boot_status (older than this page: a development build serving
+        // this page) opened its base before the window: nothing to wait for. Waiting here
+        // left a black window forever.
+        return onready();
       }
       if (s?.stage === "ready") return onready();
       if (!stop) setTimeout(tick, s?.stage === "error" ? 1000 : 150);

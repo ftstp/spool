@@ -51,16 +51,6 @@
   const s = $derived(d?.song);
   // the audio analysis of the reference render (opt-in): measured tempo beside the project's
   // when they differ by more than 3 %, and the songs that sound alike
-  const tempoHint = $derived.by(() => {
-    const b = d?.sound?.bpm;
-    const p = d?.song.tempo ?? d?.files.find((f) => f.latest)?.tempo ?? d?.files[0]?.tempo;
-    if (!b || !p) return "";
-    const near = (x: number) => Math.abs(x - 1) <= 0.03;
-    // half or double the project's tempo is the same groove counted differently (a 174 drum and
-    // bass track measures 87): not worth a hint, only a real difference is
-    if (near(b / p) || near(b / (2 * p)) || near((2 * b) / p)) return "";
-    return t("song.sound.measured", { n: Math.round(b * 10) / 10 });
-  });
   // measured on a real catalogue: two unrelated renders score about 0.55, 1 pair in 100
   // reaches 0.87; a song's closest other render is about 0.87
   const SIM_VERY = 0.9;
@@ -135,7 +125,16 @@
     d && s?.temoin ? [...d.temoins, ...d.other_audio].find((c) => c.rel === s.temoin || s.temoin!.replace(/\\/g, "/").endsWith("/" + c.rel)) : undefined,
   );
   const cover = $derived(s?.cover ? api.mediaUrl(s.cover) : "");
-  const keyHint = $derived(main ? main.key ?? (main.key_est ? "~" + main.key_est : "") : "");
+  // the Samples page in this song's key and at its tempo (as shown: written or detected)
+  const samplesLink = $derived.by(() => {
+    const p = new URLSearchParams();
+    const k = s?.key || d?.detected?.key.shown?.value;
+    const b = s?.tempo || Number(d?.detected?.tempo.shown?.value) || 0;
+    if (k) p.set("key", k);
+    if (b) p.set("bpm", String(Math.round(b * 10) / 10));
+    p.set("from", s?.title ?? "");
+    return "#/samples?" + p.toString();
+  });
   const doneChecks = $derived(d ? d.checklist.filter((c) => c.done).length : 0);
 
   const STATUS_KEYS = ["renamed", "other_vst2", "trial", "vst3", "newer", "to_vst3", "other_vst3", "missing"];
@@ -169,12 +168,11 @@
         <div class="meta">
           <Field value={s.artist} placeholder={t("song.ph.artist")} options={artistOpts} save={(v) => edit({ artist: v })} />
           <span class="dot">·</span>
-          <Field value={s.style} placeholder={t("song.ph.style")} options={styleOpts} hint={styleHint} save={(v) => edit({ style: v })} />
+          <Field value={s.style} placeholder={t("song.ph.style")} options={styleOpts} hint={styleHint} detected={d.detected?.style} save={(v) => edit({ style: v })} />
           <span class="dot">·</span>
-          <Field value={s.key} placeholder={keyHint ? t("song.ph.keyProject", { key: keyHint }) : t("song.ph.key")} options={keyOpts} hint={keyHintText} save={(v) => edit({ key: v })} />
+          <Field value={s.key} placeholder={t("song.ph.key")} options={keyOpts} hint={keyHintText} detected={d.detected?.key} save={(v) => edit({ key: v })} />
           <span class="dot">·</span>
-          <Field kind="tempo" value={s.tempo} placeholder={main?.tempo ? t("song.ph.tempoProject", { n: Math.round(main.tempo * 10) / 10 }) : t("song.ph.tempo")} save={(v) => edit({ tempo: v })} />
-          {#if tempoHint}<span class="measured small" title={t("song.sound.tempoTitle")}>{tempoHint}</span>{/if}
+          <Field kind="tempo" value={s.tempo} placeholder={t("song.ph.tempo")} detected={d.detected?.tempo} save={(v) => edit({ tempo: v })} />
           <span class="dot">·</span>
           <Field kind="date" value={s.date} placeholder={t("song.ph.date")} save={(v) => edit({ date: v })} />
         </div>
@@ -194,6 +192,7 @@
       </div>
       <div class="acts">
         {#if main}<button class="btn" onclick={() => api.openInLive(main.rel).catch((e) => app.say(String(e), { error: true }))}>{t("song.openInLive")}</button>{/if}
+        <a class="btn" href={samplesLink} title={t("song.findSamplesTip")}>{t("song.findSamples")}</a>
         <!-- the rest (folder, paths, release, archive) in the song's menu: here, or a right-click anywhere on the sheet -->
         <button class="btn more" title={t("song.moreTip")} aria-label={t("song.more")} onclick={(e) => openSongMenu(e, s.id)}>
           <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><circle cx="5" cy="12" r="1.8" /><circle cx="12" cy="12" r="1.8" /><circle cx="19" cy="12" r="1.8" /></svg></button>
@@ -209,18 +208,6 @@
         </div>
       </div>
     {/each}
-    {#if d.style_sugg && !s.style}
-      {@const g = d.style_sugg}
-      <div class="sugg">
-        <div><b>{t("song.probableStyle")}</b><div class="small muted">{t("song.styleClick")}</div></div>
-        <div class="row-btns">
-          {#each g.options as o}
-            <button class="chip" title={o.why.join("\n")} onclick={() => app.act(api.suggestionAct(g.id, true, o.style))}>{o.style} <b>{t("song.hint.pct", { pct: o.pct })}</b></button>
-          {/each}
-          <button class="btn sm" onclick={() => app.act(api.suggestionAct(g.id, false))}>{t("song.noStyle")}</button>
-        </div>
-      </div>
-    {/if}
 
     <div class="grid">
       <div class="col">

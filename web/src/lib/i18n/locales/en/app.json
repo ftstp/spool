@@ -10,7 +10,8 @@
     "repairTitle": {
       "one": "{label}: {n} the app can repair",
       "other": "{label}: {n} the app can repair"
-    }
+    },
+    "samples": "Samples"
   },
   "side": {
     "current": "Upcoming releases",

@@ -261,5 +261,22 @@
     "simTitle": "Similarity of the two reference renders: {pct} %",
     "measured": "render: {n} bpm",
     "tempoTitle": "Tempo measured on the reference render (audio analysis), different from the project's"
-  }
+  },
+  "src": {
+    "yours": "Typed by you.",
+    "from": "Detected: {src}.",
+    "none": "Nothing detected yet.",
+    "doubt": "The detections disagree: worth a check.",
+    "others": "Other suggestions:",
+    "pick": "Pick this value",
+    "back": "Back to the detected value",
+    "noted": "your entry",
+    "live": "scale set in Live",
+    "notes": "the project's MIDI notes",
+    "project": "the project's tempo",
+    "audio": "the audio render",
+    "auto": "names, plugins and similar songs"
+  },
+  "findSamples": "Find samples",
+  "findSamplesTip": "Samples in this song's key and at its tempo"
 }

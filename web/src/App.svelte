@@ -11,6 +11,7 @@
   import Stats from "./routes/Stats.svelte";
   import Create from "./routes/Create.svelte";
   import Releases from "./routes/Releases.svelte";
+  import Samples from "./routes/Samples.svelte";
   import Release from "./routes/Release.svelte";
   import Art from "./lib/components/Art.svelte";
   import Logo from "./lib/components/Logo.svelte";
@@ -99,6 +100,7 @@
     ["repair", "M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"],
     ["releases", "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"],
     ["create", "M12 5v14M5 12h14"],
+    ["samples", "M3 12h2M7 8v8M11 4v16M15 7v10M19 10v4"],
     ["stats", "M4 20V10M10 20V4M16 20v-7M22 20H2"],
   ];
   // the labels follow a change of language
@@ -140,7 +142,7 @@
   <aside class="side">
     <div class="brand"><Logo size={30} /><span>spool</span></div>
     {#each nav as [k, label, d]}
-      <a class="nav" title={mini ? (k === "repair" && fix ? t("app.nav.repairTitle", { label, n: fix }) : label) : undefined} class:on={page === k || page.startsWith(k + "/") || (k === "songs" && page.startsWith("song/")) || (k === "releases" && page.startsWith("release/")) || (k === "repair" && (page === "atelier" || page === "copies"))} href="#/{k}">
+      <a class="nav" title={mini ? (k === "repair" && fix ? t("app.nav.repairTitle", { label, n: fix }) : label) : undefined} class:on={page === k || page.startsWith(k + "/") || (k === "songs" && page.startsWith("song/")) || (k === "releases" && page.startsWith("release/")) || (k === "samples" && page.startsWith("samples?")) || (k === "repair" && (page === "atelier" || page === "copies"))} href="#/{k}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path {d} /></svg><span>{label}</span>
         {#if k === "repair" && fix}<span class="count fx" class:stale={app.busy}>{fix}</span>{/if}
         {#if k === "home" && app.overview && app.overview.queue.length}<span class="count">{app.overview.queue.length}</span>{/if}
@@ -204,6 +206,7 @@
       {:else if page === "stats"}<Stats />
       {:else if page === "create"}<Create />
       {:else if page === "releases"}<Releases />
+      {:else if page === "samples" || page.startsWith("samples?")}{#key page}<Samples />{/key}
       {:else if page.startsWith("release/")}{#key page}<Release id={page.slice(8)} />{/key}
       {:else}<Home />{/if}
     </main>

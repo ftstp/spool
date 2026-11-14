@@ -10,3 +10,6 @@ i18n = { path = "../i18n" }
 midly = "0.5"
 serde.workspace = true
 ts-rs.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true

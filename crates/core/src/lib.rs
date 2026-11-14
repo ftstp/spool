@@ -8,6 +8,8 @@ pub mod board_edit;
 pub mod chains;
 pub mod create;
 pub mod detail;
+pub mod detect;
+pub mod samples_view;
 pub mod fsops;
 pub mod insights;
 pub mod keys;
@@ -43,6 +45,9 @@ pub struct Storage {
     /// The catalogue (the base and its journal).
     #[ts(type = "number")]
     pub base: u64,
+    /// Of which the journal (emptied at each start; large only after a long session).
+    #[ts(type = "number")]
+    pub journal: u64,
     /// Of which the index of the MIDI files found (rebuilt by a scan if it went missing).
     #[ts(type = "number")]
     pub midi: u64,
@@ -106,6 +111,23 @@ fn trimmable_sets(dir: &Path) -> Vec<Vec<PathBuf>> {
     let sets = backup_sets(dir);
     let keep = sets.iter().position(|(_, set)| set[0].extension().is_some_and(|e| e == "sqlite"));
     sets.into_iter().enumerate().filter(|(i, _)| Some(*i) != keep).map(|(_, (_, set))| set).collect()
+}
+
+/// What the reference renders' analysis measured, per song (audio analysis, opt-in; only the
+/// analyses of the current model and method).
+pub(crate) fn detect_audio(con: &store::rusqlite::Connection) -> std::collections::HashMap<i64, detect::AudioMeasure> {
+    let mut out = std::collections::HashMap::new();
+    let Ok(mut s) = con.prepare(
+        "select s.id, a.bpm, a.key from songs s join audio_analysis a on a.rel = s.temoin          where s.gone = 0 and a.model = ? and a.error is null",
+    ) else {
+        return out;
+    };
+    if let Ok(rows) = s.query_map([index::AUDIO_MODEL], |r| Ok((r.get::<_, i64>(0)?, r.get::<_, Option<f64>>(1)?, r.get::<_, Option<String>>(2)?))) {
+        for (id, bpm, key) in rows.flatten() {
+            out.insert(id, detect::AudioMeasure { bpm, key });
+        }
+    }
+    out
 }
 
 /// After a change: what the undo button can offer.
@@ -376,14 +398,20 @@ impl App {
             if self.samples_stale.swap(false, std::sync::atomic::Ordering::SeqCst) {
                 scanner.forget_samples();
             }
-            let mut r = scanner.sync_with(&self.store, full, &tick, &self.fs_gen);
-            // the app moved files meanwhile: what was read is out of date, read again
-            for _ in 0..3 {
-                if !r.as_ref().is_ok_and(|r| r.stale) || self.cancel.load(std::sync::atomic::Ordering::SeqCst) {
-                    break;
+            // the whole pass on the scan's own pool, in the background: the window and the
+            // commands keep the processor and the disk first (index::background)
+            let sc: &mut index::Scanner = &mut scanner;
+            let r = index::background::run(|| {
+                let mut r = sc.sync_with(&self.store, full, &tick, &self.fs_gen);
+                // the app moved files meanwhile: what was read is out of date, read again
+                for _ in 0..3 {
+                    if !r.as_ref().is_ok_and(|r| r.stale) || self.cancel.load(std::sync::atomic::Ordering::SeqCst) {
+                        break;
+                    }
+                    r = sc.sync_with(&self.store, full, &tick, &self.fs_gen);
                 }
-                r = scanner.sync_with(&self.store, full, &tick, &self.fs_gen);
-            }
+                r
+            });
             drop(scanner);
             // one history point per change, for the Progression page
             if r.as_ref().is_ok_and(|r| r.changed) {
@@ -1270,6 +1298,7 @@ impl App {
     pub fn storage(&self) -> Storage {
         let d = &self.data_dir;
         let base: u64 = ["", "-wal", "-shm"].iter().map(|x| size_of(&d.join(format!("plugin-fixer.sqlite{x}")))).sum();
+        let journal = size_of(&d.join("plugin-fixer.sqlite-wal"));
         let midi = {
             let st = self.reader.lock().unwrap();
             st.con
@@ -1282,7 +1311,7 @@ impl App {
         let cache = ["thumbs", "templates", "audio"].iter().map(|x| size_of(&d.join(x))).sum();
         let model = size_of(&d.join("models"));
         let total = size_of(d);
-        Storage { dir: d.to_string_lossy().into_owned(), base, midi: midi.min(base), backups, backup_count, trimmable, cache, model, total }
+        Storage { dir: d.to_string_lossy().into_owned(), base, journal, midi: midi.min(base), backups, backup_count, trimmable, cache, model, total }
     }
 
     /// Frees the room taken by the safety copies, keeping the newest one (a step back stays
@@ -1605,7 +1634,29 @@ impl App {
         let roots = self.roots();
         let p = Path::new(rel_or_abs);
         let p = if p.is_absolute() { p.to_path_buf() } else { roots.abs(rel_or_abs)? };
-        (roots.contains(&p) && p.is_file()).then(|| p.canonicalize().ok()).flatten()
+        ((roots.contains(&p) || self.in_libraries(&p)) && p.is_file()).then(|| p.canonicalize().ok()).flatten()
+    }
+
+    /// Inside a sample or MIDI library folder of the settings (the Samples page plays and
+    /// shows those files, nothing else outside the projects).
+    fn in_libraries(&self, p: &Path) -> bool {
+        let st = self.reader.lock().unwrap();
+        let dirs: Vec<String> = [st.get::<Vec<String>>("sample_dirs"), st.get::<Vec<String>>("midi_dirs")].into_iter().flatten().flatten().collect();
+        drop(st);
+        // compared on the real paths: "..\" cannot climb out
+        let Ok(real) = p.canonicalize() else { return false };
+        dirs.iter().filter_map(|d| Path::new(d).canonicalize().ok()).any(|d| real.starts_with(d))
+    }
+
+    /// A page of samples (Samples page).
+    pub fn samples(&self, q: samples_view::SampleQuery) -> Result<samples_view::SamplePage> {
+        samples_view::samples(&self.reader.lock().unwrap().con, &q).map_err(err)
+    }
+
+    /// A library file's real path, only inside a sample or MIDI folder of the settings.
+    pub fn library_path(&self, abs: &str) -> Option<PathBuf> {
+        let p = Path::new(abs);
+        (p.is_absolute() && self.in_libraries(p)).then(|| p.to_path_buf())
     }
 
     /// The real path of a project file, only inside the projects folders.
@@ -2267,6 +2318,25 @@ fn watch(root: &str, dirty: Arc<Mutex<Option<std::time::Instant>>>) -> Option<no
 mod stale_wal_tests {
     /// A sound journal left by a crash is kept (its commits are not lost).
     #[test]
+    fn a_sample_plays_only_from_a_library_folder() {
+        let d = std::env::temp_dir().join(format!("pf-lib-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&d);
+        let lib = d.join("Samples");
+        std::fs::create_dir_all(lib.join("Pack")).unwrap();
+        std::fs::write(lib.join("Pack").join("Kick 1.wav"), "x").unwrap();
+        std::fs::write(d.join("secret.wav"), "x").unwrap();
+        let app = crate::App::open(&d.join("data")).unwrap();
+        app.store.lock().unwrap().set("sample_dirs", &vec![lib.to_string_lossy().to_string()]).unwrap();
+        let s = |p: std::path::PathBuf| p.to_string_lossy().replace('\\', "/");
+        assert!(app.media_path(&s(lib.join("Pack").join("Kick 1.wav"))).is_some());
+        assert!(app.media_path(&s(d.join("secret.wav"))).is_none(), "outside the library");
+        assert!(app.media_path(&s(lib.join("..").join("secret.wav"))).is_none(), "no climbing out");
+        assert!(app.library_path(&s(lib.join("Pack").join("Kick 1.wav"))).is_some());
+        drop(app);
+        let _ = std::fs::remove_dir_all(&d);
+    }
+
+    #[test]
     fn trimming_keeps_the_newest_copy_and_only_touches_backups() {
         let d = std::env::temp_dir().join(format!("pf-trim-{}", std::process::id()));
         let _ = std::fs::remove_dir_all(&d);
@@ -2321,5 +2391,51 @@ mod stale_wal_tests {
         let x: i64 = st.con.query_row("select x from t", [], |r| r.get(0)).unwrap();
         assert_eq!(x, 42);
         assert!(!d2.join("backups").exists());
+    }
+}
+
+/// The window stays quick during a full scan. Not run by default: it needs a copy of a real
+/// data folder (SPOOL_BENCH_DATA, never the user's own) and reads the projects it names.
+///   SPOOL_BENCH_DATA=<copy> cargo test --release -p core --lib responsive -- --ignored --nocapture
+#[cfg(test)]
+mod responsive_bench {
+    #[test]
+    #[ignore]
+    fn the_pages_answer_during_a_full_scan() {
+        let Some(d) = std::env::var_os("SPOOL_BENCH_DATA") else { return };
+        let app = crate::App::open(std::path::Path::new(&d)).unwrap();
+        let a = std::sync::Arc::clone(&app);
+        let t0 = std::time::Instant::now();
+        let scan = std::thread::spawn(move || a.scan(true));
+        let mut worst = [0f64; 3];
+        let mut n = 0;
+        while !scan.is_finished() {
+            std::thread::sleep(std::time::Duration::from_millis(250));
+            let t = std::time::Instant::now();
+            let _ = app.songs().unwrap();
+            let _ = app.overview().unwrap();
+            let read = t.elapsed().as_secs_f64();
+            let t = std::time::Instant::now();
+            let _ = app.releases().unwrap();
+            let rel = t.elapsed().as_secs_f64();
+            let t = std::time::Instant::now();
+            let r = crate::releases::Release { id: String::new(), title: format!("bench {n}"), kind: "ep".into(), artist: String::new(), date: None, cover_song: None, notes: String::new(), songs: vec![], folder: None, created: 0.0 };
+            let _ = app.release_save(r).unwrap();
+            let save = t.elapsed().as_secs_f64();
+            if save > 1.0 || read > 1.5 {
+                let s = app.scan_state();
+                eprintln!("{:>5.0}s SLOW pages {read:.2}s save {save:.2}s during: {} {}/{}", t0.elapsed().as_secs_f64(), s.stage, s.done, s.total);
+            }
+            for (w, x) in worst.iter_mut().zip([read, rel, save]) {
+                *w = w.max(x);
+            }
+            n += 1;
+            if n % 20 == 0 {
+                let s = app.scan_state();
+                eprintln!("{:>5.0}s {} {}/{}  worst so far: pages {:.2}s, releases {:.2}s, save {:.2}s", t0.elapsed().as_secs_f64(), s.stage, s.done, s.total, worst[0], worst[1], worst[2]);
+            }
+        }
+        scan.join().unwrap().unwrap();
+        eprintln!("scan {:.0}s, {n} rounds; worst: pages {:.2}s, releases {:.2}s, save {:.2}s", t0.elapsed().as_secs_f64(), worst[0], worst[1], worst[2]);
     }
 }

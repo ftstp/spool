@@ -17,3 +17,6 @@ target-selftest/
 media/node_modules/
 media/out/
 media/shots/
+
+# the browser preview's copies of a real catalogue: never committed (and dropped from builds)
+web/public/dev-*.json

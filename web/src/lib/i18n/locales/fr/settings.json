@@ -145,7 +145,7 @@
       "one": "Copies de sécurité : {n} copie, {size}",
       "other": "Copies de sécurité : {n} copies, {size}"
     },
-    "backupsHint": "Faites avant une mise à jour de Spool qui change le format, et quand tu repars de zéro. Les deux plus récentes de chaque sorte sont gardées.",
+    "backupsHint": "Faites avant une mise à jour de Spool qui change le format (la plus récente est gardée 30 jours), et quand tu repars de zéro (les deux plus récentes).",
     "cache": "Vignettes, modèles de projet, extraits audio : {size}",
     "model": "Analyse audio : {size}",
     "total": "Total : {size}",
@@ -155,6 +155,7 @@
     "trimYes": "Supprimer les anciennes copies",
     "trimmed": "Copies supprimées : {size} libérés.",
     "mb": "{n} Mo",
-    "gb": "{n} Go"
+    "gb": "{n} Go",
+    "journal": " (dont {size} de journal, vidé au prochain lancement)"
   }
 }

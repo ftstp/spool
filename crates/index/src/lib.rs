@@ -13,8 +13,12 @@ mod suggestions;
 
 /// The audio model whose analyses (`audio_analysis.model`) the suggestions and the song
 /// sheet use (core's `sound`): LAION CLAP larger_clap_general at revision ada0c23.
-pub const AUDIO_MODEL: &str = "laion/larger_clap_general@ada0c23";
+/// The model, and the version of what is measured beside it (k2: the key from the bgate
+/// profile): a render analysed with anything else is analysed again.
+pub const AUDIO_MODEL: &str = "laion/larger_clap_general@ada0c23;k2";
 pub mod walk;
+pub mod background;
+pub mod samples;
 
 use plugins::{Matcher, Ref, trial_key};
 use rayon::prelude::*;
@@ -28,7 +32,12 @@ use store::Store;
 use store::rusqlite::{self, params};
 
 /// Bump when the reader extracts something new: every set is then read once again.
-pub const READER_VERSION: i64 = 3;
+pub const READER_VERSION: i64 = 4;
+/// What the MIDI analysis writes (crates/midi): a new one reads every MIDI file again,
+/// once. 2: the key from the bgate profile and the bass line (Spool 0.1.2).
+pub const MIDI_VERSION: i64 = 2;
+/// What the samples' reading writes (samples.rs): a new one reads every sample again, once.
+pub const SAMPLES_VERSION: i64 = 2;
 
 pub struct Scanner {
     matcher: Option<Matcher>,
@@ -144,6 +153,7 @@ impl Scanner {
             };
             (known, st.get::<i64>("reader_version_rs"), st.get::<f64>("live_db_mtime_rs"), audio, st.get::<Vec<String>>("sample_dirs").unwrap_or_default())
         };
+        let midi_v = st.lock().unwrap().get::<i64>("midi_version_rs");
         // a folder that is not there (a drive unplugged) keeps what was known of it: its
         // files are not "gone", nothing of it is read again
         let absent: Vec<&str> =
@@ -156,8 +166,8 @@ impl Scanner {
                 }
             }
         }
-        // a new reader reads the projects again (the MIDI files keep theirs)
-        let midi_full = full;
+        // a new reader reads the projects again; a new MIDI analysis, the MIDI files
+        let midi_full = full || midi_v != Some(MIDI_VERSION);
         let full = full || reader_v != Some(READER_VERSION);
         let todo: Vec<&String> = w
             .als
@@ -188,6 +198,9 @@ impl Scanner {
         let absent_labels: Vec<String> = absent.iter().map(|a| a.to_string()).collect();
         if todo.is_empty() && gone.is_empty() && !reclassify_all && !audio_changed {
             rep.changed |= self.sync_midi(st, &roots, project_midi, midi_full, &absent_labels, tick)?;
+            if !self.stopped() {
+                rep.changed |= self.sync_samples(st, midi_full, tick)?;
+            }
             rep.cancelled = self.stopped();
             return Ok(rep);
         }
@@ -195,14 +208,10 @@ impl Scanner {
 
         // 1. read what changed, in parallel (past ~16 threads the 100 MB sets fight over memory)
         let t = Instant::now();
-        let pool = rayon::ThreadPoolBuilder::new()
-            .num_threads(std::thread::available_parallelism().map(|n| n.get()).unwrap_or(4).min(16))
-            .build()
-            .expect("thread pool");
         let (stage, total) = ("Lecture des projets", todo.len());
         let count = std::sync::atomic::AtomicUsize::new(0);
         say(tick, stage, 0, total, "");
-        let mut results: Vec<(String, Value)> = pool.install(|| {
+        let mut results: Vec<(String, Value)> = background::run(|| {
             todo.par_iter()
                 .filter_map(|rel| {
                     if self.stopped() {
@@ -220,8 +229,10 @@ impl Scanner {
         rep.read = results.len();
         rep.ms_read = t.elapsed().as_millis();
 
-        // the base from here to the commit: what was found is written in one go
+        // the base from here to the commit: what was found is written in one go, at normal
+        // priority (the pages and commands wait for it)
         let guard = st.lock().unwrap();
+        let urgent = background::Urgent::now();
         if fs_gen.load(Ordering::SeqCst) != g0 {
             rep.changed = false;
             rep.stale = true;
@@ -279,9 +290,13 @@ impl Scanner {
         rep.ms_suggest = t.elapsed().as_millis();
         tx.commit()?;
         drop(guard);
+        drop(urgent);
         // 5. the MIDI files, last: a big library must not hold the projects back
         if !self.stopped() {
             rep.changed |= self.sync_midi(st, &roots, project_midi, midi_full, &absent_labels, tick)?;
+            if !self.stopped() {
+                rep.changed |= self.sync_samples(st, midi_full, tick)?;
+            }
         }
         rep.cancelled = self.stopped();
         Ok(rep)
@@ -394,6 +409,7 @@ impl Scanner {
                 .collect();
             // each batch saved at once, the base held only for its writing
             let st = st.lock().unwrap();
+            let _urgent = background::Urgent::now();
             let tx = st.con.unchecked_transaction()?;
             for (rel, (s, m), data) in &read {
                 tx.execute(
@@ -404,9 +420,140 @@ impl Scanner {
             }
             tx.commit()?;
         }
+        // every MIDI file read with this analysis: the next scans read only what changed
+        if !self.stopped() {
+            let st = st.lock().unwrap();
+            st.set("midi_version_rs", &MIDI_VERSION)?;
+        }
         Ok(true)
     }
 
+
+    /// The samples of the sample folders: new or changed ones read (their name, their length
+    /// from the header), gone ones dropped (a folder not there keeps its own). In batches, each
+    /// saved at once: a stopped scan keeps what it read.
+    fn sync_samples(&mut self, st: &Mutex<Store>, full: bool, tick: Tick) -> rusqlite::Result<bool> {
+        let (dirs, known, version) = {
+            let st = st.lock().unwrap();
+            let known: HashMap<String, (i64, f64)> = {
+                let mut s = st.con.prepare("select path, size, mtime from samples")?;
+                s.query_map([], |r| Ok((r.get(0)?, (r.get(1)?, r.get(2)?))))?.collect::<Result<_, _>>()?
+            };
+            (st.get::<Vec<String>>("sample_dirs").unwrap_or_default(), known, st.get::<i64>("samples_version_rs"))
+        };
+        let full = full || version != Some(SAMPLES_VERSION);
+        let stage = "Recherche des samples";
+        // (path, its sample folder, size, mtime)
+        let mut found: Vec<(String, String, i64, f64)> = Vec::new();
+        let present: Vec<String> = dirs.iter().filter(|d| Path::new(d).is_dir()).map(|d| d.replace('\\', "/")).collect();
+        for d in &present {
+            let mut stack = vec![PathBuf::from(d)];
+            let mut seen = 0usize;
+            while let Some(dir) = stack.pop() {
+                if self.stopped() {
+                    return Ok(false);
+                }
+                let Ok(rd) = std::fs::read_dir(&dir) else { continue };
+                seen += 1;
+                if seen % 50 == 1 {
+                    say(tick, stage, found.len(), 0, &dir.to_string_lossy());
+                }
+                for e in rd.flatten() {
+                    let Ok(ft) = e.file_type() else { continue };
+                    if ft.is_dir() {
+                        stack.push(e.path());
+                        continue;
+                    }
+                    let low = e.file_name().to_string_lossy().to_lowercase();
+                    if low.starts_with("._") || !walk::AUDIO_EXT.iter().any(|x| low.ends_with(x)) {
+                        continue;
+                    }
+                    let Ok(md) = e.metadata() else { continue };
+                    let m = md
+                        .modified()
+                        .ok()
+                        .and_then(|t| t.duration_since(std::time::UNIX_EPOCH).ok())
+                        .map(|d| d.as_secs_f64())
+                        .unwrap_or(0.0);
+                    found.push((e.path().to_string_lossy().replace('\\', "/"), d.clone(), md.len() as i64, m));
+                }
+            }
+        }
+        let in_present = |p: &str| {
+            let p = p.to_lowercase();
+            present.iter().any(|d| p.starts_with(&format!("{}/", d.trim_end_matches('/').to_lowercase())))
+        };
+        let here: HashSet<&str> = found.iter().map(|f| f.0.as_str()).collect();
+        // gone from a folder that is there; a folder not there (a drive unplugged) keeps its own,
+        // and a folder no longer listed in the settings loses its own
+        let listed = |p: &str| {
+            let p = p.to_lowercase();
+            dirs.iter().any(|d| p.starts_with(&format!("{}/", d.replace('\\', "/").trim_end_matches('/').to_lowercase())))
+        };
+        let gone: Vec<&String> = known.keys().filter(|p| !here.contains(p.as_str()) && (in_present(p) || !listed(p))).collect();
+        let todo: Vec<&(String, String, i64, f64)> = found.iter().filter(|f| full || known.get(&f.0) != Some(&(f.2, f.3))).collect();
+        if gone.is_empty() && todo.is_empty() {
+            return Ok(false);
+        }
+        {
+            let st = st.lock().unwrap();
+            let _urgent = background::Urgent::now();
+            let tx = st.con.unchecked_transaction()?;
+            for g in &gone {
+                tx.execute("delete from samples where path=?", [g])?;
+            }
+            tx.commit()?;
+        }
+        let (stage, total) = ("Lecture des samples", todo.len());
+        let count = std::sync::atomic::AtomicUsize::new(0);
+        for batch in todo.chunks(2000) {
+            if self.stopped() {
+                break;
+            }
+            let read: Vec<_> = batch
+                .par_iter()
+                .map(|(path, root, size, mtime)| {
+                    let rel = path.get(root.len()..).unwrap_or("").trim_start_matches('/');
+                    let mut parts: Vec<&str> = rel.split('/').collect();
+                    let file = parts.pop().unwrap_or("");
+                    let stem = file.rsplit_once('.').map(|(s, _)| s).unwrap_or(file);
+                    let named = samples::read_name(stem, &parts);
+                    let dur = audio::decode::duration(Path::new(path.as_str()));
+                    let n = count.fetch_add(1, std::sync::atomic::Ordering::Relaxed) + 1;
+                    say(tick, stage, n, total, rel);
+                    let pack = parts.first().map(|s| s.to_string()).unwrap_or_default();
+                    (path.clone(), *size, *mtime, stem.to_string(), parts.join("/"), pack, named, dur)
+                })
+                .collect();
+            let st = st.lock().unwrap();
+            let _urgent = background::Urgent::now();
+            let tx = st.con.unchecked_transaction()?;
+            {
+                let mut up = tx.prepare(
+                    "insert into samples(path, size, mtime, name, folder, pack, cat, cat_src, family, is_loop, dur, bpm, key, note, read_at) \
+                     values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) on conflict(path) do update set size=excluded.size, mtime=excluded.mtime, \
+                     name=excluded.name, folder=excluded.folder, pack=excluded.pack, cat=excluded.cat, cat_src=excluded.cat_src, \
+                     family=excluded.family, is_loop=excluded.is_loop, dur=excluded.dur, bpm=excluded.bpm, key=excluded.key, \
+                     note=excluded.note, read_at=excluded.read_at",
+                )?;
+                let t = now();
+                for (path, size, mtime, stem, folder, pack, n, dur) in &read {
+                    let lp = samples::is_loop(n.is_loop, *dur);
+                    // a loop by its length: a bare number in its name is its tempo
+                    let bpm = n.bpm.or_else(|| if lp == Some(true) { samples::bare_tempo(stem) } else { None });
+                    up.execute(params![
+                        path, size, mtime, stem, folder, pack, n.cat, n.cat_src, n.family, lp.map(|b| b as i64),
+                        dur.map(|d| d as f64), bpm, n.key, n.note, t
+                    ])?;
+                }
+            }
+            tx.commit()?;
+        }
+        if !self.stopped() {
+            st.lock().unwrap().set("samples_version_rs", &SAMPLES_VERSION)?;
+        }
+        Ok(true)
+    }
 
     fn deep(&mut self) -> &HashMap<String, Vec<(i64, String)>> {
         if self.deep.is_none() {
@@ -643,6 +790,17 @@ pub fn style_guess(con: &rusqlite::Connection, sid: i64) -> rusqlite::Result<Vec
             .unwrap_or_default()
     };
     suggestions::style_guess(con, &catalog::Rules::new(&get("artists"), &get("work_words")), sid)
+}
+
+/// Every song's style options from its projects alone (no style written, no audio): tools.
+pub fn blind_styles(con: &rusqlite::Connection) -> rusqlite::Result<Vec<(i64, Vec<catalog::StyleOption>)>> {
+    let get = |k: &str| -> Vec<String> {
+        con.query_row("select v from settings where k=?", [k], |r| r.get::<_, String>(0))
+            .ok()
+            .and_then(|v| serde_json::from_str(&v).ok())
+            .unwrap_or_default()
+    };
+    suggestions::blind_styles(con, &catalog::Rules::new(&get("artists"), &get("work_words")))
 }
 
 /// After a style was emptied: the deduced styles come back at once.

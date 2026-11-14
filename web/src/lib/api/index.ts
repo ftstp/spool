@@ -40,13 +40,22 @@ export const updateInstall = () => (inTauri ? invoke<void>("update_install") : r
 export const appVersion = () => (inTauri ? import("@tauri-apps/api/app").then((m) => m.getVersion()) : Promise.resolve("dev"));
 import type { WrittenCopy } from "./bindings/WrittenCopy";
 import type { Storage } from "./bindings/Storage";
+import type { SamplePage } from "./bindings/SamplePage";
+import type { SampleQuery } from "./bindings/SampleQuery";
+export type { SamplePage, SampleQuery };
+export type { SampleRow } from "./bindings/SampleRow";
+/** A page of samples (Samples page). The browser preview reads public/dev-samples.json. */
+export const samples = (q: SampleQuery) =>
+  inTauri
+    ? invoke<SamplePage>("samples", { q })
+    : fetch("/dev-samples.json").then((r) => (r.ok ? (r.json() as Promise<SamplePage>) : ({ total: 0, all: 0, rows: [], counts: [] } as SamplePage)));
 export type { Storage };
 /** What Spool keeps on this computer (its own folder only). */
 export const storage = () => (inTauri ? invoke<Storage>("storage") : Promise.resolve(devStorage()));
 /** Removes the safety copies but the newest. */
 export const trimBackups = () => (inTauri ? invoke<Storage>("trim_backups") : readOnly());
 export const openDataDir = () => (inTauri ? invoke<void>("open_data_dir") : readOnly());
-const devStorage = (): Storage => ({ dir: "C:\Users\you\AppData\Roaming\app.pluginfixer.desktop", base: 309e6, midi: 180e6, backups: 577e6, backup_count: 4, trimmable: 302e6, cache: 8e6, model: 0, total: 894e6 });
+const devStorage = (): Storage => ({ dir: "C:\Users\you\AppData\Roaming\app.pluginfixer.desktop", base: 309e6, journal: 43e6, midi: 180e6, backups: 577e6, backup_count: 4, trimmable: 302e6, cache: 8e6, model: 0, total: 894e6 });
 /** Where the start is: the base opens (or is converted) while the window shows. */
 export type BootStatus = { stage: "opening" | "creating" | "upgrading" | "ready" | "error"; mb: number; from: number; to: number; error: string | null; secs: number };
 export const bootStatus = () => (inTauri ? invoke<BootStatus>("boot_status") : Promise.resolve(devBoot()));

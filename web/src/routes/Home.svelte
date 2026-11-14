@@ -119,7 +119,7 @@
         </section>
       </div>
       <section class="card side">
-        <div class="head"><h2>{t("home.validate")} <span class="faint">{o.queue.length + o.style_queue.length}</span></h2>
+        <div class="head"><h2>{t("home.validate")} <span class="faint">{o.queue.length}</span></h2>
           {#if o.queue.length > 1}<button class="btn sm" title={t("home.acceptAllTitle")}
             onclick={() => app.act(api.acceptAll(o.queue.map((q) => q.id)))}>{t("home.acceptAll")}</button>{/if}</div>
         {#each o.queue.slice(0, 6) as q (q.id)}
@@ -133,15 +133,7 @@
             </div>
           </div>
         {/each}
-        {#if o.style_queue.length}
-          <h3 class="small muted">{t("home.styles")}</h3>
-          {#each o.style_queue.slice(0, 6) as q (q.id)}
-            <div class="row"><a class="lk" href="#/song/{q.song_id}"><b>{q.title}</b></a>
-              <span class="chips">{#each q.options as op}<button class="chip" title={op.why.join("\n")} onclick={() => app.act(api.suggestionAct(q.id, true, op.style))}>{op.style} <b>{t("stats.pct", { n: op.pct })}</b></button>{/each}</span>
-            </div>
-          {/each}
-        {/if}
-        {#if !o.queue.length && !o.style_queue.length}<p class="small faint">{t("home.nothing")}</p>{/if}
+        {#if !o.queue.length}<p class="small faint">{t("home.nothing")}</p>{/if}
       </section>
     </div>
 

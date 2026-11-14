@@ -1,5 +1,5 @@
 //! What the interface shows, read from the base. Ported from the prototype's views.
-use crate::keys::song_key;
+
 use serde::Serialize;
 use serde_json::Value;
 use std::collections::{BTreeSet, HashMap};
@@ -21,10 +21,16 @@ pub struct SongItem {
     pub id: i64,
     pub title: Option<String>,
     pub artist: Option<String>,
+    /// Shown: the user's, else detected (`style_src` says which, as `key_src`, `tempo_src`;
+    /// crate::detect).
     pub style: Option<String>,
+    pub style_src: Option<String>,
     pub key: Option<String>,
     pub key_src: Option<String>,
     pub tempo: Option<f64>,
+    pub tempo_src: Option<String>,
+    /// Fields whose detections disagree ("style", "key", "tempo"): worth a look.
+    pub doubt: Vec<String>,
     #[ts(type = "number | null")]
     pub len: Option<i64>,
     pub stage: Option<String>,
@@ -135,10 +141,13 @@ pub fn songs_list(con: &Connection) -> rusqlite::Result<Vec<SongItem>> {
         }
     }
     let mut ssugg: HashMap<i64, StyleHint> = HashMap::new();
+    let mut style_opts: HashMap<i64, Vec<(String, i64)>> = HashMap::new();
+    let audio = crate::detect_audio(con);
     {
         let mut s = con.prepare("select song_id, reasons from suggestions where state='open' and kind='style'")?;
         for r in s.query_map([], |r| Ok((r.get::<_, i64>(0)?, r.get::<_, Option<String>>(1)?)))? {
             let (k, v) = r?;
+            style_opts.insert(k, crate::detect::style_options(v.as_deref()));
             let v: Value = serde_json::from_str(&v.unwrap_or_default()).unwrap_or(Value::Null);
             if let Some(first) = v.get(0) {
                 ssugg.insert(
@@ -195,7 +204,12 @@ pub fn songs_list(con: &Connection) -> rusqlite::Result<Vec<SongItem>> {
             continue;
         };
         let d: Value = serde_json::from_str(newest.data.as_deref().unwrap_or("{}")).unwrap_or(Value::Null);
-        let (key, key_src) = song_key(ukey.as_deref(), &d);
+        let heard = audio.get(&id).cloned().unwrap_or_default();
+        let fk = crate::detect::key(ukey.as_deref(), &d, &heard);
+        let ft_ = crate::detect::tempo(tempo, &d, &heard);
+        let fs_ = crate::detect::style(style.as_deref(), style_opts.get(&id).map(Vec::as_slice).unwrap_or(&[]));
+        let doubt: Vec<String> =
+            [("style", fs_.doubt), ("key", fk.doubt), ("tempo", ft_.doubt)].iter().filter(|x| x.1).map(|x| x.0.to_string()).collect();
         let instr: Vec<String> = d["devices"]
             .as_array()
             .map(|a| {
@@ -213,10 +227,13 @@ pub fn songs_list(con: &Connection) -> rusqlite::Result<Vec<SongItem>> {
             id,
             title,
             artist,
-            style,
-            key,
-            key_src: key_src.map(str::to_string),
-            tempo: tempo.filter(|t| *t != 0.0).or_else(|| d["tempo"].as_f64()),
+            style: fs_.shown.as_ref().map(|x| x.value.clone()),
+            style_src: fs_.shown.map(|x| x.src),
+            key: fk.shown.as_ref().map(|x| x.value.clone()),
+            key_src: fk.shown.map(|x| x.src),
+            tempo: ft_.shown.as_ref().and_then(|x| x.value.parse().ok()),
+            tempo_src: ft_.shown.map(|x| x.src),
+            doubt,
             len: d["length_s"].as_i64(),
             stage,
             sugg: sugg.get(&id).cloned(),

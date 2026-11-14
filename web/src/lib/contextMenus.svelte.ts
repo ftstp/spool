@@ -51,6 +51,8 @@ async function newRelease(id: number, title: string) {
     const [rid, st] = await api.releaseSave({ id: "", title: title || t("menu.newReleaseTitle"), kind: "single", artist: "", date: null, cover_song: id, notes: "", songs: [id], folder: null, created: 0 });
     app.undo = st;
     if (st.label) app.say(st.label, { undo: true });
+    // the page finds it at once, without waiting for the whole catalogue to reload
+    app.releases = await api.releases();
     go(`#/release/${rid}`);
   } catch (e) {
     app.say(String(e), { error: true });

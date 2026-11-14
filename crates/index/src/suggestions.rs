@@ -343,6 +343,20 @@ pub fn refresh_styles(tx: &Transaction, rules: &Rules) -> rusqlite::Result<()> {
 }
 
 /// Every song with its newest active project, its file and audio names.
+/// What the projects alone say of every song's style: no style the user wrote counts, no
+/// audio. For measuring the detection (tools), not shown in the app.
+pub fn blind_styles(con: &rusqlite::Connection, rules: &Rules) -> rusqlite::Result<Vec<(i64, Vec<catalog::StyleOption>)>> {
+    let songs: Vec<StyleSong> = style_songs(con)?
+        .into_iter()
+        .map(|mut s| {
+            s.style = None;
+            s.sound.clear();
+            s
+        })
+        .collect();
+    Ok(deduce(&songs, rules))
+}
+
 fn style_songs(tx: &rusqlite::Connection) -> rusqlite::Result<Vec<StyleSong>> {
     let mut files: HashMap<i64, (Vec<String>, Option<String>)> = HashMap::new();
     {

@@ -14,6 +14,10 @@ dir: string,
  */
 base: number, 
 /**
+ * Of which the journal (emptied at each start; large only after a long session).
+ */
+journal: number, 
+/**
  * Of which the index of the MIDI files found (rebuilt by a scan if it went missing).
  */
 midi: number, 

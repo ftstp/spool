@@ -931,3 +931,115 @@ mod tests {
         std::fs::remove_dir_all(&dir).unwrap();
     }
 }
+
+/// What Spool detects of every song by itself, for judging it on a real catalogue: the
+/// reference renders analysed (on a COPY of a data folder, SPOOL_EVAL_DATA, never the user's
+/// own), the tempo and key written in the projects, the styles from the projects alone (no
+/// style the user wrote) and from the audio alone (zero-shot). Writes SPOOL_EVAL_OUT (JSON).
+///   SPOOL_EVAL_DATA=<copy> SPOOL_EVAL_MODELS=<model dir> SPOOL_EVAL_OUT=<file.json> \
+///   cargo test --release -p core --lib detection_report -- --ignored --nocapture
+#[cfg(test)]
+mod eval {
+    use std::collections::HashMap;
+    use super::*;
+
+    #[test]
+    #[ignore]
+    fn detection_report() {
+        let (Some(d), Some(m), Some(out)) =
+            (std::env::var_os("SPOOL_EVAL_DATA"), std::env::var_os("SPOOL_EVAL_MODELS"), std::env::var_os("SPOOL_EVAL_OUT"))
+        else {
+            return;
+        };
+        let app = crate::App::open(Path::new(&d)).unwrap();
+        let an = audio::Analyzer::new(PathBuf::from(&m)).unwrap();
+        // the projects read with this version's reader (a new one reads them all again)
+        eprintln!("scanning (only reads the projects and MIDI files)");
+        app.scan(false).unwrap();
+        // 1. the reference renders (only read)
+        let roots = app.roots();
+        let (todo, total, _) = pending(&app.reader.lock().unwrap().con, &roots).unwrap();
+        eprintln!("{} renders to analyse ({total} referenced)", todo.len());
+        for (i, p) in todo.iter().enumerate() {
+            let res = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| an.analyze(&p.path)))
+                .map_err(|_| "crashed".to_string())
+                .and_then(|r| r.map_err(|e| e.to_string()));
+            save(&app.store.lock().unwrap().con, p, res).unwrap();
+            if i % 25 == 0 {
+                eprintln!("  {i}/{}", todo.len());
+            }
+        }
+        let st = app.reader.lock().unwrap();
+        let con = &st.con;
+        // 2. the audio side: tempo, key, zero-shot styles centred on this catalogue
+        let mut emb: HashMap<i64, (Vec<f32>, Option<f64>, Option<String>, String)> = HashMap::new();
+        {
+            let mut s = con
+                .prepare(
+                    "select s.id, a.embedding, a.bpm, a.key, a.rel from songs s join audio_analysis a on a.rel = s.temoin \
+                     where s.gone = 0 and a.embedding is not null",
+                )
+                .unwrap();
+            for r in s
+                .query_map([], |r| Ok((r.get::<_, i64>(0)?, r.get::<_, Vec<u8>>(1)?, r.get(2)?, r.get(3)?, r.get(4)?)))
+                .unwrap()
+            {
+                let (id, b, bpm, key, rel) = r.unwrap();
+                emb.insert(id, (embedding_of(&b), bpm, key, rel));
+            }
+        }
+        let mut mean = vec![0f32; audio::EMBEDDING_DIM];
+        for (e, ..) in emb.values() {
+            for (m, x) in mean.iter_mut().zip(e) {
+                *m += x / emb.len() as f32;
+            }
+        }
+        let set = audio::styles::builtin();
+        // 3. the projects side: styles without any written style, tempo and key of the newest project
+        let blind: HashMap<i64, Vec<catalog::StyleOption>> = index::blind_styles(con).unwrap().into_iter().collect();
+        let mut s = con
+            .prepare(
+                "select s.id, s.title, s.artist, s.style, s.key, s.song_dir, \
+                 (select f.data from files f where f.song_id = s.id and f.in_version = 0 order by f.mtime desc limit 1) \
+                 from songs s where s.gone = 0 and s.archived = 0 order by s.id",
+            )
+            .unwrap();
+        let rows: Vec<serde_json::Value> = s
+            .query_map([], |r| {
+                Ok((
+                    r.get::<_, i64>(0)?,
+                    r.get::<_, Option<String>>(1)?,
+                    r.get::<_, Option<String>>(2)?,
+                    r.get::<_, Option<String>>(3)?,
+                    r.get::<_, Option<String>>(4)?,
+                    r.get::<_, Option<String>>(5)?,
+                    r.get::<_, Option<String>>(6)?,
+                ))
+            })
+            .unwrap()
+            .map(|r| {
+                let (id, title, artist, style, key, dir, data) = r.unwrap();
+                let p: serde_json::Value = data.as_deref().and_then(|d| serde_json::from_str(d).ok()).unwrap_or_default();
+                let a = emb.get(&id);
+                let heard = crate::detect::AudioMeasure { bpm: a.and_then(|x| x.1), key: a.and_then(|x| x.2.clone()) };
+                let shown = serde_json::json!({
+                    "key": crate::detect::key(None, &p, &heard),
+                    "tempo": crate::detect::tempo(None, &p, &heard),
+                });
+                serde_json::json!({
+                    "id": id, "title": title, "artist": artist, "dir": dir,
+                    "label": {"style": style, "key": key},
+                    "shown": shown,
+                    "project": {"tempo": p["tempo"], "key": p["key"], "key_est": p["key_est"], "key_conf": p["key_conf"],
+                                "styles": blind.get(&id).map(|o| o.iter().take(3).map(|x| serde_json::json!([x.style, x.pct, x.why])).collect::<Vec<_>>())},
+                    "audio": a.map(|(e, bpm, key, rel)| serde_json::json!({
+                        "render": rel, "bpm": bpm, "key": key,
+                        "styles": set.score_centered(e, &mean).into_iter().take(3).map(|(n, p)| serde_json::json!([n, (p * 100.0).round()])).collect::<Vec<_>>(),
+                    })),
+                })
+            })
+            .collect();
+        std::fs::write(&out, serde_json::to_string_pretty(&rows).unwrap()).unwrap();
+        eprintln!("{} songs, {} with an analysed render -> {}", rows.len(), emb.len(), Path::new(&out).display());
+    }
+}

@@ -46,7 +46,7 @@ dependencies = [
 
 [[package]]
 name = "als"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "fancy-regex",
  "flate2",
@@ -112,7 +112,7 @@ checksum = "1505bd5d3d116872e7271a6d4e16d81d0c8570876c8de68093a09ac269d8aac0"
 
 [[package]]
 name = "audio"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "ort",
  "realfft",
@@ -336,7 +336,7 @@ dependencies = [
 
 [[package]]
 name = "catalog"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "fancy-regex",
  "i18n",
@@ -446,7 +446,7 @@ dependencies = [
 
 [[package]]
 name = "core"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "als",
  "audio",
@@ -1617,7 +1617,7 @@ dependencies = [
 
 [[package]]
 name = "i18n"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "serde_json",
 ]
@@ -1796,17 +1796,20 @@ dependencies = [
 
 [[package]]
 name = "index"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "als",
+ "audio",
  "catalog",
  "i18n",
  "midi",
  "plugins",
  "rayon",
+ "regex",
  "serde",
  "serde_json",
  "store",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -2256,11 +2259,12 @@ dependencies = [
 
 [[package]]
 name = "midi"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "i18n",
  "midly",
  "serde",
+ "serde_json",
  "ts-rs",
 ]
 
@@ -2957,7 +2961,7 @@ dependencies = [
 
 [[package]]
 name = "plugin-fixer-desktop"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "als",
  "core",
@@ -2973,7 +2977,7 @@ dependencies = [
 
 [[package]]
 name = "plugins"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "fancy-regex",
  "i18n",
@@ -3258,7 +3262,7 @@ checksum = "d6f6ff9a378485b298a5286656da665ba74413d36db0979633275d2e708145d4"
 
 [[package]]
 name = "repair"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "als",
  "fancy-regex",
@@ -3949,7 +3953,7 @@ checksum = "ff7589a1859b09232522bb9edf076ca7fcf14ded96685d3fa629db73023ffbb7"
 
 [[package]]
 name = "store"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "i18n",
  "rusqlite",

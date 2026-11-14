@@ -45,7 +45,7 @@
   const SEV = ["ok", "fix", "lost", "bad"];
   const nSongs = (n: number) => t("songs.nSongs", { n });
   const nProjects = (n: number) => t("stats.nProjects", { n });
-  const keySrc = (k: string) => (k === "estimé" ? "estimated" : k === "Live" ? "live" : "noted");
+  const keySrc = (k: string) => (k === "estimé" ? "estimated" : k === "Live" ? "live" : k === "audio" ? "audio" : "noted");
   const hover = $derived(t("stats.hover").split("{link}"));
   const SEVC = ["var(--ok)", "var(--fix)", "var(--lost)", "var(--bad)"];
 

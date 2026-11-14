@@ -261,5 +261,22 @@
     "simTitle": "Ressemblance des deux témoins : {pct} %",
     "measured": "témoin : {n} bpm",
     "tempoTitle": "Tempo mesuré sur le témoin (analyse audio), différent de celui du projet"
-  }
+  },
+  "src": {
+    "yours": "Saisi par toi.",
+    "from": "Détecté : {src}.",
+    "none": "Rien de détecté pour l'instant.",
+    "doubt": "Les détections ne sont pas d'accord : à vérifier.",
+    "others": "Autres propositions :",
+    "pick": "Choisir cette valeur",
+    "back": "Revenir à la détection",
+    "noted": "ta saisie",
+    "live": "gamme réglée dans Live",
+    "notes": "notes MIDI du projet",
+    "project": "tempo du projet",
+    "audio": "rendu audio",
+    "auto": "noms, plugins et morceaux proches"
+  },
+  "findSamples": "Trouver des samples",
+  "findSamplesTip": "Les samples dans la tonalité et au tempo de ce morceau"
 }

@@ -1,5 +1,29 @@
 [
   {
+    "version": "0.1.2",
+    "date": "2026-11-14",
+    "notes": {
+      "en": [
+        "New Samples page: your sample folders sorted by kind (kick, snare, bass, pad, vocals...) from their names and folders, loops or one-shots, tempo and key; play with a click, the arrows play the next one.",
+        "Find samples from a song: in its key (or its relative) and at its tempo (or half or double).",
+        "Style, key and tempo fill in by themselves, from the project first and the audio to back it; hover a field to see where it comes from and pick another suggestion.",
+        "Much better keys: 87 % right on MIDI files (was 44 %), 78 % on projects' MIDI notes.",
+        "The app stays responsive during a scan: scanning uses half of the processor at low priority.",
+        "Lighter on disk: the database journal is emptied at each start, and the copy made before an update is kept 30 days.",
+        "Home no longer asks to confirm styles one by one."
+      ],
+      "fr": [
+        "Nouvelle page Samples : tes dossiers de samples rangés par type (kick, snare, basse, pad, voix...) d'après leurs noms et dossiers, boucles ou one-shots, tempo et tonalité ; un clic pour écouter, les flèches passent au suivant.",
+        "Trouver des samples depuis un morceau : dans sa tonalité (ou sa relative) et à son tempo (ou la moitié, le double).",
+        "Le style, la tonalité et le tempo se remplissent tout seuls, d'après le projet d'abord et l'audio pour confirmer ; survole un champ pour voir d'où vient la valeur et choisir une autre proposition.",
+        "Des tonalités bien plus justes : 87 % sur les fichiers MIDI (44 % avant), 78 % sur les notes MIDI des projets.",
+        "L'app reste fluide pendant une analyse : elle n'utilise que la moitié du processeur, en basse priorité.",
+        "Plus léger sur le disque : le journal de la base est vidé à chaque lancement, et la copie faite avant une mise à jour est gardée 30 jours.",
+        "L'accueil ne demande plus de confirmer les styles un par un."
+      ]
+    }
+  },
+  {
     "version": "0.1.1",
     "date": "2026-11-14",
     "notes": {

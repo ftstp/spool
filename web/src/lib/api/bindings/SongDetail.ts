@@ -2,6 +2,7 @@
 import type { Board } from "./Board";
 import type { Candidate } from "./Candidate";
 import type { Check } from "./Check";
+import type { Detected } from "./Detected";
 import type { Devices } from "./Devices";
 import type { FileItem } from "./FileItem";
 import type { Merged } from "./Merged";
@@ -32,4 +33,9 @@ other_audio: Array<Candidate>, suggestions: Array<OpenStage>, style_sugg: OpenSt
 /**
  * What the audio analysis of its reference render says (None: not analysed).
  */
-sound: SoundInfo | null, };
+sound: SoundInfo | null, 
+/**
+ * Style, key and tempo as shown, where each comes from, and the other candidates
+ * (offered on hover, even when the user wrote one).
+ */
+detected: Detected, };

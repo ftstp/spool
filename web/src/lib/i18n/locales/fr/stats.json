@@ -1,6 +1,9 @@
 {
   "title": "Statistiques",
-  "nProjects": { "one": "{n} projet", "other": "{n} projets" },
+  "nProjects": {
+    "one": "{n} projet",
+    "other": "{n} projets"
+  },
   "pct": "{n} %",
   "of": "{n} sur {total}",
   "progress": "Avancement",
@@ -12,7 +15,8 @@
   "keySrc": {
     "estimated": "{n} estimées d'après les notes MIDI",
     "live": "{n} réglées dans Live",
-    "noted": "{n} notées"
+    "noted": "{n} notées",
+    "audio": "{n} mesurées sur le rendu audio"
   },
   "keys": "Tonalités",
   "styles": "Styles",
@@ -27,11 +31,17 @@
   "unknown": "Inconnue",
   "liveVersion": "Live {v}",
   "recovered": "Projets récupérés",
-  "scans": { "one": "{n} analyse", "other": "{n} analyses" },
+  "scans": {
+    "one": "{n} analyse",
+    "other": "{n} analyses"
+  },
   "seriesOpen": "S'ouvrent (réparation comprise)",
   "seriesComplete": "Complets (rien à installer)",
   "ifInstall": "Si tu installes dans l'ordre conseillé",
-  "completeUnit": { "one": "{n} projet complet", "other": "{n} projets complets" },
+  "completeUnit": {
+    "one": "{n} projet complet",
+    "other": "{n} projets complets"
+  },
   "completeSeries": "Projets complets",
   "today": "Aujourd'hui",
   "hover": "Survole la courbe pour voir quel plugin installer à chaque étape. La liste est dans {link}.",
@@ -39,7 +49,10 @@
   "nothingToInstall": "Rien à installer.",
   "stagesOverDays": "Étapes au fil des jours",
   "doneByMonth": "Morceaux terminés par mois",
-  "doneUnit": { "one": "{n} terminé", "other": "{n} terminés" },
+  "doneUnit": {
+    "one": "{n} terminé",
+    "other": "{n} terminés"
+  },
   "chart": {
     "empty": "Rien à montrer.",
     "noHistory": "Pas encore d'historique : il se remplit à chaque analyse qui change quelque chose.",
@@ -56,7 +69,10 @@
     "midi": "Fichiers MIDI",
     "mine": "Dans tes projets",
     "library": "Dans tes bibliothèques MIDI",
-    "files": { "one": "{n} fichier", "other": "{n} fichiers" },
+    "files": {
+      "one": "{n} fichier",
+      "other": "{n} fichiers"
+    },
     "minor": "{pct} en mineur. Tonalités : {keys}",
     "tempoRange": "{a} à {b} bpm ({pct} des fichiers)",
     "topTempo": "Tempo le plus fréquent : {v}",
@@ -67,12 +83,30 @@
     "noMidi": "Aucun fichier MIDI dans tes dossiers. Tu peux ajouter des bibliothèques MIDI (construction kits) dans les réglages.",
     "media": "Médias hors projets",
     "mediaKind": {
-      "image": { "one": "{n} image", "other": "{n} images" },
-      "gif": { "one": "{n} gif", "other": "{n} gifs" },
-      "video": { "one": "{n} vidéo", "other": "{n} vidéos" },
-      "audio": { "one": "{n} son", "other": "{n} sons" },
-      "text": { "one": "{n} note", "other": "{n} notes" },
-      "pdf": { "one": "{n} pdf", "other": "{n} pdf" }
+      "image": {
+        "one": "{n} image",
+        "other": "{n} images"
+      },
+      "gif": {
+        "one": "{n} gif",
+        "other": "{n} gifs"
+      },
+      "video": {
+        "one": "{n} vidéo",
+        "other": "{n} vidéos"
+      },
+      "audio": {
+        "one": "{n} son",
+        "other": "{n} sons"
+      },
+      "text": {
+        "one": "{n} note",
+        "other": "{n} notes"
+      },
+      "pdf": {
+        "one": "{n} pdf",
+        "other": "{n} pdf"
+      }
     },
     "inFolders": {
       "one": "Dans {n} dossier sans projet. Tu pourras les envoyer dans le moodboard d'un morceau (Morceaux, vue Dossiers, « Médias hors projets »).",

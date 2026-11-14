@@ -277,6 +277,9 @@ pub struct SongDetail {
     pub log: Vec<StageStep>,
     /// What the audio analysis of its reference render says (None: not analysed).
     pub sound: Option<crate::sound::SoundInfo>,
+    /// Style, key and tempo as shown, where each comes from, and the other candidates
+    /// (offered on hover, even when the user wrote one).
+    pub detected: crate::detect::Detected,
 }
 
 use plugins::status_severity as severity;
@@ -690,6 +693,18 @@ pub fn song_detail(con: &Connection, sid: i64) -> rusqlite::Result<Option<SongDe
             },
         )
         .optional()?;
+    let detected = {
+        let empty = Value::Null;
+        let d = main.map(|m| &m.data).unwrap_or(&empty);
+        let heard = crate::detect_audio(con).remove(&sid).unwrap_or_default();
+        let opts: Vec<(String, i64)> =
+            style_sugg.as_ref().map(|g| g.options.iter().take(3).map(|o| (o.style.clone(), o.pct)).collect()).unwrap_or_default();
+        crate::detect::Detected {
+            style: crate::detect::style(song.style.as_deref(), &opts),
+            key: crate::detect::key(song.key.as_deref(), d, &heard),
+            tempo: crate::detect::tempo(song.tempo, d, &heard),
+        }
+    };
     let siblings: Vec<Sibling> = {
         let mut s = con.prepare("select id, title from songs where song_dir=? and gone=0 and id != ?")?;
         s.query_map(rusqlite::params![song.song_dir, sid], |r| Ok(Sibling { id: r.get(0)?, title: r.get(1)? }))?
@@ -800,6 +815,7 @@ pub fn song_detail(con: &Connection, sid: i64) -> rusqlite::Result<Option<SongDe
         siblings,
         log,
         sound: crate::sound::song_sound(con, sid).ok().flatten(),
+        detected,
         song,
     }))
 }

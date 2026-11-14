@@ -159,3 +159,19 @@ mod tests {
         assert!(err < 5e-3, "max error {err}");
     }
 }
+
+/// The duration of `path` from its header alone (nothing decoded): None when the header does
+/// not say it (some MP3s) or the file is unreadable. For indexing many samples cheaply.
+pub fn duration(path: &Path) -> Option<f32> {
+    let file = File::open(path).ok()?;
+    let mss = MediaSourceStream::new(Box::new(file), Default::default());
+    let mut hint = Hint::new();
+    if let Some(ext) = path.extension().and_then(|e| e.to_str()) {
+        hint.with_extension(ext);
+    }
+    let probed = symphonia::default::get_probe().format(&hint, mss, &FormatOptions::default(), &MetadataOptions::default()).ok()?;
+    let track = probed.format.tracks().iter().find(|t| t.codec_params.codec != CODEC_TYPE_NULL)?;
+    let p = &track.codec_params;
+    let (frames, rate) = (p.n_frames?, p.sample_rate?);
+    (rate > 0).then(|| frames as f32 / rate as f32)
+}

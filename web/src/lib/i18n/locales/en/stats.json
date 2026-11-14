@@ -1,6 +1,9 @@
 {
   "title": "Statistics",
-  "nProjects": { "one": "{n} project", "other": "{n} projects" },
+  "nProjects": {
+    "one": "{n} project",
+    "other": "{n} projects"
+  },
   "pct": "{n}%",
   "of": "{n} of {total}",
   "progress": "Progress",
@@ -12,7 +15,8 @@
   "keySrc": {
     "estimated": "{n} estimated from the MIDI notes",
     "live": "{n} set in Live",
-    "noted": "{n} entered by hand"
+    "noted": "{n} entered by hand",
+    "audio": "{n} measured on the audio render"
   },
   "keys": "Keys",
   "styles": "Styles",
@@ -27,11 +31,17 @@
   "unknown": "Unknown",
   "liveVersion": "Live {v}",
   "recovered": "Projects recovered",
-  "scans": { "one": "{n} scan", "other": "{n} scans" },
+  "scans": {
+    "one": "{n} scan",
+    "other": "{n} scans"
+  },
   "seriesOpen": "Open (repairs included)",
   "seriesComplete": "Complete (nothing to install)",
   "ifInstall": "If you install in the suggested order",
-  "completeUnit": { "one": "{n} complete project", "other": "{n} complete projects" },
+  "completeUnit": {
+    "one": "{n} complete project",
+    "other": "{n} complete projects"
+  },
   "completeSeries": "Complete projects",
   "today": "Today",
   "hover": "Hover over the curve to see which plugin to install at each step. The list is in {link}.",
@@ -39,7 +49,10 @@
   "nothingToInstall": "Nothing to install.",
   "stagesOverDays": "Stages over time",
   "doneByMonth": "Songs finished per month",
-  "doneUnit": { "one": "{n} finished", "other": "{n} finished" },
+  "doneUnit": {
+    "one": "{n} finished",
+    "other": "{n} finished"
+  },
   "chart": {
     "empty": "Nothing to show.",
     "noHistory": "No history yet: it fills up with every scan that changes something.",
@@ -56,7 +69,10 @@
     "midi": "MIDI files",
     "mine": "In your projects",
     "library": "In your MIDI libraries",
-    "files": { "one": "{n} file", "other": "{n} files" },
+    "files": {
+      "one": "{n} file",
+      "other": "{n} files"
+    },
     "minor": "{pct} in minor. Keys: {keys}",
     "tempoRange": "{a} to {b} bpm ({pct} of files)",
     "topTempo": "Most common tempo: {v}",
@@ -67,12 +83,30 @@
     "noMidi": "No MIDI files in your folders. You can add MIDI libraries (construction kits) in Settings.",
     "media": "Media outside projects",
     "mediaKind": {
-      "image": { "one": "{n} image", "other": "{n} images" },
-      "gif": { "one": "{n} GIF", "other": "{n} GIFs" },
-      "video": { "one": "{n} video", "other": "{n} videos" },
-      "audio": { "one": "{n} sound", "other": "{n} sounds" },
-      "text": { "one": "{n} note", "other": "{n} notes" },
-      "pdf": { "one": "{n} PDF", "other": "{n} PDFs" }
+      "image": {
+        "one": "{n} image",
+        "other": "{n} images"
+      },
+      "gif": {
+        "one": "{n} GIF",
+        "other": "{n} GIFs"
+      },
+      "video": {
+        "one": "{n} video",
+        "other": "{n} videos"
+      },
+      "audio": {
+        "one": "{n} sound",
+        "other": "{n} sounds"
+      },
+      "text": {
+        "one": "{n} note",
+        "other": "{n} notes"
+      },
+      "pdf": {
+        "one": "{n} PDF",
+        "other": "{n} PDFs"
+      }
     },
     "inFolders": {
       "one": "In {n} folder with no project. You can send them to a song's mood board (Songs, Folders view, \"Media outside projects\").",

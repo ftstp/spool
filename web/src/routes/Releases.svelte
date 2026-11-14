@@ -24,7 +24,11 @@
     }
     return [...n].sort((a, b) => b[1] - a[1])[0]?.[0] ?? "";
   }
+  // one release per click: a second click while the first is saved does nothing
+  let creating = $state(false);
   async function create(h?: ReleaseHint) {
+    if (creating) return;
+    creating = true;
     const ids = h ? [...h.songs].sort((a, b) => natural(byId.get(a)?.title ?? "", byId.get(b)?.title ?? "")) : [];
     try {
       const [id, st] = await app.track(
@@ -35,10 +39,14 @@
       );
       app.undo = st;
       if (st.label) app.say(st.label, { undo: true });
-      await app.reload();
+      // only the releases, then the page: the whole catalogue reloads behind (the
+      // "changed" event), which a scan can make slow
+      app.releases = await api.releases();
       location.hash = `#/release/${id}`;
     } catch (e) {
       app.say(String(e), { error: true });
+    } finally {
+      creating = false;
     }
   }
   const list = $derived(app.releases.map((r) => ({ r, s: summary(r, app.songs) })));
@@ -50,7 +58,7 @@
       <h1>{t("releases.title")}</h1>
       <p class="muted sub">{t("releases.intro")}</p>
     </div>
-    <button class="btn primary" onclick={() => create()}>{t("releases.new")}</button>
+    <button class="btn primary" disabled={creating} aria-busy={creating} onclick={() => create()}>{t("releases.new")}</button>
   </header>
 
   {#if list.length}
@@ -74,7 +82,7 @@
     <section class="card empty">
       <h2>{t("releases.firstTitle")}</h2>
       <p class="muted">{t("releases.firstText")}</p>
-      <button class="btn primary" onclick={() => create()}>{t("releases.create")}</button>
+      <button class="btn primary" disabled={creating} aria-busy={creating} onclick={() => create()}>{t("releases.create")}</button>
     </section>
   {/if}
 
@@ -92,7 +100,7 @@
               <span class="small muted">{kindLabel(h.kind)} · {t("songs.nSongs", { n: h.songs.length })}{h.artist || artistOf(h.songs) ? ` · ${h.artist || artistOf(h.songs)}` : ""}</span>
               <span class="small faint path" title={h.folder}>{t("releases.inFolder", { path: h.folder.split("/").slice(-3, -1).join(" / ") || t("releases.mainFolder") })}</span>
             </div>
-            <button class="btn sm" onclick={() => create(h)}>{t("releases.make")}</button>
+            <button class="btn sm" disabled={creating} onclick={() => create(h)}>{t("releases.make")}</button>
           </div>
         {/each}
       </div>

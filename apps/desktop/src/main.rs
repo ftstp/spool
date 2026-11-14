@@ -674,10 +674,17 @@ async fn open_fatstep(path: String) -> Res<()> {
 
 /// Shows a file or folder of the projects in the Explorer.
 #[tauri::command]
+async fn samples(app: State<'_, Arc<App>>, q: app_core::samples_view::SampleQuery) -> Res<app_core::samples_view::SamplePage> {
+    let app = Arc::clone(&app);
+    run(move || app.samples(q)).await
+}
+
+#[tauri::command]
 async fn reveal(app: State<'_, Arc<App>>, rel: String) -> Res<()> {
     let app = Arc::clone(&app);
     run(move || {
-        let p = app.project_path(&rel).filter(|p| p.exists()).ok_or_else(|| tr!("fs.notFoundShort"))?;
+        // a project's file, or a library's (a sample, a MIDI file: absolute)
+        let p = app.project_path(&rel).or_else(|| app.library_path(&rel)).filter(|p| p.exists()).ok_or_else(|| tr!("fs.notFoundShort"))?;
         // Explorer reads only backslashes (a "C:/..." path opens Documents instead), and wants
         // /select,"path" with the quotes around the path alone
         let path = p.to_string_lossy().replace('/', "\\");
@@ -965,6 +972,7 @@ fn main() {
             repair_plan,
             repair_state,
             written_copies,
+            samples,
             boot_status,
             storage,
             trim_backups,

@@ -5,9 +5,16 @@ use crate::xml::{N, child, iter, iter_tag, py_sum, round2, tag, val};
 use regex::Regex;
 use std::sync::LazyLock;
 
-/// Krumhansl-Kessler key profiles: how much each scale degree "belongs" to a major / minor key.
-const MAJOR: [f64; 12] = [6.35, 2.23, 3.48, 2.33, 4.38, 4.09, 2.52, 5.19, 2.39, 3.66, 2.29, 2.88];
-const MINOR: [f64; 12] = [6.33, 2.68, 3.52, 5.38, 2.60, 3.53, 2.54, 4.75, 3.98, 2.69, 3.34, 3.17];
+/// Key profiles: Faraldo's "bgate" (electronic dance music; Essentia's default), the same as
+/// crates/midi. A project's notes come by clip, not in playing order, so the bass is the low
+/// register (below E3) rather than the lowest note at each moment. On 2,507 sample-pack MIDI
+/// files whose name gives the key (packs not used to choose): Krumhansl-Kessler 39 % exact
+/// (what this was), bgate 50 %, bgate + the low register 78 %.
+const MAJOR: [f64; 12] = [1.00, 0.00, 0.42, 0.00, 0.53, 0.37, 0.00, 0.77, 0.00, 0.38, 0.21, 0.30];
+const MINOR: [f64; 12] = [1.00, 0.00, 0.36, 0.39, 0.00, 0.38, 0.00, 0.74, 0.27, 0.00, 0.42, 0.23];
+/// Notes below this one (E3) are the bass.
+const LOW_BELOW: i64 = 52;
+const LOW_WEIGHT: f64 = 1.0;
 
 static DRUM_TRACK: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(
@@ -51,22 +58,9 @@ fn corr(x: &[f64; 12], y: &[f64; 12]) -> f64 {
     if den != 0.0 { num / den } else { 0.0 }
 }
 
-/// The bass's main note is the tonic: the quality then comes from the third heard over it.
-/// None when the bass points elsewhere.
-fn bass_confirms(hist: &[f64; 12], bass: &[f64; 12], tonic: usize) -> Option<bool> {
-    if py_sum(bass.iter().copied()) == 0.0 {
-        return None;
-    }
-    let top = (0..12).fold(0, |best, i| if bass[i] > bass[best] { i } else { best });
-    if top != tonic {
-        return None;
-    }
-    let (mut m3, mut maj3) = (hist[(tonic + 3) % 12], hist[(tonic + 4) % 12]);
-    if m3 == maj3 {
-        m3 = hist[(tonic + 8) % 12] + hist[(tonic + 10) % 12];
-        maj3 = hist[(tonic + 9) % 12] + hist[(tonic + 11) % 12];
-    }
-    Some(m3 > maj3)
+/// The bass's main note is the tonic.
+fn bass_on_tonic(bass: &[f64; 12], tonic: usize) -> bool {
+    py_sum(bass.iter().copied()) > 0.0 && (0..12).fold(0, |best, i| if bass[i] > bass[best] { i } else { best }) == tonic
 }
 
 #[derive(Debug, Clone, PartialEq)]
@@ -79,7 +73,7 @@ pub struct KeyEstimate {
 
 /// Key guessed from the MIDI notes (drum tracks left out), weighted by duration.
 pub fn estimate_key(tracks: N) -> KeyEstimate {
-    let (mut hist, mut bass, mut n) = ([0.0f64; 12], [0.0f64; 12], 0usize);
+    let (mut hist, mut bass, mut low, mut n) = ([0.0f64; 12], [0.0f64; 12], [0.0f64; 12], 0usize);
     for t in iter_tag(tracks, "MidiTrack") {
         let name = val(child(t, "Name"), "EffectiveName").unwrap_or("");
         if DRUM_TRACK.is_match(name) || iter(t).any(|d| matches!(tag(d), "DrumGroupDevice" | "InstrumentImpulse")) {
@@ -97,6 +91,9 @@ pub fn estimate_key(tracks: N) -> KeyEstimate {
                 let Ok(d) = raw.trim().parse::<f64>() else { continue };
                 let d = d.min(8.0);
                 hist[pc] += d;
+                if pitch < LOW_BELOW {
+                    low[pc] += d;
+                }
                 if is_bass {
                     bass[pc] += d;
                 }
@@ -107,32 +104,26 @@ pub fn estimate_key(tracks: N) -> KeyEstimate {
     if n < 30 {
         return KeyEstimate { key: None, conf: 0.0, bass: false };
     }
-    let (mut best, mut score, mut tonic, mut minor) = (String::new(), -2.0f64, 0usize, false);
+    let has_low = py_sum(low.iter().copied()) > 0.0;
+    // (combined score, the notes' correlation alone, tonic, minor)
+    let (mut top, mut score, mut tonic, mut minor) = (f64::MIN, -2.0f64, 0usize, false);
     for t in 0..12 {
-        for (prof, suffix) in [(&MAJOR, ""), (&MINOR, "m")] {
+        for (prof, m) in [(&MAJOR, false), (&MINOR, true)] {
             let rotated: [f64; 12] = std::array::from_fn(|i| prof[(i + 12 - t) % 12]);
             let c = corr(&hist, &rotated);
-            if c > score {
-                best = format!("{}{}", NOTE_NAMES[t], suffix);
-                score = c;
-                tonic = t;
-                minor = !suffix.is_empty();
+            let all = c + if has_low { LOW_WEIGHT * corr(&low, &rotated) } else { 0.0 };
+            if all > top {
+                (top, score, tonic, minor) = (all, c, t, m);
             }
         }
     }
     if score < 0.6 {
         return KeyEstimate { key: None, conf: round2(score), bass: false };
     }
-    let confirmed = bass_confirms(&hist, &bass, tonic);
-    if let Some(m) = confirmed
-        && m != minor
-    {
-        minor = m;
-        best = format!("{}{}", NOTE_NAMES[tonic], if m { "m" } else { "" });
-    }
+    let best = format!("{}{}", NOTE_NAMES[tonic], if minor { "m" } else { "" });
     let key = match refine_mode(&hist, tonic, minor) {
         Some(mode) => format!("{} {}", NOTE_NAMES[tonic], mode),
         None => best,
     };
-    KeyEstimate { key: Some(key), conf: round2(score), bass: confirmed.is_some() }
+    KeyEstimate { key: Some(key), conf: round2(score), bass: bass_on_tonic(&bass, tonic) || bass_on_tonic(&low, tonic) }
 }

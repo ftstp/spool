@@ -6,7 +6,7 @@
   import PlayBtn from "./PlayBtn.svelte";
   import { t } from "../i18n/index.svelte";
   let { song }: { song: SongItem } = $props();
-  const meta = $derived([song.artist, bpm(song.tempo), song.key && (song.key_src === "estimé" ? "~" + song.key : song.key)].filter(Boolean).join(" · "));
+  const meta = $derived([song.artist, bpm(song.tempo), song.key].filter(Boolean).join(" · "));
 </script>
 
 <div class="rcard" style="--h:{hue(song.title ?? '')}">

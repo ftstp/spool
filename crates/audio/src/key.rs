@@ -11,6 +11,9 @@ pub const PITCH_NAMES: [&str; 12] = ["C", "C#", "D", "D#", "E", "F", "F#", "G", 
 pub enum Profile {
     Krumhansl,
     Temperley,
+    /// Faraldo's "bgate" (electronic dance music, Beatport; Essentia's default). On 1,057
+    /// sample-pack loops whose name gives the key: 42 % exact against Temperley's 27 %.
+    Bgate,
 }
 
 impl Profile {
@@ -23,6 +26,10 @@ impl Profile {
             Profile::Temperley => (
                 [5.0, 2.0, 3.5, 2.0, 4.5, 4.0, 2.0, 4.5, 2.0, 3.5, 1.5, 4.0],
                 [5.0, 2.0, 3.5, 4.5, 2.0, 4.0, 2.0, 4.5, 3.5, 2.0, 1.5, 4.0],
+            ),
+            Profile::Bgate => (
+                [1.00, 0.00, 0.42, 0.00, 0.53, 0.37, 0.00, 0.77, 0.00, 0.38, 0.21, 0.30],
+                [1.00, 0.00, 0.36, 0.39, 0.00, 0.38, 0.00, 0.74, 0.27, 0.00, 0.42, 0.23],
             ),
         }
     }
@@ -49,7 +56,7 @@ pub struct KeyConfig {
 impl Default for KeyConfig {
     fn default() -> Self {
         KeyConfig {
-            profile: Profile::Temperley,
+            profile: Profile::Bgate,
             f_min: 80.0,
             f_max: 2000.0,
             log_gain: 0.0,
