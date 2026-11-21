@@ -7,6 +7,7 @@ export const FAMILIES: [string, string[]][] = [
   ["melodic", ["lead", "pad", "pluck", "keys", "guitar", "brass", "strings", "woodwind", "synth", "melody"]],
   ["vocal", ["vocal"]],
   ["fx", ["fx"]],
+  ["fullloop", ["fullloop"]],
   ["demo", ["demo"]],
 ];
 

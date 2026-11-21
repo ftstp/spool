@@ -1,5 +1,21 @@
 [
   {
+    "version": "0.1.46",
+    "date": "2026-11-21",
+    "notes": {
+      "en": [
+        "Samples: a new Full loops family for loops that are a whole mix rather than one instrument.",
+        "Sort by ear, by folder: listen to a few samples of a folder, one key sorts the whole folder.",
+        "More names read: cym, mel, \"Drums 174 BPM\", wurli, marimba, kalimba, sitar, ukulele."
+      ],
+      "fr": [
+        "Samples : nouvelle famille Boucles complètes, pour les boucles qui sont un mix entier plutôt qu'un seul instrument.",
+        "Tri à l'oreille par dossier : écoute quelques samples d'un dossier, une touche classe tout le dossier.",
+        "Plus de noms lus : cym, mel, « Drums 174 BPM », wurli, marimba, kalimba, sitar, ukulele."
+      ]
+    }
+  },
+  {
     "version": "0.1.45",
     "date": "2026-11-21",
     "notes": {

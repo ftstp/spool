@@ -2321,6 +2321,11 @@ impl App {
         samples_view::sort_by_hand(&self.store.lock().unwrap().con, paths, family, cat).map_err(err)
     }
 
+    /// The folders holding the most unsorted samples (the quick sort by folder).
+    pub fn unsorted_folders(&self, skip: &[String]) -> Result<Vec<samples_view::FolderToSort>> {
+        samples_view::unsorted_folders(&self.reader.lock().unwrap().con, skip, 20).map_err(err)
+    }
+
     /// The unsorted samples of one folder, sorted by hand at once.
     pub fn sort_sample_folder(&self, dir: &str, family: &str, cat: Option<&str>) -> Result<usize> {
         let paths = samples_view::unsorted_in(&self.reader.lock().unwrap().con, dir).map_err(err)?;

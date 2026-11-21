@@ -367,6 +367,9 @@ export const sortSamples = (paths: string[], family: string | null, cat: string 
   inTauri ? invoke<number>("sort_samples", { paths, family, cat }) : Promise.resolve(paths.length);
 export const sortSampleFolder = (dir: string, family: string, cat: string | null) =>
   inTauri ? invoke<number>("sort_sample_folder", { dir, family, cat }) : Promise.resolve(0);
+/** The folders with the most unsorted samples (the quick sort by folder), but those skipped. */
+export const unsortedFolders = (skip: string[]) =>
+  inTauri ? invoke<import("./bindings/FolderToSort").FolderToSort[]>("unsorted_folders", { skip }) : Promise.resolve([]);
 export const sampleSongs = (path: string) =>
   inTauri ? invoke<number[]>("sample_songs", { path }) : devJson<Record<string, number[]>>("dev-sample-songs.json", {}).then((m) => m[path] ?? []);
 /** What changed between two saves of a project (older first). */

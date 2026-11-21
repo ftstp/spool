@@ -5,6 +5,20 @@ installed copies offer each update by themselves.
 
 *This file is generated from `CHANGELOG.json` at each release.*
 
+## 0.1.46 (2026-11-21)
+
+- Samples: a new Full loops family for loops that are a whole mix rather than one instrument.
+- Sort by ear, by folder: listen to a few samples of a folder, one key sorts the whole folder.
+- More names read: cym, mel, "Drums 174 BPM", wurli, marimba, kalimba, sitar, ukulele.
+
+<details><summary>En français</summary>
+
+- Samples : nouvelle famille Boucles complètes, pour les boucles qui sont un mix entier plutôt qu'un seul instrument.
+- Tri à l'oreille par dossier : écoute quelques samples d'un dossier, une touche classe tout le dossier.
+- Plus de noms lus : cym, mel, « Drums 174 BPM », wurli, marimba, kalimba, sitar, ukulele.
+
+</details>
+
 ## 0.1.45 (2026-11-21)
 
 - Samples: names with glued words are read ("BassLoop", "TopPercLoop"), and words inside other words no longer mislead ("Percy" is no percussion).

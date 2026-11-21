@@ -15,7 +15,7 @@ const CATS: [(&str, &str, &str); 23] = [
     ("snare", "drums", r"snare|\bsnr\b|\bsd\b|rimshot|\brim\b"),
     ("clap", "drums", r"clap|\bsnaps?\b"),
     ("hihat", "drums", r"hi ?hat|\bhh\b|\bhats?\b|openhat|closedhat"),
-    ("cymbal", "drums", r"crash|\bride\b|cymbal|splash"),
+    ("cymbal", "drums", r"crash|\bride\b|cymbal|\bcyms?\b|\bcymb|splash"),
     ("tom", "drums", r"\btoms?\b"),
     ("perc", "drums", r"\bpercs?\b|\bperc\d|percussi|shaker|conga|bongo|tamb|maraca|cowbell|clave|woodblock|beatbox"),
     ("808", "bass", r"808"),
@@ -25,13 +25,13 @@ const CATS: [(&str, &str, &str); 23] = [
     ("lead", "melodic", r"\blead"),
     ("pad", "melodic", r"\bpads?\b|atmos|\batmo\b|athmo|ambien|drone"),
     ("pluck", "melodic", r"pluck|\barps?\b|arpegg"),
-    ("keys", "melodic", r"piano|\bkeys\b|rhodes|\borgans?\b|epiano|\bchords?\b"),
-    ("guitar", "melodic", r"guitar|\bgtr"),
+    ("keys", "melodic", r"piano|\bkeys\b|rhodes|wurli|marimba|mallet|kalimba|vibraphone|xylophone|\borgans?\b|epiano|\bchords?\b"),
+    ("guitar", "melodic", r"guitar|sitar|banjo|ukulele|\bkoto\b|\bgtr"),
     ("brass", "melodic", r"brass|trumpet|trombone|\bsax|\bhorns?\b|tuba"),
     ("strings", "melodic", r"\bstrings?\b|violin|viola|cello|pizz|orchestra|\borch\b"),
     ("woodwind", "melodic", r"flute|whistle|clarinet|oboe|recorder|ocarina|bassoon"),
     ("synth", "melodic", r"\bsynths?\b|\bstabs?\b|\briffs?\b"),
-    ("melody", "melodic", r"melod|music ?loop"),
+    ("melody", "melodic", r"melod|music ?loop|\bmusc\b|\bmel\b"),
     ("vocal", "vocal", r"\bvox\b|vocal|voice|acapella|chant|\bvx\b"),
     ("fx", "fx", r"\bfx\b|\bsfx|riser|impact|sweep|downlifter|uplifter|whoosh|transition|build ?ups?\b|glitch|\bnoise|vinyl|crackle|foley"),
 ];
@@ -48,6 +48,16 @@ static DRUMLOOP: LazyLock<Regex> =
 /// A pack's demo (the full mix that presents it): its own family, whatever it is made of
 /// ("House Bass (Demo)" is a demo, not a bass).
 static DEMO: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(?i)\bdemos?\b|\bpreview\b|\bfull ?mix\b").unwrap());
+/// "Drums 174 BPM - 9": a drum loop, when nothing more precise is named ("Drums - Hats 172bpm"
+/// is a hi-hat loop).
+static DRUMS_TEMPO: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"(?i)\bdrums?\b.{0,16}\d{2,3} ?bpm\b|\bdrums \d{2,3}\b").unwrap());
+/// A loop whose name and folders name no instrument: a whole mix ("VEE Electro Loop 358",
+/// "Houseloops 128BPM 005", "Song Starter - Full", a construction kit's full mix).
+static FULL_LOOP: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"(?i)loop|\bfull\b|\bmix\b|construction|song ?starter").unwrap());
+static DRUMS_NAMED: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(?i)\bdrums?\b|\bbreaks?\b|break ?beat").unwrap());
+static INSTRUMENT: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(?i)\binstrument").unwrap());
 static LOOP: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(?i)loop|\d{2,3} ?bpm|\bbpm").unwrap());
 static SHOT: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(?i)one ?shot|\bhit\b|\bshot\b").unwrap());
 static BPM: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(?i)(\d{2,3}(?:\.\d)?) ?bpm|bpm ?(\d{2,3})").unwrap());
@@ -58,13 +68,14 @@ static KEY: LazyLock<Regex> =
 /// A note at the end of a one-shot's name: "808 Boom F#", "Sub C2".
 static NOTE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(?: )([A-G])(#|b)?(-?\d)?$").unwrap());
 
-pub const FAMILIES: [&str; 7] = ["drums", "drumloop", "bass", "melodic", "vocal", "fx", "demo"];
+pub const FAMILIES: [&str; 8] = ["drums", "drumloop", "bass", "melodic", "vocal", "fx", "fullloop", "demo"];
 
 /// The family a category belongs to ("kick": drums; a drum loop and a demo are their own).
 pub fn family_of(cat: &str) -> Option<&'static str> {
     match cat {
         "drumloop" => Some("drumloop"),
         "demo" => Some("demo"),
+        "fullloop" => Some("fullloop"),
         _ => CATS.iter().find(|c| c.0 == cat).map(|c| c.1),
     }
 }
@@ -87,7 +98,7 @@ pub struct Named {
 
 /// A kind glued to "loop", "shot" or "hit" ("bassloop", "KICKSHOT").
 static GLUED: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"(?i)(bass|kick|snare|clap|hat|perc|drum|synth|pad|lead|vocal|vox|fx|top|beat|groove|break|sub|808|chord|pluck|arp)(loops?|shots?|hits?)\b").unwrap()
+    Regex::new(r"(?i)(bass|kick|snare|clap|hat|perc|drum|synth|pad|lead|vocal|vox|fx|top|beat|groove|break|sub|808|chord|pluck|arp|house|techno|tech)(loops?|shots?|hits?|beats?)\b").unwrap()
 });
 
 /// The words of a sound that a name writes glued to the next one with a capital ("BassLoop",
@@ -157,6 +168,9 @@ pub fn cats_in(s: &str) -> Vec<(&'static str, &'static str)> {
     }
     let mut found: Vec<(&str, &str)> = RX.iter().filter(|(_, _, r)| r.is_match(&w)).map(|(c, f, _)| (*c, *f)).collect();
     // "808 Sub Bass": an 808; "Sub Bass", "Growl Bass": the precise one; "Bass Drum": a kick
+    if found.is_empty() && DRUMS_TEMPO.is_match(&w) {
+        return vec![("drumloop", "drumloop")];
+    }
     if found.iter().any(|x| x.0 == "808") {
         found.retain(|x| x.0 != "sub");
     }
@@ -201,6 +215,19 @@ pub fn read_name(stem: &str, folders: &[&str]) -> Named {
                 src = "folder";
                 break;
             }
+        }
+    }
+    // nothing named anywhere, and a loop or a full mix: a whole mix, not one instrument
+    // (drums named: a drum loop; an instrument's folder: something melodic, which one unknown)
+    if found.is_empty() && (FULL_LOOP.is_match(&words(stem)) || folders.last().is_some_and(|f| FULL_LOOP.is_match(&words(f)))) {
+        let near = format!("{} {}", words(stem), folders.iter().rev().take(2).map(|f| words(f)).collect::<Vec<_>>().join(" "));
+        if DRUMS_NAMED.is_match(&near) {
+            found = vec![("drumloop", "drumloop")];
+        } else if INSTRUMENT.is_match(&near) {
+            n.family = Some("melodic".into());
+            n.cat_src = Some("folder".into());
+        } else {
+            found = vec![("fullloop", "fullloop")];
         }
     }
     if let [(c, f)] = found.as_slice() {
@@ -317,6 +344,26 @@ mod tests {
         assert_eq!(cat("Violin Staccato C", &[]).as_deref(), Some("strings"));
         assert_eq!(cat("Pan Flute Loop 90", &[]).as_deref(), Some("woodwind"));
         assert_eq!(cat("Melody Loop 07 Am", &[]).as_deref(), Some("melody"));
+        // abbreviations, a drum loop by its tempo
+        assert_eq!(cat("Cym - 8", &[]).as_deref(), Some("cymbal"));
+        assert_eq!(cat("MEL 174 BPM Dm -1", &[]).as_deref(), Some("melody"));
+        assert_eq!(cat("Drums 174 BPM - 9_22", &[]).as_deref(), Some("drumloop"));
+        assert_eq!(cat("003 Drums - Hats 172bpm Fm", &[]).as_deref(), Some("hihat"));
+        assert_eq!(cat("EH_Kick Drum 10", &[]).as_deref(), Some("kick"));
+        // a loop naming no instrument, nor its folders: a whole mix
+        assert_eq!(cat("VEE Electro Loop 358", &["VEE Electro Loops 128 BPM"]).as_deref(), Some("fullloop"));
+        assert_eq!(cat("KSHMR Retro SS - Sunset Rendezvous (98, Fm) - Full", &["Retro"]).as_deref(), Some("fullloop"));
+        assert_eq!(cat("VEC2 Loops 027", &["Pack", "VEC2 Loops"]).as_deref(), Some("fullloop"));
+        // a loop in a folder that names it stays what the folder says
+        assert_eq!(cat("Loop 03", &["Bass Loops"]).as_deref(), Some("bass"));
+        assert_eq!(cat("VEH2 Housebeats - 01", &[]).as_deref(), Some("drumloop"));
+        assert_eq!(cat("120_AnarchyBreak_01_SP", &["AIFF", "Full Drums"]).as_deref(), Some("drumloop"));
+        let n = read_name("SO_DU_85_mallet_trooper_Fmaj", &["Splice", "Instrument_Loops"]);
+        assert_eq!((n.family.as_deref(), n.cat.as_deref()), (Some("melodic"), Some("keys")));
+        let n = read_name("SO_DU_85_pariah_Cmin", &["Splice", "Instrument_Loops"]);
+        assert_eq!((n.family.as_deref(), n.cat.as_deref()), (Some("melodic"), None));
+        // a one-shot naming nothing stays unsorted
+        assert_eq!(cat("Thing 02", &["Pack"]), None);
         // a pack's demo is a demo, whatever it is made of
         assert_eq!(cat("House Bass (Demo)", &[]).as_deref(), Some("demo"));
         assert_eq!(cat("Track 01", &["Catalyst Samples - Ingredient House Bass", "Demo"]).as_deref(), Some("demo"));

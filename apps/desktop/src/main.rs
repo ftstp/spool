@@ -911,6 +911,12 @@ async fn sort_samples(app: State<'_, Arc<App>>, paths: Vec<String>, family: Opti
 }
 
 #[tauri::command]
+async fn unsorted_folders(app: State<'_, Arc<App>>, skip: Vec<String>) -> Res<Vec<app_core::samples_view::FolderToSort>> {
+    let app = Arc::clone(&app);
+    run(move || app.unsorted_folders(&skip)).await
+}
+
+#[tauri::command]
 async fn sort_sample_folder(app: State<'_, Arc<App>>, dir: String, family: String, cat: Option<String>) -> Res<usize> {
     let app = Arc::clone(&app);
     run(move || app.sort_sample_folder(&dir, &family, cat.as_deref())).await
@@ -1352,6 +1358,7 @@ fn main() {
             sample_songs,
             sort_samples,
             sort_sample_folder,
+            unsorted_folders,
             ref_tracks,
             ref_track,
             unmerge_artist,

@@ -42,7 +42,8 @@
     "none": "Unsorted",
     "demo": "Demos",
     "long": "Long recordings",
-    "unreadable": "Unreadable"
+    "unreadable": "Unreadable",
+    "fullloop": "Full loops"
   },
   "cat": {
     "kick": "Kick",
@@ -69,7 +70,8 @@
     "melody": "Melody",
     "demo": "Demo",
     "sub": "Sub",
-    "growl": "Growl / wobble"
+    "growl": "Growl / wobble",
+    "fullloop": "Full loop"
   },
   "fromAudio": "By ear (the name said nothing)",
   "listening": "The audio analysis is listening to the {n} unsorted samples: {time} left.",
@@ -132,15 +134,24 @@
     "title": "Sort by ear",
     "progress": "{done} sorted, {left} left",
     "stop": "Done",
-    "guess": "Probably: {what} ({p}%)",
+    "guess": "Probably: {what} ({p})",
     "enter": "Confirm this guess",
     "enterKey": "Enter",
     "noGuess": "No guess for this one.",
     "skip": "Skip",
-    "keys": "Enter confirms, 1 to 7 picks the family, S skips, Space replays, Backspace undoes.",
+    "keys": "Enter confirms, 1 to 8 picks the family, S skips, Space replays, Backspace undoes.",
     "undo": "Undo “{name}”",
     "loading": "Loading the unsorted samples...",
     "finished": "Done: {n} samples sorted. Spool uses them to sort the others.",
-    "empty": "No unsorted sample left."
+    "empty": "No unsorted sample left.",
+    "ofN": "{n} of {all}",
+    "progressFolders": "{done} samples sorted",
+    "mode": "Sort",
+    "oneByOne": "One by one",
+    "byFolder": "By folder",
+    "byFolderTip": "The folders with the most unsorted samples: listen to a few, one key sorts the whole folder.",
+    "nSamples": "{n} samples",
+    "listen": "Listen:",
+    "keysFolder": "Enter confirms, 1 to 8 sorts the whole folder, Tab plays the next example, S skips the folder, Backspace undoes."
   }
 }

@@ -42,7 +42,8 @@
     "none": "Non classés",
     "demo": "Démos",
     "long": "Enregistrements longs",
-    "unreadable": "Illisibles"
+    "unreadable": "Illisibles",
+    "fullloop": "Boucles complètes"
   },
   "cat": {
     "kick": "Kick",
@@ -69,7 +70,8 @@
     "melody": "Mélodie",
     "demo": "Démo",
     "sub": "Sub",
-    "growl": "Growl / wobble"
+    "growl": "Growl / wobble",
+    "fullloop": "Boucle complète"
   },
   "fromAudio": "D'après l'écoute (le nom ne disait rien)",
   "listening": "L'analyse audio écoute les {n} samples non classés : {time} restantes.",
@@ -132,15 +134,24 @@
     "title": "Tri à l'oreille",
     "progress": "{done} classés, {left} restants",
     "stop": "Terminer",
-    "guess": "Probablement : {what} ({p} %)",
+    "guess": "Probablement : {what} ({p})",
     "enter": "Confirmer cette proposition",
     "enterKey": "Entrée",
     "noGuess": "Pas de proposition pour celui-ci.",
     "skip": "Passer",
-    "keys": "Entrée confirme, 1 à 7 choisit la famille, S passe, Espace rejoue, Retour arrière annule.",
+    "keys": "Entrée confirme, 1 à 8 choisit la famille, S passe, Espace rejoue, Retour arrière annule.",
     "undo": "Annuler « {name} »",
     "loading": "Chargement des samples non classés...",
     "finished": "Terminé : {n} samples classés. Spool en tient compte pour classer les autres.",
-    "empty": "Plus aucun sample non classé."
+    "empty": "Plus aucun sample non classé.",
+    "ofN": "{n} sur {all}",
+    "progressFolders": "{done} samples classés",
+    "mode": "Trier",
+    "oneByOne": "Un par un",
+    "byFolder": "Par dossier",
+    "byFolderTip": "Les plus gros dossiers de non classés : écoute-en quelques-uns, une touche classe tout le dossier.",
+    "nSamples": "{n} samples",
+    "listen": "Écouter :",
+    "keysFolder": "Entrée confirme, 1 à 8 classe tout le dossier, Tab passe à l'exemple suivant, S passe le dossier, Retour arrière annule."
   }
 }

@@ -122,6 +122,47 @@ pub fn unsorted_in(con: &Connection, dir: &str) -> rusqlite::Result<Vec<String>>
     s.query_map(rusqlite::params![dir.len() as i64 + 1, format!("{dir}/")], |r| r.get(0))?.collect()
 }
 
+/// A folder of unsorted samples, for the quick sort by folder: listen to a few, sort them all.
+#[derive(Debug, Clone, Serialize, TS)]
+#[ts(export)]
+pub struct FolderToSort {
+    pub dir: String,
+    /// Its unsorted samples (the folder's own, not its subfolders').
+    pub paths: Vec<String>,
+    /// A few of them, spread over the folder, to listen to.
+    pub examples: Vec<SampleRow>,
+    /// The family most of them are guessed to be (sample_learn's guesses), and by how many.
+    pub guess: Option<String>,
+    #[ts(type = "number")]
+    pub guess_n: i64,
+}
+
+/// The folders holding the most unsorted samples, largest first, but those in `skip`.
+pub fn unsorted_folders(con: &Connection, skip: &[String], limit: usize) -> rusqlite::Result<Vec<FolderToSort>> {
+    use std::collections::HashMap;
+    let mut s = con.prepare(&format!("select path, g_family from samples where {FAM} is null order by path"))?;
+    let mut by: HashMap<String, (Vec<String>, HashMap<String, i64>)> = HashMap::new();
+    for (p, g) in s.query_map([], |r| Ok((r.get::<_, String>(0)?, r.get::<_, Option<String>>(1)?)))?.flatten() {
+        let dir = p.rsplit_once('/').map(|x| x.0.to_string()).unwrap_or_default();
+        let e = by.entry(dir).or_default();
+        e.0.push(p);
+        if let Some(g) = g {
+            *e.1.entry(g).or_default() += 1;
+        }
+    }
+    let mut v: Vec<(String, (Vec<String>, HashMap<String, i64>))> = by.into_iter().filter(|x| !skip.contains(&x.0)).collect();
+    v.sort_by(|a, b| b.1.0.len().cmp(&a.1.0.len()).then(a.0.cmp(&b.0)));
+    let mut out = Vec::new();
+    for (dir, (paths, guesses)) in v.into_iter().take(limit) {
+        let (guess, guess_n) = guesses.into_iter().max_by_key(|x| (x.1, x.0.clone())).map(|x| (Some(x.0), x.1)).unwrap_or((None, 0));
+        // three, spread: the first, the middle, the last
+        let pick: Vec<String> = [0, paths.len() / 2, paths.len().saturating_sub(1)].iter().map(|i| paths[*i].clone()).collect::<std::collections::BTreeSet<_>>().into_iter().collect();
+        let examples = rows_for(con, &pick)?;
+        out.push(FolderToSort { dir, paths, examples, guess, guess_n });
+    }
+    Ok(out)
+}
+
 /// In how many songs a sample is used (index::sample_use).
 const USED: &str = "(select count(distinct song_id) from sample_use u where u.path = lower(samples.path))";
 
@@ -373,6 +414,9 @@ mod tests {
     #[test]
     fn sorted_by_hand_wins_and_long_or_unreadable_are_apart() {
         let st = base();
+        let f = unsorted_folders(&st.con, &[], 10).unwrap();
+        assert_eq!((f.len(), f[0].dir.as_str(), f[0].paths.len(), f[0].examples.len()), (1, "D:/S/Pack", 1, 1));
+        assert!(unsorted_folders(&st.con, &["D:/S/Pack".into()], 10).unwrap().is_empty());
         assert_eq!(unsorted_in(&st.con, "D:/S/Pack").unwrap(), ["D:/S/Pack/thing.wav"]);
         // a category of another family is dropped, an unknown family refused
         assert_eq!(sort_by_hand(&st.con, &["D:/S/Pack/thing.wav".into()], Some("fx"), Some("kick")).unwrap(), 1);
@@ -382,6 +426,7 @@ mod tests {
         assert_eq!((r[0].family.as_deref(), r[0].cat.as_deref(), r[0].cat_src.as_deref()), (Some("fx"), None, Some("user")));
         assert_eq!((r[1].family.as_deref(), r[1].cat.as_deref()), (Some("drums"), Some("snare")));
         assert!(unsorted_in(&st.con, "D:/S/Pack").unwrap().is_empty());
+        assert!(unsorted_folders(&st.con, &[], 10).unwrap().is_empty());
         // back to automatic
         sort_by_hand(&st.con, &["D:/S/Pack/Kick 1.wav".into()], None, None).unwrap();
         assert_eq!(rows_for(&st.con, &["D:/S/Pack/Kick 1.wav".into()]).unwrap()[0].cat.as_deref(), Some("kick"));
