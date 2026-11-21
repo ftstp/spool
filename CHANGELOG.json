@@ -1,0 +1,840 @@
+[
+  {
+    "version": "0.1.43",
+    "date": "2026-11-21",
+    "notes": {
+      "en": [
+        "Samples: far fewer left unsorted. A name naming several kinds is settled (\"Vocal FX\" an effect, \"Vocal Chop Lead\" a vocal, \"Claps & Snares\" drums), and more words are read: fills, noise, foley, build-ups; new kinds brass, strings, woodwinds, melody.",
+        "Samples sorted by ear: Spool learns from your own well-named samples, on your computer, and sorts the others when it is sure."
+      ],
+      "fr": [
+        "Samples : beaucoup moins de non classés. Un nom qui cite plusieurs types est tranché (« Vocal FX » un effet, « Vocal Chop Lead » une voix, « Claps & Snares » de la batterie), et plus de mots sont lus : fills, noise, foley, build-ups ; nouveaux types cuivres, cordes, bois, mélodie.",
+        "Samples rangés à l'écoute : Spool apprend de tes propres samples bien nommés, sur ton ordinateur, et range les autres quand il est sûr."
+      ]
+    }
+  },
+  {
+    "version": "0.1.42",
+    "date": "2026-11-21",
+    "notes": {
+      "en": [
+        "Releases: play a whole release from its cover, on the Releases page and in the sidebar.",
+        "Play buttons in Home's Almost done and To review.",
+        "The MIDI keyboard is set up from the keyboard icon at the top right: input, sound and volume. The player keeps the chord you play.",
+        "Artists: To sort only offers names that look like artists; album and category folders are behind a link."
+      ],
+      "fr": [
+        "Sorties : écoute une sortie entière depuis sa pochette, dans la page Sorties et dans la barre latérale.",
+        "Boutons de lecture dans Presque finis et À valider, sur l'accueil.",
+        "Le clavier MIDI se règle depuis l'icône de clavier en haut à droite : entrée, son et volume. Le lecteur garde l'accord joué.",
+        "Artistes : À trier ne propose que les noms qui ressemblent à des artistes ; les dossiers d'albums et de catégories sont derrière un lien."
+      ]
+    }
+  },
+  {
+    "version": "0.1.41",
+    "date": "2026-11-21",
+    "notes": {
+      "en": [
+        "A project of audio only (recordings, no MIDI) plays: it was refused for having no notes."
+      ],
+      "fr": [
+        "Un projet uniquement audio (des enregistrements, sans MIDI) se lit : il était refusé faute de notes."
+      ]
+    }
+  },
+  {
+    "version": "0.1.40",
+    "date": "2026-11-21",
+    "notes": {
+      "en": [
+        "A project with long recordings (hours of audio, several GB) plays instead of closing Spool: files over about 5 minutes are read as they play."
+      ],
+      "fr": [
+        "Un projet avec de longs enregistrements (des heures d'audio, plusieurs Go) se lit au lieu de fermer Spool : les fichiers de plus de 5 minutes environ sont lus au fil de la lecture."
+      ]
+    }
+  },
+  {
+    "version": "0.1.39",
+    "date": "2026-11-21",
+    "notes": {
+      "en": [
+        "Artists: one question per name, \"who is it?\": me, me under another name, a guest (featuring) or not an artist. Names found in your folders wait in \"To sort\" instead of ending up in titles. The artists list, merges and featurings left Settings.",
+        "Featurings are also read without brackets (\"A & B\", \"A x B\", \"Title feat. B\") when every name is known.",
+        "Home figures are about finishing: done this year, close to done, asleep (nothing saved for 3 months), active weeks. Each opens the songs it counts.",
+        "Pick up shows three rows, and how many is yours to choose."
+      ],
+      "fr": [
+        "Artistes : une seule question par nom, « qui est-ce ? » : moi, moi sous un autre nom, un invité (featuring) ou pas un artiste. Les noms trouvés dans tes dossiers attendent dans « À trier » au lieu de finir dans les titres. La liste d'artistes, les fusions et les featurings quittent les Réglages.",
+        "Les featurings sont aussi reconnus sans parenthèses (« A & B », « A x B », « Titre feat. B ») quand tous les noms sont connus.",
+        "Les chiffres de l'accueil parlent de finir : terminés cette année, proches de la fin, endormis (rien d'enregistré depuis 3 mois), semaines actives. Chacun ouvre les morceaux qu'il compte.",
+        "Reprendre affiche trois lignes, et le nombre se règle."
+      ]
+    }
+  },
+  {
+    "version": "0.1.38",
+    "date": "2026-11-21",
+    "notes": {
+      "en": [
+        "Home: every row is full and the sections of a row are the same height.",
+        "Home keeps to what to do now: the figures, Pick up, Almost done, To validate and a short Progress. The charts are on the Statistics page."
+      ],
+      "fr": [
+        "Accueil : chaque ligne est pleine et les sections d'une même ligne ont la même hauteur.",
+        "L'accueil se concentre sur ce qu'il y a à faire : les chiffres, Reprendre, Presque finis, À valider et un Avancement court. Les graphiques sont sur la page Statistiques."
+      ]
+    }
+  },
+  {
+    "version": "0.1.37",
+    "date": "2026-11-21",
+    "notes": {
+      "en": [
+        "Home: the figures at the top are sections like the others. Every section moves anywhere and has a remove button while rearranging, and dragging no longer hesitates.",
+        "Previous and next work through the list on screen, whether a song plays its render or its project.",
+        "The play button of the song playing stays visible in lists.",
+        "Arrangement: each MIDI track's name shows the sound it plays; click it to choose another one.",
+        "MIDI keyboard: choose its sound from the player bar. Synth, pad, pluck, lead and bass are new."
+      ],
+      "fr": [
+        "Accueil : les chiffres du haut sont des sections comme les autres. Chaque section se déplace n'importe où et se retire d'un clic en réorganisation, et le glisser ne bloque plus.",
+        "Précédent et suivant parcourent la liste affichée, que le morceau joue son témoin ou son projet.",
+        "Le bouton play du morceau en lecture reste visible dans les listes.",
+        "Arrangement : le nom de chaque piste MIDI affiche le son joué ; un clic permet d'en choisir un autre.",
+        "Clavier MIDI : le son se choisit depuis le lecteur en bas. Synthé, nappe, pluck, lead et basse ajoutés."
+      ]
+    }
+  },
+  {
+    "version": "0.1.36",
+    "date": "2026-11-21",
+    "notes": {
+      "en": [
+        "Dragging a song onto a release works again, as do dragging a card onto a stage, a track within a release and a tab.",
+        "Home: no more floating panel. Right-click any section to rearrange Home (sections then drag and the others make room), remove it or add one right after it; \"+ Add a section\" shows when the pointer is on the page.",
+        "A song played from a list (Songs, board, folders, Home, an artist) plays on through the list, with previous and next in the player bar.",
+        "Song sheet: the Render / Project switch shows what is playing, and the render is the default.",
+        "Arrangement: set the sound each track plays (click its colour dot). It is kept, marked, and can go back to the one from the project.",
+        "A long arrangement shows about 40 bars and follows playback; the chart and the staff scroll with it too.",
+        "The player bar shows the chord your MIDI keyboard plays, beside the song's.",
+        "Key: a Pitch effect on a MIDI track is taken into account, and the song's own key settles a key the notes leave open (F minor or C minor).",
+        "Unstick: with no render, a sample loop plays over the project.",
+        "Samples: synths, stabs, riffs and breaks are now sorted by their names.",
+        "Play buttons: the triangle is centred in its circle."
+      ],
+      "fr": [
+        "Glisser un morceau sur une sortie fonctionne de nouveau, comme glisser une carte sur une étape, une piste dans une sortie ou un onglet.",
+        "Accueil : plus de panneau flottant. Un clic droit sur une section permet de réorganiser l'accueil (les sections se glissent et les autres se décalent), de la retirer ou d'en ajouter une juste après ; « + Ajouter une section » apparaît au survol de la page.",
+        "Un morceau lancé depuis une liste (Morceaux, tableau, dossiers, accueil, artiste) enchaîne sur les suivants, avec précédent et suivant dans le lecteur.",
+        "Fiche morceau : le choix Témoin / Projet montre ce qui joue, et le témoin est choisi par défaut.",
+        "Arrangement : choisis le son joué par chaque piste (clic sur sa pastille de couleur). Il est retenu, signalé, et peut revenir à celui du projet.",
+        "Un long arrangement affiche environ 40 mesures et suit la lecture ; la grille et la portée défilent aussi avec elle.",
+        "Le lecteur affiche l'accord joué sur ton clavier MIDI, à côté de celui du morceau.",
+        "Tonalité : un effet Pitch sur une piste MIDI est pris en compte, et la tonalité du morceau tranche quand les notes hésitent (Fa mineur ou Do mineur).",
+        "Débloquer : sans témoin, une boucle de sample se joue par-dessus le projet.",
+        "Samples : les synthés, stabs, riffs et breaks sont maintenant rangés d'après leurs noms.",
+        "Boutons de lecture : le triangle est centré dans son rond."
+      ]
+    }
+  },
+  {
+    "version": "0.1.35",
+    "date": "2026-11-20",
+    "notes": {
+      "en": [
+        "Home: right-click a block or a figure at the top to move it, remove it, or add another one right after it.",
+        "The Customize panel can be dragged by its title to see the blocks behind it, and stays where you leave it.",
+        "To review: \"Accept all\" shows how many suggestions it accepts, and the list opens to all of them before you decide.",
+        "A page whose height sits right at the window's no longer gains and loses its scrollbar in a loop."
+      ],
+      "fr": [
+        "Accueil : un clic droit sur un bloc ou un chiffre du haut permet de le déplacer, de le retirer ou d'en ajouter un autre juste après.",
+        "Le panneau Personnaliser se déplace en le tirant par son titre, pour voir les blocs qu'il cachait, et reste là où tu le laisses.",
+        "À valider : « Tout valider » indique combien de suggestions il valide, et la liste s'ouvre en entier pour les voir avant de décider.",
+        "Une page dont la hauteur tombe pile sur celle de la fenêtre ne gagne et ne perd plus sa barre de défilement en boucle."
+      ]
+    }
+  },
+  {
+    "version": "0.1.34",
+    "date": "2026-11-19",
+    "notes": {
+      "en": [
+        "Settings: a name taken for one of your artists that is in fact a featured artist can be moved to the featurings. Its songs go to the main artist, with this name credited as a featuring.",
+        "Home is yours: the \"Customize\" button lets you choose the figures at the top, the blocks below (every Statistics chart included) and their order.",
+        "Songs: save your filters, sort and view as a preset, switch from one to another in the bar, and mark one with a star to have it applied when Spool starts.",
+        "A song with no render yet still has a play button in the lists: it plays its latest project."
+      ],
+      "fr": [
+        "Réglages : un nom pris pour un de tes artistes alors que c'est un featuring peut passer dans les featurings. Ses morceaux vont à l'artiste principal, avec ce nom crédité en featuring.",
+        "L'accueil est à toi : le bouton « Personnaliser » permet de choisir les chiffres du haut, les blocs du dessous (tous les graphiques des Statistiques compris) et leur ordre.",
+        "Morceaux : enregistre tes filtres, ton tri et ta vue en préréglage, passe de l'un à l'autre depuis la barre, et marque-en un d'une étoile pour qu'il s'applique au lancement de Spool.",
+        "Un morceau sans témoin a quand même un bouton de lecture dans les listes : il lit son projet le plus récent."
+      ]
+    }
+  },
+  {
+    "version": "0.1.33",
+    "date": "2026-11-19",
+    "notes": {
+      "en": [
+        "One tooltip instead of two: the system's own no longer shows a moment later over Spool's.",
+        "Tooltips are drawn like the rest of the app (a rounded bubble with a small arrow) and stay inside the window, near the edges too.",
+        "A tooltip no longer stays on screen when what it described goes away."
+      ],
+      "fr": [
+        "Une seule infobulle au lieu de deux : celle du système ne s'affiche plus un instant après par-dessus celle de Spool.",
+        "Les infobulles ont le style du reste de l'application (une bulle arrondie avec une petite flèche) et restent dans la fenêtre, près des bords aussi.",
+        "Une infobulle ne reste plus affichée quand l'élément qu'elle décrit disparaît."
+      ]
+    }
+  },
+  {
+    "version": "0.1.32",
+    "date": "2026-11-19",
+    "notes": {
+      "en": [
+        "Spool answers much faster: a long calculation (the statistics, for instance) no longer holds up the pages, the song sheets or the player.",
+        "The statistics are worked out about four times faster, and Home and Statistics show the last figures at once while the new ones come in.",
+        "A status or a field you change shows at once, in the lists and on the song page.",
+        "The player always plays the last thing you clicked: a song clicked a few pages earlier no longer starts late.",
+        "Project playback starts as soon as its first seconds are ready; the rest loads while it plays.",
+        "Playing from the start begins at the first locator when there is one, and no longer counts muted or reference tracks, so it no longer starts on silence. A render played from the top skips the silence it opens with.",
+        "A MIDI file that cannot be read no longer makes Spool reload everything every 10 minutes."
+      ],
+      "fr": [
+        "Spool répond beaucoup plus vite : un calcul long (les statistiques, par exemple) ne bloque plus les pages, les fiches des morceaux ni le lecteur.",
+        "Les statistiques se calculent environ quatre fois plus vite, et l'accueil et la page Statistiques affichent tout de suite les derniers chiffres en attendant les nouveaux.",
+        "Un statut ou un champ modifié s'affiche immédiatement, dans les listes comme sur la fiche du morceau.",
+        "Le lecteur joue toujours le dernier élément cliqué : un morceau cliqué quelques pages plus tôt ne se lance plus en retard.",
+        "La lecture du projet démarre dès que ses premières secondes sont prêtes ; le reste se charge pendant la lecture.",
+        "La lecture depuis le début part du premier marqueur quand il y en a un, et ne tient plus compte des pistes coupées ni des références : elle ne commence plus sur du silence. Un témoin lu depuis le début saute son silence d'ouverture.",
+        "Un fichier MIDI illisible ne fait plus tout recharger à Spool toutes les 10 minutes."
+      ]
+    }
+  },
+  {
+    "version": "0.1.31",
+    "date": "2026-11-18",
+    "notes": {
+      "en": [
+        "The Media page also shows the media outside your projects, by folder: the same files as the Folders view's panel, with filters by kind.",
+        "A new Unused audio list: the sounds no song uses, by folder. Listen, open the folder, and link one by hand as a song's reference render, onto a mood board, or as a reference for a song, an artist or a release. Songs with a close name are suggested first.",
+        "Several media can be picked at once and sent to a song, release or artist mood board.",
+        "A render found only by its name in an MP3 folder is no longer taken as a song's reference render: it is offered on the song page, to choose by hand."
+      ],
+      "fr": [
+        "La page Médias montre aussi les médias hors de vos projets, par dossier : les mêmes fichiers que le panneau de la vue Dossiers, avec des filtres par type.",
+        "Nouvelle liste Audio inutilisé : les sons qu'aucun morceau n'utilise, par dossier. Écoutez, ouvrez le dossier, et liez-en un à la main comme témoin d'un morceau, dans un moodboard, ou comme référence pour un morceau, un artiste ou une sortie. Les morceaux au nom proche sont suggérés en premier.",
+        "On peut cocher plusieurs médias et les envoyer d'un coup dans le moodboard d'un morceau, d'une sortie ou d'un artiste.",
+        "Un rendu trouvé seulement par son nom dans un dossier MP3 n'est plus pris comme témoin d'un morceau : il est proposé sur la page du morceau, à choisir à la main."
+      ]
+    }
+  },
+  {
+    "version": "0.1.30",
+    "date": "2026-11-18",
+    "notes": {
+      "en": [
+        "Spool left open for a long time (overnight, screens off) no longer stops redrawing: the window follows its size again when moved to another screen.",
+        "A new version is looked for right after Spool opens, and again when you come back to its window, and it is said by a message, not only at the foot of the sidebar."
+      ],
+      "fr": [
+        "Spool laissé ouvert longtemps (la nuit, écrans éteints) ne cesse plus de se redessiner : la fenêtre suit de nouveau sa taille quand on la change d'écran.",
+        "Une nouvelle version est cherchée dès l'ouverture de Spool, puis quand on revient sur sa fenêtre, et un message la signale, pas seulement le bas de la barre latérale."
+      ]
+    }
+  },
+  {
+    "version": "0.1.29",
+    "date": "2026-11-18",
+    "notes": {
+      "en": [
+        "Mute and solo now silence the audio tracks of a project too (one could go on sounding).",
+        "The arrangement's chord row names the chord you hear at the playhead, and every chord shows on hover.",
+        "The staff writes a bar far over or under it an octave lower or higher, under 8va or 8vb: no note is cut. Long songs scroll more smoothly.",
+        "Render and Project switch from the player bar without it jumping. A click on a progression plays it (drag it into Live as before).",
+        "Every tooltip now shows at once, in the app's own style.",
+        "Play a MIDI keyboard through Spool: choose its input in Settings, a piano, an organ or an electric piano, with its own volume.",
+        "The pill at the top turns through what is useful today: the next release, the song nearly done, an idea left aside, your week, and more."
+      ],
+      "fr": [
+        "Le mute et le solo coupent aussi les pistes audio d'un projet (l'une d'elles pouvait continuer à sonner).",
+        "La ligne d'accords de l'arrangement nomme l'accord entendu à la tête de lecture, et chaque accord s'affiche au survol.",
+        "La portée écrit une mesure trop haute ou trop basse une octave plus bas ou plus haut, sous 8va ou 8vb : aucune note n'est coupée. Les longs morceaux défilent plus légèrement.",
+        "Témoin et Projet se changent depuis le lecteur sans que la barre saute. Un clic sur une progression la joue (et elle se glisse toujours dans Live).",
+        "Toutes les infobulles s'affichent tout de suite, au style de l'app.",
+        "Jouez d'un clavier MIDI dans Spool : choisissez son entrée dans les Réglages, un piano, un orgue ou un piano électrique, avec son propre volume.",
+        "La pastille du haut fait défiler ce qui est utile aujourd'hui : la prochaine sortie, le morceau presque fini, une idée laissée de côté, ta semaine, et plus encore."
+      ]
+    }
+  },
+  {
+    "version": "0.1.28",
+    "date": "2026-11-17",
+    "notes": {
+      "en": [
+        "The staff reads like a real one: the tune is taken from the melody clips across the whole project (not the bass or the chords), written with real note values and rests that fill each bar exactly, under the time signature and the tempo.",
+        "Click a bar of the chords (or of the staff) to play from there. Render and Project switch from the player bar too, always in step with the sheet, and Space pauses what you hear instead of starting another file.",
+        "While you scroll a song's sheet, the title of each open section stays at the top, and the arrangement keeps its timeline in sight, ready for a click. The render's waveform is taller and lined up with its buttons.",
+        "Finishing checks: add your own, save them as a preset for every song (or for some), and the cover, the title and artist, and the lyrics tick themselves. A text in the mood board can become the lyrics in one click.",
+        "Notes are separate items you delete one by one, and a note can be tied to a moment of the render: a click on its time plays from there.",
+        "Drop an audio file anywhere on a References card to add it. The render names are shown in full. Playback goes on when you change page.",
+        "In the calendar, drag a song onto a day to set its release date. The sidebar's sections fold.",
+        "The bar under the player holds still, the - and + sit close to their value, the key changes with the mouse wheel too, and the diagnostic report moved to Settings."
+      ],
+      "fr": [
+        "La portée se lit comme une vraie : la mélodie vient des clips mélodiques de tout le projet (ni la basse ni les accords), écrite avec de vraies valeurs de notes et des silences qui remplissent chaque mesure exactement, sous la signature rythmique et le tempo.",
+        "Cliquez sur une mesure de la grille (ou de la portée) pour lire depuis là. Témoin et Projet se changent aussi depuis le lecteur en bas, toujours synchronisés avec la fiche, et la barre espace met en pause ce que vous entendez au lieu de relancer un autre fichier.",
+        "Quand vous faites défiler la fiche d'un morceau, le titre de chaque section ouverte reste en haut, et l'arrangement garde sa timeline visible, prête pour un clic. La forme d'onde du témoin est plus haute et alignée avec ses boutons.",
+        "Finitions : ajoutez les vôtres, gardez-les en preset pour tous les morceaux (ou certains), et la pochette, le titre et l'artiste, et les paroles se cochent seuls. Un texte du moodboard devient les paroles en un clic.",
+        "Les notes sont des petits textes séparés, supprimés un par un, et une note peut être liée à un moment du témoin : un clic sur son heure relance la lecture là.",
+        "Déposez un fichier audio n'importe où sur une carte Références pour l'ajouter. Les noms des rendus s'affichent en entier. La lecture continue quand vous changez de page.",
+        "Dans le calendrier, glissez un morceau sur un jour pour fixer sa date de sortie. Les sections de la barre latérale se replient.",
+        "La barre du lecteur reste immobile, les - et + sont collés à leur valeur, la tonalité se règle aussi à la molette, et le rapport de diagnostic est dans les Réglages."
+      ]
+    }
+  },
+  {
+    "version": "0.1.27",
+    "date": "2026-11-17",
+    "notes": {
+      "en": [
+        "A new song sheet: the render stays in sight at the top while you scroll, with its waveform and comments, and plays the render or the project from the same button.",
+        "Open the sections you want with the buttons at the top (or the keys 1 to 0); each button says what its section holds while closed, and the sections you open stay open for every song.",
+        "The chords are a section of their own, and the stages are a line the song moves along, with the stage Spool guesses shown dotted."
+      ],
+      "fr": [
+        "Nouvelle fiche morceau : le témoin reste visible en haut pendant que vous faites défiler, avec sa forme d'onde et ses commentaires, et le même bouton lit le témoin ou le projet.",
+        "Ouvrez les sections que vous voulez avec les boutons du haut (ou les touches 1 à 0) ; chaque bouton résume sa section quand elle est fermée, et les sections ouvertes le restent pour tous les morceaux.",
+        "Les accords ont leur propre section, et les étapes forment une frise, avec l'étape devinée par Spool en pointillés."
+      ]
+    }
+  },
+  {
+    "version": "0.1.26",
+    "date": "2026-11-17",
+    "notes": {
+      "en": [
+        "Switching back from the render to the project in a song's arrangement now plays the project from the same point (the render used to keep playing).",
+        "Groups have mute and solo, tracks have solo (Ctrl+click adds to the solo); nested groups are followed.",
+        "The chord chart has a Staff mode again: the chords above the tune, in treble clef.",
+        "Latin chord names read \"Do m\", \"Sol m\" (not \"Dom\").",
+        "A Key control beside the tempo transposes what plays, a semitone at a time, without changing the tempo.",
+        "The player bar shows the chord heard and the next one, for any song render started from anywhere."
+      ],
+      "fr": [
+        "Dans l'arrangement d'un morceau, revenir du témoin au projet lit bien le projet au même endroit (le témoin continuait de jouer).",
+        "Les groupes ont mute et solo, les pistes ont solo (Ctrl+clic ajoute au solo) ; les groupes imbriqués sont suivis.",
+        "La grille d'accords retrouve un mode Portée : les accords au-dessus de la mélodie, en clé de sol.",
+        "Les accords en notation latine s'écrivent « Do m », « Sol m » (et plus « Dom »).",
+        "Un réglage Ton à côté du tempo transpose ce qui est lu, demi-ton par demi-ton, sans changer le tempo.",
+        "La barre du lecteur affiche l'accord entendu et le suivant, pour le témoin de n'importe quel morceau, d'où qu'il soit lancé."
+      ]
+    }
+  },
+  {
+    "version": "0.1.25",
+    "date": "2026-11-17",
+    "notes": {
+      "en": [
+        "The Folders view of the Songs page stays smooth however big it gets: hovering a song shows its play button at once (a hover used to lay out every card of the view again)."
+      ],
+      "fr": [
+        "La vue Dossiers de la page Morceaux reste fluide quelle que soit sa taille : au survol d'un morceau, son bouton play s'affiche tout de suite (chaque survol recalculait toutes les cartes de la vue)."
+      ]
+    }
+  },
+  {
+    "version": "0.1.24",
+    "date": "2026-11-17",
+    "notes": {
+      "en": [
+        "An artist's photo is changed with a click on it: a file from your disk, or any picture already in their projects. An artist without a chosen photo no longer borrows a song's artwork.",
+        "A release's picture is changed the same way, with a click on its cover.",
+        "Right-click any picture in the app to make it the main picture of a song, a release or an artist. Sending a file to a mood board now offers artists too.",
+        "The release page uses the whole window, and each track shows its style, key, tempo and last save. A release has notes.",
+        "The Songs calendar places songs by release date, creation or last modification.",
+        "Dropping a song on a folder asks before moving it on disk, and \"Arrange on disk\" says clearly that nothing moves before you confirm.",
+        "Date fields match the rest of the app. The artist profile drops the ISNI, label, publisher, distributor and Bandcamp fields."
+      ],
+      "fr": [
+        "La photo d'un artiste se change en cliquant dessus : un fichier de ton disque, ou n'importe quelle image déjà dans ses projets. Un artiste sans photo choisie n'emprunte plus la pochette d'un morceau.",
+        "L'image d'une sortie se change de la même façon, en cliquant sur sa pochette.",
+        "Clic droit sur n'importe quelle image de l'app pour en faire l'image principale d'un morceau, d'une sortie ou d'un artiste. Envoyer un fichier vers un moodboard propose aussi les artistes.",
+        "La page d'une sortie occupe toute la fenêtre, et chaque titre montre son style, sa tonalité, son tempo et sa dernière modification. Une sortie a des notes.",
+        "Le calendrier des morceaux les place selon leur date de sortie, de création ou de dernière modification.",
+        "Glisser un morceau sur un dossier demande avant de le déplacer sur le disque, et « Ranger sur le disque » dit clairement que rien ne bouge avant ta confirmation.",
+        "Les champs de date suivent le style de l'app. Le profil d'artiste n'a plus les champs ISNI, label, éditeur, distributeur et Bandcamp."
+      ]
+    }
+  },
+  {
+    "version": "0.1.23",
+    "date": "2026-11-17",
+    "notes": {
+      "en": [
+        "A Resources section on each song: the samples its project plays (in the project folder, in a library, or not found) and what its Samples folders keep unused, with its MIDI files. Each one plays, drags into Live and shows in Explorer.",
+        "The mood board also lists the notes and documents (text, PDF...) lying in the song's folder; a click shows them in Explorer."
+      ],
+      "fr": [
+        "Une section Ressources sur chaque morceau : les samples que joue son projet (dans le dossier du projet, dans une bibliothèque, ou introuvables) et ce que ses dossiers Samples gardent sans l'utiliser, avec ses fichiers MIDI. Chacun s'écoute, se glisse dans Live et s'affiche dans l'explorateur.",
+        "Le moodboard liste aussi les notes et documents (texte, PDF...) posés dans le dossier du morceau ; un clic les montre dans l'explorateur."
+      ]
+    }
+  },
+  {
+    "version": "0.1.22",
+    "date": "2026-11-17",
+    "notes": {
+      "en": [
+        "Settings > Storage: the lines now add up to the total (the WAV copies made to play AIFF files were counted in the total but shown nowhere), and the safety copies are described as they are now: one, compressed."
+      ],
+      "fr": [
+        "Réglages > Stockage : les lignes font maintenant bien le total (les copies WAV faites pour lire les AIFF étaient comptées dans le total mais affichées nulle part), et les copies de sécurité sont décrites comme elles sont maintenant : une seule, compressée."
+      ]
+    }
+  },
+  {
+    "version": "0.1.21",
+    "date": "2026-11-17",
+    "notes": {
+      "en": [
+        "A smaller catalogue: what Spool keeps of each project and MIDI file is now compressed (about 45% smaller). The first start after the update converts it, for a few seconds to a couple of minutes on a large one.",
+        "Safety copies: only the newest is kept, and it is compressed in the background (about 6 times smaller).",
+        "Chords: simpler and closer to what is played. A melody over the chords counts less, a sus, 7th or maj7 is shown only when its note is really there, a bar is split only when the chord really changes, and a slash bass only when the bass holds it.",
+        "Playing a project: a limiter keeps the sound from saturating."
+      ],
+      "fr": [
+        "Un catalogue plus léger : ce que Spool garde de chaque projet et de chaque fichier MIDI est maintenant compressé (environ 45 % de place en moins). Le premier démarrage après la mise à jour le convertit, de quelques secondes à une ou deux minutes sur un gros catalogue.",
+        "Copies de sécurité : seule la plus récente est gardée, et elle est compressée en arrière-plan (environ 6 fois plus petite).",
+        "Accords : plus simples et plus proches de ce qui est joué. Une mélodie par-dessus les accords compte moins, un sus, un 7 ou un maj7 n'est affiché que si sa note est vraiment là, une mesure n'est coupée que si l'accord change vraiment, et une basse en « / » seulement quand la basse la tient.",
+        "Lecture d'un projet : un limiteur empêche le son de saturer."
+      ]
+    }
+  },
+  {
+    "version": "0.1.20",
+    "date": "2026-11-17",
+    "notes": {
+      "en": [
+        "Playing a project: a Drum Rack made with \"Slice to new Drum Rack\" plays each pad's own slice again, instead of restarting the whole loop on every hit (the beat stacked on itself)."
+      ],
+      "fr": [
+        "Lecture d'un projet : un Drum Rack fait avec « Slice to new Drum Rack » joue de nouveau la tranche de chaque pad, au lieu de relancer toute la boucle à chaque coup (le rythme s'empilait sur lui-même)."
+      ]
+    }
+  },
+  {
+    "version": "0.1.19",
+    "date": "2026-11-17",
+    "notes": {
+      "en": [
+        "The diagnostic report's folder now opens when the report is created (it showed \"not found\", though the report was written)."
+      ],
+      "fr": [
+        "Le dossier du rapport de diagnostic s'ouvre bien à sa création (il affichait « introuvable », alors que le rapport était écrit)."
+      ]
+    }
+  },
+  {
+    "version": "0.1.18",
+    "date": "2026-11-16",
+    "notes": {
+      "en": [
+        "Arrangement: each MIDI clip shows its chords (bar by bar when there is room, else its progression in short), and hovering or right-clicking it gives its notes, range, velocities and chords.",
+        "A play button beside the chord chart plays all of the song's chords in a row, skipping the empty bars; the playhead follows.",
+        "Closer sounds when a project plays: each track's sound is guessed from its instrument, preset, name and effects (bass, organ, electric piano, reese...), and Simpler and Drum Rack play their real samples.",
+        "Playing is kept: velocity on every note, the clips' pitch bend, glide when the instrument has it or when a line is played legato.",
+        "A volume control in the player at the bottom, for everything the app plays, remembered.",
+        "Diagnostic report (Settings > Spool, or the activity details): if the analysis seems stuck or keeps starting again at the same place, create it and send it. The app keeps a small journal on your computer only; nothing is ever sent by the app.",
+        "The folder tree export is removed: Spool collects nothing."
+      ],
+      "fr": [
+        "Arrangement : chaque clip MIDI montre ses accords (mesure par mesure quand il y a la place, sinon sa suite en bref), et le survol ou le clic droit donne ses notes, sa tessiture, ses vélocités et ses accords.",
+        "Un bouton lecture à côté de la grille joue tous les accords du morceau à la suite, en sautant les mesures vides ; la tête de lecture suit.",
+        "Des sons plus proches à la lecture d'un projet : le son de chaque piste est déduit de son instrument, de son preset, de son nom et de ses effets (basse, orgue, piano électrique, reese...), et Simpler et Drum Rack jouent leurs vrais samples.",
+        "Le jeu est conservé : vélocité sur chaque note, pitch bend des clips, glide quand l'instrument l'a ou quand une ligne est jouée legato.",
+        "Un réglage de volume dans le lecteur en bas, pour tout ce que l'app joue, retenu.",
+        "Rapport de diagnostic (Réglages > Spool, ou le détail de l'activité) : si l'analyse semble bloquée ou recommence toujours au même endroit, crée-le et envoie-le. L'app tient un petit journal sur ton ordinateur uniquement ; elle n'envoie jamais rien.",
+        "L'export de l'arborescence est retiré : Spool ne collecte rien."
+      ]
+    }
+  },
+  {
+    "version": "0.1.17",
+    "date": "2026-11-16",
+    "notes": {
+      "en": [
+        "How Spool reads your folders (Settings): what it understood of the way you keep your projects, with your own examples, and rules you can change: where a title comes from (the project, the folder, or automatic), which folders are a single song. Each change shows the songs before and after before it is applied, and Ctrl+Z undoes it.",
+        "\"1 v2\", \"1 v7\" and \"1\" are now one song. Gathering a folder from a song's sheet keeps it as a rule and offers to do the same for the folders beside it.",
+        "Export your folder tree (names only, anonymisable) to help check that Spool reads your way of working.",
+        "Arrangement: one play button with Project or Render; a click on the ruler places the start instead of starting the render. Tracks and groups switched off in Live start muted.",
+        "Chords: up to two chords a bar and the bass under them (F#m/A), on one line per section, repeats counted, in American, Latin or degree names.",
+        "Progressions tab: your song's loop, variations of it, and the well-known progressions of its mode in its key, to hear and drag into Live.",
+        "Media page: every song's pictures, videos, fonts and presets, by song or as a folder tree; a star makes a picture the song's own. A plugin skin or a screenshot is no longer picked as a song's picture.",
+        "Every page shows its shape while it loads, and the sidebar status tells the long background work (full analysis, listening to the sounds, with what is left) apart from the quick checks; a click shows the details. Whole section titles fold the song sheet."
+      ],
+      "fr": [
+        "Comment Spool lit ton classement (Réglages) : ce que Spool a compris de ta façon de ranger, avec tes propres exemples, et des règles à changer : d'où vient le titre (le projet, le dossier ou automatique), quels dossiers sont un seul morceau. Chaque changement montre les morceaux avant et après, avant d'être appliqué, et Ctrl+Z l'annule.",
+        "« 1 v2 », « 1 v7 » et « 1 » sont maintenant un seul morceau. Réunir un dossier depuis la fiche d'un morceau en fait une règle et propose de faire pareil pour les dossiers voisins.",
+        "Exporte l'arborescence de tes dossiers (les noms seulement, anonymisables) pour aider à vérifier que Spool lit bien ta façon de ranger.",
+        "Arrangement : un seul bouton lecture avec Projet ou Témoin ; un clic sur la règle place le départ au lieu de lancer le témoin. Les pistes et groupes coupés dans Live démarrent coupés.",
+        "Accords : jusqu'à deux accords par mesure et la basse dessous (F#m/A), sur une ligne par section, les répétitions comptées, en notation américaine, latine ou en degrés.",
+        "Onglet Progressions : la boucle de ton morceau, des variantes, et les progressions connues de son mode dans sa tonalité, à écouter et à glisser dans Live.",
+        "Page Médias : les images, vidéos, polices et presets de chaque morceau, par morceau ou en arborescence ; l'étoile fait d'une image celle du morceau. Un skin de plugin ou une capture d'écran n'est plus choisi comme image du morceau.",
+        "Chaque page montre sa forme pendant le chargement, et le statut de la barre latérale sépare les longs travaux de fond (analyse complète, écoute des sons, avec ce qui reste) des petites vérifications ; un clic montre le détail. Tout le titre d'une section replie la fiche."
+      ]
+    }
+  },
+  {
+    "version": "0.1.16",
+    "date": "2026-11-16",
+    "notes": {
+      "en": [
+        "Chord chart under the arrangement: the song's bars four to a line by section, a repeated line counted once, in American (Am7), Latin (La m7), degrees (vi) or on a staff. A click on a bar plays its chord.",
+        "A song's sheet opens with every section folded (arrangement, render, projects, checklist, notes, mood board...). While its tab stays open each section stays as you left it; opened again later, it starts folded.",
+        "Right-click a clip in the arrangement: listen, find MIDI of the same kind or samples that sound alike, save a MIDI clip as a file, open the sample's or the project's folder.",
+        "Automatic analysis can be turned off in the settings, with an \"Analyse\" button in the sidebar; while Ableton Live is open, the sound analysis goes gently so Live does not crackle.",
+        "Folders and releases: the Folders view shows which folder is a release and turns one into a release; the Releases page lists the singles and filters by type; drag a song onto a release in the sidebar, which now lists more of them.",
+        "A folder split into several songs says so, newest project first, and gathers them into one song in a click. A project with a newer version in the same folder shows it.",
+        "The arrangement is drawn in one go (smooth scrolling with it open), Redo (Ctrl+Y) sits beside Undo, and every play button turns into pause.",
+        "MIDI drums sound like a real kit (kick, snare, hats, cymbals, toms...), and a kit written higher up is brought back in place. In \"Unstick this song\", an audio loop over the render starts on the bar and stays in time without crackles."
+      ],
+      "fr": [
+        "Grille d'accords sous l'arrangement : les mesures par quatre, par section, une ligne qui revient comptée une fois, en notation américaine (Am7), latine (La m7), en degrés (vi) ou sur une portée. Un clic sur une mesure joue son accord.",
+        "La fiche d'un morceau s'ouvre avec toutes ses sections repliées (arrangement, témoin, projets, finitions, notes, moodboard...). Tant que son onglet reste ouvert, chaque section reste comme tu l'as laissée ; rouvert plus tard, tout repart replié.",
+        "Clic droit sur un clip de l'arrangement : écouter, trouver du MIDI du même genre ou des samples qui sonnent pareil, enregistrer un clip MIDI en fichier, ouvrir le dossier du sample ou du projet.",
+        "L'analyse automatique peut se couper dans les réglages, avec un bouton « Analyser » dans la barre latérale ; quand Ableton Live est ouvert, l'analyse du son se fait en douceur pour que Live ne craque pas.",
+        "Dossiers et sorties : la vue Dossiers montre quel dossier est une sortie et en fait une sortie ; la page Sorties liste les singles et filtre par type ; un morceau se glisse sur une sortie de la barre latérale, qui en affiche davantage.",
+        "Un dossier découpé en plusieurs morceaux le signale, le projet le plus récent en premier, et les réunit en un seul morceau en un clic. Un projet qui a une version plus récente dans le même dossier l'indique.",
+        "L'arrangement est dessiné d'un bloc (défilement fluide quand il est ouvert), Rétablir (Ctrl+Y) est à côté d'Annuler, et chaque bouton lecture passe en pause.",
+        "La batterie MIDI sonne comme un vrai kit (grosse caisse, caisse claire, charleston, cymbales, toms...) et un kit écrit plus haut est remis en place. Dans « Débloquer », une boucle audio sur le témoin démarre sur la mesure et reste calée sans craquer."
+      ]
+    }
+  },
+  {
+    "version": "0.1.15",
+    "date": "2026-11-16",
+    "notes": {
+      "en": [
+        "Songs page redesigned: one header line, the filters behind a \"Filters\" button sorted by theme (music, progress, technical), each filter set shown as a label removed in one click.",
+        "Scrolling a song's sheet is smooth again: the list beside it only draws the rows in sight.",
+        "Styles: songs with no telling name now get the style of the songs they sound like or share plugins with. Far fewer songs without a style.",
+        "Repair starts with three plain steps: repair at once (a repaired copy also gathers the samples found elsewhere into the project, like Live's Collect All and Save), what to install first, the samples still lost. Ignoring a plugin is a clear button.",
+        "Projects copied as they are into other folders are flagged, with the songs they copy and a way to archive the copy.",
+        "Sidebar in sections (Catalogue, Make music, Upkeep); \"Create\" is now \"Starter pack\". Releases can be filtered. Previous / next in the player for the Samples and MIDI lists.",
+        "The mood board also shows the fonts (with the song's title) and presets kept in the song's folder; every render of a song is listed; \"Find samples / MIDI\" is in the song's menu."
+      ],
+      "fr": [
+        "Page Morceaux repensée : une seule ligne d'en-tête, les filtres derrière un bouton « Filtres » rangés par thème (musique, avancement, technique), chaque filtre actif affiché en étiquette qu'un clic retire.",
+        "Le défilement de la fiche d'un morceau est de nouveau fluide : la liste à côté ne dessine que les lignes visibles.",
+        "Styles : un morceau sans nom parlant prend le style des morceaux auxquels il ressemble à l'écoute ou dont il partage les plugins. Beaucoup moins de morceaux sans style.",
+        "Réparer commence par trois étapes simples : réparer d'un coup (une copie réparée réunit aussi dans le projet les samples retrouvés ailleurs, comme « Réunir et sauvegarder » dans Live), quoi installer d'abord, les samples encore perdus. Ignorer un plugin est un vrai bouton.",
+        "Les projets copiés tels quels dans d'autres dossiers sont signalés, avec les morceaux qu'ils copient et de quoi archiver la copie.",
+        "Barre latérale en sections (Catalogue, Composer, Entretien) ; « Créer » devient « Starter pack ». Les sorties se filtrent. Précédent / suivant dans le lecteur pour les listes de samples et de MIDI.",
+        "Le moodboard montre aussi les polices (avec le titre du morceau) et les presets rangés dans le dossier du morceau ; tous les rendus d'un morceau sont listés ; « Trouver des samples / des MIDI » est dans le menu du morceau."
+      ]
+    }
+  },
+  {
+    "version": "0.1.14",
+    "date": "2026-11-16",
+    "notes": {
+      "en": [
+        "Artists: a page for every artist the catalogue names, and a sheet for each: a profile written in place (who, contact, links, rights identifiers such as collecting society, IPI, ISNI, notes), their songs, featurings, releases, styles, keys and tempos, a mood board and a photo. Kept by Spool, never written into your projects.",
+        "References: mark an audio file as a reference (a released track) of a song, an artist or a release. It is never taken for the reference render again.",
+        "Compare your render with a reference: loudness, peak, average level, dynamics, format, and the balance of frequencies on one chart, with the gap range by range (sub to highs), at equal loudness.",
+        "Play the project: mute a track with a click on its name, kept for that project. Tracks that play a reference, or are named so, start muted.",
+        "Home no longer jumps while its figures load."
+      ],
+      "fr": [
+        "Artistes : une page pour chaque artiste que nomme le catalogue, et une fiche pour chacun : un profil rempli sur place (qui, contact, liens, identifiants de droits comme la société de gestion, l'IPI, l'ISNI, notes), ses morceaux, featurings, sorties, styles, tonalités et tempos, un moodboard et une photo. Gardé par Spool, jamais écrit dans tes projets.",
+        "Références : marque un audio comme référence (un morceau sorti) d'un morceau, d'un artiste ou d'une sortie. Il n'est plus jamais pris pour le témoin.",
+        "Compare ton témoin à une référence : loudness, crête, niveau moyen, dynamique, format, et l'équilibre des fréquences sur une même courbe, avec l'écart zone par zone (du sub aux aigus), à volume égal.",
+        "Écoute du projet : coupe une piste d'un clic sur son nom, retenu pour ce projet. Les pistes qui jouent une référence, ou nommées ainsi, partent coupées.",
+        "L'accueil ne saute plus pendant que ses chiffres arrivent."
+      ]
+    }
+  },
+  {
+    "version": "0.1.13",
+    "date": "2026-11-16",
+    "notes": {
+      "en": [
+        "Play the project: its MIDI tracks with the small synth and its audio clips from their own samples, in time with the arrangement, from the first bar that sounds.",
+        "Reference renders in AIFF play (they showed as unreadable).",
+        "Projects saved with Live 9 or older: their samples are found at last (they were invisible: missing counts, sample use, playback). Spool reads every project once again after this update.",
+        "Over the reference render, a MIDI clip or a loop now stays in time with it: started on the render's own clock, and put back if it drifts.",
+        "The search finds by tempo (174, 170-175), key (Fm, F#m or Gbm), artist, style, folder, project file, release, instrument: every word typed must match, in any order.",
+        "A folder holding one Live project of another name (\"Lea/solitaire Project\") is named after the project.",
+        "Repair says in one sentence whether anything is missing; each project on a song's sheet says when all its plugins and samples are there.",
+        "A release plays through with previous / next in the player bar, from any of its tracks.",
+        "Older versions of a project open in Live from the song's sheet; \"make it a song of its own\" asks first, then opens the new song in a tab."
+      ],
+      "fr": [
+        "Écoute le projet : ses pistes MIDI avec le petit synthé et ses clips audio depuis leurs propres samples, calés sur l'arrangement, dès la première mesure qui sonne.",
+        "Les témoins en AIFF se lisent (ils étaient indiqués illisibles).",
+        "Projets enregistrés avec Live 9 ou plus ancien : leurs samples sont enfin retrouvés (ils étaient invisibles : manquants, utilisation, écoute). Spool relit une fois tous les projets après cette mise à jour.",
+        "Par-dessus le témoin, un clip MIDI ou une boucle reste calé dessus : lancé sur l'horloge du témoin lui-même, et remis en place s'il dérive.",
+        "La recherche trouve par tempo (174, 170-175), tonalité (Fm, F#m ou Gbm), artiste, style, dossier, fichier de projet, sortie, instrument : chaque mot tapé doit correspondre, dans n'importe quel ordre.",
+        "Un dossier qui contient un seul projet Live d'un autre nom (« Lea/solitaire Project ») prend le nom du projet.",
+        "Réparer dit en une phrase s'il manque quelque chose ; chaque projet sur la fiche d'un morceau dit quand tous ses plugins et samples sont là.",
+        "Une sortie s'écoute d'un bout à l'autre avec précédent / suivant dans la barre de lecture, à partir de n'importe lequel de ses morceaux.",
+        "Les anciennes versions d'un projet s'ouvrent dans Live depuis la fiche ; « En faire un morceau à part » demande d'abord, puis ouvre le nouveau morceau dans un onglet."
+      ]
+    }
+  },
+  {
+    "version": "0.1.12",
+    "date": "2026-11-16",
+    "notes": {
+      "en": [
+        "\"Unstick this song\" on each song's sheet: your own material that fits it (its key and tempo): the MIDI clips of your other projects (progressions, basslines, melodies, beats) and your loops. Hear one alone or over the reference render from its next bar, then drag it into Live.",
+        "Play the whole arrangement: the reference render with a playhead over it, or every MIDI track together. Click the ruler to play from there; the locators run through the tracks.",
+        "The arrangement folds away and shows any version of the project, older ones included.",
+        "Harmony: choose the aid shown (the key's seven chords and their function, the circle of fifths, a keyboard) or hide it.",
+        "\"Open in Live\" buttons now say so."
+      ],
+      "fr": [
+        "« Débloquer ce morceau » sur la fiche de chaque morceau : ta propre matière qui va avec (sa tonalité, son tempo) : les clips MIDI de tes autres projets (progressions, basses, mélodies, rythmes) et tes boucles. Écoute-la seule ou par-dessus le témoin à partir de la mesure suivante, puis glisse-la dans Live.",
+        "Écoute tout l'arrangement : le témoin avec une tête de lecture, ou toutes les pistes MIDI ensemble. Clique la règle pour écouter à partir de là ; les repères traversent les pistes.",
+        "L'arrangement se replie et montre n'importe quelle version du projet, les anciennes comprises.",
+        "Harmonie : choisis l'aide affichée (les sept accords de la tonalité et leur fonction, le cercle des quintes, un clavier) ou masque-la.",
+        "Les boutons « Ouvrir dans Live » le disent clairement."
+      ]
+    }
+  },
+  {
+    "version": "0.1.11",
+    "date": "2026-11-16",
+    "notes": {
+      "en": [
+        "Each song's sheet shows its arrangement, drawn from the project: tracks coloured by role, the clips where they are (MIDI ones with their notes), the sections from your locators. Click a clip to hear it.",
+        "Harmony on the sheet: a chord row under the arrangement, the key on a circle of fifths, and what could come after a chord, by level (basics, colours, advanced) and by style (jazz, soul and funk, reggae, brass band, orchestral), each explained in a line. Hear it, then drag it into Live as MIDI.",
+        "MIDI page: \"In your projects\" lists the MIDI clips written in all your Live projects (chords, basslines, melodies, beats), each once, with the song it comes from. Listen, then drag it into Live. The next scan reads your projects once for this.",
+        "MIDI files play in the bottom player, where you can jump anywhere. The tempo is set with the mouse wheel or by dragging its value.",
+        "A style is no longer read from folder names and shown as typed by you: only your own, else what Spool detects."
+      ],
+      "fr": [
+        "La fiche de chaque morceau montre son arrangement, tiré du projet : les pistes colorées par rôle, les clips à leur place (les MIDI avec leurs notes), les sections tirées de tes repères. Clique un clip pour l'écouter.",
+        "L'harmonie sur la fiche : une ligne d'accords sous l'arrangement, la tonalité sur un cercle des quintes, et les accords qui pourraient suivre, par niveau (bases, couleurs, avancé) et par style (jazz, soul et funk, reggae, fanfare, orchestral), chacun expliqué en une phrase. Écoute, puis glisse dans Live en MIDI.",
+        "Page MIDI : « Dans tes projets » liste les clips MIDI écrits dans tous tes projets Live (accords, basses, mélodies, rythmes), une seule fois chacun, avec le morceau d'où ils viennent. Écoute, puis glisse dans Live. La prochaine analyse relit tes projets une fois pour cela.",
+        "Les fichiers MIDI se lisent dans le lecteur du bas, où tu peux te déplacer. Le tempo se règle à la molette ou en glissant sa valeur.",
+        "Un style n'est plus lu dans les noms de dossiers et affiché comme saisi par toi : seulement le tien, sinon ce que Spool détecte."
+      ]
+    }
+  },
+  {
+    "version": "0.1.10",
+    "date": "2026-11-15",
+    "notes": {
+      "en": [
+        "Lighter texts: the start screen, the welcome, Settings and the tooltips no longer repeat what Spool does with your files; each action says what it does.",
+        "Small fixes in the comparison panel and the comments count."
+      ],
+      "fr": [
+        "Textes allégés : l'écran de démarrage, l'accueil, les Réglages et les bulles d'aide ne répètent plus ce que Spool fait de tes fichiers ; chaque action dit ce qu'elle fait.",
+        "Petites corrections dans la comparaison et le compte des commentaires."
+      ]
+    }
+  },
+  {
+    "version": "0.1.9",
+    "date": "2026-11-15",
+    "notes": {
+      "en": [
+        "Right-click a release to rename it, change its type, copy its tracklist or delete it without opening it (Ctrl+Z brings it back).",
+        "Right-click a track of a release to move it up or down, use its artwork for the release, or remove it.",
+        "Right-click a sample or a MIDI file to listen, add it to a mood board, show it in Explorer or copy its path or name."
+      ],
+      "fr": [
+        "Clic droit sur une sortie pour la renommer, changer son type, copier sa liste de titres ou la supprimer sans l'ouvrir (Ctrl+Z la remet).",
+        "Clic droit sur une piste d'une sortie pour la monter, la descendre, utiliser sa pochette pour la sortie ou la retirer.",
+        "Clic droit sur un sample ou un MIDI pour l'écouter, l'ajouter à un moodboard, l'afficher dans l'Explorateur ou copier son chemin ou son nom."
+      ]
+    }
+  },
+  {
+    "version": "0.1.8",
+    "date": "2026-11-15",
+    "notes": {
+      "en": [
+        "Send a sample or a MIDI file to the mood board of a song or a release in one click. Releases now have their own mood board, and sounds and MIDI files on a board can be played and dragged into Live. A file from your library is only linked, never moved.",
+        "Timed comments on reference renders (\"the drop is empty at 1:32\"): added at the moment you hear, ticked when dealt with, a click plays from there.",
+        "Compare a render with another version of the song or with a released reference track, switching at the same moment and at the same loudness, and see how much Spotify, Deezer or Apple Music would turn it down.",
+        "What changed between two saves of a project: tempo, length, tracks added, removed or renamed, each track's plugins, notes, clips and samples.",
+        "Samples: see which songs use each one, filter the ones never used, and find the duplicates with the space they take (nothing is ever deleted). Your projects are read again once at the next scan for this.",
+        "Drag a MIDI file into Live as you hear it: transposed and at the tempo chosen, as a copy (the original never changes)."
+      ],
+      "fr": [
+        "Envoie un sample ou un MIDI dans le moodboard d'un morceau ou d'une sortie en un clic. Les sorties ont maintenant leur propre moodboard, et les sons et MIDI d'un moodboard s'écoutent et se glissent dans Live. Un fichier de ta bibliothèque est seulement lié, jamais déplacé.",
+        "Commentaires datés sur les témoins (« le drop est vide à 1:32 ») : ajoutés au moment écouté, cochés quand c'est réglé, un clic relance l'écoute à cet endroit.",
+        "Compare un témoin avec une autre version du morceau ou un morceau de référence, en passant de l'un à l'autre au même moment et au même volume, et vois de combien Spotify, Deezer ou Apple Music le baisseraient.",
+        "Ce qui a changé entre deux enregistrements d'un projet : tempo, durée, pistes ajoutées, retirées ou renommées, plugins de chaque piste, notes, clips et samples.",
+        "Samples : vois quels morceaux utilisent chacun, filtre ceux qui ne servent jamais, et retrouve les doublons avec la place qu'ils prennent (rien n'est jamais supprimé). Pour cela, tes projets sont relus une fois à la prochaine analyse.",
+        "Glisse un MIDI dans Live tel que tu l'écoutes : transposé et au tempo choisi, en copie (l'original ne change jamais)."
+      ]
+    }
+  },
+  {
+    "version": "0.1.7",
+    "date": "2026-11-14",
+    "notes": {
+      "en": [
+        "MIDI files now play: in 0.1.6 the app's own security rules blocked every one of them.",
+        "Play samples, reference renders and MIDI files faster or slower without changing their key, or lock them to the tempo you typed (a loop at half or double that tempo keeps its speed). Loop button in the player.",
+        "Transpose MIDI files in semitones while listening (drums stay as they are)."
+      ],
+      "fr": [
+        "Les fichiers MIDI se lisent enfin : en 0.1.6, les règles de sécurité de l'app les bloquaient tous.",
+        "Écoute les samples, les témoins et les MIDI plus vite ou plus lentement sans changer leur tonalité, ou cale-les sur le tempo tapé (une boucle à la moitié ou au double de ce tempo garde sa vitesse). Bouton boucle dans le lecteur.",
+        "Transpose les MIDI en demi-tons pendant l'écoute (la batterie ne bouge pas)."
+      ]
+    }
+  },
+  {
+    "version": "0.1.6",
+    "date": "2026-11-14",
+    "notes": {
+      "en": [
+        "Listen to your MIDI files on the MIDI page: a built-in synth plays them with piano, synth, bass or drums, picked from what the file is (or chosen by you), in a loop on their bars.",
+        "A project grouped with others by its name can become a song of its own, from the song's sheet. Ctrl+Z puts it back; no file moves.",
+        "Attach another song to this one straight from the song's menu: the songs of the same folder come first.",
+        "Sending a song to a release suggests the likely ones first (same folder, same artist, not out yet), and offers to create the release from a folder named like an EP or an LP."
+      ],
+      "fr": [
+        "Écoute tes fichiers MIDI sur la page MIDI : un synthé intégré les joue en piano, synthé, basse ou batterie, choisi selon le fichier (ou par toi), en boucle sur leurs mesures.",
+        "Un projet regroupé avec d'autres à cause de son nom peut devenir un morceau à part, depuis la fiche du morceau. Ctrl+Z le remet ; aucun fichier ne bouge.",
+        "Rattache un autre morceau à celui-ci directement depuis le menu du morceau : les morceaux du même dossier viennent en premier.",
+        "Envoyer un morceau dans une sortie propose d'abord les plus probables (même dossier, même artiste, pas encore sortie), et propose de créer la sortie à partir d'un dossier nommé comme un EP ou un LP."
+      ]
+    }
+  },
+  {
+    "version": "0.1.5",
+    "date": "2026-11-14",
+    "notes": {
+      "en": [
+        "Drag samples and MIDI files straight into Live (always as a copy: the original stays in your library).",
+        "Drop files anywhere on a song's sheet to add them to its mood board: a file from your projects is linked where it is, without a copy; a file from elsewhere is copied.",
+        "Merge two artists in Settings: songs, releases and folders take the name kept, and later scans keep it. Ctrl+Z undoes it; no file moves.",
+        "A song's sheet shows its folder and its releases, and moves it to another release.",
+        "The audio analysis in detail from the status in the sidebar: what it listens to, the time left, why it waits.",
+        "Resizable areas (the song list, the loose media panel) and song tabs you can reorder.",
+        "Faster pages: what did not change is not computed again. More loose media found (an archive folder with a project at its top hid everything below it)."
+      ],
+      "fr": [
+        "Glisse les samples et les fichiers MIDI directement dans Live (toujours en copie : l'original reste dans ta bibliothèque).",
+        "Lâche des fichiers n'importe où sur la fiche d'un morceau pour les ajouter à son moodboard : un fichier de tes projets est lié là où il est, sans copie ; un fichier venu d'ailleurs est copié.",
+        "Fusionne deux artistes dans les Réglages : morceaux, sorties et dossiers prennent le nom gardé, et les analyses suivantes le gardent. Ctrl+Z l'annule ; aucun fichier ne bouge.",
+        "La fiche d'un morceau montre son dossier et ses sorties, et le déplace vers une autre sortie.",
+        "Le détail de l'analyse audio depuis le statut de la barre latérale : ce qu'elle écoute, le temps restant, pourquoi elle attend.",
+        "Zones redimensionnables (la liste des morceaux, le panneau des médias) et onglets de morceaux déplaçables.",
+        "Pages plus rapides : ce qui n'a pas changé n'est plus recalculé. Plus de médias hors ligne trouvés (un dossier d'archives avec un projet à sa racine cachait tout ce qu'il contenait)."
+      ]
+    }
+  },
+  {
+    "version": "0.1.4",
+    "date": "2026-11-14",
+    "notes": {
+      "en": [
+        "New MIDI page: the MIDI files of your projects and MIDI folders by kind (chords, bass, melodies, drums), key (and its relative) and tempo, with their chords; 'Find MIDI' from a song.",
+        "Samples: the ones whose name says nothing are sorted by ear (only when the analysis is sure), and every sample gets 'Sounds alike'.",
+        "The audio analysis is about five times faster and adapts to your computer: it uses the processor left free, slows down when other programs need it and pauses when the computer is busy. The time left is shown.",
+        "Settings > Storage shows everything Spool takes: the application, the catalogue and its indexes, the analysis model, the safety copies and the interface cache.",
+        "Sample names: a style in a name ('Bass House', 'Drum & Bass') no longer makes a sample a bass."
+      ],
+      "fr": [
+        "Nouvelle page MIDI : les fichiers MIDI de tes projets et de tes dossiers MIDI par type (accords, basses, mélodies, batterie), tonalité (et sa relative) et tempo, avec leurs accords ; « Trouver des MIDI » depuis un morceau.",
+        "Samples : ceux dont le nom ne dit rien sont rangés à l'écoute (seulement quand l'analyse est sûre), et chaque sample a ses « Sons proches ».",
+        "L'analyse audio est environ cinq fois plus rapide et s'adapte à ton ordinateur : elle utilise le processeur resté libre, ralentit quand d'autres programmes en ont besoin et se met en pause quand l'ordinateur est occupé. Le temps restant est affiché.",
+        "Réglages > Stockage montre tout ce que Spool occupe : l'application, le catalogue et ses index, le modèle d'analyse, les copies de sécurité et le cache de l'interface.",
+        "Noms des samples : un style dans un nom (« Bass House », « Drum & Bass ») ne fait plus d'un sample une basse."
+      ]
+    }
+  },
+  {
+    "version": "0.1.3",
+    "date": "2026-11-14",
+    "notes": {
+      "en": [
+        "Audio analysis is now on by default: Spool downloads its model once in the background after the first setup (about 80 MB) and tells you when. Nothing of your music leaves your computer, and you can turn it off in Settings > Spool.",
+        "A development build serving a newer page no longer stays on a black window.",
+        "The scan's progress names the samples' steps."
+      ],
+      "fr": [
+        "L'analyse audio est maintenant activée par défaut : Spool télécharge son modèle une seule fois en arrière-plan après la configuration (environ 80 Mo) et te le signale. Rien de ta musique ne quitte ton ordinateur, et tu peux la désactiver dans Réglages > Spool.",
+        "Une version de développement qui sert une page plus récente ne reste plus sur une fenêtre noire.",
+        "La progression de l'analyse nomme les étapes des samples."
+      ]
+    }
+  },
+  {
+    "version": "0.1.2",
+    "date": "2026-11-14",
+    "notes": {
+      "en": [
+        "New Samples page: your sample folders sorted by kind (kick, snare, bass, pad, vocals...) from their names and folders, loops or one-shots, tempo and key; play with a click, the arrows play the next one.",
+        "Find samples from a song: in its key (or its relative) and at its tempo (or half or double).",
+        "Style, key and tempo fill in by themselves, from the project first and the audio to back it; hover a field to see where it comes from and pick another suggestion.",
+        "Much better keys: 87 % right on MIDI files (was 44 %), 78 % on projects' MIDI notes.",
+        "The app stays responsive during a scan: scanning uses half of the processor at low priority.",
+        "Lighter on disk: the database journal is emptied at each start, and the copy made before an update is kept 30 days.",
+        "Home no longer asks to confirm styles one by one."
+      ],
+      "fr": [
+        "Nouvelle page Samples : tes dossiers de samples rangés par type (kick, snare, basse, pad, voix...) d'après leurs noms et dossiers, boucles ou one-shots, tempo et tonalité ; un clic pour écouter, les flèches passent au suivant.",
+        "Trouver des samples depuis un morceau : dans sa tonalité (ou sa relative) et à son tempo (ou la moitié, le double).",
+        "Le style, la tonalité et le tempo se remplissent tout seuls, d'après le projet d'abord et l'audio pour confirmer ; survole un champ pour voir d'où vient la valeur et choisir une autre proposition.",
+        "Des tonalités bien plus justes : 87 % sur les fichiers MIDI (44 % avant), 78 % sur les notes MIDI des projets.",
+        "L'app reste fluide pendant une analyse : elle n'utilise que la moitié du processeur, en basse priorité.",
+        "Plus léger sur le disque : le journal de la base est vidé à chaque lancement, et la copie faite avant une mise à jour est gardée 30 jours.",
+        "L'accueil ne demande plus de confirmer les styles un par un."
+      ]
+    }
+  },
+  {
+    "version": "0.1.1",
+    "date": "2026-11-14",
+    "notes": {
+      "en": [
+        "A catalogue from an earlier Spool is now updated behind a start screen that says what is happening (a safety copy first, then the new format), instead of a black window.",
+        "Settings > Data > Storage: what Spool keeps on your computer, a button to open its folder, and one to free the older safety copies.",
+        "Lighter on disk: two safety copies of each kind are kept instead of up to eight, and the database journal stays small.",
+        "Optional audio analysis (Settings > Spool): 'sounds like', the measured tempo and a style clue, from your renders. Off by default, runs on your computer only.",
+        "Songs: the grid view is gone (list, folders, board and calendar stay)."
+      ],
+      "fr": [
+        "Un catalogue d'une version précédente de Spool est maintenant mis à jour derrière un écran de démarrage qui dit ce qui se passe (une copie de sécurité, puis le nouveau format), au lieu d'une fenêtre noire.",
+        "Réglages > Données > Stockage : ce que Spool garde sur ton ordinateur, un bouton pour ouvrir son dossier et un pour libérer les anciennes copies de sécurité.",
+        "Plus léger sur le disque : deux copies de sécurité de chaque sorte au lieu de huit au plus, et le journal de la base reste petit.",
+        "Analyse audio en option (Réglages > Spool) : « ça sonne comme », le tempo mesuré et un indice de style, à partir de tes rendus. Désactivée par défaut, elle tourne sur ton ordinateur uniquement.",
+        "Morceaux : la vue en grille disparaît (liste, dossiers, tableau et calendrier restent)."
+      ]
+    }
+  },
+  {
+    "version": "0.1.0",
+    "date": "2026-11-13",
+    "notes": {
+      "en": [
+        "First public release of Spool.",
+        "Interface in English and French (Settings > Spool).",
+        "Your Ableton catalogue sorted by song, stage, style and key.",
+        "Repairs for projects that no longer open: a copy next to the original, which is never modified.",
+        "Mood boards, releases (EPs, albums), a starting project for a style, statistics."
+      ],
+      "fr": [
+        "Première version publique de Spool.",
+        "Interface en français et en anglais (Réglages > Spool).",
+        "Ton catalogue Ableton rangé par morceau, étape, style et tonalité.",
+        "Réparation des projets qui ne s'ouvrent plus : une copie à côté, l'original n'est jamais modifié.",
+        "Moodboards, sorties (EP, albums), création d'un projet de départ, statistiques."
+      ]
+    }
+  }
+]

@@ -1,0 +1,60 @@
+{
+  "ago": {
+    "today": "today",
+    "yesterday": "yesterday",
+    "days": {
+      "one": "{n} day ago",
+      "other": "{n} days ago"
+    },
+    "months": {
+      "one": "{n} month ago",
+      "other": "{n} months ago"
+    },
+    "years": {
+      "one": "{n} year ago",
+      "other": "{n} years ago"
+    }
+  },
+  "stage": {
+    "draft": "Draft",
+    "arrangement": "Arrangement",
+    "mix": "Mix",
+    "master": "Master",
+    "done": "Done",
+    "pause": "On hold",
+    "none": "Unsorted"
+  },
+  "bpm": "{n} bpm",
+  "language": "Language",
+  "languageHint": "The language of Spool's interface and messages.",
+  "close": "Close",
+  "cancel": "Cancel",
+  "save": "Save",
+  "loading": "Loading...",
+  "time": {
+    "underMin": "under a minute",
+    "min": "about {n} min",
+    "hMin": "about {h} h {m}",
+    "h": "about {h} h"
+  },
+  "tempo": {
+    "bpm": "{n} BPM",
+    "pct": "{n} %",
+    "tip": "Faster or slower, the key unchanged. Wheel or drag on the value to set it, a click puts it back as recorded.",
+    "slower": "Slower",
+    "faster": "Faster",
+    "reset": "Put the original speed back",
+    "lock": "Lock to {n}",
+    "lockTip": "Every file plays at {n} BPM, from its own tempo (a loop at half or double that tempo keeps its speed).",
+    "loopTip": "Play again and again",
+    "tipUnknown": "This file's tempo is unknown (not in its name or its data): the speed shows as a percentage. Wheel or drag to set it, a click puts it back to 100 %."
+  },
+  "pitch": {
+    "none": "Key 0",
+    "semis": "Key {n}",
+    "up": "Up a semitone",
+    "down": "Down a semitone",
+    "reset": "Back to the original key",
+    "tip": "Transpose what plays, a semitone at a time, without changing the tempo (mouse wheel over it; click: original key)"
+  }
+}

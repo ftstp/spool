@@ -1,0 +1,39 @@
+{
+  "title": "Comment Spool lit ton classement",
+  "lede": "Chacun range ses projets à sa façon. Voici ce que Spool a compris de la tienne, avec tes propres exemples, et les règles que tu peux changer. Un changement se voit avant d'être fait, et Ctrl+Z l'annule. Rien ne bouge sur ton disque.",
+  "understood": "{files} projets lus, {songs} morceaux",
+  "versions": "{n} projets portent un numéro de version dans leur nom : ce sont des versions du même morceau",
+  "versionDirs": "{n} projets rangés comme anciennes versions par leur dossier (Backup, versions, old...)",
+  "projectDirs": "{n} projets dans des dossiers « ... Project » de Live",
+  "fromFolder": "{n} morceaux portent le nom de leur dossier (le dossier est le morceau)",
+  "numbered": "{n} morceaux nommés par un numéro seul :",
+  "words": "Mots de travail ignorés dans les noms :",
+  "edit": "modifier",
+  "rules": "Les règles",
+  "titleRule": {
+    "label": "Le titre d'un morceau vient",
+    "hint": "Automatique : du dossier quand il ne contient que ce morceau, sinon du projet. Tu peux imposer l'un ou l'autre.",
+    "auto": "Automatique",
+    "file": "Du projet",
+    "folder": "Du dossier"
+  },
+  "folder": {
+    "label": "Un dossier de morceau contient",
+    "hint": "Selon les noms : chaque nom de projet différent est un morceau, ses versions rangées dessous. Un seul morceau : tout ce qui est dans un dossier de morceau en fait un seul (sauf les dossiers qui contiennent d'autres dossiers de morceaux).",
+    "names": "Selon les noms",
+    "all": "Un seul morceau"
+  },
+  "multi": "{n} dossiers contiennent plusieurs morceaux. Coche ceux qui n'en sont qu'un :",
+  "multiNone": "Aucun dossier ne contient plusieurs morceaux.",
+  "oneSong": "un seul morceau",
+  "previewing": "Calcul de ce que ça change...",
+  "preview": "{now} morceaux aujourd'hui, {after} avec ces règles",
+  "previewFolders": {
+    "one": "{n} dossier change",
+    "other": "{n} dossiers changent"
+  },
+  "apply": "Appliquer",
+  "undoable": "Ctrl+Z revient en arrière.",
+  "settingsHint": "Ce que Spool a compris de ta façon de ranger, et les règles à changer (titre, dossiers d'un seul morceau).",
+  "open": "Voir et régler"
+}

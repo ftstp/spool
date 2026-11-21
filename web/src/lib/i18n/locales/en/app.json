@@ -1,0 +1,391 @@
+{
+  "nav": {
+    "home": "Home",
+    "songs": "Songs",
+    "repair": "Repair",
+    "releases": "Releases",
+    "create": "Starter pack",
+    "stats": "Statistics",
+    "settings": "Settings",
+    "repairTitle": {
+      "one": "{label}: {n} the app can repair",
+      "other": "{label}: {n} the app can repair"
+    },
+    "samples": "Samples",
+    "midi": "MIDI",
+    "artists": "Artists",
+    "media": "Media"
+  },
+  "side": {
+    "current": "Upcoming releases",
+    "ready": "{ready}/{count} ready",
+    "readyWhen": "{ready}/{count} ready · {when}",
+    "relTitle": "{title}: {ready}/{count} ready",
+    "relTitleWhen": "{title}: {ready}/{count} ready, {when}",
+    "open": "Open",
+    "expand": "Expand the sidebar",
+    "collapse": "Collapse the sidebar",
+    "fold": "Collapse",
+    "sec": {
+      "catalogue": "Catalogue",
+      "make": "Make music",
+      "care": "Upkeep"
+    },
+    "secFold": "Fold the section",
+    "secUnfold": "Unfold the section"
+  },
+  "status": {
+    "running": "Scanning...",
+    "error": "Error: {error}",
+    "upToDate": "Up to date, scanned {ago}",
+    "busy": "Updating the numbers..."
+  },
+  "top": {
+    "back": "Previous page",
+    "backTitle": "Previous page (Alt ←)",
+    "forward": "Next page",
+    "forwardTitle": "Next page (Alt →)",
+    "undo": "Undo",
+    "undoTitle": "Undo: {label} (Ctrl Z)",
+    "nothingToUndo": "Nothing to undo",
+    "newSong": "New song",
+    "newSongTitle": "A blank project with your usual sounds for a style",
+    "fixable": {
+      "one": "{n} project the app can repair",
+      "other": "{n} projects the app can repair"
+    }
+  },
+  "undo": {
+    "confirmFiles": "Undoing \"{label}\" moves files back on disk. Press Ctrl+Z again (or Undo) to confirm.",
+    "done": "Undone: {label}"
+  },
+  "search": {
+    "placeholderSongs": "Filter: title, artist, style, tempo (174), key (Fm), folder, project, release, instrument",
+    "placeholder": "Song, tempo (174), key (Fm), artist, style, folder, release… or a command",
+    "nothing": "Nothing for \"{q}\"",
+    "sec": {
+      "styles": "Styles",
+      "songs": "Songs",
+      "folders": "Folders",
+      "commands": "Commands",
+      "releases": "Releases",
+      "artists": "Artists"
+    },
+    "songCount": {
+      "one": "{n} song",
+      "other": "{n} songs"
+    },
+    "trackCount": {
+      "one": "{n} track",
+      "other": "{n} tracks"
+    },
+    "view": {
+      "list": "List",
+      "folders": "Folders",
+      "board": "Board",
+      "cal": "Calendar"
+    },
+    "cmd": {
+      "home": "Home",
+      "songs": "Songs",
+      "repair": "Repair",
+      "create": "Starter pack: a new project",
+      "releases": "Releases (EPs, albums)",
+      "atelier": "Treatments (Atelier)",
+      "stats": "Statistics",
+      "copies": "Copies written by Spool",
+      "export": "Export the catalogue (CSV)",
+      "settings": "Settings",
+      "songsView": "Songs: {view} view",
+      "scan": "Scan now",
+      "rescan": "Reread everything (Live's plugins included)",
+      "addProjects": "Add a projects folder",
+      "addSamples": "Add a samples folder",
+      "closeAll": "Close all open songs",
+      "fold": "Collapse or expand the sidebar",
+      "withAudio": "Songs with a reference render",
+      "toFix": "Songs to repair",
+      "artists": "Artists"
+    },
+    "scanStarted": "Scan started.",
+    "rescanStarted": "Rereading everything, Live's plugin list included.",
+    "allSongs": "{n} songs found: see them all"
+  },
+  "scan": {
+    "steps": {
+      "find": "Finding projects",
+      "read": "Reading projects",
+      "samples": "Indexing samples",
+      "plugins": "Checking against installed plugins",
+      "group": "Grouping songs",
+      "temoins": "Reference renders, mood boards and suggestions",
+      "midiFind": "Finding MIDI files",
+      "midiRead": "Analysing MIDI files",
+      "samplesFind": "Finding samples",
+      "samplesRead": "Reading samples"
+    },
+    "found": {
+      "find": {
+        "one": "{num} file (projects and reference renders)",
+        "other": "{num} files (projects and reference renders)"
+      },
+      "read": {
+        "one": "{num} read",
+        "other": "{num} read"
+      },
+      "midiFind": {
+        "one": "{num} found",
+        "other": "{num} found"
+      },
+      "midiRead": {
+        "one": "{num} read",
+        "other": "{num} read"
+      }
+    },
+    "left": "{time} left",
+    "stopping": "Stopping...",
+    "cancel": "Cancel the scan",
+    "keptNote": "What has been read is kept; the rest will be read at the next scan.",
+    "stopped": "Scan stopped. What was read is kept; the rest will be read at the next scan (\"Scan now\", or on its own in 30 minutes).",
+    "analysis": "Scan",
+    "stopTitle": "Stop the scan (what was read is kept)",
+    "stoppingShort": "stopping...",
+    "cancelShort": "cancel",
+    "other": {
+      "update": "Updating",
+      "oldDisk": "Searching the old disk"
+    },
+    "audio": {
+      "line": "Audio analysis",
+      "pause": "pause",
+      "pauseTitle": "Pause the audio analysis (it resumes where it stopped, from Settings)",
+      "detailsTitle": "See the audio analysis in detail",
+      "lineLive": "Sound analysis (slowed: Live is open)"
+    }
+  },
+  "update": {
+    "whatsNew": "What's new:\n{notes}",
+    "install": "Install Spool {version}",
+    "isAvailable": "is available",
+    "downloading": "Downloading...",
+    "installRestart": "Install and restart",
+    "later": "Later",
+    "available": "Spool {version} is available.",
+    "upToDate": "Spool is up to date.",
+    "checkFailed": "Couldn't check for updates: {error}",
+    "scanRunning": "A scan is running: install the update once it's done."
+  },
+  "csv": {
+    "head": {
+      "title": "Title",
+      "artist": "Artist",
+      "style": "Style",
+      "key": "Key",
+      "tempo": "Tempo",
+      "stage": "Stage",
+      "rating": "Rating",
+      "kinds": "Types",
+      "catalog": "Catalogue",
+      "files": "Projects",
+      "plugins": "Plugins",
+      "audio": "Reference render",
+      "live": "Live version",
+      "created": "Created",
+      "modified": "Modified",
+      "dir": "Folder",
+      "project": "Project"
+    },
+    "sev": {
+      "ok": "Opens",
+      "fix": "Repairable by the app",
+      "lost": "Settings lost",
+      "bad": "Plugin to install"
+    },
+    "yes": "yes",
+    "no": "no",
+    "dialogTitle": "Export the catalogue",
+    "fileName": "catalogue",
+    "exported": {
+      "one": "{n} song exported: {at}",
+      "other": "{n} songs exported: {at}"
+    }
+  },
+  "api": {
+    "preview": "(preview)",
+    "readOnly": "Read-only preview: changes are made in the app.",
+    "gb": "{n} GB",
+    "mb": "{n} MB",
+    "lessThanMinute": "less than a minute",
+    "aboutMin": "about {n} min",
+    "aboutHours": "about {n} h",
+    "bigFolder": "This folder holds {midi} MIDI files ({size}) out of {files} files. Reading them will take {time} the first time, after the projects are scanned; after that only new ones are read. You can stop the scan at any time.",
+    "bigFolderMore": "This folder holds {midi} MIDI files ({size}) out of {files} files (and probably more: the folder is too big to count in a few seconds). Reading them will take {time} the first time, after the projects are scanned; after that only new ones are read. You can stop the scan at any time."
+  },
+  "folders": {
+    "pick": "Choose a folder",
+    "empty": "No folders.",
+    "remove": "Remove",
+    "add": "Add a folder...",
+    "paste": "or paste a path",
+    "pathPlaceholder": "C:\\Users\\...\\Music",
+    "addTyped": "Add",
+    "big": "Large folder",
+    "addAnyway": "Add anyway"
+  },
+  "rootArtists": {
+    "intro": "Artist of each folder: the songs in it get this artist, unless their own folders name another. Leave empty if the folder mixes several artists.",
+    "placeholder": "Artist (optional)",
+    "guessed": "guessed"
+  },
+  "notion": {
+    "title": "Import from Notion",
+    "reading": "Reading...",
+    "columns": "Columns",
+    "columnsHint": "Each Notion column goes into a song field. Check the app's choices.",
+    "empty": "empty",
+    "fieldFor": "Field for {name}",
+    "target": {
+      "ignore": "Ignore",
+      "title": "Song name",
+      "artist": "Artist",
+      "style": "Style",
+      "key": "Key",
+      "tempo": "Tempo",
+      "stage": "Stage",
+      "notes": "Notes",
+      "rating": "Rating (stars)",
+      "kinds": "Type",
+      "ft": "With (collaborators)"
+    },
+    "stages": "Stages",
+    "stagesHint": "What each Notion status becomes in the app.",
+    "rows": {
+      "one": "{n} row",
+      "other": "{n} rows"
+    },
+    "stageFor": "Stage for {name}",
+    "keep": "Don't change",
+    "songs": "Songs",
+    "matched": {
+      "one": "of {total} rows matches a song, by its name.",
+      "other": "of {total} rows match a song, by their name."
+    },
+    "others": {
+      "one": "The other {n} is left aside (no song is created from a row).",
+      "other": "The other {n} are left aside (no song is created from a row)."
+    },
+    "showMatched": "Show matched",
+    "showOthers": "Show the others",
+    "noName": "(no name)",
+    "close": "{title} (similar name)",
+    "onlyEmpty": "Fill in only: don't replace what is already filled in the app",
+    "noAudio": "Audio files (the \"Track\" column) are not imported: the app finds the bounces in your folders.",
+    "importing": "Importing...",
+    "import": {
+      "one": "Import {n} row",
+      "other": "Import {n} rows"
+    },
+    "done": {
+      "one": "Notion import: {n} song updated",
+      "other": "Notion import: {n} songs updated"
+    }
+  },
+  "boot": {
+    "openTitle": "Opening your catalogue",
+    "open": "Reading your base ({mb} MB)...",
+    "create": "Getting ready...",
+    "slow": "A large catalogue takes a moment to open.",
+    "upgradeTitle": "Updating your catalogue",
+    "upgrade": "Spool brings your catalogue ({mb} MB) to this version's format. On a large catalogue this can take a minute or two.",
+    "errorTitle": "Spool could not open your catalogue",
+    "elapsed": "{s} s"
+  },
+  "audioDetails": {
+    "title": "Audio analysis",
+    "state": {
+      "running": "running",
+      "paused": "paused",
+      "busy": "waiting",
+      "waiting": "waiting",
+      "done": "done",
+      "off": "off"
+    },
+    "phase": {
+      "renders": "Listening to your reference renders",
+      "unsorted": "Listening to the unsorted samples (it sorts them when sure)",
+      "rest": "Listening to the other samples (for sounds alike)"
+    },
+    "left": "{time} left",
+    "measuring": "time left: measuring",
+    "copies": "{n} copies of the model at work",
+    "oneCopy": "1 copy of the model at work",
+    "speed": "{ms} ms a file",
+    "busyWhy": "Other programs keep the computer busy: the analysis waits until it is free.",
+    "renders": "Reference renders analysed: {n} of {total}",
+    "unsorted": "Unsorted samples to listen to: {n}",
+    "sortedByEar": "{n} sorted by ear",
+    "heard": "Samples listened to: {n} ({rest} left)",
+    "estimate": "Left to listen to: {time} on this computer",
+    "pause": "Pause",
+    "resume": "Resume",
+    "toSamples": "See the samples"
+  },
+  "analyse": {
+    "label": "Analyse",
+    "tip": "Read the projects again and analyse the sounds now",
+    "pendingTip": "Projects changed since the last analysis: click to read them again",
+    "pending": "changes waiting"
+  },
+  "redo": {
+    "label": "Redo",
+    "title": "Redo: {label} (Ctrl Y)",
+    "done": "Redone: {label}",
+    "nothing": "Nothing to redo"
+  },
+  "activity": {
+    "title": "Activity",
+    "open": "See what the app is doing now",
+    "long": "Full analysis of the projects",
+    "checking": "Checking the files that changed...",
+    "pending": "changes waiting",
+    "left": "{n} left",
+    "audio": {
+      "running": "Listening to the sounds",
+      "live": "Listening to the sounds, slowed down (Live is open)",
+      "busy": "Listening to the sounds: waits for the computer to be free",
+      "waiting": "Listening to the sounds: resumes soon",
+      "paused": "Listening to the sounds: paused"
+    }
+  },
+  "report": {
+    "title": "Diagnostic report",
+    "hint": "If the analysis seems stuck or keeps starting again at the same place: create this report and send it. It holds the version, the size of your base, what is being analysed and where, and the end of the app's journal (file paths). Nothing is sent by the app: you choose to pass it on.",
+    "button": "Create a diagnostic report",
+    "done": "Report created: its folder opens."
+  },
+  "hl": {
+    "release": "{title} comes out in {n} d: {ready}/{count} ready",
+    "releaseToday": "{title} comes out today: {ready}/{count} ready",
+    "late": "{title}: date passed {n} d ago, not all ready",
+    "doneNoDate": "Finished without a release date: {n}",
+    "near": "Nearly done: {title}, {done}/{n} checks, {stage}",
+    "noRender": "{title} is at {stage} with no render: bounce it",
+    "resume": "Pick up: {title}",
+    "forgotten": "Not opened for {n} months: {title} {stars}",
+    "gem": "Worth a listen: {title} {stars}",
+    "draft": "An idea left aside for {n} months: {title}",
+    "week": "This week: {n} songs worked on",
+    "streak": "{n} days in a row in Live",
+    "anniv": "A year ago, you started {title}",
+    "colour": "This month: {n} new songs, mostly in {key} at {bpm} bpm",
+    "started": "This month: {n} songs started",
+    "broken": "Recent projects that do not open as saved: {n}",
+    "next": "Next ({i}/{n})",
+    "nextLabel": "Show the next one"
+  },
+  "keyboard": {
+    "title": "MIDI keyboard",
+    "tip": "MIDI keyboard: plug in, choose the sound",
+    "tipOn": "MIDI keyboard plugged in, sound: {sound}. Click to set it up"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "title": "Media",
+  "count": "{n} files in {songs} songs",
+  "search": "Search a file, a song...",
+  "viewLabel": "View",
+  "bySong": "By song",
+  "tree": "Folder tree",
+  "kind": {
+    "all": "All",
+    "image": "Pictures",
+    "video": "Videos",
+    "font": "Fonts",
+    "preset": "Presets",
+    "text": "Notes",
+    "other": "Other",
+    "audio": "Audio",
+    "audioUnused": "Unused audio"
+  },
+  "lede": "What the mood boards and the song folders hold. The star makes a picture the song's own (Ctrl+Z undoes it); nothing is moved on your disk.",
+  "none": "No media found: no picture, video, font or preset in the song folders or their mood boards.",
+  "noneHere": "Nothing for this filter.",
+  "enlarge": "Enlarge {name}",
+  "coverSet": "Make it the song's picture",
+  "coverUnset": "Chosen picture: click to go back to the app's choice",
+  "coverAuto": "Picture chosen by the app",
+  "isCover": "song's picture",
+  "showAll": "Show the {n} others",
+  "audio": {
+    "lede": "The audio files of song folders that no song uses: not a reference render, not a sample a project plays, not a reference track. Often a render the app did not link by its name: link it as the reference render. Nothing is moved on your disk.",
+    "count": {
+      "one": "{n} file",
+      "other": "{n} files"
+    },
+    "reveal": "Open the folder",
+    "listen": "Listen",
+    "near": "Close name to:",
+    "link": "Link...",
+    "close": "Close",
+    "as": "As",
+    "asTemoin": "A song's reference render",
+    "asBoard": "A song's mood board",
+    "asRef": "Reference",
+    "refSong": "for a song",
+    "refArtist": "for an artist",
+    "refRelease": "for a release",
+    "find": "Search...",
+    "suggested": "suggested",
+    "noTarget": "No match.",
+    "doneTemoin": "{name} is the reference render of {title}.",
+    "doneBoard": "{name} is on the mood board of {title}.",
+    "doneRef": "{name} is a reference for {title}.",
+    "none": "No unused audio here.",
+    "loadMore": "Show {n} more folders"
+  },
+  "scopeLabel": "Source",
+  "scope": {
+    "songs": "From songs ({n})",
+    "loose": "Outside projects ({n})"
+  },
+  "pick": {
+    "bar": "Selection",
+    "count": {
+      "one": "{n} file selected",
+      "other": "{n} files selected"
+    },
+    "send": "Send to a mood board...",
+    "clear": "Clear the selection",
+    "one": "Select {name}",
+    "folder": "Select the whole folder"
+  },
+  "loose": {
+    "lede": "The pictures, videos, sounds and notes of folders with no project, outside your song folders (the same as the Folders view's \"Media outside projects\" panel). Tick several to send them at once to a song's, a release's or an artist's mood board. Nothing is moved on your disk."
+  }
+}

@@ -1,0 +1,28 @@
+# Spool's downloads: the installers and latest.json (what installed copies ask for updates),
+# served from artists.fatstep.com/spool/download/ - the same pattern as Songfindr's panel.
+#
+# NO `main`, ON PURPOSE. Without a script this Worker never runs: it only serves files, and
+# Cloudflare serves static assets free and unlimited (the 100,000 requests a day count script
+# invocations). Do NOT add `run_worker_first`: every request would then run a script.
+#
+# EVERY UPLOAD REPLACES ALL THE FILES. So tools/publish.py uploads every installer ever
+# published (kept in releases/, never committed), not only the new one: a link to an older
+# version must keep working.
+#
+# A file may weigh 25 MiB at most (Workers static assets): publish.py refuses a bigger one.
+
+name = "spool-download"
+compatibility_date = "2026-11-13"
+
+# account_id comes from CLOUDFLARE_ACCOUNT_ID in the environment (never in the repository).
+
+routes = [
+  { pattern = "artists.fatstep.com/spool/download/*", zone_name = "fatstep.com" }
+]
+
+# Files sit under build/spool/download/: a route /spool/download/* looks for an asset at
+# that same path.
+[assets]
+directory = "./build"
+not_found_handling = "none"
+html_handling = "none"

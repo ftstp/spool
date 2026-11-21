@@ -1,0 +1,508 @@
+<script lang="ts">
+  import { makeReport } from "../lib/diagnostic";
+  // Settings, in four parts: the folders the app reads, how it arranges (in the app only, or
+  // on disk too), the data in and out, and starting over set apart. A list of settings, each
+  // with what it does; the parts listed on the left follow the scroll.
+  import * as api from "../lib/api";
+  import { app } from "../lib/state.svelte";
+  import FolderList from "../lib/components/FolderList.svelte";
+  import ScanProgress from "../lib/components/ScanProgress.svelte";
+  import { ago, aboutTime } from "../lib/format";
+  import NotionImport from "../lib/components/NotionImport.svelte";
+  import RootArtists from "../lib/components/RootArtists.svelte";
+  import { exportSongs } from "../lib/csv";
+  import FatstepLogo from "../lib/components/FatstepLogo.svelte";
+  import AudioDetails from "../lib/components/AudioDetails.svelte";
+  import { theme, THEMES } from "../lib/theme.svelte";
+  import { updates } from "../lib/update.svelte";
+  import { t, fmtTime, fmtNum, i18n, LANGS, type Lang } from "../lib/i18n/index.svelte";
+  import { onMount } from "svelte";
+  import { keyboard, KEY_SOUNDS, type KeySound } from "../lib/keyboard.svelte";
+  import { noteLabel } from "../lib/theory";
+  // the MIDI keyboards plugged in: asked for when Settings opens
+  $effect(() => void keyboard.start());
+
+  // what Spool keeps on disk: read when the page opens, its own folder only
+  let disk = $state<api.Storage | null>(null);
+  let trimming = $state(false);
+  onMount(() => {
+    api.storage().then((s) => (disk = s)).catch(() => {});
+  });
+  const size = (b: number) =>
+    b >= 1e9 ? t("settings.storage.gb", { n: fmtNum(Math.round(b / 1e8) / 10) }) : t("settings.storage.mb", { n: fmtNum(Math.max(1, Math.round(b / 1e6))) });
+  // what the catalogue holds, when worth saying
+  const baseParts = $derived(
+    disk
+      ? [
+          disk.midi > 50e6 && t("settings.storage.midi", { size: size(disk.midi) }),
+          disk.samples > 20e6 && t("settings.storage.samples", { size: size(disk.samples) }),
+          disk.journal > 50e6 && t("settings.storage.journal", { size: size(disk.journal) }),
+        ].filter((x): x is string => !!x)
+      : [],
+  );
+  async function trim() {
+    const before = disk?.total ?? 0;
+    try {
+      disk = await api.trimBackups();
+      app.say(t("settings.storage.trimmed", { size: size(Math.max(0, before - disk.total)) }));
+    } catch (e) {
+      app.say(String(e), { error: true });
+    }
+    trimming = false;
+  }
+  // the export: every song, or with the archived ones too
+  let withArchived = $state(false);
+  const toExport = $derived(app.songs.filter((s) => withArchived || !s.archived));
+
+  const cfg = $derived(app.config);
+  let msg = $state("");
+  let busy = $state(false);
+  let confirming = $state(false);
+
+  async function set<K extends string>(key: K, value: unknown, ok?: string) {
+    try {
+      app.config = await api.setConfig(key, value);
+      if (ok) app.say(ok);
+    } catch (e) {
+      app.say(String(e), { error: true });
+    }
+  }
+  const addRoot = async (p: string) => {
+    app.config = await api.addRoot(p);
+    app.say(t("settings.folderAdded"));
+    api.scan(false);
+  };
+  const removeRoot = async (p: string) => {
+    app.config = await api.removeRoot(p);
+    app.say(t("settings.folderRemoved"));
+    api.scan(false);
+  };
+  const addSamples = async (p: string) => {
+    const dirs = cfg?.sample_dirs ?? [];
+    if (dirs.some((d) => d.toLowerCase() === p.toLowerCase())) throw t("settings.already");
+    app.config = await api.setConfig("sample_dirs", [...dirs, p]);
+  };
+  const removeSamples = async (p: string) => (app.config = await api.setConfig("sample_dirs", (cfg?.sample_dirs ?? []).filter((d) => d !== p)));
+  const addMidi = async (p: string) => {
+    const dirs = cfg?.midi_dirs ?? [];
+    if (dirs.some((d) => d.toLowerCase() === p.toLowerCase())) throw t("settings.already");
+    app.config = await api.setConfig("midi_dirs", [...dirs, p]);
+  };
+  const removeMidi = async (p: string) => (app.config = await api.setConfig("midi_dirs", (cfg?.midi_dirs ?? []).filter((d) => d !== p)));
+
+  // working words: edited as text, saved on demand (a change regroups the songs). Artists
+  // are sorted on the Artists page (who is who), not here.
+  const lines = (v: string) => v.split("\n").map((l) => l.trim()).filter(Boolean);
+  let words = $state((app.config?.work_words ?? []).join("\n"));
+  const wordsDirty = $derived(lines(words).join("\n") !== (cfg?.work_words ?? []).join("\n"));
+
+  async function reset() {
+    busy = true;
+    try {
+      await api.resetBase();
+      confirming = false;
+      app.undo = await api.undoState();
+      // the base is empty: the setup comes back in front
+      await app.reload();
+    } catch (e) {
+      msg = String(e);
+    }
+    busy = false;
+  }
+  const DRIVES = "DEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+  // the part on screen, for the list on the left
+  const PARTS = $derived((["dossiers", "rangement", "donnees", "spool", "zero"] as const).map((k) => [k, t(`settings.parts.${k}`)] as const));
+  let part = $state<string>("dossiers");
+  function spy(node: HTMLElement) {
+    const io = new IntersectionObserver(
+      (es) => {
+        for (const e of es) if (e.isIntersecting) part = (e.target as HTMLElement).dataset.part ?? part;
+      },
+      { root: node.closest("main"), rootMargin: "0px 0px -65% 0px" },
+    );
+    node.querySelectorAll<HTMLElement>("[data-part]").forEach((x) => io.observe(x));
+    return { destroy: () => io.disconnect() };
+  }
+  const goTo = (k: string) => {
+    part = k;
+    document.getElementById("part-" + k)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  // the audio analysis (opt-in): its state comes with the scan's, asked once on opening
+  const au = $derived(app.scan?.audio);
+  $effect(() => {
+    api.audioState().then((a) => app.scan && (app.scan.audio = a), () => {});
+  });
+  async function audio(on: boolean) {
+    try {
+      const a = await api.audioEnable(on);
+      if (app.scan) app.scan.audio = a;
+      app.say(on ? (a.ready ? t("settings.audio.onSaid") : t("settings.audio.downloadStarted")) : t("settings.audio.offSaid"));
+    } catch (e) {
+      app.say(String(e), { error: true });
+    }
+  }
+  async function removeModel() {
+    try {
+      const a = await api.audioRemove();
+      if (app.scan) app.scan.audio = a;
+      app.say(t("settings.audio.removed"));
+    } catch (e) {
+      app.say(String(e), { error: true });
+    }
+  }
+
+  let notionFile = $state<string | null>(null);
+  async function pickNotion() {
+    try {
+      notionFile = await api.pickFile(t("settings.data.notionDialog"), ["csv"]);
+    } catch (e) {
+      app.say(String(e), { error: true });
+    }
+  }
+</script>
+
+<div class="page">
+  <header class="head">
+    <h1>{t("settings.title")}</h1>
+  </header>
+  {#if cfg}
+    <div class="layout">
+      <nav class="toc" aria-label={t("settings.parts.label")}>
+        {#each PARTS as [k, l]}<button class:on={part === k} class:z={k === "zero"} onclick={() => goTo(k)}>{l}</button>{/each}
+      </nav>
+
+      <div class="body" use:spy>
+        <section class="group" id="part-dossiers" data-part="dossiers">
+          <h2>{t("settings.parts.dossiers")}</h2>
+          <p class="gsub small muted">{t("settings.folders.sub")}</p>
+
+          <div class="item stack">
+            <div class="it"><h3>{t("settings.folders.projects")}</h3><p class="small muted">{t("settings.folders.projectsHint")}</p></div>
+            <FolderList
+              items={cfg.roots.map((r) => ({ path: r.path, note: r.label ? t("settings.folders.rootLabel", { label: r.label }) : cfg.roots.length > 1 ? t("settings.folders.mainRoot") : undefined }))}
+              add={addRoot}
+              remove={removeRoot}
+              pick={t("settings.folders.pickProjects")}
+            />
+            <RootArtists roots={cfg.roots} />
+          </div>
+
+          <div class="item stack">
+            <div class="it"><h3>{t("settings.folders.samples")}</h3><p class="small muted">{t("settings.folders.samplesHint")}</p></div>
+            <FolderList items={cfg.sample_dirs.map((path) => ({ path }))} add={addSamples} remove={removeSamples} check={api.bigFolderWarning} pick={t("settings.folders.pickSamples")} empty={t("settings.folders.samplesEmpty")} />
+          </div>
+
+          <div class="item stack">
+            <div class="it"><h3>{t("settings.folders.midi")} <span class="opt">{t("settings.folders.optional")}</span></h3><p class="small muted">{t("settings.folders.midiHint")}</p></div>
+            <FolderList items={cfg.midi_dirs.map((path) => ({ path }))} add={addMidi} remove={removeMidi} check={api.bigFolderWarning} pick={t("settings.folders.pickMidi")} empty={t("settings.folders.midiEmpty")} />
+          </div>
+
+          <div class="item">
+            <div class="it"><h3>{t("settings.folders.oldWindows")}</h3><p class="small muted">{t("settings.folders.oldWindowsHint")}</p></div>
+            <div class="ctl">
+              <select value={cfg.old_drive} aria-label={t("settings.folders.oldDrive")} onchange={(e) => set("old_drive", (e.currentTarget as HTMLSelectElement).value, t("settings.folders.oldDriveSaved"))}>
+                <option value="">{t("settings.folders.none")}</option>
+                {#each DRIVES as d}<option value={d}>{t("settings.folders.drive", { d })}</option>{/each}
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <section class="group" id="part-rangement" data-part="rangement">
+          <h2>{t("settings.parts.rangement")}</h2>
+          <p class="gsub small muted">{t("settings.arrange.sub")}</p>
+
+          <div class="item" class:live={cfg.physical}>
+            <div class="it">
+              <h3>{t("settings.arrange.physical")}</h3>
+              <p class="small muted">{t("settings.arrange.physicalHint")}</p>
+              <p class="small state">{cfg.physical ? t("settings.arrange.physicalOn") : t("settings.arrange.physicalOff")}</p>
+            </div>
+            <label class="switch" title={cfg.physical ? t("settings.arrange.disable") : t("settings.arrange.enable")}>
+              <input type="checkbox" role="switch" aria-label={t("settings.arrange.physical")} checked={!!cfg.physical} onchange={(e) => set("physical", e.currentTarget.checked, e.currentTarget.checked ? t("settings.arrange.physicalOnSaid") : t("settings.arrange.physicalOffSaid"))} />
+              <i></i>
+            </label>
+          </div>
+
+          <div class="item">
+            <div class="it"><h3>{t("settings.arrange.artists")}</h3><p class="small muted">{t("settings.arrange.artistsMoved")}</p></div>
+            <a class="btn" href="#/artists">{t("settings.arrange.artistsOpen")}</a>
+          </div>
+
+          <div class="item">
+            <div class="it"><h3>{t("reading.title")}</h3><p class="small muted">{t("reading.settingsHint")}</p></div>
+            <a class="btn" href="#/reading">{t("reading.open")}</a>
+          </div>
+
+          <div class="item stack">
+            <div class="it"><h3>{t("settings.arrange.words")}</h3><p class="small muted">{t("settings.arrange.wordsHint")}</p></div>
+            <textarea rows="4" bind:value={words}></textarea>
+            <div class="row"><button class="btn primary" disabled={!wordsDirty} onclick={() => set("work_words", lines(words), t("settings.arrange.wordsSaved"))}>{t("common.save")}</button></div>
+          </div>
+        </section>
+
+        <section class="group" id="part-donnees" data-part="donnees">
+          <h2>{t("settings.parts.donnees")}</h2>
+          <p class="gsub small muted">{t("settings.data.sub")}</p>
+
+          <div class="item" class:live={cfg.auto_analysis}>
+            <div class="it">
+              <h3>{t("settings.data.auto")}</h3>
+              <p class="small muted">{t("settings.data.autoHint")}</p>
+              <p class="small state">{cfg.auto_analysis ? t("settings.data.autoOn") : t("settings.data.autoOff")}</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" role="switch" aria-label={t("settings.data.auto")} checked={cfg.auto_analysis} onchange={(e) => set("auto_analysis", e.currentTarget.checked, e.currentTarget.checked ? t("settings.data.autoOnSaid") : t("settings.data.autoOffSaid"))} />
+              <i></i>
+            </label>
+          </div>
+
+          <div class="item" class:stack={app.scan?.running}>
+            <div class="it">
+              <h3>{t("settings.data.scan")}</h3>
+              <p class="small muted">{t("settings.data.scanHint")}</p>
+              {#if !app.scan?.running}<p class="small state">{app.scan?.last ? t("settings.data.lastScan", { ago: ago(app.scan.last) }) : t("settings.data.notScanned")}{cfg.live_db ? "" : t("settings.data.noLive")}</p>{/if}
+            </div>
+            {#if app.scan?.running}<ScanProgress full />
+            {:else}<div class="ctl"><button class="btn" onclick={() => api.scan(false)}>{t("settings.data.scanNow")}</button><button class="btn" onclick={() => api.scan(true)}>{t("settings.data.rescan")}</button></div>{/if}
+          </div>
+
+          <div class="item">
+            <div class="it">
+              <h3>{t("settings.data.export")}</h3>
+              <p class="small muted">{t("settings.data.exportHint")}</p>
+              <label class="small chk"><input type="checkbox" bind:checked={withArchived} /> {t("settings.data.withArchived")}</label>
+            </div>
+            <div class="ctl"><button class="btn" disabled={!toExport.length} onclick={() => exportSongs(toExport)}>{t("settings.data.exportN", { n: toExport.length })}</button></div>
+          </div>
+
+          <div class="item">
+            <div class="it"><h3>{t("settings.data.notion")}</h3><p class="small muted">{t("settings.data.notionHint")}</p></div>
+            <div class="ctl"><button class="btn" onclick={pickNotion}>{t("settings.data.notionPick")}</button></div>
+          </div>
+
+          {#if disk}
+            <div class="item" class:stack={trimming}>
+              <div class="it">
+                <h3>{t("settings.storage.title")}</h3>
+                <p class="small muted">{t("settings.storage.hint")}</p>
+                <ul class="disk small">
+                  {#if disk.app > 0}<li>{t("settings.storage.app", { size: size(disk.app) })}</li>{/if}
+                  <li>{t("settings.storage.base", { size: size(disk.base) })}{#if baseParts.length}<span class="muted">{" (" + t("settings.storage.of", { parts: baseParts.join(", ") }) + ")"}</span>{/if}</li>
+                  {#if disk.model > 0}<li>{t("settings.storage.model", { size: size(disk.model) })}<br /><span class="muted">{t("settings.storage.modelHint")}</span></li>{/if}
+                  {#if disk.backup_count}<li>{t("settings.storage.backups", { n: disk.backup_count, size: size(disk.backups) })}<br /><span class="muted">{t("settings.storage.backupsHint")}</span></li>{/if}
+                  {#if disk.cache > 0}<li>{t("settings.storage.cache", { size: size(disk.cache) })}<br /><span class="muted">{t("settings.storage.cacheHint")}</span></li>{/if}
+                  {#if disk.webview > 0}<li>{t("settings.storage.webview", { size: size(disk.webview) })}<br /><span class="muted">{t("settings.storage.webviewHint")}</span></li>{/if}
+                  <li class="tot">{t("settings.storage.total", { size: size(disk.total + disk.app + disk.webview) })}</li>
+                </ul>
+                {#if trimming}<p class="small warn">{t("settings.storage.trimConfirm")}</p>{/if}
+              </div>
+              {#if trimming}
+                <div class="row">
+                  <button class="btn danger" onclick={trim}>{t("settings.storage.trimYes")}</button>
+                  <button class="btn" onclick={() => (trimming = false)}>{t("common.cancel")}</button>
+                </div>
+              {:else}
+                <div class="ctl">
+                  <button class="btn" onclick={() => api.openDataDir().catch((e) => app.say(String(e), { error: true }))} title={disk.dir}>{t("settings.storage.open")}</button>
+                  {#if disk.trimmable > 0}<button class="btn" onclick={() => (trimming = true)}>{t("settings.storage.trim", { size: size(disk.trimmable) })}</button>{/if}
+                </div>
+              {/if}
+            </div>
+          {/if}
+
+        </section>
+
+        <section class="group" id="part-spool" data-part="spool">
+          <h2>{t("settings.parts.spool")}</h2>
+          <p class="gsub small muted">{t("settings.spool.sub")}</p>
+          <div class="item">
+            <div class="it"><h3>{t("app.report.title")}</h3><p class="small muted">{t("app.report.hint")}</p></div>
+            <button class="btn" onclick={makeReport}>{t("app.report.button")}</button>
+          </div>
+          <div class="item">
+            <div class="it">
+              <h3>{t("settings.spool.version", { v: updates.current || "..." })}</h3>
+              <p class="small muted">{t("settings.spool.updatesHint")}</p>
+              <p class="small state">{#if updates.info}{t("settings.spool.available", { version: updates.info.version })}{:else if updates.at}{t("settings.spool.checkedAt", { time: fmtTime(new Date(updates.at)) })}{:else}{t("settings.spool.notChecked")}{/if}</p>
+            </div>
+            <div class="ctl">
+              {#if updates.info}<button class="btn primary" disabled={updates.installing} onclick={() => updates.install()}>{updates.installing ? t("settings.spool.downloading") : t("settings.spool.install", { version: updates.info.version })}</button>
+              {:else}<button class="btn" disabled={updates.checking} onclick={() => updates.check(true)}>{updates.checking ? t("settings.spool.checking") : t("settings.spool.check")}</button>{/if}
+            </div>
+          </div>
+          <div class="item" class:live={au?.enabled && au?.ready} class:stack={au?.downloading}>
+            <div class="it">
+              <h3>{t("settings.audio.title")}</h3>
+              <p class="small muted">{t("settings.audio.hint", { mb: au?.download_mb ?? 0 })}</p>
+              <p class="small muted">{t("settings.audio.privacy")}</p>
+              <p class="small faint">{t("settings.audio.credit")}</p>
+              {#if au?.error}<p class="small warn">{au.error}</p>{/if}
+              {#if au?.enabled && au.ready}
+                <div class="details"><AudioDetails /></div>
+              {:else if au?.ready}
+                <p class="small state">{t("settings.audio.kept", { mb: au.disk_mb })}</p>
+              {/if}
+            </div>
+            {#if au?.downloading}
+              <div class="dl">
+                <div class="bar" aria-hidden="true"><i style:width={au.dl_total ? Math.round((au.dl_done / au.dl_total) * 100) + "%" : "0%"}></i></div>
+                <div class="row small"><span class="muted">{t("settings.audio.downloading", { done: Math.round(au.dl_done / 1048576), total: Math.round(au.dl_total / 1048576) })}</span><button class="btn sm" onclick={() => audio(false)}>{t("common.cancel")}</button></div>
+              </div>
+            {:else}
+              <div class="ctl">
+                {#if au?.enabled && au.ready}<button class="btn" onclick={() => api.audioPause(!au.paused)}>{au.paused ? t("settings.audio.resume") : t("settings.audio.pause")}</button>{/if}
+                {#if au?.enabled && !au.ready}<button class="btn" onclick={() => audio(true)}>{t("settings.audio.retry")}</button>{/if}
+                {#if au?.ready || au?.disk_mb}<button class="btn" onclick={removeModel} title={t("settings.audio.removeHint")}>{t("settings.audio.remove", { mb: au.disk_mb })}</button>{/if}
+                <label class="switch" title={au?.enabled ? t("settings.audio.disable") : t("settings.audio.enable", { mb: au?.download_mb ?? 0 })}>
+                  <input type="checkbox" role="switch" aria-label={t("settings.audio.title")} checked={!!au?.enabled} onchange={(e) => audio(e.currentTarget.checked)} />
+                  <i></i>
+                </label>
+              </div>
+            {/if}
+          </div>
+          <div class="item" class:live={!!keyboard.input && keyboard.inputs.some((i) => i.id === keyboard.input)}>
+            <div class="it">
+              <h3>{t("settings.keyboard.title")}</h3>
+              <p class="small muted">{t("settings.keyboard.hint")}</p>
+              {#if !keyboard.supported}<p class="small warn">{t("settings.keyboard.unsupported")}</p>
+              {:else if keyboard.error}<p class="small warn">{keyboard.error}</p>
+              {:else if !keyboard.inputs.length}<p class="small faint">{t("settings.keyboard.none")}</p>
+              {:else if keyboard.input}<p class="small state">{keyboard.down.length ? t("settings.keyboard.playing", { notes: [...keyboard.down].sort((a, b) => a - b).map((n) => noteLabel(n, i18n.lang === "fr")).join(" ") }) : t("settings.keyboard.ready")}</p>{/if}
+            </div>
+            <div class="ctl kbd">
+              <select aria-label={t("settings.keyboard.input")} value={keyboard.input} onchange={(e) => keyboard.setInput(e.currentTarget.value)} disabled={!keyboard.inputs.length}>
+                <option value="">{t("settings.keyboard.off")}</option>
+                {#each keyboard.inputs as i (i.id)}<option value={i.id}>{i.name}</option>{/each}
+              </select>
+              <select aria-label={t("settings.keyboard.sound")} value={keyboard.sound} onchange={(e) => keyboard.setSound(e.currentTarget.value as KeySound)}>
+                {#each KEY_SOUNDS as k (k)}<option value={k}>{t(`settings.keyboard.sounds.${k}`)}</option>{/each}
+              </select>
+              <label class="small muted vol">{t("settings.keyboard.volume")}
+                <input type="range" min="0" max="1" step="0.01" value={keyboard.volume} oninput={(e) => keyboard.setVolume(+e.currentTarget.value)} /></label>
+            </div>
+          </div>
+          <div class="item">
+            <div class="it"><h3>{t("settings.theme.title")}</h3><p class="small muted">{t("settings.theme.hint")}</p></div>
+            <div class="ctl">
+              <div class="seg" role="radiogroup" aria-label={t("settings.theme.title")}>
+                {#each THEMES as k}<button role="radio" aria-checked={theme.value === k} class:on={theme.value === k} onclick={() => theme.set(k)}>{t(`settings.theme.${k}`)}</button>{/each}
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="it"><h3>{t("common.language")}</h3><p class="small muted">{t("common.languageHint")}</p></div>
+            <div class="ctl">
+              <select value={i18n.lang} aria-label={t("common.language")} onchange={(e) => app.setLang(e.currentTarget.value as Lang)}>
+                {#each LANGS as [code, name]}<option value={code} lang={code}>{name}</option>{/each}
+              </select>
+            </div>
+          </div>
+          <div class="item">
+            <div class="it">
+              <h3>{t("settings.fatstep.title")}</h3>
+              <div class="publisher"><FatstepLogo size={26} /></div>
+              <p class="small muted">{t("settings.fatstep.body")}</p>
+            </div>
+            <div class="ctl"><button class="btn" onclick={() => api.openFatstep("/")}>{t("settings.fatstep.site")} ↗</button></div>
+          </div>
+        </section>
+
+        <section class="group danger-zone" id="part-zero" data-part="zero">
+          <h2>{t("settings.parts.zero")}</h2>
+          <div class="item" class:stack={confirming}>
+            <div class="it">
+              <p class="small muted">{t("settings.zero.hint")}</p>
+              {#if confirming}<p class="small warn">{t("settings.zero.confirm")}</p>{/if}
+            </div>
+            {#if confirming}
+              <div class="row">
+                <button class="btn danger" disabled={busy} onclick={reset}>{t("settings.zero.yes")}</button>
+                <button class="btn" disabled={busy} onclick={() => (confirming = false)}>{t("common.cancel")}</button>
+              </div>
+            {:else}
+              <div class="ctl"><button class="btn danger" onclick={() => (confirming = true)}>{t("settings.zero.start")}</button></div>
+            {/if}
+          </div>
+        </section>
+      </div>
+    </div>
+  {/if}
+</div>
+
+{#if notionFile}<NotionImport path={notionFile} close={() => (notionFile = null)} />{/if}
+
+<style>
+  .kbd { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: flex-end; }
+  .kbd .vol { display: inline-flex; align-items: center; gap: 6px; }
+  .kbd input[type="range"] { width: 110px; }
+  .page { padding: 24px 28px 80px; }
+  .head { margin-bottom: 22px; }
+  .head h1 { margin: 0 0 4px; }
+  .sub { margin: 0; max-width: 720px; }
+  .layout { display: grid; grid-template-columns: 160px minmax(0, 820px); gap: 36px; align-items: start; }
+
+  /* the parts, following the scroll */
+  .toc { position: sticky; top: 0; display: flex; flex-direction: column; gap: 2px; padding-top: 2px; }
+  .toc button { border: 0; background: none; text-align: left; padding: 6px 10px; border-radius: 7px; color: var(--muted); cursor: pointer; font: inherit; font-size: 13px; position: relative; }
+  .toc button:hover { color: var(--ink); background: color-mix(in srgb, var(--line) 45%, transparent); }
+  .toc button.on { color: var(--ink); font-weight: 600; }
+  .toc button.on::before { content: ""; position: absolute; left: -2px; top: 8px; bottom: 8px; width: 3px; border-radius: 2px; background: var(--rec); }
+  .toc button.z { margin-top: 12px; }
+  .toc button.z.on::before { background: var(--bad); }
+  /* narrow: one column, the parts list goes */
+  @media (max-width: 900px) { .layout { grid-template-columns: minmax(0, 1fr); } .toc { display: none; } }
+
+  .body { display: flex; flex-direction: column; gap: 38px; min-width: 0; }
+  .group { scroll-margin-top: 16px; }
+  .group h2 { margin: 0; font-size: 16px; }
+  .gsub { margin: 3px 0 10px; }
+  .group > .item:first-of-type { border-top: 1px solid var(--line); }
+
+  /* a setting: what it does on the left, its control on the right (or below, for lists) */
+  .item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px 28px; align-items: start; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .item.stack { grid-template-columns: minmax(0, 1fr); }
+  .it h3 { margin: 0 0 3px; font-size: 13.5px; font-weight: 600; }
+  .it p { margin: 0; max-width: 64ch; }
+  .it .state { margin-top: 6px; color: var(--ink); }
+  .item.live .state { color: var(--rec); }
+  .seg { display: inline-flex; padding: 2px; border-radius: 9px; background: var(--panel2); border: 1px solid var(--line); }
+  .seg button { border: 0; background: none; padding: 4px 11px; border-radius: 7px; cursor: pointer; color: var(--muted); font-size: 12.5px; transition: background-color .15s, color .15s; }
+  .seg button.on { background: var(--panel); color: var(--ink); font-weight: 600; box-shadow: 0 1px 2px rgba(0, 0, 0, .12); }
+  .publisher { margin: 8px 0 8px; color: var(--ink); }
+  .opt { font-weight: 400; font-size: 11px; color: var(--faint); margin-left: 4px; }
+  .ctl { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; padding-top: 2px; }
+  .chk { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; cursor: pointer; }
+
+  /* an on/off switch */
+  .switch { position: relative; width: 40px; height: 22px; flex: none; cursor: pointer; margin-top: 2px; }
+  .switch input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; z-index: 1; }
+  .switch i { position: absolute; inset: 0; border-radius: 99px; background: var(--line); transition: background .2s; pointer-events: none; }
+  .switch i::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--panel); box-shadow: 0 1px 2px rgba(0, 0, 0, .25); transition: transform .2s; }
+  .switch input:checked + i { background: var(--rec); }
+  .switch input:checked + i::after { transform: translateX(18px); }
+  .switch input:focus-visible + i { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .dl { display: flex; flex-direction: column; gap: 6px; }
+  .dl .bar { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+  .dl .bar i { display: block; height: 100%; background: var(--accent); border-radius: inherit; transition: width .3s ease-out; }
+  .dl .row { justify-content: space-between; align-items: center; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .row input { flex: 1; min-width: 200px; }
+  textarea { width: 100%; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font: inherit; color: inherit; resize: vertical; }
+  .it .warn { color: var(--lost); margin-top: 8px; }
+  .btn:disabled { opacity: .5; cursor: default; }
+  .btn.danger { border-color: color-mix(in srgb, var(--bad) 60%, var(--line)); color: var(--bad); }
+  .btn.danger:hover { background: color-mix(in srgb, var(--bad) 12%, transparent); }
+
+  .details { margin-top: 10px; padding: 12px 14px; border-radius: 10px; background: var(--panel2); }
+  .disk { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 4px; font-variant-numeric: tabular-nums; }
+  .disk .tot { font-weight: 600; margin-top: 2px; }
+  /* starting over, set apart */
+  .danger-zone { border: 1px solid color-mix(in srgb, var(--bad) 35%, var(--line)); border-radius: var(--radius); padding: 14px 18px 2px; }
+  .danger-zone h2 { color: var(--bad); }
+  .danger-zone .item { border: 0 !important; padding-top: 8px; }
+  @media (prefers-reduced-motion: reduce) { .switch i, .switch i::after { transition: none; } }
+</style>

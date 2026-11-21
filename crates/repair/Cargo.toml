@@ -1,0 +1,21 @@
+[package]
+name = "repair"
+description = "Repaired and treated copies of Ableton sets: an editable XML tree written back exactly like the original"
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+
+[dependencies]
+i18n = { path = "../i18n" }
+roxmltree.workspace = true
+flate2.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+ts-rs.workspace = true
+rayon.workspace = true
+sha2 = "0.10"
+plist.workspace = true
+als = { path = "../als" }
+md-5 = "0.10"
+regex.workspace = true
+fancy-regex.workspace = true

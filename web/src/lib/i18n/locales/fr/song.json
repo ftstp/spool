@@ -1,0 +1,770 @@
+{
+  "psay": {
+    "ok": "installé",
+    "renamed": "installé sous un autre nom : la copie réparée fait le lien",
+    "trial": "remplacé par une version installée dans les copies réparées",
+    "vst3": "la VST2 manque : remplacé par sa VST3 dans les copies réparées",
+    "other_vst2": "un autre fichier VST2 du même plugin est installé",
+    "newer": "une autre version est installée, pas celle du projet",
+    "to_vst3": "seulement en VST3 ici, le projet attend la VST2",
+    "other_vst3": "un autre format ou une autre version est installé",
+    "missing": "pas installé"
+  },
+  "status": {
+    "renamed": "renommé",
+    "other_vst2": "autre VST2",
+    "trial": "version d'essai",
+    "vst3": "remplacé par la VST3",
+    "newer": "version plus récente",
+    "to_vst3": "à passer en VST3",
+    "other_vst3": "autre VST3",
+    "missing": "manquant"
+  },
+  "statusIgnored": "{status}, ignoré",
+  "sev": {
+    "s0": "S'ouvre",
+    "s1": "Réparable par l'app",
+    "s2": "Réglages perdus",
+    "s3": "Il manque des plugins"
+  },
+  "dev": {
+    "native": "Appareil de Live",
+    "ignored": "ignoré dans Réparer",
+    "here": "ici : {name}",
+    "instances": {
+      "one": "{n} instance",
+      "other": "{n} instances"
+    },
+    "clickHint": "Clic : sa fiche dans Réparer"
+  },
+  "hint": {
+    "styleNone": "Suggestion de l'app : aucune piste assez nette (nom, dossier, rendus, sons du projet).",
+    "head": "Suggestion de l'app :",
+    "stylePct": "{style} {pct} %",
+    "pct": "{pct} %",
+    "liveKey": "Gamme réglée dans Live : {key}",
+    "midi": "Notes MIDI du projet : {key} (confiance {pct} %)",
+    "midiBass": "Notes MIDI du projet : {key} (confiance {pct} %, la basse confirme la tonique)",
+    "unsure": "trop incertain pour être proposé",
+    "keyNone": "Suggestion de l'app : rien à proposer (pas de gamme dans Live, pas assez de notes MIDI)."
+  },
+  "repairStarted": "Réparation lancée : la copie apparaîtra dans quelques secondes (suivi dans Réparer).",
+  "pathCopied": "Chemin copié : {path}",
+  "gone": "Ce morceau n'existe plus.",
+  "backToSongs": "Retour aux morceaux",
+  "archived": "Ce morceau est archivé : il n'apparaît plus dans les listes.",
+  "unarchive": "Désarchiver",
+  "back": "← Morceaux",
+  "ph": {
+    "title": "Sans titre",
+    "artist": "+ artiste",
+    "style": "+ style",
+    "key": "+ tonalité",
+    "keyProject": "{key} (projet)",
+    "tempo": "+ tempo",
+    "tempoProject": "{n} bpm (projet)",
+    "date": "+ date de sortie",
+    "kind": "+ type (Original, Remix...)",
+    "ft": "+ avec (collaborateurs)"
+  },
+  "stage": "Étape",
+  "openInLive": "Ouvrir dans Live",
+  "moreTip": "Plus d'actions (ou clic droit sur la page)",
+  "more": "Plus d'actions",
+  "probableStage": "Étape probable : {stage}",
+  "accept": "Valider",
+  "decline": "Refuser",
+  "probableStyle": "Style probable",
+  "styleClick": "Un clic sur un style le note pour ce morceau.",
+  "noStyle": "Aucun",
+  "temoin": {
+    "title": "Témoin",
+    "byYou": "choisi par toi",
+    "byApp": "choisi par l'app",
+    "none": "Aucun rendu audio retenu pour ce morceau.",
+    "renders": {
+      "one": "{n} rendu dans le dossier",
+      "other": "{n} rendus dans le dossier"
+    },
+    "listen": "Écouter",
+    "tag": "témoin",
+    "choose": "Choisir",
+    "letApp": "Laisser l'app choisir",
+    "otherAudio": {
+      "one": "{n} autre fichier audio dans le dossier",
+      "other": "{n} autres fichiers audio dans le dossier"
+    },
+    "otherAudioHint": "Des fichiers que l'app n'a pas reliés à ce morceau par leur nom. Si l'un est son rendu, choisis-le.",
+    "near": "Projets enregistrés le plus près du témoin :",
+    "nearDays": {
+      "one": "{d} j",
+      "other": "{d} j"
+    },
+    "oldVersion": "ancienne version",
+    "byName": {
+      "one": "{n} rendu au nom proche, dans - MP3",
+      "other": "{n} rendus au nom proche, dans - MP3"
+    },
+    "byNameHint": "Trouvés seulement par leur nom, donc jamais liés tout seuls : un autre morceau peut porter un nom voisin. Écoute, et choisis-le si c'est bien le rendu de ce morceau."
+  },
+  "projects": {
+    "title": "Projets",
+    "oldVersions": {
+      "one": "{n} ancienne version",
+      "other": "{n} anciennes versions"
+    },
+    "backups": {
+      "one": "{n} sauvegarde",
+      "other": "{n} sauvegardes"
+    },
+    "latest": "dernier",
+    "repairComplete": "Écrit une copie réparée à côté, qui s'ouvrira sans rien de manquant",
+    "repairPartial": "Écrit une copie réparée à côté (il restera des manques)",
+    "repair": "Réparer",
+    "copyFullPath": "Copier le chemin complet",
+    "copyPath": "Copier le chemin",
+    "reveal": "Afficher dans l'explorateur",
+    "unreadable": "Illisible : {error}",
+    "samplesLost": {
+      "one": "{n} sample introuvable",
+      "other": "{n} samples introuvables"
+    },
+    "own": "En faire un morceau à part",
+    "ownTip": "Ce projet n'est pas une version de ce morceau : en faire un morceau à part (Ctrl+Z le remet ici).",
+    "ownDone": "« {name} » est maintenant un morceau à part.",
+    "ownConfirmTitle": "Faire de « {name} » un morceau à part ?",
+    "ownConfirmText": "Ce projet quitte « {title} » et devient un morceau à lui, avec sa propre fiche. Les fichiers ne bougent pas, et Ctrl+Z le remet.",
+    "allHere": "Tous les plugins et samples de ce projet sont là."
+  },
+  "checks": {
+    "title": "Finitions",
+    "manual": "· à la main",
+    "applies": "Le compter à nouveau",
+    "na": "Pas pour ce morceau",
+    "naTip": "Ce point ne concerne pas ce morceau (des paroles pour un instrumental, par exemple) : il ne compte plus dans les finitions",
+    "appliesTip": "Ce point compte de nouveau dans les finitions de ce morceau",
+    "already": "« {label} » est déjà dans les finitions.",
+    "presets": "Presets",
+    "presetsTip": "Enregistrer les finitions ajoutées comme preset, en appliquer un, ou choisir celui qui s'affiche sur tous les morceaux",
+    "saveAs": "Enregistrer ces finitions comme preset...",
+    "saveAsNone": "Ajoutez d'abord une finition à ce morceau",
+    "apply": "Appliquer « {name} » ({n})",
+    "default": "Sur tous les morceaux",
+    "defaultNone": "Aucun preset",
+    "delete": "Supprimer un preset",
+    "presetSaved": "Preset « {name} » enregistré ({n} finition(s)).",
+    "presetPh": "Nom du preset (EP, single, remix...)",
+    "presetSave": "Enregistrer",
+    "lyricsOffer": "« {name} » est dans le moodboard :",
+    "lyricsYes": "en faire les paroles",
+    "remove": "Retirer cette finition",
+    "removeName": "Retirer « {label} »",
+    "addPh": "Ajouter une finition (stems envoyés, clip, instru...)",
+    "add": "Ajouter"
+  },
+  "notes": {
+    "title": "Notes",
+    "placeholder": "Une idée, une chose à refaire... (Entrée pour l'ajouter)",
+    "add": "Ajouter",
+    "at": "à {time} du témoin",
+    "atNone": "à un moment du témoin (lancez la lecture)",
+    "atTip": "Lier la note à ce moment du morceau : un clic sur son heure y relance la lecture",
+    "remove": "Supprimer cette note"
+  },
+  "devices": {
+    "title": "Dans le projet",
+    "instr": "Instruments",
+    "fx": "Effets",
+    "midi": "MIDI",
+    "chain": "Chaîne du master : {chain}"
+  },
+  "board": {
+    "label": "Moodboard",
+    "title": "Moodboard",
+    "added": "« {name} » ajouté au moodboard",
+    "trashed": "« {name} » mis de côté (dossier .corbeille du moodboard)",
+    "unlinked": "« {name} » retiré du moodboard (le fichier reste en place)",
+    "addImage": "+ Image",
+    "addIdea": "+ Idée",
+    "addLyrics": "+ Paroles",
+    "inFolder": "Dans le dossier :",
+    "enlarge": "Agrandir {name}",
+    "setAside": "Mettre de côté",
+    "setAsideName": "Mettre de côté {name}",
+    "moreImages": {
+      "one": "+ {n} image",
+      "other": "+ {n} images"
+    },
+    "lyrics": "Paroles",
+    "newIdea": "Nouvelle idée",
+    "lyricsPh": "Les paroles du morceau...",
+    "ideaPh": "Une idée, une référence, à refaire...",
+    "edit": "Modifier",
+    "empty": "(vide)",
+    "also": "Aussi : {list}",
+    "removeColor": "Retirer la couleur {c}",
+    "addColor": "Ajouter une couleur",
+    "hint": "Glisse ici des images, ou ajoute une idée, des paroles, des couleurs.",
+    "dropHere": "Lâche pour l'ajouter au moodboard",
+    "dropHow": "Un fichier de tes projets est lié là où il est, sans copie ; un fichier venu d'ailleurs est copié dans le moodboard.",
+    "linkedN": {
+      "one": "{n} fichier lié (rien copié)",
+      "other": "{n} fichiers liés (rien copié)"
+    },
+    "copiedN": {
+      "one": "{n} fichier copié dans le moodboard",
+      "other": "{n} fichiers copiés dans le moodboard"
+    },
+    "refusedN": {
+      "one": "{n} refusé : {names} (dossier ou format qu'un moodboard ne montre pas)",
+      "other": "{n} refusés : {names} (dossiers ou formats qu'un moodboard ne montre pas)"
+    },
+    "dragTip": "Glisse-le dans Live",
+    "listen": "Écouter",
+    "unlinkTip": "Retirer du moodboard",
+    "kind": {
+      "audio": "Son",
+      "midi": "MIDI",
+      "image": "Image",
+      "other": "Fichier"
+    },
+    "files": "Sons et MIDI",
+    "presets": "Presets",
+    "presetTip": "Glisse « {name} » dans Live",
+    "inFolderTip": "Afficher dans l'explorateur : {path}"
+  },
+  "media": {
+    "title": "Médias hors projets",
+    "reload": "Relire les dossiers",
+    "shrink": "Réduire le panneau",
+    "widen": "Agrandir le panneau",
+    "intro": "Les images, vidéos, sons et notes rangés hors de tes morceaux. Clique un élément pour l'ajouter au moodboard d'un morceau.",
+    "searching": "Recherche dans tes dossiers...",
+    "kinds": {
+      "image": "Images",
+      "video": "Vidéos",
+      "audio": "Sons",
+      "text": "Notes",
+      "all": "Tout"
+    },
+    "kind": {
+      "image": "image",
+      "gif": "gif",
+      "video": "vidéo",
+      "audio": "son",
+      "text": "note",
+      "pdf": "pdf"
+    },
+    "search": "Nom ou dossier",
+    "sort": "Tri",
+    "sortRecent": "Récents d'abord",
+    "sortOld": "Anciens d'abord",
+    "sortBig": "Plus lourds d'abord",
+    "sortName": "Par nom",
+    "sortFolder": "Par dossier",
+    "nothing": "Rien avec ce filtre.",
+    "rootFolder": "Dossier principal",
+    "wholeFolder": "Tout le dossier...",
+    "itemTip": "{name}\n{dir}\n{size} · {date}\nClic : l'ajouter à un moodboard. Clic droit : plus",
+    "mb": "{n} Mo",
+    "kb": "{n} Ko",
+    "showMore": {
+      "one": "Afficher {k} de plus ({n} restants)",
+      "other": "Afficher {k} de plus ({n} restants)"
+    }
+  },
+  "merges": {
+    "sameFolder": "Même dossier :",
+    "sameFolderCount": "Même dossier ({n} autres morceaux) :",
+    "attachTip": "C'est le même morceau : rattacher « {title} » à celui-ci",
+    "attachHere": "rattacher ici",
+    "less": "Réduire",
+    "seeOthers": "Voir les {n} autres",
+    "attached": "Rattaché :",
+    "split": "Séparer",
+    "splitDone": "« {name} » est de nouveau un morceau à part",
+    "pickPh": "Morceau à rattacher à celui-ci...",
+    "attachOther": "Rattacher un autre morceau...",
+    "pickHint": "Le morceau choisi rejoint celui-ci : ses projets, et ses prochains enregistrements."
+  },
+  "player": {
+    "pause": "Pause",
+    "play": "Lecture",
+    "inApp": "lecture dans l'app",
+    "loadingWave": "lecture de l'onde...",
+    "loudnessTip": "Volume perçu intégré (EBU R128), crête d'échantillon, niveau moyen, plage de volume",
+    "peak": "crête {v} dB",
+    "region": "Lecteur",
+    "closePlayer": "Fermer le lecteur",
+    "listenTemoin": "Écouter le témoin",
+    "listenProject": "Écouter le projet (pas encore de témoin)",
+    "unreadable": "Fichier illisible",
+    "playsInApp": "La lecture se fait dans l'app.",
+    "prev": "Morceau précédent",
+    "next": "Morceau suivant",
+    "inQueue": "{i}/{n} · {name}",
+    "prevFile": "Fichier précédent de la liste",
+    "nextFile": "Fichier suivant de la liste",
+    "mute": "Couper le son",
+    "unmute": "Remettre le son",
+    "volume": "Volume",
+    "volumeTip": "Volume : {n} %",
+    "chordsTip": "L'accord entendu et le suivant",
+    "keyChord": "Clavier",
+    "keyChordTip": "Ce que joue ton clavier MIDI en ce moment, à lire face à l'accord du morceau"
+  },
+  "card": {
+    "openInLive": "Ouvrir le projet dans Live"
+  },
+  "stars": {
+    "label": "Note",
+    "star": {
+      "one": "{n} étoile",
+      "other": "{n} étoiles"
+    },
+    "clear": "Retirer la note",
+    "outOf5": "{n} sur 5"
+  },
+  "field": {
+    "clickToEdit": "{hint}\n\nCliquer pour modifier",
+    "edit": "Modifier"
+  },
+  "sound": {
+    "title": "Sonne comme",
+    "untitled": "(sans titre)",
+    "veryClose": "très proche",
+    "close": "proche",
+    "related": "apparenté",
+    "simTitle": "Ressemblance des deux témoins : {pct} %",
+    "measured": "témoin : {n} bpm",
+    "tempoTitle": "Tempo mesuré sur le témoin (analyse audio), différent de celui du projet"
+  },
+  "src": {
+    "yours": "Saisi par toi.",
+    "from": "Détecté : {src}.",
+    "none": "Rien de détecté pour l'instant.",
+    "doubt": "Les détections ne sont pas d'accord : à vérifier.",
+    "others": "Autres propositions :",
+    "pick": "Choisir cette valeur",
+    "back": "Revenir à la détection",
+    "noted": "ta saisie",
+    "live": "gamme réglée dans Live",
+    "notes": "notes MIDI du projet",
+    "project": "tempo du projet",
+    "audio": "rendu audio",
+    "auto": "noms, plugins et morceaux proches",
+    "folder": "Lu dans le nom du dossier."
+  },
+  "findSamples": "Trouver des samples",
+  "findSamplesTip": "Les samples dans la tonalité et au tempo de ce morceau",
+  "findMidi": "Trouver des MIDI",
+  "findMidiTip": "Les fichiers MIDI dans la tonalité et au tempo de ce morceau",
+  "place": {
+    "folderTip": "Le dossier du morceau : l'ouvrir dans l'Explorateur",
+    "noRelease": "Dans aucune sortie",
+    "moveTo": "Déplacer vers une autre sortie...",
+    "addTo": "Ajouter à une sortie...",
+    "moved": "Morceau dans « {title} ».",
+    "suggested": "Suggérées",
+    "others": "Autres sorties",
+    "fromFolder": "Créer « {title} » ({n} morceaux du dossier)"
+  },
+  "compare": {
+    "title": "Comparer",
+    "aTip": "Écouter A (le témoin), au même moment",
+    "bTip": "Écouter B, au même moment",
+    "bLabel": "Avec quoi comparer",
+    "nothing": "Aucune autre version",
+    "versions": "Autres versions du morceau",
+    "refs": "Morceaux de référence",
+    "addRef": "+ Morceau de référence...",
+    "dropRef": "Retirer cette référence",
+    "pickRef": "Un morceau de référence",
+    "match": "Même volume",
+    "matchTip": "Baisse le plus fort des deux au volume de l'autre, pour juger le son et pas le niveau",
+    "peak": "crête {v} dB",
+    "lowered": "{which} baissé de {db} dB pour comparer",
+    "down": "baissé de {db} dB",
+    "quiet": "plus faible de {db} dB que les autres morceaux",
+    "asIs": "joué tel quel",
+    "peakWarn": "Crête à {v} dB : vise -1 dB maximum, l'encodage des plateformes peut saturer au-dessus.",
+    "colon": " : "
+  },
+  "comments": {
+    "title": "Commentaires",
+    "add": "+ Commenter à {time}",
+    "addTip": "Un commentaire au moment écouté (mets en pause où tu veux)",
+    "ph": "Ce que tu entends à ce moment...",
+    "save": "Ajouter",
+    "done": "Réglé",
+    "jump": "Écouter à ce moment",
+    "remove": "Supprimer",
+    "hint": "Écoute le témoin et note ce qui ne va pas, au moment près. Les commentaires restent attachés à la version écoutée."
+  },
+  "diff": {
+    "title": "Ce qui a changé entre deux versions",
+    "from": "Version d'avant",
+    "to": "Version d'après",
+    "pickTwo": "Choisis deux versions différentes.",
+    "same": "Rien de ce que Spool lit n'a changé (le changement est ailleurs : automations, mixage, réglages des plugins...).",
+    "what": {
+      "tempo": "Tempo",
+      "length": "Durée",
+      "sig": "Signature",
+      "key": "Tonalité",
+      "live": "Version de Live",
+      "tracks": "Pistes",
+      "samples": "Samples"
+    },
+    "tracksAdded": "Pistes ajoutées :",
+    "tracksRemoved": "Pistes retirées :",
+    "was": "avant : {name}",
+    "notes": "notes {from} → {to}",
+    "clips": "clips {from} → {to}",
+    "pluginsAdded": "Plugins ajoutés :",
+    "pluginsRemoved": "Plugins retirés :",
+    "samplesAdded": "Samples ajoutés :",
+    "samplesRemoved": "Samples retirés :",
+    "locatorsAdded": "Repères ajoutés :",
+    "locatorsRemoved": "Repères retirés :",
+    "more": "et {n} autres"
+  },
+  "session": {
+    "title": "Arrangement",
+    "bars": {
+      "one": "{n} mesure",
+      "other": "{n} mesures"
+    },
+    "version": "Version du projet",
+    "allTracks": "Toutes les pistes",
+    "reading": "Lecture du projet...",
+    "empty": "Aucun clip placé dans l'arrangement de ce projet (tout est peut-être en vue Session).",
+    "midiTip": "Clic : écouter ce clip MIDI",
+    "audioTip": "Clic : écouter ce sample",
+    "missing": "{n} sample(s) de ce projet illisible(s) ou introuvable(s) : joué sans eux.",
+    "cannotPlay": "Ce clip ne peut pas être écouté ici : son fichier est introuvable.",
+    "hint": "L'arrangement de « {title} » tel que le projet le décrit : les sections viennent des repères posés dans Live. Clique un clip pour l'écouter.",
+    "fold": "Replier l'arrangement",
+    "unfold": "Déplier l'arrangement",
+    "playRender": "Témoin",
+    "playMidi": "Projet",
+    "playRenderTip": "Écouter le témoin, la tête de lecture sur l'arrangement (juste si le témoin a été exporté depuis la mesure 1)",
+    "playMidiTip": "Écouter le projet lui-même : ses pistes MIDI avec le petit synthé et ses clips audio depuis leurs samples, calés sur l'arrangement (sans les effets ni les instruments de Live)",
+    "noMidi": "Rien à écouter dans cet arrangement : ni note MIDI, ni sample retrouvé.",
+    "midiName": "{title} (projet)",
+    "old": "ancienne version",
+    "versionTip": "Voir l'arrangement d'une autre version du projet",
+    "rulerTip": "Clique pour placer la lecture ici",
+    "mute": "Couper cette piste dans « Projet » (retenu pour ce projet)",
+    "unmute": "Réentendre cette piste dans « Projet »",
+    "menu": {
+      "similarMidi": "MIDI du même genre (tonalité, tempo)",
+      "saveMidi": "Enregistrer en fichier MIDI et ouvrir le dossier",
+      "revealProject": "Ouvrir le dossier du projet",
+      "similarSamples": "Samples qui sonnent pareil",
+      "revealSample": "Ouvrir le dossier du sample",
+      "missing": "Sample introuvable sur cet ordinateur",
+      "notesInfo": "{n} notes, de {lo} à {hi}, {bars} mesures",
+      "velInfo": "Vélocité de {lo} à {hi}",
+      "chordsInfo": "Accords : {chords}"
+    },
+    "pause": "Pause",
+    "playFrom": "Écouter : {src}",
+    "srcLabel": "Ce qu'on écoute",
+    "offInLive": "Coupée dans Live : coupée ici aussi au départ",
+    "muteGroup": "Couper ce groupe et ses pistes dans « Projet » (retenu pour ce projet)",
+    "unmuteGroup": "Réentendre ce groupe dans « Projet »",
+    "solo": "Solo : n'entendre que cette piste (Ctrl+clic : l'ajouter aux autres en solo)",
+    "soloGroup": "Solo : n'entendre que ce groupe (Ctrl+clic : l'ajouter aux autres en solo)",
+    "unsolo": "Retirer le solo",
+    "renderEnds": "Le témoin s'arrête à {at} : le projet continue d'ici.",
+    "fam": {
+      "piano": "Piano",
+      "epiano": "Piano électrique",
+      "organ": "Orgue",
+      "synth": "Synthé",
+      "pad": "Nappe",
+      "pluck": "Pluck",
+      "lead": "Lead",
+      "brass": "Cuivres",
+      "bass": "Basse synthé",
+      "sub": "Sub",
+      "reese": "Reese",
+      "bassgtr": "Basse électrique",
+      "drums": "Batterie"
+    },
+    "soundTitle": "Son de {track}",
+    "soundGuess": "d'après le projet",
+    "soundReset": "Revenir au son d'après le projet",
+    "soundResetAll": "Revenir aux sons d'après le projet sur toutes les pistes",
+    "soundTip": "Son joué ici : {fam}, d'après le projet. Clic pour en choisir un autre.",
+    "soundSet": "Son choisi à la main : {fam}. Clic pour le changer ou revenir à celui d'après le projet.",
+    "whole": "Tout le morceau",
+    "zoom": "Zoomer",
+    "wholeTip": "Voir tout le morceau dans la largeur",
+    "zoomTip": "Voir environ {n} mesures à la fois : l'arrangement suit la lecture (Maj + molette pour le faire défiler)"
+  },
+  "harmony": {
+    "chords": "Accords",
+    "circle": "Cercle des quintes",
+    "keyWord": "tonalité",
+    "used": "Dans le morceau :",
+    "outOfKey": "hors de la gamme",
+    "noKey": "Les notes de ce projet ne disent pas de tonalité claire (pas assez de pistes harmoniques en MIDI).",
+    "pick": "Choisis un accord dans la ligne des accords ou sur le cercle.",
+    "after": "Après {chord}",
+    "style": "Style",
+    "anyStyle": "Tous les styles",
+    "hear": "Écouter",
+    "hearTip": "Écouter {a} puis {b}",
+    "dragTip": "Glisse-le dans Live : les deux accords en MIDI, une mesure chacun",
+    "none": "Rien pour ce filtre.",
+    "level": {
+      "all": "Tout",
+      "base": "Bases",
+      "color": "Couleurs",
+      "advanced": "Avancé"
+    },
+    "styles": {
+      "jazz": "Jazz",
+      "soul": "Soul, funk",
+      "reggae": "Reggae",
+      "fanfare": "Fanfare",
+      "orchestral": "Orchestral"
+    },
+    "why": {
+      "perfect": "Cadence parfaite : la dominante se résout sur la tonique, le repos le plus fort.",
+      "deceptive": "Cadence rompue : on attend la tonique, on tombe sur le relatif. Surprise douce.",
+      "plagalBack": "Retour vers la sous-dominante : la tension retombe sans conclure.",
+      "toDominant": "Vers la dominante : la tension monte, elle appelle la tonique.",
+      "plagal": "Cadence plagale (IV-I) : le « amen », un repos plus doux que V-I.",
+      "home": "Retour à la tonique : on se pose.",
+      "preDominant": "Prépare la dominante (ii-V) : l'enchaînement le plus naturel vers V.",
+      "subdominant": "Sous-dominante : on s'éloigne de la maison sans tension.",
+      "dominant": "Dominante : crée la tension qui veut revenir à la tonique.",
+      "relative": "Relatif : les mêmes notes, la couleur inverse (majeur et mineur).",
+      "secondaryDominant": "Dominante secondaire de {to} : un accord hors gamme qui pousse vers {to}.",
+      "borrowedIv": "iv emprunté au mineur : une touche de mélancolie dans une tonalité majeure.",
+      "borrowed": "Accord emprunté au mode mineur : plus sombre, très utilisé en pop et en rock.",
+      "dorianIV": "IV majeur (couleur dorienne) : éclaire un morceau mineur, très soul.",
+      "picardy": "Tierce picarde : finir en majeur un morceau mineur, effet lumineux.",
+      "suspension": "Suspension : retarde la tierce, puis se résout sur {to}.",
+      "tritoneSub": "Substitution tritonique : remplace V7 par l'accord à un triton, la basse descend d'un demi-ton vers {to}.",
+      "neapolitan": "Accord napolitain : bII majeur, dramatique, souvent avant {to}.",
+      "passingDim": "Diminué de passage : relie deux accords par un demi-ton.",
+      "backdoor": "Cadence « backdoor » : bVII7 vers {to}, une résolution plus soul que V7.",
+      "jazzIIV": "Enchaînement ii-V-I jazz, avec les septièmes.",
+      "extend": "Même accord enrichi (9e) : plus de couleur sans changer la fonction.",
+      "soulNinth": "Accord de neuvième : la signature des claviers soul.",
+      "funkSharp9": "7#9 : l'accord funk (Hendrix, James Brown), tendu et cru.",
+      "reggaeSkank": "Grille reggae : joue-le en skank, accords courts sur les temps 2 et 4.",
+      "fanfareCadence": "Cadence de fanfare : V7 franc puis tonique, avec les cuivres.",
+      "epicCadence": "Cadence épique bVI-bVII-I : la montée des musiques de film.",
+      "sus2Pad": "Sus2 : ouvert et aérien, idéal en nappe de cordes."
+    },
+    "viewLabel": "Aide affichée",
+    "view": {
+      "scale": "Gamme",
+      "circle": "Cercle des quintes",
+      "keys": "Clavier",
+      "none": "Masquer"
+    },
+    "viewTip": {
+      "scale": "Les sept accords de la tonalité et leur fonction",
+      "circle": "Les tonalités voisines, une quinte d'écart entre chaque case",
+      "keys": "Les notes de la gamme et celles de l'accord choisi sur un clavier",
+      "none": "Seulement les propositions"
+    },
+    "fn": {
+      "T": "Tonique : le repos, la maison",
+      "SD": "Sous-dominante : on s'éloigne, sans tension",
+      "D": "Dominante : la tension qui appelle la tonique"
+    },
+    "fnShort": {
+      "T": "repos",
+      "SD": "départ",
+      "D": "tension"
+    },
+    "fnLegend": "Vert : repos (tonique). Bleu : départ (sous-dominante). Rouge : tension (dominante). Une progression va souvent repos, départ, tension, repos.",
+    "keysLegend": "Points : les notes de la gamme. En rouge : l'accord choisi, sa fondamentale entourée."
+  },
+  "openInLiveTip": "Ouvrir ce projet dans Ableton Live",
+  "unstuck": {
+    "title": "Débloquer ce morceau",
+    "fits": "ce qui va avec : {key}, {bpm} bpm",
+    "stop": "Arrêter",
+    "noKey": "La tonalité et le tempo de ce morceau ne sont pas connus : renseigne-les en haut de la fiche.",
+    "lede": "Ta propre matière qui va avec ce morceau : les clips MIDI de tes autres projets et tes boucles, dans sa tonalité (ou le relatif) et à son tempo. ▶ seul, ▶+ par-dessus le témoin, calé sur la mesure suivante. Glisse une ligne dans Live.",
+    "tab": {
+      "chords": "Progressions",
+      "bass": "Basses",
+      "melody": "Mélodies",
+      "drums": "Rythmes",
+      "samples": "Samples"
+    },
+    "alone": "Écouter seul",
+    "overTip": "Écouter par-dessus le témoin, au tempo du morceau, à partir de la mesure suivante",
+    "dragTip": "Glisse-le dans Live",
+    "none": "Rien de compatible dans ta matière pour l'instant.",
+    "overProjectTip": "Écouter par-dessus le projet (le morceau n'a pas de témoin), au tempo du morceau, à partir de la mesure suivante"
+  },
+  "copies": {
+    "text": {
+      "one": "Ce projet est une copie exacte de celui de",
+      "other": "Ce projet est une copie exacte de ceux de"
+    },
+    "why": "Même fichier, même date : sans doute un dossier dupliqué pour démarrer autre chose.",
+    "archive": "Archiver cette copie",
+    "archiveTip": "La cacher des listes de Spool (rien ne bouge sur le disque, et ça se défait)"
+  },
+  "folder": {
+    "title": {
+      "one": "Ce dossier « {folder} »",
+      "other": "Le dossier « {folder} » contient {n} projets, que Spool range en {n} morceaux"
+    },
+    "newest": "le plus récent",
+    "gather": "Les réunir en un seul morceau",
+    "gatherTip": "Un seul morceau, le projet le plus récent en tête (« {title} »), titré d'après le dossier. Les fichiers ne bougent pas ; Ctrl+Z défait.",
+    "gathered": "Les {n} projets du dossier forment maintenant un seul morceau",
+    "neighbours": {
+      "one": "{n} autre dossier à côté contient aussi plusieurs morceaux : le réunir pareil ?",
+      "other": "{n} autres dossiers à côté contiennent aussi plusieurs morceaux : les réunir pareil ?"
+    },
+    "neighboursDo": "Les réunir aussi",
+    "neighboursNo": "Non",
+    "rules": "Les règles de lecture"
+  },
+  "chart": {
+    "title": "Grille",
+    "key": "en {key}",
+    "notation": "Notation",
+    "mode": {
+      "us": "C Am",
+      "latin": "Do La m",
+      "degrees": "I vi",
+      "staff": "Portée"
+    },
+    "modeTip": {
+      "us": "Notation américaine (A B C)",
+      "latin": "Notation latine (do ré mi)",
+      "degrees": "Degrés dans la tonalité (I, IV, V, vi...)",
+      "staff": "Partition simple : les accords au-dessus de la mélodie, en clé de sol"
+    },
+    "empty": "Aucun accord lisible dans les pistes MIDI de ce projet.",
+    "none": "Pas d'accord sur cette mesure",
+    "timesTip": "Cette ligne revient {n} fois de suite",
+    "playAll": "Écouter tous les accords du morceau, à son tempo",
+    "stopAll": "Arrêter les accords",
+    "noTune": "Aucune mélodie trouvée dans le projet : seuls les accords sont écrits.",
+    "jumpTip": "Lire depuis la mesure {n}"
+  },
+  "prog": {
+    "tab": "Progressions",
+    "tabChords": "Accord par accord",
+    "dragTip": "Clic : l'écouter. Glisse-la dans Live : la progression en MIDI, une mesure par accord",
+    "yours": "la tienne",
+    "loop": "Ta boucle",
+    "loopWhy": "Les quatre mesures qui reviennent le plus dans le projet",
+    "variations": "Variantes de ta boucle",
+    "classics": "Progressions connues en {key}",
+    "var": {
+      "swap": "Un accord remplacé par un autre de même fonction : même rôle, autre couleur",
+      "borrowIv": "Le IV passe en mineur (emprunté au mode mineur) : plus mélancolique",
+      "dominant": "Une dominante 7 avant le retour : la tension appelle la suite",
+      "sevenths": "Tout en accords de septième : plus riche, plus jazz ou soul"
+    },
+    "why": {
+      "axis": "La progression la plus utilisée en pop : stable, lumineuse, elle tourne sans fin",
+      "axisMinorStart": "La même en partant du vi : plus émouvante, très électro",
+      "doowop": "Les années 50, le doo-wop : douce et nostalgique",
+      "royal": "La « royal road » de la J-pop : elle monte, puis retombe sur le relatif",
+      "canon": "Le canon de Pachelbel : une basse qui descend, huit accords",
+      "twoFiveOne": "Le ii-V-I du jazz : la cadence la plus naturelle vers la tonique",
+      "turnaround": "Le turnaround jazz : une boucle sans fin vers la tonique",
+      "mixo": "Le bVII emprunté au mixolydien : rock, sans la tension du V",
+      "borrowedIv": "Le iv emprunté en fin de boucle : la touche soul et mélancolique",
+      "plagalRock": "Simple et solide : rock, reggae, folk",
+      "sadPop": "Partir du IV : la pop en suspens, entre joie et regret",
+      "neoSoul": "Une descente en septièmes : neo-soul, R&B",
+      "epic": "La boucle épique du mineur : bandes-son, électro, pop sombre",
+      "andalusian": "La cadence andalouse : la basse descend jusqu'au V, flamenco et rock",
+      "aeolianLoop": "Mineur naturel en va-et-vient : rock et électro mélancoliques",
+      "minorCadence": "La cadence mineure classique, le V majeur qui ramène à la maison",
+      "harmonicDrama": "Le V majeur du mineur harmonique : dramatique, orchestral",
+      "circle": "Le cycle des quintes en mineur : chaque accord appelle le suivant",
+      "minorTwoFive": "Le ii-V-i mineur du jazz",
+      "dorian": "Le IV majeur du dorien : groove soul et funk en mineur",
+      "phrygian": "Le bII phrygien : sombre et tendu, très trap et drill",
+      "darkPop": "Un v mineur au lieu du V : pop et hip-hop sombres, sans résolution",
+      "lament": "Une descente courte qui s'attarde : hip-hop, rock planant",
+      "lofi": "Des septièmes en cycle : lo-fi, hip-hop jazzy"
+    },
+    "styles": {
+      "pop": "Pop",
+      "rock": "Rock",
+      "edm": "Électro",
+      "soul": "Soul, R&B",
+      "jpop": "J-pop",
+      "orchestral": "Orchestral",
+      "jazz": "Jazz",
+      "funk": "Funk",
+      "reggae": "Reggae",
+      "flamenco": "Flamenco",
+      "classical": "Classique",
+      "trap": "Trap",
+      "drill": "Drill",
+      "hiphop": "Hip-hop",
+      "lofi": "Lo-fi"
+    }
+  },
+  "resources": {
+    "title": "Ressources",
+    "loading": "Lecture du projet...",
+    "none": "Ce projet ne joue aucun sample, et son dossier Samples est vide.",
+    "summary": "{audio} samples et {midi} MIDI joués",
+    "missing": "{n} introuvable(s)",
+    "from": "lu dans {file}",
+    "unused": "Dans les dossiers Samples, pas utilisés ({n})",
+    "showAll": "Tout afficher",
+    "more": "Et {n} de plus, non affichés.",
+    "missingTip": "Ce fichier n'est plus à cet endroit : le projet ne le trouve pas.",
+    "place": {
+      "project": "dossier du projet",
+      "library": "bibliothèque",
+      "missing": "introuvable"
+    }
+  },
+  "sections": {
+    "bar": "Sections de la fiche",
+    "tip": "Ouvrir ou fermer cette section (touche {n}). Ce que tu ouvres reste ouvert pour tous les morceaux.",
+    "close": "Fermer cette section (le bouton en haut la rouvre)",
+    "closeName": "Fermer {name}",
+    "label": {
+      "session": "Arrangement",
+      "chords": "Accords",
+      "unstuck": "Débloquer",
+      "temoin": "Rendus et comparaison",
+      "checks": "Finitions",
+      "notes": "Notes",
+      "projects": "Projets",
+      "resources": "Ressources",
+      "devices": "Plugins",
+      "board": "Moodboard"
+    },
+    "allHere": "tout est là",
+    "toFix": {
+      "one": "{n} à réparer",
+      "other": "{n} à réparer"
+    },
+    "lost": {
+      "one": "{n} perdu",
+      "other": "{n} perdus"
+    },
+    "comments": {
+      "one": "{n} commentaire",
+      "other": "{n} commentaires"
+    },
+    "rendersLink": "Rendus et comparaison",
+    "noChords": "Aucun accord trouvé dans les notes de ce projet."
+  }
+}
