@@ -362,6 +362,11 @@ export const midiExport = (rel: string, semis: number, rate: number, target: num
   inTauri ? invoke<string>("midi_export", { rel, semis, rate, target, drums }) : readOnly();
 /** The samples kept twice or more, and the songs whose projects use a sample. */
 export const sampleDupes = () => (inTauri ? invoke<import("./bindings/Dupes").Dupes[]>("sample_dupes") : Promise.resolve([]));
+/** Samples sorted by hand (family null: back to the automatic sort); a folder's unsorted ones at once. */
+export const sortSamples = (paths: string[], family: string | null, cat: string | null) =>
+  inTauri ? invoke<number>("sort_samples", { paths, family, cat }) : Promise.resolve(paths.length);
+export const sortSampleFolder = (dir: string, family: string, cat: string | null) =>
+  inTauri ? invoke<number>("sort_sample_folder", { dir, family, cat }) : Promise.resolve(0);
 export const sampleSongs = (path: string) =>
   inTauri ? invoke<number[]>("sample_songs", { path }) : devJson<Record<string, number[]>>("dev-sample-songs.json", {}).then((m) => m[path] ?? []);
 /** What changed between two saves of a project (older first). */

@@ -1123,7 +1123,7 @@ impl App {
                 // on by default: what is missing downloads once per session, after the first
                 // setup (offline: tried again at the next start, not in a loop)
                 let mut fetched = false;
-                let mut learnt: Option<(i64, i64)> = None;
+                let mut learnt: Option<(i64, i64, i64, i64)> = None;
                 let mut checked = std::time::Instant::now() - Duration::from_secs(120);
                 loop {
                     std::thread::sleep(Duration::from_secs(3));
@@ -1134,36 +1134,38 @@ impl App {
                         fetched = true;
                         app.audio_download();
                     }
-                    if !app.audio_may_run() {
-                        continue;
-                    }
-                    let _ = app.audio_round();
-                    // the unsorted samples sorted by what the library's named ones teach:
-                    // learnt again when the named or the heard samples changed (checked
-                    // every minute; a few seconds of work)
-                    if checked.elapsed() > Duration::from_secs(60) {
+                    // the unsorted samples sorted by their folder and by what the library's named
+                    // ones teach: learnt again when the named, the heard or the user's samples
+                    // changed (checked every minute; a few seconds of work). The folder needs no
+                    // listening, so this runs with the analysis off too, but not during a scan.
+                    if checked.elapsed() > Duration::from_secs(60) && !app.state.lock().unwrap().running {
                         checked = std::time::Instant::now();
                         let m = app.samples_learn_marker();
                         if m.is_some() && m != learnt && app.sort_samples_by_library().is_ok() {
                             learnt = m;
                         }
                     }
+                    if !app.audio_may_run() {
+                        continue;
+                    }
+                    let _ = app.audio_round();
                 }
             })
             .expect("spawn the audio analysis thread");
     }
 
-    /// (named samples heard, unsorted samples heard): what the library's own model learns from
-    /// and sorts. None when the base cannot be read.
-    fn samples_learn_marker(&self) -> Option<(i64, i64)> {
+    /// (sorted samples heard, unsorted samples heard, sorted by hand, sorted in all): what the
+    /// library's own model and the folders learn from and sort. None when the base cannot be
+    /// read.
+    fn samples_learn_marker(&self) -> Option<(i64, i64, i64, i64)> {
         self.reader
             .lock()
             .unwrap()
             .con
             .query_row(
-                "select coalesce(sum(family is not null), 0), coalesce(sum(family is null), 0) from samples where emb is not null",
+                "select coalesce(sum(emb is not null and coalesce(u_family, family) is not null), 0), coalesce(sum(emb is not null and coalesce(u_family, family) is null), 0), count(u_family) * 1000003 + coalesce(sum((rowid % 9973) * (unicode(u_family) * 31 + length(u_family) + coalesce(unicode(u_cat), 0) * 7 + length(coalesce(u_cat, '')))), 0), coalesce(sum(coalesce(u_family, family) is not null), 0) from samples",
                 [],
-                |r| Ok((r.get(0)?, r.get(1)?)),
+                |r| Ok((r.get(0)?, r.get(1)?, r.get(2)?, r.get(3)?)),
             )
             .ok()
     }

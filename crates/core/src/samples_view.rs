@@ -46,6 +46,11 @@ pub struct SampleRow {
     /// In how many songs' projects it is used.
     #[ts(type = "number")]
     pub used: i64,
+    /// For an unsorted sample: the best guess (crate::sample_learn), what the quick sort
+    /// proposes, with its probability.
+    pub guess: Option<String>,
+    pub guess_cat: Option<String>,
+    pub guess_conf: Option<f32>,
 }
 
 #[derive(Debug, Clone, Serialize, TS)]
@@ -71,11 +76,49 @@ pub struct SamplePage {
     pub counts: Vec<CatCount>,
 }
 
-/// A sample's family and category as shown: its name's, else what the audio said when sure
-/// (the library's own model writes a_family only when sure: crate::sample_learn).
-const FAM: &str = "coalesce(family, a_family)";
-const CAT: &str = "case when family is not null then cat else a_cat end";
-const SRC: &str = "case when family is not null then cat_src when a_family is not null then 'audio' end";
+/// A sample's family and category as shown: the user's, else its name's, else what the samples
+/// named around it ("neighbours") or the audio said when sure (crate::sample_learn writes a_family only when sure). Unsorted,
+/// a long recording (not listened to) and a file that cannot be read are shown apart.
+const FAM: &str = "coalesce(u_family, family, a_family, case when dur > 60 then 'long' when a_error is not null then 'unreadable' end)";
+const CAT: &str = "case when u_family is not null then u_cat when family is not null then cat else a_cat end";
+const SRC: &str = "case when u_family is not null then 'user' when family is not null then cat_src when a_family is not null then case when a_src = 'folder' then 'neighbours' else 'audio' end end";
+/// The columns of a row (see `row`).
+const COLS: &str = "path, name, folder, pack, {CAT}, {SRC}, {FAM}, is_loop, dur, bpm, key, note, {USED}, g_family, g_cat, g_conf";
+
+fn cols() -> String {
+    COLS.replace("{CAT}", CAT).replace("{SRC}", SRC).replace("{FAM}", FAM).replace("{USED}", USED)
+}
+
+/// The families a sample can be sorted in by hand (index::samples::FAMILIES).
+fn sortable(f: &str) -> bool {
+    index::samples::FAMILIES.contains(&f)
+}
+
+/// Sorts samples by hand (`family` None: back to what the name, the folder or the audio says).
+/// The category must be one of the family's, or none. Returns how many were changed.
+pub fn sort_by_hand(con: &Connection, paths: &[String], family: Option<&str>, cat: Option<&str>) -> rusqlite::Result<usize> {
+    if family.is_some_and(|f| !sortable(f)) {
+        return Ok(0);
+    }
+    let cat = family.and(cat).filter(|c| index::samples::family_of(c) == family);
+    let tx = con.unchecked_transaction()?;
+    let mut n = 0;
+    {
+        let mut s = tx.prepare("update samples set u_family=?, u_cat=? where path=?")?;
+        for p in paths {
+            n += s.execute(rusqlite::params![family, cat, p])?;
+        }
+    }
+    tx.commit()?;
+    Ok(n)
+}
+
+/// The unsorted samples of one folder (not its subfolders), for sorting them all at once.
+pub fn unsorted_in(con: &Connection, dir: &str) -> rusqlite::Result<Vec<String>> {
+    let dir = dir.trim_end_matches('/');
+    let mut s = con.prepare(&format!("select path from samples where substr(path, 1, ?1) = ?2 and instr(substr(path, ?1 + 1), '/') = 0 and {FAM} is null"))?;
+    s.query_map(rusqlite::params![dir.len() as i64 + 1, format!("{dir}/")], |r| r.get(0))?.collect()
+}
 
 /// In how many songs a sample is used (index::sample_use).
 const USED: &str = "(select count(distinct song_id) from sample_use u where u.path = lower(samples.path))";
@@ -180,14 +223,15 @@ fn row(r: &rusqlite::Row) -> rusqlite::Result<SampleRow> {
         key: r.get(10)?,
         note: r.get(11)?,
         used: r.get::<_, Option<i64>>(12)?.unwrap_or(0),
+        guess: r.get(13)?,
+        guess_cat: r.get(14)?,
+        guess_conf: r.get::<_, Option<f64>>(15)?.map(|x| x as f32),
     })
 }
 
 /// The rows of these samples, in the order given (a path not in the base is left out).
 pub fn rows_for(con: &Connection, paths: &[String]) -> rusqlite::Result<Vec<SampleRow>> {
-    let mut s = con.prepare(&format!(
-        "select path, name, folder, pack, {CAT}, {SRC}, {FAM}, is_loop, dur, bpm, key, note, {USED} from samples where path = ?"
-    ))?;
+    let mut s = con.prepare(&format!("select {} from samples where path = ?", cols()))?;
     let mut out = Vec::new();
     for p in paths {
         if let Some(r) = s.query_map([p], row)?.next() {
@@ -205,8 +249,8 @@ pub fn samples(con: &Connection, q: &SampleQuery) -> rusqlite::Result<SamplePage
     vv.push(Sql::Integer(q.limit.clamp(1, 500)));
     vv.push(Sql::Integer(q.offset.max(0)));
     let mut s = con.prepare(&format!(
-        "select path, name, folder, pack, {CAT}, {SRC}, {FAM}, is_loop, dur, bpm, key, note, {USED} from samples where {w} \
-         order by pack collate nocase, folder collate nocase, name collate nocase limit ? offset ?"
+        "select {} from samples where {w} order by pack collate nocase, folder collate nocase, name collate nocase limit ? offset ?",
+        cols()
     ))?;
     let rows = s
         .query_map(rusqlite::params_from_iter(vv.iter()), row)?
@@ -320,6 +364,29 @@ mod tests {
         let mut songs = sample_songs(&st.con, "D:/S/Pack/Kick 1.wav").unwrap();
         songs.sort();
         assert_eq!(songs, [1, 2]);
+    }
+
+    #[test]
+    fn sorted_by_hand_wins_and_long_or_unreadable_are_apart() {
+        let st = base();
+        assert_eq!(unsorted_in(&st.con, "D:/S/Pack").unwrap(), ["D:/S/Pack/thing.wav"]);
+        // a category of another family is dropped, an unknown family refused
+        assert_eq!(sort_by_hand(&st.con, &["D:/S/Pack/thing.wav".into()], Some("fx"), Some("kick")).unwrap(), 1);
+        assert_eq!(sort_by_hand(&st.con, &["D:/S/Pack/thing.wav".into()], Some("nope"), None).unwrap(), 0);
+        sort_by_hand(&st.con, &["D:/S/Pack/Kick 1.wav".into()], Some("drums"), Some("snare")).unwrap();
+        let r = rows_for(&st.con, &["D:/S/Pack/thing.wav".into(), "D:/S/Pack/Kick 1.wav".into()]).unwrap();
+        assert_eq!((r[0].family.as_deref(), r[0].cat.as_deref(), r[0].cat_src.as_deref()), (Some("fx"), None, Some("user")));
+        assert_eq!((r[1].family.as_deref(), r[1].cat.as_deref()), (Some("drums"), Some("snare")));
+        assert!(unsorted_in(&st.con, "D:/S/Pack").unwrap().is_empty());
+        // back to automatic
+        sort_by_hand(&st.con, &["D:/S/Pack/Kick 1.wav".into()], None, None).unwrap();
+        assert_eq!(rows_for(&st.con, &["D:/S/Pack/Kick 1.wav".into()]).unwrap()[0].cat.as_deref(), Some("kick"));
+        st.con.execute("insert into samples(path, name, dur) values('D:/S/Rip/tape.wav', 'tape', 3600)", []).unwrap();
+        st.con.execute("insert into samples(path, name, a_error) values('D:/S/Rip/bad.wav', 'bad', 'cannot decode')", []).unwrap();
+        let p = samples(&st.con, &SampleQuery { family: Some("long".into()), ..q() }).unwrap();
+        assert_eq!(p.rows.iter().map(|r| r.name.as_str()).collect::<Vec<_>>(), ["tape"]);
+        assert_eq!(samples(&st.con, &SampleQuery { family: Some("unreadable".into()), ..q() }).unwrap().total, 1);
+        assert_eq!(samples(&st.con, &SampleQuery { family: Some("none".into()), ..q() }).unwrap().total, 0);
     }
 
     #[test]

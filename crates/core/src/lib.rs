@@ -2315,6 +2315,18 @@ impl App {
         samples_view::sample_songs(&self.reader.lock().unwrap().con, path).map_err(err)
     }
 
+    /// Samples sorted by hand (Samples page; `family` None: back to the automatic sort). Kept
+    /// across scans, and taught to the library's own model at its next learning.
+    pub fn sort_samples(&self, paths: &[String], family: Option<&str>, cat: Option<&str>) -> Result<usize> {
+        samples_view::sort_by_hand(&self.store.lock().unwrap().con, paths, family, cat).map_err(err)
+    }
+
+    /// The unsorted samples of one folder, sorted by hand at once.
+    pub fn sort_sample_folder(&self, dir: &str, family: &str, cat: Option<&str>) -> Result<usize> {
+        let paths = samples_view::unsorted_in(&self.reader.lock().unwrap().con, dir).map_err(err)?;
+        self.sort_samples(&paths, Some(family), cat)
+    }
+
     /// A page of samples (Samples page).
     pub fn samples(&self, q: samples_view::SampleQuery) -> Result<samples_view::SamplePage> {
         samples_view::samples(&self.reader.lock().unwrap().con, &q).map_err(err)

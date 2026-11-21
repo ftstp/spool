@@ -905,6 +905,18 @@ async fn sample_dupes(app: State<'_, Arc<App>>) -> Res<Vec<app_core::samples_vie
 }
 
 #[tauri::command]
+async fn sort_samples(app: State<'_, Arc<App>>, paths: Vec<String>, family: Option<String>, cat: Option<String>) -> Res<usize> {
+    let app = Arc::clone(&app);
+    run(move || app.sort_samples(&paths, family.as_deref(), cat.as_deref())).await
+}
+
+#[tauri::command]
+async fn sort_sample_folder(app: State<'_, Arc<App>>, dir: String, family: String, cat: Option<String>) -> Res<usize> {
+    let app = Arc::clone(&app);
+    run(move || app.sort_sample_folder(&dir, &family, cat.as_deref())).await
+}
+
+#[tauri::command]
 async fn sample_songs(app: State<'_, Arc<App>>, path: String) -> Res<Vec<i64>> {
     let app = Arc::clone(&app);
     run(move || app.sample_songs(&path)).await
@@ -1338,6 +1350,8 @@ fn main() {
             clip_uses,
             midi_export,
             sample_songs,
+            sort_samples,
+            sort_sample_folder,
             ref_tracks,
             ref_track,
             unmerge_artist,

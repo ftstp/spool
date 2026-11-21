@@ -41,7 +41,8 @@ pub const MIDI_VERSION: i64 = 2;
 /// What the samples' reading writes (samples.rs): a new one reads every sample again, once.
 /// 4: synths, stabs and riffs; breaks are drum loops (Spool 0.1.36).
 /// 5: brass, strings, woodwind, melody; fills, noise, foley; several categories settled (0.1.43).
-pub const SAMPLES_VERSION: i64 = 5;
+/// 6: a pack's demo is its own family (0.1.44).
+pub const SAMPLES_VERSION: i64 = 6;
 
 pub struct Scanner {
     matcher: Option<Matcher>,

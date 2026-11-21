@@ -10,18 +10,24 @@
   import { player, browse } from "../lib/player.svelte";
   import { ui } from "../lib/contextMenus.svelte";
   import SampleDupes from "../lib/components/SampleDupes.svelte";
+  import SampleSortMenu from "../lib/components/SampleSortMenu.svelte";
+  import SampleQuickSort from "../lib/components/SampleQuickSort.svelte";
+  import { FAMILIES } from "../lib/sampleFamilies";
   import { t, fmtNum } from "../lib/i18n/index.svelte";
   import { aboutTime } from "../lib/format";
   const au = $derived(app.scan?.audio);
 
-  const FAMILIES: [string, string[]][] = [
-    ["drums", ["kick", "snare", "clap", "hihat", "cymbal", "tom", "perc"]],
-    ["drumloop", ["drumloop"]],
-    ["bass", ["808", "bass"]],
-    ["melodic", ["lead", "pad", "pluck", "keys", "guitar", "brass", "strings", "woodwind", "synth", "melody"]],
-    ["vocal", ["vocal"]],
-    ["fx", ["fx"]],
-  ];
+  /** Shown apart from the unsorted ones: long recordings (not listened to) and files that cannot be read. */
+  const APART = ["long", "unreadable"];
+  // sorting one sample by hand (under its row), and the quick sort of the unsorted ones
+  let sortOf = $state<string | null>(null);
+  let quick = $state(false);
+  function sorted() {
+    sortOf = null;
+    load();
+  }
+  const srcTip = (s: string | null) =>
+    t(s === "audio" ? "samples.fromAudio" : s === "folder" ? "samples.fromFolder" : s === "neighbours" ? "samples.fromNeighbours" : s === "user" ? "samples.fromUser" : "samples.fromName");
   const NOTES = ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"];
   const KEYS = [...NOTES.map((n) => n + "m"), ...NOTES];
   const PAGE = 200;
@@ -152,7 +158,7 @@
   onDestroy(() => browse.clear(step));
   function keys(e: KeyboardEvent) {
     const typing = e.target instanceof HTMLElement && e.target.matches("input, select, textarea");
-    if (typing || !shown.length) return;
+    if (typing || quick || !shown.length) return;
     if (e.key === "ArrowDown" || e.key === "ArrowUp") {
       e.preventDefault();
       step(e.key === "ArrowDown" ? 1 : -1);
@@ -231,6 +237,14 @@
           {/if}
         {/each}
         <button class="fam" class:on={family === "none"} disabled={!count("none")} onclick={() => pickFamily("none")} title={t("samples.noneTip")}>{t("samples.fam.none")} <span class="n">{fmtNum(count("none"))}</span></button>
+        {#if count("none")}
+          <button class="sub quickbtn" class:on={quick} onclick={() => (quick = !quick)} title={t("samples.quick.tip")}>{t("samples.quick.open")}</button>
+        {/if}
+        {#each APART as f}
+          {#if count(f)}
+            <button class="fam" class:on={family === f} onclick={() => pickFamily(f)} title={t(`samples.${f}Tip`)}>{t(`samples.fam.${f}`)} <span class="n">{fmtNum(count(f))}</span></button>
+          {/if}
+        {/each}
         <p class="small faint hint">{t("samples.howTip")}</p>
         {#if au?.enabled && au.samples_todo}
           <p class="small faint hint">{au.running && au.eta_s
@@ -244,6 +258,8 @@
         {#if alikeErr}<p class="small warn">{alikeErr}</p>{/if}
         {#if showDupes}
           <SampleDupes close={() => (showDupes = false)} />
+        {:else if quick}
+          <SampleQuickSort close={() => { quick = false; load(); }} />
         {:else}
         {#if near}
           <div class="nearhead">
@@ -266,7 +282,11 @@
               <span class="folder small faint">{r.folder}</span>
             </button>
             <span class="tags small">
-              {#if r.cat}<span class="tag" class:heard={r.cat_src === "audio"} title={r.cat_src === "audio" ? t("samples.fromAudio") : r.cat_src === "folder" ? t("samples.fromFolder") : t("samples.fromName")}>{t(`samples.cat.${r.cat}`)}</span>{/if}
+              {#if r.cat || (r.family && !APART.includes(r.family) && r.cat_src)}
+                <button class="tag" class:heard={r.cat_src === "audio" || r.cat_src === "neighbours"} class:mine={r.cat_src === "user"} title="{srcTip(r.cat_src)}. {t('samples.sort.tip')}" onclick={() => (sortOf = sortOf === r.path ? null : r.path)}>{t(r.cat ? `samples.cat.${r.cat}` : `samples.fam.${r.family}`)}</button>
+              {:else}
+                <button class="tag add" title={t("samples.sort.tip")} onclick={() => (sortOf = sortOf === r.path ? null : r.path)}>{r.guess ? t("samples.sort.maybe", { what: t(r.guess_cat && r.guess_cat !== r.guess ? `samples.cat.${r.guess_cat}` : `samples.fam.${r.guess}`) }) : t("samples.sort.button")}</button>
+              {/if}
               {#if r.is_loop !== null}<span class="faint">{r.is_loop ? t("samples.loop") : t("samples.shot")}</span>{/if}
               {#if r.used}<button class="use" class:open={useOf === r.path} title={t("samples.used.rowTip")} onclick={() => toggleUse(r)}>{t("samples.used.inN", { n: r.used })}</button>{/if}
             </span>
@@ -284,6 +304,9 @@
                 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="9" width="11" height="11" rx="2" /><path d="M5 15V6a2 2 0 0 1 2-2h9" /></svg></button>
             </span>
           </div>
+          {#if sortOf === r.path}
+            <SampleSortMenu row={r} close={() => (sortOf = null)} done={sorted} />
+          {/if}
           {#if useOf === r.path}
             <div class="uses small">{t("samples.used.inSongs")}
               {#each useSongs as id, k (id)}{k ? ", " : " "}<a href="#/song/{id}">{songTitle(id)}</a>{/each}
@@ -338,9 +361,13 @@
   .nm { display: flex; flex-direction: column; min-width: 0; border: 0; background: none; color: var(--ink); text-align: left; cursor: pointer; padding: 0; font: inherit; }
   .name, .folder { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .tags { display: flex; gap: 8px; align-items: center; white-space: nowrap; }
-  .tag { border: 1px solid var(--line); border-radius: 6px; padding: 0 6px; }
-  /* sorted by ear, not by name: dotted */
+  .tag { border: 1px solid var(--line); border-radius: 6px; padding: 0 6px; background: none; color: var(--ink); font: inherit; cursor: pointer; transition: border-color .15s; }
+  .tag:hover { border-color: var(--accent); }
+  /* sorted by ear or by its folder, not by name: dashed; by the user: filled */
   .tag.heard { border-style: dashed; }
+  .tag.mine { background: var(--accent-bg); }
+  .tag.add { border-style: dashed; color: var(--faint); }
+  .quickbtn { color: var(--accent) !important; }
   .num { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
   .acts { display: flex; gap: 2px; opacity: 0; transition: opacity .15s; }
   .icon:disabled { opacity: .4; cursor: progress; }

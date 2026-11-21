@@ -43,6 +43,9 @@ static GENRES: LazyLock<Regex> = LazyLock::new(|| {
 });
 static DRUMLOOP: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"(?i)(drum|top|break|beat|groove|full).{0,12}loop|loop.{0,12}(drum|top|break)|breakbeat|\bbreaks?\b|\bfills?\b|\bbeats?\b").unwrap());
+/// A pack's demo (the full mix that presents it): its own family, whatever it is made of
+/// ("House Bass (Demo)" is a demo, not a bass).
+static DEMO: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(?i)\bdemos?\b|\bpreview\b|\bfull ?mix\b").unwrap());
 static LOOP: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(?i)loop|\d{2,3} ?bpm|\bbpm").unwrap());
 static SHOT: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(?i)one ?shot|\bhit\b|\bshot\b").unwrap());
 static BPM: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(?i)(\d{2,3}(?:\.\d)?) ?bpm|bpm ?(\d{2,3})").unwrap());
@@ -53,7 +56,16 @@ static KEY: LazyLock<Regex> =
 /// A note at the end of a one-shot's name: "808 Boom F#", "Sub C2".
 static NOTE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(?: )([A-G])(#|b)?(-?\d)?$").unwrap());
 
-pub const FAMILIES: [&str; 6] = ["drums", "drumloop", "bass", "melodic", "vocal", "fx"];
+pub const FAMILIES: [&str; 7] = ["drums", "drumloop", "bass", "melodic", "vocal", "fx", "demo"];
+
+/// The family a category belongs to ("kick": drums; a drum loop and a demo are their own).
+pub fn family_of(cat: &str) -> Option<&'static str> {
+    match cat {
+        "drumloop" => Some("drumloop"),
+        "demo" => Some("demo"),
+        _ => CATS.iter().find(|c| c.0 == cat).map(|c| c.1),
+    }
+}
 
 /// What a sample's path says of it.
 #[derive(Debug, Clone, Default, PartialEq)]
@@ -96,6 +108,9 @@ fn sharp(letter: &str, acc: &str) -> Option<String> {
 
 pub fn cats_in(s: &str) -> Vec<(&'static str, &'static str)> {
     let w = GENRES.replace_all(&words(s), " ").into_owned();
+    if DEMO.is_match(&w) {
+        return vec![("demo", "demo")];
+    }
     if DRUMLOOP.is_match(&w) {
         return vec![("drumloop", "drumloop")];
     }
@@ -239,6 +254,10 @@ mod tests {
         assert_eq!(cat("Violin Staccato C", &[]).as_deref(), Some("strings"));
         assert_eq!(cat("Pan Flute Loop 90", &[]).as_deref(), Some("woodwind"));
         assert_eq!(cat("Melody Loop 07 Am", &[]).as_deref(), Some("melody"));
+        // a pack's demo is a demo, whatever it is made of
+        assert_eq!(cat("House Bass (Demo)", &[]).as_deref(), Some("demo"));
+        assert_eq!(cat("Track 01", &["Catalyst Samples - Ingredient House Bass", "Demo"]).as_deref(), Some("demo"));
+        assert_eq!(cat("Pack Preview", &[]).as_deref(), Some("demo"));
         // a bass drum is a kick, not a bass
         assert_eq!(cat("Bass Drum 4", &[]).as_deref(), Some("kick"));
         // a synth is said only when nothing more precise is

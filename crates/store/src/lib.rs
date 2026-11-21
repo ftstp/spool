@@ -147,6 +147,18 @@ const MIGRATIONS: &[&str] = &[
     update files set plugstate = z(plugstate) where typeof(plugstate) = 'text';
     update midi set data = z(data) where typeof(data) = 'text';
     "#,
+    // 12: a sample sorted by the user (u_family, u_cat: wins over the name and the audio, and
+    // is kept across scans), where an automatic sort comes from (a_src: 'audio', or 'folder'
+    // for the samples named around it), and the best guess for one nothing is sure of
+    // (g_family, g_cat, g_conf: what the quick sort proposes)
+    r#"
+    alter table samples add column u_family text;
+    alter table samples add column u_cat text;
+    alter table samples add column a_src text;
+    alter table samples add column g_family text;
+    alter table samples add column g_cat text;
+    alter table samples add column g_conf real;
+    "#,
 ];
 
 /// The format from which the stored JSON is compressed (the base is compacted once when it

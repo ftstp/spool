@@ -39,7 +39,10 @@
     "melodic": "Mélodique",
     "vocal": "Voix",
     "fx": "Effets",
-    "none": "Non classés"
+    "none": "Non classés",
+    "demo": "Démos",
+    "long": "Enregistrements longs",
+    "unreadable": "Illisibles"
   },
   "cat": {
     "kick": "Kick",
@@ -63,7 +66,8 @@
     "brass": "Cuivres",
     "strings": "Cordes",
     "woodwind": "Bois (flûte...)",
-    "melody": "Mélodie"
+    "melody": "Mélodie",
+    "demo": "Démo"
   },
   "fromAudio": "D'après l'écoute (le nom ne disait rien)",
   "listening": "L'analyse audio écoute les {n} samples non classés : {time} restantes.",
@@ -101,5 +105,40 @@
     "summaryMore": "Au moins {n} samples en double (les plus lourds), {mb} Mo en trop"
   },
   "alikeNotInLibrary": "« {name} » n'est pas dans ta bibliothèque de samples (c'est un fichier du projet, un freeze ou un bounce) : il n'y a rien à quoi le comparer.",
-  "alikeFailed": "Impossible de comparer « {name} » : {error}"
+  "alikeFailed": "Impossible de comparer « {name} » : {error}",
+  "fromUser": "Classé par toi",
+  "fromNeighbours": "D'après les samples voisins de son dossier",
+  "longTip": "Plus d'une minute : des enregistrements plutôt que des samples, laissés de côté par l'écoute.",
+  "unreadableTip": "Des fichiers que Spool n'arrive pas à décoder (format inconnu, fichier abîmé ou accès refusé).",
+  "sort": {
+    "title": "Classer ce sample",
+    "tip": "Clique pour le classer toi-même",
+    "button": "Classer",
+    "maybe": "{what} ?",
+    "as": "Classer en",
+    "which": "Plus précisément",
+    "familyOnly": "Juste la famille",
+    "folder": "Aussi les autres non classés de ce dossier",
+    "auto": "Revenir au classement automatique",
+    "close": "Fermer",
+    "done": "{n} classé(s) en {what}.",
+    "reset": "Revenu au classement automatique."
+  },
+  "quick": {
+    "open": "Trier à l'oreille",
+    "tip": "Les non classés un par un : écoute, puis une touche pour confirmer ou corriger.",
+    "title": "Tri à l'oreille",
+    "progress": "{done} classés, {left} restants",
+    "stop": "Terminer",
+    "guess": "Probablement : {what} ({p} %)",
+    "enter": "Confirmer cette proposition",
+    "enterKey": "Entrée",
+    "noGuess": "Pas de proposition pour celui-ci.",
+    "skip": "Passer",
+    "keys": "Entrée confirme, 1 à 7 choisit la famille, S passe, Espace rejoue, Retour arrière annule.",
+    "undo": "Annuler « {name} »",
+    "loading": "Chargement des samples non classés...",
+    "finished": "Terminé : {n} samples classés. Spool en tient compte pour classer les autres.",
+    "empty": "Plus aucun sample non classé."
+  }
 }

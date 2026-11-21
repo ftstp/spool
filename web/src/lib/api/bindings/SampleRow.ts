@@ -4,4 +4,9 @@ export type SampleRow = { path: string, name: string, folder: string, pack: stri
 /**
  * In how many songs' projects it is used.
  */
-used: number, };
+used: number, 
+/**
+ * For an unsorted sample: the best guess (crate::sample_learn), what the quick sort
+ * proposes, with its probability.
+ */
+guess: string | null, guess_cat: string | null, guess_conf: number | null, };

@@ -39,7 +39,10 @@
     "melodic": "Melodic",
     "vocal": "Vocals",
     "fx": "Effects",
-    "none": "Unsorted"
+    "none": "Unsorted",
+    "demo": "Demos",
+    "long": "Long recordings",
+    "unreadable": "Unreadable"
   },
   "cat": {
     "kick": "Kick",
@@ -63,7 +66,8 @@
     "brass": "Brass",
     "strings": "Strings",
     "woodwind": "Woodwinds",
-    "melody": "Melody"
+    "melody": "Melody",
+    "demo": "Demo"
   },
   "fromAudio": "By ear (the name said nothing)",
   "listening": "The audio analysis is listening to the {n} unsorted samples: {time} left.",
@@ -101,5 +105,40 @@
     "summaryMore": "At least {n} samples kept twice or more (the largest), {mb} MB too many"
   },
   "alikeNotInLibrary": "\"{name}\" is not in your sample library (it is a file of the project, a freeze or a bounce): there is nothing to compare it with.",
-  "alikeFailed": "Could not compare \"{name}\": {error}"
+  "alikeFailed": "Could not compare \"{name}\": {error}",
+  "fromUser": "Sorted by you",
+  "fromNeighbours": "From the samples next to it in its folder",
+  "longTip": "Over a minute long: recordings rather than samples, not listened to.",
+  "unreadableTip": "Files Spool cannot decode (unknown format, damaged file or access denied).",
+  "sort": {
+    "title": "Sort this sample",
+    "tip": "Click to sort it yourself",
+    "button": "Sort",
+    "maybe": "{what}?",
+    "as": "Sort as",
+    "which": "More precisely",
+    "familyOnly": "Family only",
+    "folder": "Also the other unsorted ones in this folder",
+    "auto": "Back to the automatic sort",
+    "close": "Close",
+    "done": "{n} sorted as {what}.",
+    "reset": "Back to the automatic sort."
+  },
+  "quick": {
+    "open": "Sort by ear",
+    "tip": "The unsorted ones one at a time: listen, then one key to confirm or correct.",
+    "title": "Sort by ear",
+    "progress": "{done} sorted, {left} left",
+    "stop": "Done",
+    "guess": "Probably: {what} ({p}%)",
+    "enter": "Confirm this guess",
+    "enterKey": "Enter",
+    "noGuess": "No guess for this one.",
+    "skip": "Skip",
+    "keys": "Enter confirms, 1 to 7 picks the family, S skips, Space replays, Backspace undoes.",
+    "undo": "Undo “{name}”",
+    "loading": "Loading the unsorted samples...",
+    "finished": "Done: {n} samples sorted. Spool uses them to sort the others.",
+    "empty": "No unsorted sample left."
+  }
 }

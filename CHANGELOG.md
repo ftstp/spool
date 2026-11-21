@@ -5,6 +5,22 @@ installed copies offer each update by themselves.
 
 *This file is generated from `CHANGELOG.json` at each release.*
 
+## 0.1.44 (2026-11-21)
+
+- Samples: sort by ear. The unsorted ones play one at a time with Spool's guess; one key confirms or corrects.
+- Sort any sample yourself, or all the unsorted ones of a folder at once. Your choice always wins, stays after a rescan, and helps Spool sort the rest.
+- A sample takes the family of the well-named samples around it in its folder.
+- A pack's demo is its own family. Long recordings and unreadable files are shown apart instead of counting as unsorted.
+
+<details><summary>En français</summary>
+
+- Samples : tri à l'oreille. Les non classés passent un par un avec la proposition de Spool ; une touche confirme ou corrige.
+- Classe toi-même n'importe quel sample, ou tous les non classés d'un dossier d'un coup. Ton choix passe toujours en premier, reste après un rescan et aide Spool à classer le reste.
+- Un sample prend la famille des samples bien nommés qui l'entourent dans son dossier.
+- La démo d'un pack a sa propre famille. Les enregistrements longs et les fichiers illisibles sont à part au lieu de compter comme non classés.
+
+</details>
+
 ## 0.1.43 (2026-11-21)
 
 - Samples: far fewer left unsorted. A name naming several kinds is settled ("Vocal FX" an effect, "Vocal Chop Lead" a vocal, "Claps & Snares" drums), and more words are read: fills, noise, foley, build-ups; new kinds brass, strings, woodwinds, melody.
