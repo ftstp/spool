@@ -1,6 +1,6 @@
 # Changelog
 
-Every version of Spool, newest first. Download the latest at [artists.fatstep.com/spool](https://artists.fatstep.com/spool);
+Every version of Spool, newest first. Download the latest at [fatstep.com/tools/spool](https://fatstep.com/tools/spool);
 installed copies offer each update by themselves.
 
 *This file is generated from `CHANGELOG.json` at each release.*

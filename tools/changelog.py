@@ -22,7 +22,7 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CHANGELOG = os.path.join(ROOT, 'CHANGELOG.json')
 REPO = 'ftstp/spool'
-DOWNLOAD = 'https://artists.fatstep.com/spool'
+DOWNLOAD = 'https://fatstep.com/tools/spool'
 
 
 def entries():
