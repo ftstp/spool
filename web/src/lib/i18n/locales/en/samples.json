@@ -54,7 +54,7 @@
     "perc": "Percussion",
     "drumloop": "Drum loop",
     "808": "808",
-    "bass": "Bass",
+    "bass": "Synth bass",
     "lead": "Lead",
     "pad": "Pad",
     "pluck": "Pluck",
@@ -67,7 +67,9 @@
     "strings": "Strings",
     "woodwind": "Woodwinds",
     "melody": "Melody",
-    "demo": "Demo"
+    "demo": "Demo",
+    "sub": "Sub",
+    "growl": "Growl / wobble"
   },
   "fromAudio": "By ear (the name said nothing)",
   "listening": "The audio analysis is listening to the {n} unsorted samples: {time} left.",

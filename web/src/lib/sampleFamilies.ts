@@ -3,7 +3,7 @@
 export const FAMILIES: [string, string[]][] = [
   ["drums", ["kick", "snare", "clap", "hihat", "cymbal", "tom", "perc"]],
   ["drumloop", ["drumloop"]],
-  ["bass", ["808", "bass"]],
+  ["bass", ["808", "sub", "bass", "growl"]],
   ["melodic", ["lead", "pad", "pluck", "keys", "guitar", "brass", "strings", "woodwind", "synth", "melody"]],
   ["vocal", ["vocal"]],
   ["fx", ["fx"]],

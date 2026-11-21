@@ -1,5 +1,21 @@
 [
   {
+    "version": "0.1.45",
+    "date": "2026-11-21",
+    "notes": {
+      "en": [
+        "Samples: names with glued words are read (\"BassLoop\", \"TopPercLoop\"), and words inside other words no longer mislead (\"Percy\" is no percussion).",
+        "Basses: 808, sub, synth bass and growl / wobble.",
+        "Each family shows its loops and one-shots in the left column."
+      ],
+      "fr": [
+        "Samples : les noms aux mots collés sont lus (« BassLoop », « TopPercLoop »), et un mot caché dans un autre ne trompe plus (« Percy » n'est pas une percussion).",
+        "Basses : 808, sub, basse synthé et growl / wobble.",
+        "Chaque famille montre ses boucles et ses one-shots dans la colonne de gauche."
+      ]
+    }
+  },
+  {
     "version": "0.1.44",
     "date": "2026-11-21",
     "notes": {

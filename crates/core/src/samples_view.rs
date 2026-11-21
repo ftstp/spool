@@ -58,6 +58,8 @@ pub struct SampleRow {
 pub struct CatCount {
     pub family: Option<String>,
     pub cat: Option<String>,
+    /// A loop, a one-shot, or not known.
+    pub is_loop: Option<bool>,
     #[ts(type = "number")]
     pub n: i64,
 }
@@ -139,7 +141,8 @@ fn key_terms(k: &str) -> Option<(Vec<String>, Vec<String>)> {
     Some((vec![name(t, minor), rel], steps.iter().map(|s| NOTES[(t + s) % 12].to_string()).collect()))
 }
 
-/// The WHERE clause and its values, without the category filters when `with_cat` is false.
+/// The WHERE clause and its values, without the category and loop filters when `with_cat` is
+/// false (the counts, split by them).
 fn filter(q: &SampleQuery, with_cat: bool) -> (String, Vec<Sql>) {
     let mut w: Vec<String> = vec!["1=1".into()];
     let mut v: Vec<Sql> = Vec::new();
@@ -161,15 +164,16 @@ fn filter(q: &SampleQuery, with_cat: bool) -> (String, Vec<Sql>) {
             w.push(format!("{CAT} = ?"));
             v.push(Sql::Text(c.into()));
         }
+        // the counts are split by loop or one-shot instead (each family shows both)
+        match q.kind.as_deref() {
+            Some("loop") => w.push("is_loop = 1".into()),
+            Some("shot") => w.push("is_loop = 0".into()),
+            _ => {}
+        }
     }
     match q.used.as_deref() {
         Some("used") => w.push("exists (select 1 from sample_use u where u.path = lower(samples.path))".into()),
         Some("unused") => w.push("not exists (select 1 from sample_use u where u.path = lower(samples.path))".into()),
-        _ => {}
-    }
-    match q.kind.as_deref() {
-        Some("loop") => w.push("is_loop = 1".into()),
-        Some("shot") => w.push("is_loop = 0".into()),
         _ => {}
     }
     if let Some((keys, notes)) = q.key.as_deref().and_then(key_terms) {
@@ -256,9 +260,9 @@ pub fn samples(con: &Connection, q: &SampleQuery) -> rusqlite::Result<SamplePage
         .query_map(rusqlite::params_from_iter(vv.iter()), row)?
         .collect::<rusqlite::Result<Vec<_>>>()?;
     let (wc, vc) = filter(q, false);
-    let mut s = con.prepare(&format!("select {FAM}, {CAT}, count(*) from samples where {wc} group by 1, 2"))?;
+    let mut s = con.prepare(&format!("select {FAM}, {CAT}, is_loop, count(*) from samples where {wc} group by 1, 2, 3"))?;
     let counts = s
-        .query_map(rusqlite::params_from_iter(vc.iter()), |r| Ok(CatCount { family: r.get(0)?, cat: r.get(1)?, n: r.get(2)? }))?
+        .query_map(rusqlite::params_from_iter(vc.iter()), |r| Ok(CatCount { family: r.get(0)?, cat: r.get(1)?, is_loop: r.get::<_, Option<i64>>(2)?.map(|x| x != 0), n: r.get(3)? }))?
         .collect::<rusqlite::Result<Vec<_>>>()?;
     Ok(SamplePage { total, all, rows, counts })
 }

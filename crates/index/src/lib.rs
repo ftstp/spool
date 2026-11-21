@@ -42,7 +42,8 @@ pub const MIDI_VERSION: i64 = 2;
 /// 4: synths, stabs and riffs; breaks are drum loops (Spool 0.1.36).
 /// 5: brass, strings, woodwind, melody; fills, noise, foley; several categories settled (0.1.43).
 /// 6: a pack's demo is its own family (0.1.44).
-pub const SAMPLES_VERSION: i64 = 6;
+/// 7: glued words and capitals inside a word read ("BassLoop"); sub and growl basses (0.1.45).
+pub const SAMPLES_VERSION: i64 = 7;
 
 pub struct Scanner {
     matcher: Option<Matcher>,

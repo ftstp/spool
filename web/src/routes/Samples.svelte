@@ -123,9 +123,12 @@
     timer = window.setTimeout(() => load(), 220);
   }
 
-  const count = (f: string, c?: string) =>
-    (page?.counts ?? []).filter((x) => (f === "none" ? x.family === null : x.family === f) && (c === undefined || x.cat === c)).reduce((a, x) => a + x.n, 0);
-  const total = $derived((page?.counts ?? []).reduce((a, x) => a + x.n, 0));
+  // the counts come split by loop / one-shot: the sidebar follows the loop filter, and a
+  // family shows both halves
+  const isKind = (x: { is_loop: boolean | null }, k: string) => !k || (k === "loop" ? x.is_loop === true : x.is_loop === false);
+  const count = (f: string, c?: string, k = kind) =>
+    (page?.counts ?? []).filter((x) => (f === "none" ? x.family === null : x.family === f) && (c === undefined || x.cat === c) && isKind(x, k)).reduce((a, x) => a + x.n, 0);
+  const total = $derived((page?.counts ?? []).filter((x) => isKind(x, kind)).reduce((a, x) => a + x.n, 0));
   function pickFamily(f: string) {
     if (family === f && !cat) family = "";
     else family = f;
@@ -228,7 +231,15 @@
         <button class="fam" class:on={!family} onclick={() => { family = ""; cat = ""; }}>{t("samples.everything")} <span class="n">{fmtNum(total)}</span></button>
         {#each FAMILIES as [f, cs]}
           {@const n = count(f)}
-          <button class="fam" class:on={family === f && !cat} disabled={!n} onclick={() => pickFamily(f)}>{t(`samples.fam.${f}`)} <span class="n">{fmtNum(n)}</span></button>
+          <button class="fam" class:on={family === f && !cat} disabled={!n && family !== f} onclick={() => pickFamily(f)}>{t(`samples.fam.${f}`)} <span class="n">{fmtNum(n)}</span></button>
+          {#if family === f}
+            <div class="split" role="radiogroup" aria-label={t("samples.kind")}>
+              {#each [["loop", t("samples.loops")], ["shot", t("samples.shots")]] as [v, l]}
+                {@const m = count(f, cat || undefined, v)}
+                <button role="radio" aria-checked={kind === v} class:on={kind === v} disabled={!m && kind !== v} onclick={() => (kind = kind === v ? "" : v)}>{l} <span class="n">{fmtNum(m)}</span></button>
+              {/each}
+            </div>
+          {/if}
           {#if family === f && cs.length > 1}
             {#each cs as c}
               {@const m = count(f, c)}
@@ -344,6 +355,9 @@
   .cats button.on { background: var(--accent-bg); font-weight: 600; }
   .cats button:disabled { color: var(--faint); cursor: default; }
   .cats .sub { padding-left: 24px; font-size: 13px; }
+  .split { display: flex; gap: 4px; padding: 2px 0 4px 14px; }
+  .cats .split button { flex: 1; justify-content: center; gap: 6px; padding: 3px 8px; font-size: 12px; border: 1px solid var(--line); border-radius: 999px; }
+  .cats .split button.on { border-color: var(--accent); font-weight: 600; }
   .cats .n { color: var(--faint); font-variant-numeric: tabular-nums; font-weight: 400; }
   .cats .hint { margin: 12px 10px 0; line-height: 1.45; }
   .list { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); overflow: hidden; }

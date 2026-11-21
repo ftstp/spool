@@ -5,6 +5,20 @@ installed copies offer each update by themselves.
 
 *This file is generated from `CHANGELOG.json` at each release.*
 
+## 0.1.45 (2026-11-21)
+
+- Samples: names with glued words are read ("BassLoop", "TopPercLoop"), and words inside other words no longer mislead ("Percy" is no percussion).
+- Basses: 808, sub, synth bass and growl / wobble.
+- Each family shows its loops and one-shots in the left column.
+
+<details><summary>En français</summary>
+
+- Samples : les noms aux mots collés sont lus (« BassLoop », « TopPercLoop »), et un mot caché dans un autre ne trompe plus (« Percy » n'est pas une percussion).
+- Basses : 808, sub, basse synthé et growl / wobble.
+- Chaque famille montre ses boucles et ses one-shots dans la colonne de gauche.
+
+</details>
+
 ## 0.1.44 (2026-11-21)
 
 - Samples: sort by ear. The unsorted ones play one at a time with Spool's guess; one key confirms or corrects.

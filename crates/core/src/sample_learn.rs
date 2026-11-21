@@ -173,7 +173,9 @@ fn folders(con: &Connection) -> rusqlite::Result<std::collections::HashMap<Strin
         }
         // the family only: a folder's category was measured far less sure ("Foley" holding
         // mostly keys, "Reverse Instruments" mostly guitars)
-        out.insert(dir, (Said { family: f.to_string(), cat: None, conf: share as f32 }, sure));
+        // a lean from few samples is a weak guess: 2 of 2 is not "100 %" (shown as 40 %)
+        let conf = if sure { share } else { share * v.len() as f64 / FOLDER_MIN as f64 };
+        out.insert(dir, (Said { family: f.to_string(), cat: None, conf: conf as f32 }, sure));
     }
     Ok(out)
 }

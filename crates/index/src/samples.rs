@@ -10,20 +10,22 @@ use std::sync::LazyLock;
 /// (category, family, pattern). Order matters only for the drum-loop rule below. "synth" is
 /// the fallback of the melodic ones: said only when nothing more precise is ("Synth Lead" is a
 /// lead, "Bass Synth" a bass, "Synth Shot 4" a synth).
-const CATS: [(&str, &str, &str); 21] = [
+const CATS: [(&str, &str, &str); 23] = [
     ("kick", "drums", r"kick|kik|\bkck\b|\bbd\b|bassdrum|bass drum"),
     ("snare", "drums", r"snare|\bsnr\b|\bsd\b|rimshot|\brim\b"),
-    ("clap", "drums", r"clap|snap"),
+    ("clap", "drums", r"clap|\bsnaps?\b"),
     ("hihat", "drums", r"hi ?hat|\bhh\b|\bhats?\b|openhat|closedhat"),
     ("cymbal", "drums", r"crash|\bride\b|cymbal|splash"),
     ("tom", "drums", r"\btoms?\b"),
-    ("perc", "drums", r"perc|shaker|conga|bongo|tamb|cowbell|clave|woodblock|beatbox"),
-    ("808", "bass", r"808|\bsub\b|sub ?bass"),
-    ("bass", "bass", r"\bbass\b|\bbass(line|es)\b|reese|synth ?bass|wobble"),
+    ("perc", "drums", r"\bpercs?\b|\bperc\d|percussi|shaker|conga|bongo|tamb|maraca|cowbell|clave|woodblock|beatbox"),
+    ("808", "bass", r"808"),
+    ("sub", "bass", r"\bsub\b|sub ?bass"),
+    ("growl", "bass", r"growl ?bass|bass ?growl|wobble|\bwobs?\b|\bwubs?\b|\byoi\b"),
+    ("bass", "bass", r"\bbass\b|\bbass(line|es)\b|reese|synth ?bass"),
     ("lead", "melodic", r"\blead"),
     ("pad", "melodic", r"\bpads?\b|atmos|\batmo\b|athmo|ambien|drone"),
     ("pluck", "melodic", r"pluck|\barps?\b|arpegg"),
-    ("keys", "melodic", r"piano|\bkeys\b|rhodes|organ|epiano|\bchords?\b"),
+    ("keys", "melodic", r"piano|\bkeys\b|rhodes|\borgans?\b|epiano|\bchords?\b"),
     ("guitar", "melodic", r"guitar|\bgtr"),
     ("brass", "melodic", r"brass|trumpet|trombone|\bsax|\bhorns?\b|tuba"),
     ("strings", "melodic", r"\bstrings?\b|violin|viola|cello|pizz|orchestra|\borch\b"),
@@ -39,10 +41,10 @@ static RX: LazyLock<Vec<(&'static str, &'static str, Regex)>> =
 /// Style names that hold a category word ("Bass House Clap 3" is a clap, not a bass):
 /// taken out before the categories are looked for.
 static GENRES: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"(?i)\b(bass ?house|drum ?(and|&|n) ?bass|drumnbass|future ?bass|bass ?music|uk ?bass|bassline ?house|tech ?house|deep ?house|future ?house|vocal ?house|trap ?vocal|lo ?fi ?keys)\b").unwrap()
+    Regex::new(r"(?i)\b(bass ?house|drum ?(and|&|n) ?bass|drumnbass|future ?bass|bass ?music|uk ?bass|bassline ?house|tech ?house|deep ?house|future ?house|vocal ?house|trap ?vocal|lo ?fi ?keys|wobble ?house)\b").unwrap()
 });
 static DRUMLOOP: LazyLock<Regex> =
-    LazyLock::new(|| Regex::new(r"(?i)(drum|top|break|beat|groove|full).{0,12}loop|loop.{0,12}(drum|top|break)|breakbeat|\bbreaks?\b|\bfills?\b|\bbeats?\b").unwrap());
+    LazyLock::new(|| Regex::new(r"(?i)(drum|top|break|beat|groove|full).{0,16}loop|loop.{0,12}(drum|top|break)|breakbeat|\bbreaks?\b|\bfills?\b|\bbeats?\b").unwrap());
 /// A pack's demo (the full mix that presents it): its own family, whatever it is made of
 /// ("House Bass (Demo)" is a demo, not a bass).
 static DEMO: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(?i)\bdemos?\b|\bpreview\b|\bfull ?mix\b").unwrap());
@@ -83,9 +85,48 @@ pub struct Named {
     pub note: Option<String>,
 }
 
-/// Separators to spaces: "Kick_01-Hard.wav" -> "Kick 01 Hard".
+/// A kind glued to "loop", "shot" or "hit" ("bassloop", "KICKSHOT").
+static GLUED: LazyLock<Regex> = LazyLock::new(|| {
+    Regex::new(r"(?i)(bass|kick|snare|clap|hat|perc|drum|synth|pad|lead|vocal|vox|fx|top|beat|groove|break|sub|808|chord|pluck|arp)(loops?|shots?|hits?)\b").unwrap()
+});
+
+/// The words of a sound that a name writes glued to the next one with a capital ("BassLoop",
+/// "TopPercLoop", "EkaliThreatzHatLoop"). Only these are taken apart: a spoken phrase
+/// written the same way ("BreakItUp", "SeenTheLeader") stays one word.
+const SOUND_WORDS: &[&str] = &[
+    "bass", "basses", "kick", "kicks", "snare", "snares", "clap", "claps", "hat", "hats", "hihat", "perc", "percs", "drum", "drums",
+    "synth", "synths", "pad", "pads", "vox", "vocal", "vocals", "fx", "sfx", "sub", "chord", "chords", "pluck", "arp", "piano",
+    "keys", "loop", "loops", "shaker", "conga", "bongo", "riser", "wobble", "melody", "fill", "fills", "guitar", "strings", "brass",
+    "flute", "stab", "stabs", "ride", "crash", "rim",
+];
+
+/// "BassLoop" -> "Bass Loop", "BreakItUp" unchanged (see SOUND_WORDS).
+fn camel(token: &str) -> String {
+    let c: Vec<char> = token.chars().collect();
+    let mut pieces: Vec<String> = vec![String::new()];
+    for i in 0..c.len() {
+        let cut = i > 0 && c[i - 1].is_lowercase() && c[i].is_uppercase() && c.get(i + 1).is_some_and(|n| n.is_lowercase());
+        if cut {
+            pieces.push(String::new());
+        }
+        pieces.last_mut().unwrap().push(c[i]);
+    }
+    let known = |p: &str| SOUND_WORDS.contains(&p.trim_end_matches(|x: char| x.is_ascii_digit()).to_lowercase().as_str());
+    let mut out = String::new();
+    for (i, p) in pieces.iter().enumerate() {
+        if i > 0 && (known(&pieces[i - 1]) || known(p)) {
+            out.push(' ');
+        }
+        out.push_str(p);
+    }
+    out
+}
+
+/// Separators to spaces ("Kick_01-Hard" -> "Kick 01 Hard"), and glued words apart.
 fn words(s: &str) -> String {
     let t: String = s.chars().map(|c| if matches!(c, '_' | '-' | '.' | '(' | ')' | '[' | ']' | ',' | '+') { ' ' } else { c }).collect();
+    let t = t.split_whitespace().map(camel).collect::<Vec<_>>().join(" ");
+    let t = GLUED.replace_all(&t, "$1 $2");
     t.split_whitespace().collect::<Vec<_>>().join(" ")
 }
 
@@ -115,8 +156,11 @@ pub fn cats_in(s: &str) -> Vec<(&'static str, &'static str)> {
         return vec![("drumloop", "drumloop")];
     }
     let mut found: Vec<(&str, &str)> = RX.iter().filter(|(_, _, r)| r.is_match(&w)).map(|(c, f, _)| (*c, *f)).collect();
-    // "808 Sub Bass": one bass; "Bass Drum": a kick
-    if found.iter().any(|x| x.0 == "808" || x.0 == "kick") {
+    // "808 Sub Bass": an 808; "Sub Bass", "Growl Bass": the precise one; "Bass Drum": a kick
+    if found.iter().any(|x| x.0 == "808") {
+        found.retain(|x| x.0 != "sub");
+    }
+    if found.iter().any(|x| matches!(x.0, "808" | "sub" | "growl" | "kick")) {
         found.retain(|x| x.0 != "bass");
     }
     if found.len() > 1 {
@@ -133,10 +177,10 @@ pub fn cats_in(s: &str) -> Vec<(&'static str, &'static str)> {
             }
         }
         if found.iter().any(|x| x.1 == "drums") {
-            found.retain(|x| x.0 != "808");
+            found.retain(|x| x.0 != "808" && x.0 != "sub");
         }
-        if let Some(x) = found.iter().find(|x| x.0 == "bass").copied()
-            && found.iter().all(|y| y.0 == "bass" || y.1 == "melodic")
+        if let Some(x) = found.iter().find(|x| x.1 == "bass").copied()
+            && found.iter().all(|y| y.0 == x.0 || y.1 == "melodic")
         {
             return vec![x];
         }
@@ -226,6 +270,25 @@ mod tests {
         assert_eq!(cat("KSHMR Snare 12", &[]).as_deref(), Some("snare"));
         assert_eq!(cat("Open Hat 3", &[]).as_deref(), Some("hihat"));
         assert_eq!(cat("808 Sub Bass F#", &[]).as_deref(), Some("808"));
+        assert_eq!(cat("Deep Sub Bass 03", &[]).as_deref(), Some("sub"));
+        assert_eq!(cat("Neuro Growl Bass 7", &[]).as_deref(), Some("growl"));
+        assert_eq!(cat("Reese Bass 2", &[]).as_deref(), Some("bass"));
+        // glued words and capitals inside a word
+        assert_eq!(cat("Bpm172_F_BassLoop_11", &[]).as_deref(), Some("bass"));
+        assert_eq!(cat("NFK[172]P2_BASSLOOP", &[]).as_deref(), Some("bass"));
+        assert_eq!(cat("TopPercLoop 3", &[]).as_deref(), Some("drumloop"));
+        // a word inside another is not read: "Percy" is no percussion, "organic" no organ
+        assert_eq!(cat("CS_House_Bass_Loops_Percy_A_#_125", &[]).as_deref(), Some("bass"));
+        assert_eq!(cat("Organic Pad 2", &[]).as_deref(), Some("pad"));
+        assert_eq!(cat("VP3_172_Drums_KickSnare_Loop_Boom", &[]).as_deref(), Some("drumloop"));
+        // a spoken phrase glued with capitals stays one word; an animal's growl is no bass
+        assert_eq!(cat("MD3_BreakItUp", &[]), None);
+        assert_eq!(cat("TalkToHim", &["Vox", "TomLaval"]).as_deref(), Some("vocal"));
+        assert_eq!(cat("VFH3 128BPM Wobble House Kick", &[]).as_deref(), Some("kick"));
+        assert_eq!(cat("VMV1 SP1 SeenTheLeader", &[]), None);
+        assert_eq!(cat("KSHMR Animals 29 - Lion Growl", &[]), None);
+        assert_eq!(cat("Lev_Bass_Saw_Wobble_Set_F#1", &[]).as_deref(), Some("growl"));
+        assert_eq!(read_name("Bpm172_F_BassLoop_11", &[]).is_loop, Some(true));
         assert_eq!(cat("Bassline_Gm_124", &[]).as_deref(), Some("bass"));
         assert_eq!(cat("Top Loop 03 128bpm", &[]).as_deref(), Some("drumloop"));
         assert_eq!(cat("001", &["Pack X", "Vocals"]).as_deref(), Some("vocal"));
