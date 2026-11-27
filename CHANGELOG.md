@@ -7,14 +7,12 @@ installed copies offer each update by themselves.
 
 ## 0.1.78 (2026-11-27)
 
-- Styles are now heard by the same audio model as the songs that sound alike: no second model to download, no second listening of each render. The style model downloaded by earlier versions (18 MB) is deleted with what it heard. Your styles, your own style words and your names for the styles Spool hears are kept.
 - Where Spool is unsure of a song's style, it asks for a confirmation in one click ("Spool thinks this is dnb. Right?"), at the top of the Your styles page and on the song's sheet: yes, another style, mixed, or I don't know. A few at a time, and only where the answer also helps several songs that sound alike.
 - A song alike through its plugins alone (the same correction plugin on every master, the same sampler) no longer gives its style to many others: that hint now counts fully from three songs alike.
 
 <details><summary>En français</summary>
 
-- Les styles sont maintenant entendus par le même modèle audio que les morceaux qui sonnent pareil : plus de second modèle à télécharger, plus de seconde écoute de chaque témoin. Le modèle de styles téléchargé par les versions précédentes (18 Mo) est supprimé avec ce qu'il avait entendu. Vos styles, vos propres mots de styles et vos noms pour les styles que Spool entend sont gardés.
-- Là où Spool hésite sur le style d'un morceau, il demande une confirmation en un clic (« Spool pense que c'est du « dnb ». C'est ça ? »), en haut de la page Tes styles et dans la fiche du morceau : oui, un autre style, varié, ou je ne sais pas. Quelques-unes à la fois, et seulement là où la réponse aide aussi plusieurs morceaux qui sonnent pareil.
+- Là où Spool hésite sur le style d'un morceau, il demande une confirmation en un clic (« Spool pense que c'est de la dnb. C'est ça ? »), en haut de la page Tes styles et dans la fiche du morceau : oui, un autre style, varié, ou je ne sais pas. Quelques-unes à la fois, et seulement là où la réponse aide aussi plusieurs morceaux qui sonnent pareil.
 - Un morceau qui ressemble à d'autres par ses seuls plugins (la même correction sur chaque master, le même sampler) ne leur donne plus son style : cet indice compte pleinement à partir de trois morceaux semblables.
 
 </details>
