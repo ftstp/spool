@@ -1,0 +1,75 @@
+{
+  "title": "Home",
+  "inprog": "{n} in mix or master",
+  "allStats": "All statistics",
+  "tile": {
+    "activity": "Active weeks",
+    "savedSongs": {
+      "one": "{n} song saved",
+      "other": "{n} songs saved"
+    },
+    "activityFoot": "{n} active weeks of the last {total}",
+    "week": "Week of {date}",
+    "done": "Finished in {year}",
+    "doneUnit": {
+      "one": "{n} song finished",
+      "other": "{n} songs finished"
+    },
+    "doneFoot": "{n} in the whole of {year}",
+    "close": "Close to done",
+    "closeFoot": "{mix} in mix · {master} in master",
+    "noAudio": {
+      "one": "{n} without a render",
+      "other": "{n} without a render"
+    },
+    "asleep": "Asleep",
+    "asleepFoot": "arranged or further, nothing saved for 3 months",
+    "doneNone": "A song moved to the Done stage counts here"
+  },
+  "resume": "Continue",
+  "allSongs": "All songs",
+  "almost": "Almost done",
+  "validate": "To review",
+  "acceptAllTitle": "Accepts all {n} suggested stages, including the ones not shown (can be undone)",
+  "acceptAll": "Accept all ({n})",
+  "accept": "Accept",
+  "refuse": "Decline",
+  "styles": "Likely styles",
+  "nothing": "Nothing to review.",
+  "layout": {
+    "done": "Done",
+    "tiles": "Figures at the top",
+    "reset": "Back to the original home",
+    "empty": "Nothing is shown. Add a section with the button below.",
+    "remove": "Remove from Home",
+    "add": "Add a section here",
+    "nothingToAdd": "Everything is already shown",
+    "addSection": "Add a section",
+    "reorg": "Rearrange Home",
+    "reorgEnd": "Stop rearranging",
+    "reorgHint": "Drag a section to move it: the others make room. Right-click to remove or add one."
+  },
+  "blocks": {
+    "resume": "Continue",
+    "almost": "Almost done",
+    "validate": "To review",
+    "progress": "Progress by artist",
+    "opens": "Projects that open and blocking plugins",
+    "tempos": "Tempos and keys",
+    "styles": "Styles and years",
+    "instr": "Most used instruments",
+    "fx": "Most used effects and Live versions",
+    "recovered": "Projects recovered",
+    "ifInstall": "If you install in the suggested order",
+    "stagesDays": "Stages over time",
+    "doneMonth": "Songs finished per month",
+    "favs": "Favourites"
+  },
+  "queueMore": "Show the other {n}",
+  "queueLess": "Show less",
+  "rows": {
+    "one": "{n} row",
+    "other": "{n} rows"
+  },
+  "rowsTitle": "Rows of songs to pick up"
+}

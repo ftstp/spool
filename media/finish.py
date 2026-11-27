@@ -1,0 +1,46 @@
+"""From Remotion's masters in out/ to the files that ship:
+  out/spool-tour.mp4         H.264 yuv420p, CRF 17, AAC, faststart
+  out/spool-tour-poster.webp 1600 px, from out/poster.png (npm run poster)
+  out/spool-tour-loop.webp   silent animated WebP, 960 px, for the README (a repo video does not play there)
+Run after `npm run render` and `npm run poster`."""
+import subprocess
+from pathlib import Path
+
+OUT = Path(__file__).parent / "out"
+RAW = OUT / "spool-tour-raw.mkv"
+run = lambda *a: subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", *a], check=True, cwd=OUT)
+
+# constant quality (CRF 18: 17 went past the download Worker's 25 MiB per file), not a bitrate cap
+v = ["-vf", "format=yuv420p", "-c:v", "libx264", "-preset", "slower", "-crf", "18",
+     "-profile:v", "high", "-level", "4.1", "-color_range", "tv"]
+run("-i", RAW.name, *v, "-movflags", "+faststart", "-c:a", "aac", "-b:a", "160k", "-ar", "48000", "spool-tour.mp4")
+
+run("-i", "poster.png", "-vf", "scale=1600:-1:flags=lanczos", "-c:v", "libwebp", "-quality", "86", "spool-tour-poster.webp")
+
+# the loop: files -> songs, a song sheet and its arrangement (pointed out in turn), statistics +
+# the light/dark wipe (frame ranges of the master, see src/beat.ts)
+segs = [(163, 306), (431, 655), (1427, 1608)]
+fc, fade = [], 0.6
+for i, (a, b) in enumerate(segs):
+    fc.append(f"[0:v]trim=start_frame={a}:end_frame={b},setpts=PTS-STARTPTS[s{i}]")
+for i in range(1, len(segs)):
+    src = "s0" if i == 1 else f"x{i - 1}"
+    off_i = sum((b - a) / 30 for a, b in segs[:i]) - fade * i
+    fc.append(f"[{src}][s{i}]xfade=transition=fade:duration={fade}:offset={off_i:.3f}[x{i}]")
+fc.append(f"[x{len(segs) - 1}]fps=15,scale=960:-1:flags=lanczos[v]")
+run("-i", RAW.name, "-filter_complex", ";".join(fc), "-map", "[v]", "-an", "-c:v", "libwebp_anim", "-lossless", "0",
+    "-quality", "68", "-compression_level", "6", "-loop", "0", "spool-tour-loop.webp")
+for f in ("spool-tour.mp4", "spool-tour-poster.webp", "spool-tour-loop.webp"):
+    print(f, round((OUT / f).stat().st_size / 1e6, 2), "MB")
+
+# ---- the vertical shorts (python finish.py shorts): out/shorts/raw-N.mkv -> spool-short-N-*.mp4
+import sys
+if len(sys.argv) > 1 and sys.argv[1] == "shorts":
+    S = OUT / "shorts"
+    for n, name in ((1, "catalogue"), (2, "files"), (3, "themes")):
+        sv = ["-vf", "format=yuv420p", "-c:v", "libx264", "-preset", "slower", "-crf", "18",
+              "-profile:v", "high", "-level", "4.1", "-color_range", "tv"]
+        subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", f"raw-{n}.mkv", *sv, "-movflags", "+faststart",
+                        "-c:a", "aac", "-b:a", "192k", "-ar", "48000", f"spool-short-{n}-{name}.mp4"], check=True, cwd=S)
+        (S / f"raw-{n}.mkv").unlink()
+        print(f"spool-short-{n}-{name}.mp4", round((S / f"spool-short-{n}-{name}.mp4").stat().st_size / 1e6, 2), "MB")

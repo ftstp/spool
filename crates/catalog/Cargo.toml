@@ -1,0 +1,16 @@
+[package]
+name = "catalog"
+description = "Songs: which song a project file belongs to, versions, variants, names read from folders"
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+
+[dependencies]
+i18n = { path = "../i18n" }
+regex.workspace = true
+fancy-regex.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+unicode-normalization.workspace = true
+rayon.workspace = true
+ts-rs.workspace = true

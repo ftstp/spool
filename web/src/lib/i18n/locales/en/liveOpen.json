@@ -1,0 +1,36 @@
+{
+  "title": "Open “{name}” in Live",
+  "lead": "Spool holds changes for this project that the set does not have yet. Tick the ones to carry:",
+  "repair": "Repair",
+  "repairPlugins": "plugins and samples",
+  "renames": {
+    "one": "{n} plugin renamed",
+    "other": "{n} plugins renamed"
+  },
+  "samples": {
+    "one": "{n} sample found again",
+    "other": "{n} samples found again"
+  },
+  "trials": {
+    "one": "{n} trial version replaced",
+    "other": "{n} trial versions replaced"
+  },
+  "removes": {
+    "one": "{n} plugin removed",
+    "other": "{n} plugins removed"
+  },
+  "markers": "Markers changed in Spool",
+  "markersN": {
+    "one": "{n} marker, in place of the set's",
+    "other": "{n} markers, in place of the set's"
+  },
+  "cleanup": "Clean up",
+  "cleanupDetail": "empty tracks, disabled effects, unused returns",
+  "copyNote": "A copy is written next to the project and opens in Live. The original project is never changed.",
+  "original": "Open the original",
+  "cancel": "Cancel",
+  "withChanges": "Write the copy and open it",
+  "writing": "Writing...",
+  "written": "Copy written: {name}",
+  "presetName": "Opening in Live"
+}

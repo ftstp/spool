@@ -1,0 +1,41 @@
+{
+  "title": "Références",
+  "add": "+ Ajouter",
+  "pick": "Un morceau de référence",
+  "listen": "Écouter",
+  "compare": "Comparer",
+  "detach": "Ne plus en faire une référence ici (le fichier ne bouge pas)",
+  "missing": "introuvable",
+  "viaArtist": "de l'artiste {name}",
+  "viaRelease": "de la sortie {name}",
+  "none": {
+    "song": "Aucune référence : un morceau sorti à côté duquel tenir celui-ci. Ajoute-en une, ou marque un audio du dossier comme référence.",
+    "artist": "Aucune référence pour cet artiste : elles vaudront pour tous ses morceaux.",
+    "release": "Aucune référence pour cette sortie : elles vaudront pour tous ses titres."
+  },
+  "yours": "Le tien",
+  "yourRender": "Ton témoin",
+  "theRef": "La référence",
+  "lufs": "Loudness (LUFS)",
+  "peak": "Crête (dBFS)",
+  "rms": "Niveau moyen (dBFS)",
+  "lra": "Dynamique (LU)",
+  "format": "Format",
+  "mono": "mono",
+  "stereo": "stéréo",
+  "spectrum": "Équilibre des fréquences",
+  "reading": "Lecture des deux fichiers…",
+  "spectrumFailed": "Spectre illisible : {error}",
+  "range": {
+    "sub": "Sub",
+    "bass": "Basses",
+    "lowmid": "Bas-médiums",
+    "mid": "Médiums",
+    "highmid": "Haut-médiums",
+    "air": "Aigus"
+  },
+  "diffHint": "Écart de ton témoin par rapport à la référence, à volume égal : + il en a plus, - il en a moins.",
+  "mark": "Référence",
+  "markTip": "C'est une référence (un morceau sorti), pas un rendu de ce morceau : il ne sera jamais pris pour le témoin",
+  "marked": "« {name} » est une référence de ce morceau"
+}

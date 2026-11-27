@@ -1,0 +1,75 @@
+{
+  "title": "Accueil",
+  "inprog": "{n} en mix ou master",
+  "allStats": "Toutes les statistiques",
+  "tile": {
+    "activity": "Semaines actives",
+    "savedSongs": {
+      "one": "{n} morceau enregistré",
+      "other": "{n} morceaux enregistrés"
+    },
+    "activityFoot": "{n} semaines actives sur les {total} dernières",
+    "week": "Semaine du {date}",
+    "done": "Terminés en {year}",
+    "doneUnit": {
+      "one": "{n} morceau terminé",
+      "other": "{n} morceaux terminés"
+    },
+    "doneFoot": "{n} sur toute l'année {year}",
+    "close": "Proches de la fin",
+    "closeFoot": "{mix} en mix · {master} en master",
+    "noAudio": {
+      "one": "{n} sans témoin",
+      "other": "{n} sans témoin"
+    },
+    "asleep": "Endormis",
+    "asleepFoot": "arrangés ou plus loin, rien d'enregistré depuis 3 mois",
+    "doneNone": "Un morceau passé à l'étape Terminé compte ici"
+  },
+  "resume": "Reprendre",
+  "allSongs": "Tous les morceaux",
+  "almost": "Presque finis",
+  "validate": "À valider",
+  "acceptAllTitle": "Valide les {n} étapes proposées, y compris celles qui ne sont pas affichées (annulable)",
+  "acceptAll": "Tout valider ({n})",
+  "accept": "Valider",
+  "refuse": "Refuser",
+  "styles": "Styles probables",
+  "nothing": "Rien à valider.",
+  "layout": {
+    "done": "Terminé",
+    "tiles": "Chiffres en haut",
+    "reset": "Revenir à l'accueil d'origine",
+    "empty": "Rien n'est affiché. Ajoute une section avec le bouton ci-dessous.",
+    "remove": "Retirer de l'accueil",
+    "add": "Ajouter une section ici",
+    "nothingToAdd": "Tout est déjà affiché",
+    "addSection": "Ajouter une section",
+    "reorg": "Réorganiser l'accueil",
+    "reorgEnd": "Terminer la réorganisation",
+    "reorgHint": "Glisse une section pour la déplacer : les autres se décalent. Clic droit pour en retirer ou en ajouter."
+  },
+  "blocks": {
+    "resume": "Reprendre",
+    "almost": "Presque finis",
+    "validate": "À valider",
+    "progress": "Avancement par artiste",
+    "opens": "Projets qui s'ouvrent et plugins bloquants",
+    "tempos": "Tempos et tonalités",
+    "styles": "Styles et années",
+    "instr": "Instruments les plus utilisés",
+    "fx": "Effets les plus utilisés et versions de Live",
+    "recovered": "Projets récupérés",
+    "ifInstall": "Si tu installes dans l'ordre conseillé",
+    "stagesDays": "Étapes au fil des jours",
+    "doneMonth": "Morceaux terminés par mois",
+    "favs": "Favoris"
+  },
+  "queueMore": "Voir les {n} autres",
+  "queueLess": "Réduire",
+  "rows": {
+    "one": "{n} ligne",
+    "other": "{n} lignes"
+  },
+  "rowsTitle": "Lignes de morceaux à reprendre"
+}

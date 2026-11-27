@@ -1,0 +1,8 @@
+{
+  "fromDisk": "Choisir un fichier...",
+  "dropHint": "ou glisse une image ici. Elle est copiée dans le dossier de Spool, l'original ne bouge pas.",
+  "fromApp": "Ou une image déjà dans tes projets",
+  "loading": "Recherche des images...",
+  "none": "Aucune image trouvée dans ses projets.",
+  "notImage": "Ce fichier n'est pas une image."
+}

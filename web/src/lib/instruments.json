@@ -1,0 +1,1495 @@
+{
+  "piano": {
+    "zones": [
+      {
+        "note": 37,
+        "file": "piano-37.ogg"
+      },
+      {
+        "note": 41,
+        "file": "piano-41.ogg"
+      },
+      {
+        "note": 45,
+        "file": "piano-45.ogg"
+      },
+      {
+        "note": 49,
+        "file": "piano-49.ogg"
+      },
+      {
+        "note": 53,
+        "file": "piano-53.ogg"
+      },
+      {
+        "note": 57,
+        "file": "piano-57.ogg"
+      },
+      {
+        "note": 61,
+        "file": "piano-61.ogg"
+      },
+      {
+        "note": 65,
+        "file": "piano-65.ogg"
+      },
+      {
+        "note": 69,
+        "file": "piano-69.ogg"
+      },
+      {
+        "note": 73,
+        "file": "piano-73.ogg"
+      },
+      {
+        "note": 77,
+        "file": "piano-77.ogg"
+      },
+      {
+        "note": 81,
+        "file": "piano-81.ogg"
+      },
+      {
+        "note": 85,
+        "file": "piano-85.ogg"
+      },
+      {
+        "note": 89,
+        "file": "piano-89.ogg"
+      },
+      {
+        "note": 93,
+        "file": "piano-93.ogg"
+      }
+    ],
+    "len": 5.0,
+    "release": 0.25,
+    "gain": 0.9
+  },
+  "strings": {
+    "zones": [
+      {
+        "note": 36,
+        "file": "strings-36.ogg"
+      },
+      {
+        "note": 43,
+        "file": "strings-43.ogg"
+      },
+      {
+        "note": 50,
+        "file": "strings-50.ogg"
+      },
+      {
+        "note": 55,
+        "file": "strings-55.ogg"
+      },
+      {
+        "note": 57,
+        "file": "strings-57.ogg"
+      },
+      {
+        "note": 59,
+        "file": "strings-59.ogg"
+      },
+      {
+        "note": 64,
+        "file": "strings-64.ogg"
+      },
+      {
+        "note": 66,
+        "file": "strings-66.ogg"
+      },
+      {
+        "note": 71,
+        "file": "strings-71.ogg"
+      },
+      {
+        "note": 72,
+        "file": "strings-72.ogg"
+      },
+      {
+        "note": 77,
+        "file": "strings-77.ogg"
+      },
+      {
+        "note": 79,
+        "file": "strings-79.ogg"
+      },
+      {
+        "note": 86,
+        "file": "strings-86.ogg"
+      }
+    ],
+    "len": 3.5,
+    "release": 0.35,
+    "gain": 1.3
+  },
+  "brass": {
+    "zones": [
+      {
+        "note": 36,
+        "file": "brass-36.ogg"
+      },
+      {
+        "note": 43,
+        "file": "brass-43.ogg"
+      },
+      {
+        "note": 50,
+        "file": "brass-50.ogg"
+      },
+      {
+        "note": 53,
+        "file": "brass-53.ogg"
+      },
+      {
+        "note": 60,
+        "file": "brass-60.ogg"
+      },
+      {
+        "note": 67,
+        "file": "brass-67.ogg"
+      },
+      {
+        "note": 74,
+        "file": "brass-74.ogg"
+      },
+      {
+        "note": 81,
+        "file": "brass-81.ogg"
+      }
+    ],
+    "len": 2.8,
+    "release": 0.2,
+    "gain": 0.85
+  },
+  "viola": {
+    "zones": [
+      {
+        "note": 48,
+        "file": "viola-48.ogg",
+        "loop": [
+          0.9,
+          3.04958
+        ]
+      },
+      {
+        "note": 50,
+        "file": "viola-50.ogg",
+        "loop": [
+          0.9,
+          3.04958
+        ]
+      },
+      {
+        "note": 52,
+        "file": "viola-52.ogg",
+        "loop": [
+          0.9,
+          3.04921
+        ]
+      },
+      {
+        "note": 55,
+        "file": "viola-55.ogg",
+        "loop": [
+          0.9,
+          3.04979
+        ]
+      },
+      {
+        "note": 59,
+        "file": "viola-59.ogg",
+        "loop": [
+          0.9,
+          3.04513
+        ]
+      },
+      {
+        "note": 62,
+        "file": "viola-62.ogg",
+        "loop": [
+          0.9,
+          3.04604
+        ]
+      },
+      {
+        "note": 65,
+        "file": "viola-65.ogg",
+        "loop": [
+          0.9,
+          3.04669
+        ]
+      },
+      {
+        "note": 69,
+        "file": "viola-69.ogg",
+        "loop": [
+          0.9,
+          3.04927
+        ]
+      },
+      {
+        "note": 72,
+        "file": "viola-72.ogg",
+        "loop": [
+          0.9,
+          3.04783
+        ]
+      },
+      {
+        "note": 76,
+        "file": "viola-76.ogg",
+        "loop": [
+          0.9,
+          3.048
+        ]
+      },
+      {
+        "note": 79,
+        "file": "viola-79.ogg",
+        "loop": [
+          0.9,
+          3.04846
+        ]
+      },
+      {
+        "note": 83,
+        "file": "viola-83.ogg",
+        "loop": [
+          0.9,
+          3.04885
+        ]
+      },
+      {
+        "note": 86,
+        "file": "viola-86.ogg",
+        "loop": [
+          0.9,
+          3.04858
+        ]
+      }
+    ],
+    "len": 3.2,
+    "release": 0.35,
+    "gain": 0.74,
+    "held": true
+  },
+  "cello": {
+    "zones": [
+      {
+        "note": 36,
+        "file": "cello-36.ogg",
+        "loop": [
+          0.9,
+          3.04929
+        ]
+      },
+      {
+        "note": 40,
+        "file": "cello-40.ogg",
+        "loop": [
+          0.9,
+          3.04921
+        ]
+      },
+      {
+        "note": 43,
+        "file": "cello-43.ogg",
+        "loop": [
+          0.9,
+          3.04217
+        ]
+      },
+      {
+        "note": 47,
+        "file": "cello-47.ogg",
+        "loop": [
+          0.9,
+          3.0485
+        ]
+      },
+      {
+        "note": 50,
+        "file": "cello-50.ogg",
+        "loop": [
+          0.9,
+          3.04188
+        ]
+      },
+      {
+        "note": 53,
+        "file": "cello-53.ogg",
+        "loop": [
+          0.9,
+          3.04171
+        ]
+      },
+      {
+        "note": 57,
+        "file": "cello-57.ogg",
+        "loop": [
+          0.9,
+          3.04988
+        ]
+      },
+      {
+        "note": 60,
+        "file": "cello-60.ogg",
+        "loop": [
+          0.9,
+          3.04562
+        ]
+      },
+      {
+        "note": 64,
+        "file": "cello-64.ogg",
+        "loop": [
+          0.9,
+          3.04927
+        ]
+      },
+      {
+        "note": 67,
+        "file": "cello-67.ogg",
+        "loop": [
+          0.9,
+          3.04929
+        ]
+      },
+      {
+        "note": 71,
+        "file": "cello-71.ogg",
+        "loop": [
+          0.9,
+          3.04792
+        ]
+      },
+      {
+        "note": 74,
+        "file": "cello-74.ogg",
+        "loop": [
+          0.9,
+          3.04785
+        ]
+      },
+      {
+        "note": 77,
+        "file": "cello-77.ogg",
+        "loop": [
+          0.9,
+          3.04825
+        ]
+      }
+    ],
+    "len": 3.2,
+    "release": 0.35,
+    "gain": 0.79,
+    "held": true
+  },
+  "contrabass": {
+    "zones": [
+      {
+        "note": 30,
+        "file": "contrabass-30.ogg",
+        "loop": [
+          0.9,
+          3.04619
+        ]
+      },
+      {
+        "note": 31,
+        "file": "contrabass-31.ogg",
+        "loop": [
+          0.9,
+          3.04629
+        ]
+      },
+      {
+        "note": 34,
+        "file": "contrabass-34.ogg",
+        "loop": [
+          0.9,
+          3.04612
+        ]
+      },
+      {
+        "note": 36,
+        "file": "contrabass-36.ogg",
+        "loop": [
+          0.9,
+          3.04571
+        ]
+      },
+      {
+        "note": 38,
+        "file": "contrabass-38.ogg",
+        "loop": [
+          0.9,
+          3.0444
+        ]
+      },
+      {
+        "note": 40,
+        "file": "contrabass-40.ogg",
+        "loop": [
+          0.9,
+          3.03621
+        ]
+      },
+      {
+        "note": 42,
+        "file": "contrabass-42.ogg",
+        "loop": [
+          0.9,
+          3.03979
+        ]
+      },
+      {
+        "note": 44,
+        "file": "contrabass-44.ogg",
+        "loop": [
+          0.9,
+          3.04621
+        ]
+      },
+      {
+        "note": 45,
+        "file": "contrabass-45.ogg",
+        "loop": [
+          0.9,
+          3.0334
+        ]
+      },
+      {
+        "note": 49,
+        "file": "contrabass-49.ogg",
+        "loop": [
+          0.9,
+          3.03825
+        ]
+      },
+      {
+        "note": 52,
+        "file": "contrabass-52.ogg",
+        "loop": [
+          0.9,
+          3.04335
+        ]
+      },
+      {
+        "note": 56,
+        "file": "contrabass-56.ogg",
+        "loop": [
+          0.9,
+          3.04438
+        ]
+      },
+      {
+        "note": 59,
+        "file": "contrabass-59.ogg",
+        "loop": [
+          0.9,
+          3.03525
+        ]
+      }
+    ],
+    "len": 3.2,
+    "release": 0.35,
+    "gain": 0.51,
+    "held": true
+  },
+  "pizz": {
+    "zones": [
+      {
+        "note": 36,
+        "file": "pizz-36.ogg"
+      },
+      {
+        "note": 40,
+        "file": "pizz-40.ogg"
+      },
+      {
+        "note": 43,
+        "file": "pizz-43.ogg"
+      },
+      {
+        "note": 47,
+        "file": "pizz-47.ogg"
+      },
+      {
+        "note": 50,
+        "file": "pizz-50.ogg"
+      },
+      {
+        "note": 53,
+        "file": "pizz-53.ogg"
+      },
+      {
+        "note": 55,
+        "file": "pizz-55.ogg"
+      },
+      {
+        "note": 57,
+        "file": "pizz-57.ogg"
+      },
+      {
+        "note": 59,
+        "file": "pizz-59.ogg"
+      },
+      {
+        "note": 60,
+        "file": "pizz-60.ogg"
+      },
+      {
+        "note": 62,
+        "file": "pizz-62.ogg"
+      },
+      {
+        "note": 64,
+        "file": "pizz-64.ogg"
+      },
+      {
+        "note": 66,
+        "file": "pizz-66.ogg"
+      },
+      {
+        "note": 67,
+        "file": "pizz-67.ogg"
+      },
+      {
+        "note": 69,
+        "file": "pizz-69.ogg"
+      },
+      {
+        "note": 71,
+        "file": "pizz-71.ogg"
+      },
+      {
+        "note": 72,
+        "file": "pizz-72.ogg"
+      },
+      {
+        "note": 74,
+        "file": "pizz-74.ogg"
+      },
+      {
+        "note": 76,
+        "file": "pizz-76.ogg"
+      },
+      {
+        "note": 77,
+        "file": "pizz-77.ogg"
+      },
+      {
+        "note": 79,
+        "file": "pizz-79.ogg"
+      },
+      {
+        "note": 83,
+        "file": "pizz-83.ogg"
+      },
+      {
+        "note": 86,
+        "file": "pizz-86.ogg"
+      }
+    ],
+    "len": 1.6,
+    "release": 0.15,
+    "gain": 1.67
+  },
+  "harp": {
+    "zones": [
+      {
+        "note": 28,
+        "file": "harp-28.ogg"
+      },
+      {
+        "note": 31,
+        "file": "harp-31.ogg"
+      },
+      {
+        "note": 35,
+        "file": "harp-35.ogg"
+      },
+      {
+        "note": 38,
+        "file": "harp-38.ogg"
+      },
+      {
+        "note": 41,
+        "file": "harp-41.ogg"
+      },
+      {
+        "note": 45,
+        "file": "harp-45.ogg"
+      },
+      {
+        "note": 48,
+        "file": "harp-48.ogg"
+      },
+      {
+        "note": 52,
+        "file": "harp-52.ogg"
+      },
+      {
+        "note": 55,
+        "file": "harp-55.ogg"
+      },
+      {
+        "note": 59,
+        "file": "harp-59.ogg"
+      },
+      {
+        "note": 62,
+        "file": "harp-62.ogg"
+      },
+      {
+        "note": 65,
+        "file": "harp-65.ogg"
+      },
+      {
+        "note": 69,
+        "file": "harp-69.ogg"
+      },
+      {
+        "note": 72,
+        "file": "harp-72.ogg"
+      },
+      {
+        "note": 76,
+        "file": "harp-76.ogg"
+      },
+      {
+        "note": 79,
+        "file": "harp-79.ogg"
+      },
+      {
+        "note": 83,
+        "file": "harp-83.ogg"
+      },
+      {
+        "note": 86,
+        "file": "harp-86.ogg"
+      },
+      {
+        "note": 89,
+        "file": "harp-89.ogg"
+      },
+      {
+        "note": 93,
+        "file": "harp-93.ogg"
+      },
+      {
+        "note": 95,
+        "file": "harp-95.ogg"
+      },
+      {
+        "note": 98,
+        "file": "harp-98.ogg"
+      },
+      {
+        "note": 101,
+        "file": "harp-101.ogg"
+      }
+    ],
+    "len": 3.0,
+    "release": 0.4,
+    "gain": 1.18
+  },
+  "flute": {
+    "zones": [
+      {
+        "note": 60,
+        "file": "flute-60.ogg",
+        "loop": [
+          0.9,
+          2.84575
+        ]
+      },
+      {
+        "note": 64,
+        "file": "flute-64.ogg",
+        "loop": [
+          0.9,
+          2.84592
+        ]
+      },
+      {
+        "note": 69,
+        "file": "flute-69.ogg",
+        "loop": [
+          0.9,
+          2.84729
+        ]
+      },
+      {
+        "note": 72,
+        "file": "flute-72.ogg",
+        "loop": [
+          0.9,
+          2.84592
+        ]
+      },
+      {
+        "note": 76,
+        "file": "flute-76.ogg",
+        "loop": [
+          0.9,
+          2.849
+        ]
+      },
+      {
+        "note": 81,
+        "file": "flute-81.ogg",
+        "loop": [
+          0.9,
+          2.84692
+        ]
+      },
+      {
+        "note": 84,
+        "file": "flute-84.ogg",
+        "loop": [
+          0.9,
+          2.84798
+        ]
+      },
+      {
+        "note": 88,
+        "file": "flute-88.ogg",
+        "loop": [
+          0.9,
+          2.84692
+        ]
+      },
+      {
+        "note": 93,
+        "file": "flute-93.ogg",
+        "loop": [
+          0.9,
+          2.8444
+        ]
+      },
+      {
+        "note": 96,
+        "file": "flute-96.ogg",
+        "loop": [
+          0.9,
+          2.83948
+        ]
+      }
+    ],
+    "len": 3.0,
+    "release": 0.25,
+    "gain": 0.5,
+    "held": true
+  },
+  "oboe": {
+    "zones": [
+      {
+        "note": 58,
+        "file": "oboe-58.ogg",
+        "loop": [
+          0.9,
+          2.84517
+        ]
+      },
+      {
+        "note": 62,
+        "file": "oboe-62.ogg",
+        "loop": [
+          0.9,
+          2.8461
+        ]
+      },
+      {
+        "note": 65,
+        "file": "oboe-65.ogg",
+        "loop": [
+          0.9,
+          2.84683
+        ]
+      },
+      {
+        "note": 70,
+        "file": "oboe-70.ogg",
+        "loop": [
+          0.9,
+          2.84769
+        ]
+      },
+      {
+        "note": 74,
+        "file": "oboe-74.ogg",
+        "loop": [
+          0.9,
+          2.84558
+        ]
+      },
+      {
+        "note": 77,
+        "file": "oboe-77.ogg",
+        "loop": [
+          0.9,
+          2.84673
+        ]
+      },
+      {
+        "note": 82,
+        "file": "oboe-82.ogg",
+        "loop": [
+          0.9,
+          2.84827
+        ]
+      },
+      {
+        "note": 86,
+        "file": "oboe-86.ogg",
+        "loop": [
+          0.9,
+          2.84825
+        ]
+      },
+      {
+        "note": 89,
+        "file": "oboe-89.ogg",
+        "loop": [
+          0.9,
+          2.84827
+        ]
+      }
+    ],
+    "len": 3.0,
+    "release": 0.2,
+    "gain": 0.51,
+    "held": true
+  },
+  "clarinet": {
+    "zones": [
+      {
+        "note": 50,
+        "file": "clarinet-50.ogg",
+        "loop": [
+          0.9,
+          2.8489
+        ]
+      },
+      {
+        "note": 53,
+        "file": "clarinet-53.ogg",
+        "loop": [
+          0.9,
+          2.84365
+        ]
+      },
+      {
+        "note": 58,
+        "file": "clarinet-58.ogg",
+        "loop": [
+          0.9,
+          2.84458
+        ]
+      },
+      {
+        "note": 62,
+        "file": "clarinet-62.ogg",
+        "loop": [
+          0.9,
+          2.84888
+        ]
+      },
+      {
+        "note": 65,
+        "file": "clarinet-65.ogg",
+        "loop": [
+          0.9,
+          2.84658
+        ]
+      },
+      {
+        "note": 70,
+        "file": "clarinet-70.ogg",
+        "loop": [
+          0.9,
+          2.84681
+        ]
+      },
+      {
+        "note": 74,
+        "file": "clarinet-74.ogg",
+        "loop": [
+          0.9,
+          2.84719
+        ]
+      },
+      {
+        "note": 77,
+        "file": "clarinet-77.ogg",
+        "loop": [
+          0.9,
+          2.84106
+        ]
+      },
+      {
+        "note": 82,
+        "file": "clarinet-82.ogg",
+        "loop": [
+          0.9,
+          2.8476
+        ]
+      },
+      {
+        "note": 86,
+        "file": "clarinet-86.ogg",
+        "loop": [
+          0.9,
+          2.84658
+        ]
+      },
+      {
+        "note": 90,
+        "file": "clarinet-90.ogg",
+        "loop": [
+          0.9,
+          2.8455
+        ]
+      }
+    ],
+    "len": 3.0,
+    "release": 0.2,
+    "gain": 0.42,
+    "held": true
+  },
+  "bassoon": {
+    "zones": [
+      {
+        "note": 34,
+        "file": "bassoon-34.ogg",
+        "loop": [
+          0.9,
+          2.84996
+        ]
+      },
+      {
+        "note": 37,
+        "file": "bassoon-37.ogg",
+        "loop": [
+          0.9,
+          2.84979
+        ]
+      },
+      {
+        "note": 41,
+        "file": "bassoon-41.ogg",
+        "loop": [
+          0.9,
+          2.83706
+        ]
+      },
+      {
+        "note": 45,
+        "file": "bassoon-45.ogg",
+        "loop": [
+          0.9,
+          2.83998
+        ]
+      },
+      {
+        "note": 46,
+        "file": "bassoon-46.ogg",
+        "loop": [
+          0.9,
+          2.84067
+        ]
+      },
+      {
+        "note": 48,
+        "file": "bassoon-48.ogg",
+        "loop": [
+          0.9,
+          2.84121
+        ]
+      },
+      {
+        "note": 55,
+        "file": "bassoon-55.ogg",
+        "loop": [
+          0.9,
+          2.844
+        ]
+      },
+      {
+        "note": 60,
+        "file": "bassoon-60.ogg",
+        "loop": [
+          0.9,
+          2.8419
+        ]
+      },
+      {
+        "note": 63,
+        "file": "bassoon-63.ogg",
+        "loop": [
+          0.9,
+          2.84617
+        ]
+      },
+      {
+        "note": 68,
+        "file": "bassoon-68.ogg",
+        "loop": [
+          0.9,
+          2.84035
+        ]
+      },
+      {
+        "note": 69,
+        "file": "bassoon-69.ogg",
+        "loop": [
+          0.9,
+          2.84719
+        ]
+      },
+      {
+        "note": 72,
+        "file": "bassoon-72.ogg",
+        "loop": [
+          0.9,
+          2.848
+        ]
+      },
+      {
+        "note": 75,
+        "file": "bassoon-75.ogg",
+        "loop": [
+          0.9,
+          2.84804
+        ]
+      }
+    ],
+    "len": 3.0,
+    "release": 0.2,
+    "gain": 0.47,
+    "held": true
+  },
+  "horn": {
+    "zones": [
+      {
+        "note": 33,
+        "file": "horn-33.ogg",
+        "loop": [
+          0.9,
+          2.84717
+        ]
+      },
+      {
+        "note": 36,
+        "file": "horn-36.ogg",
+        "loop": [
+          0.9,
+          2.84979
+        ]
+      },
+      {
+        "note": 39,
+        "file": "horn-39.ogg",
+        "loop": [
+          0.9,
+          2.84871
+        ]
+      },
+      {
+        "note": 43,
+        "file": "horn-43.ogg",
+        "loop": [
+          0.9,
+          2.83781
+        ]
+      },
+      {
+        "note": 46,
+        "file": "horn-46.ogg",
+        "loop": [
+          0.9,
+          2.83827
+        ]
+      },
+      {
+        "note": 50,
+        "file": "horn-50.ogg",
+        "loop": [
+          0.9,
+          2.84262
+        ]
+      },
+      {
+        "note": 53,
+        "file": "horn-53.ogg",
+        "loop": [
+          0.9,
+          2.83817
+        ]
+      },
+      {
+        "note": 57,
+        "file": "horn-57.ogg",
+        "loop": [
+          0.9,
+          2.84471
+        ]
+      },
+      {
+        "note": 60,
+        "file": "horn-60.ogg",
+        "loop": [
+          0.9,
+          2.8441
+        ]
+      },
+      {
+        "note": 74,
+        "file": "horn-74.ogg",
+        "loop": [
+          0.9,
+          2.8444
+        ]
+      },
+      {
+        "note": 77,
+        "file": "horn-77.ogg",
+        "loop": [
+          0.9,
+          2.84485
+        ]
+      }
+    ],
+    "len": 3.0,
+    "release": 0.3,
+    "gain": 0.61,
+    "held": true
+  },
+  "trumpet": {
+    "zones": [
+      {
+        "note": 53,
+        "file": "trumpet-53.ogg",
+        "loop": [
+          0.9,
+          2.84948
+        ]
+      },
+      {
+        "note": 57,
+        "file": "trumpet-57.ogg",
+        "loop": [
+          0.9,
+          2.83935
+        ]
+      },
+      {
+        "note": 60,
+        "file": "trumpet-60.ogg",
+        "loop": [
+          0.9,
+          2.84592
+        ]
+      },
+      {
+        "note": 63,
+        "file": "trumpet-63.ogg",
+        "loop": [
+          0.9,
+          2.84306
+        ]
+      },
+      {
+        "note": 67,
+        "file": "trumpet-67.ogg",
+        "loop": [
+          0.9,
+          2.84235
+        ]
+      },
+      {
+        "note": 70,
+        "file": "trumpet-70.ogg",
+        "loop": [
+          0.9,
+          2.84327
+        ]
+      },
+      {
+        "note": 74,
+        "file": "trumpet-74.ogg",
+        "loop": [
+          0.9,
+          2.84635
+        ]
+      },
+      {
+        "note": 77,
+        "file": "trumpet-77.ogg",
+        "loop": [
+          0.9,
+          2.84242
+        ]
+      },
+      {
+        "note": 81,
+        "file": "trumpet-81.ogg",
+        "loop": [
+          0.9,
+          2.84383
+        ]
+      },
+      {
+        "note": 84,
+        "file": "trumpet-84.ogg",
+        "loop": [
+          0.9,
+          2.84612
+        ]
+      }
+    ],
+    "len": 3.0,
+    "release": 0.2,
+    "gain": 0.69,
+    "held": true
+  },
+  "trombone": {
+    "zones": [
+      {
+        "note": 34,
+        "file": "trombone-34.ogg",
+        "loop": [
+          0.9,
+          2.84979
+        ]
+      },
+      {
+        "note": 37,
+        "file": "trombone-37.ogg",
+        "loop": [
+          0.9,
+          2.84929
+        ]
+      },
+      {
+        "note": 39,
+        "file": "trombone-39.ogg",
+        "loop": [
+          0.9,
+          2.8474
+        ]
+      },
+      {
+        "note": 41,
+        "file": "trombone-41.ogg",
+        "loop": [
+          0.9,
+          2.83804
+        ]
+      },
+      {
+        "note": 46,
+        "file": "trombone-46.ogg",
+        "loop": [
+          0.9,
+          2.84135
+        ]
+      },
+      {
+        "note": 50,
+        "file": "trombone-50.ogg",
+        "loop": [
+          0.9,
+          2.84977
+        ]
+      },
+      {
+        "note": 53,
+        "file": "trombone-53.ogg",
+        "loop": [
+          0.9,
+          2.8436
+        ]
+      },
+      {
+        "note": 60,
+        "file": "trombone-60.ogg",
+        "loop": [
+          0.9,
+          2.84529
+        ]
+      },
+      {
+        "note": 61,
+        "file": "trombone-61.ogg",
+        "loop": [
+          0.9,
+          2.8456
+        ]
+      },
+      {
+        "note": 63,
+        "file": "trombone-63.ogg",
+        "loop": [
+          0.9,
+          2.84665
+        ]
+      },
+      {
+        "note": 65,
+        "file": "trombone-65.ogg",
+        "loop": [
+          0.9,
+          2.8459
+        ]
+      }
+    ],
+    "len": 3.0,
+    "release": 0.25,
+    "gain": 0.74,
+    "held": true
+  },
+  "tuba": {
+    "zones": [
+      {
+        "note": 29,
+        "file": "tuba-29.ogg",
+        "loop": [
+          0.9,
+          2.84917
+        ]
+      },
+      {
+        "note": 34,
+        "file": "tuba-34.ogg",
+        "loop": [
+          0.9,
+          2.84729
+        ]
+      },
+      {
+        "note": 39,
+        "file": "tuba-39.ogg",
+        "loop": [
+          0.9,
+          2.8494
+        ]
+      },
+      {
+        "note": 41,
+        "file": "tuba-41.ogg",
+        "loop": [
+          0.9,
+          2.83829
+        ]
+      },
+      {
+        "note": 46,
+        "file": "tuba-46.ogg",
+        "loop": [
+          0.9,
+          2.83623
+        ]
+      },
+      {
+        "note": 50,
+        "file": "tuba-50.ogg",
+        "loop": [
+          0.9,
+          2.8485
+        ]
+      },
+      {
+        "note": 53,
+        "file": "tuba-53.ogg",
+        "loop": [
+          0.9,
+          2.83669
+        ]
+      },
+      {
+        "note": 58,
+        "file": "tuba-58.ogg",
+        "loop": [
+          0.9,
+          2.84969
+        ]
+      },
+      {
+        "note": 62,
+        "file": "tuba-62.ogg",
+        "loop": [
+          0.9,
+          2.84921
+        ]
+      }
+    ],
+    "len": 3.0,
+    "release": 0.25,
+    "gain": 0.63,
+    "held": true
+  },
+  "timpani": {
+    "zones": [
+      {
+        "note": 33,
+        "file": "timpani-33.ogg"
+      },
+      {
+        "note": 42,
+        "file": "timpani-42.ogg"
+      },
+      {
+        "note": 46,
+        "file": "timpani-46.ogg"
+      },
+      {
+        "note": 49,
+        "file": "timpani-49.ogg"
+      },
+      {
+        "note": 52,
+        "file": "timpani-52.ogg"
+      }
+    ],
+    "len": 3.5,
+    "release": 0.5,
+    "gain": 2.2
+  },
+  "glock": {
+    "zones": [
+      {
+        "note": 79,
+        "file": "glock-79.ogg"
+      },
+      {
+        "note": 84,
+        "file": "glock-84.ogg"
+      },
+      {
+        "note": 91,
+        "file": "glock-91.ogg"
+      },
+      {
+        "note": 96,
+        "file": "glock-96.ogg"
+      },
+      {
+        "note": 103,
+        "file": "glock-103.ogg"
+      },
+      {
+        "note": 108,
+        "file": "glock-108.ogg"
+      }
+    ],
+    "len": 3.0,
+    "release": 0.6,
+    "gain": 2.02
+  }
+}

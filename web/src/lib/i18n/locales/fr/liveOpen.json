@@ -1,0 +1,36 @@
+{
+  "title": "Ouvrir « {name} » dans Live",
+  "lead": "Spool a des changements pour ce projet que le set n'a pas encore. Coche ceux à emporter :",
+  "repair": "Réparer",
+  "repairPlugins": "plugins et samples",
+  "renames": {
+    "one": "{n} plugin renommé",
+    "other": "{n} plugins renommés"
+  },
+  "samples": {
+    "one": "{n} sample retrouvé",
+    "other": "{n} samples retrouvés"
+  },
+  "trials": {
+    "one": "{n} version d'essai remplacée",
+    "other": "{n} versions d'essai remplacées"
+  },
+  "removes": {
+    "one": "{n} plugin retiré",
+    "other": "{n} plugins retirés"
+  },
+  "markers": "Marqueurs changés dans Spool",
+  "markersN": {
+    "one": "{n} marqueur, à la place de ceux du set",
+    "other": "{n} marqueurs, à la place de ceux du set"
+  },
+  "cleanup": "Nettoyer",
+  "cleanupDetail": "pistes vides, effets désactivés, retours inutilisés",
+  "copyNote": "Une copie est écrite à côté du projet et s'ouvre dans Live. Le projet d'origine n'est jamais modifié.",
+  "original": "Ouvrir l'original",
+  "cancel": "Annuler",
+  "withChanges": "Créer la copie et l'ouvrir",
+  "writing": "Écriture...",
+  "written": "Copie écrite : {name}",
+  "presetName": "Ouverture dans Live"
+}

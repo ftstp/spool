@@ -1,0 +1,40 @@
+{
+  "title": "How Spool reads your folders",
+  "lede": "Everyone keeps their projects their own way. Here is what Spool understood of yours, with your own examples, and the rules you can change. A change is shown before it is made, and Ctrl+Z undoes it. Nothing moves on your disk.",
+  "understood": "{files} projects read, {songs} songs",
+  "versions": "{n} projects carry a version number in their name: versions of the same song",
+  "versionDirs": "{n} projects set aside as older versions by their folder (Backup, versions, old...)",
+  "projectDirs": "{n} projects in Live \"... Project\" folders",
+  "fromFolder": "{n} songs are named after their folder (the folder is the song)",
+  "numbered": "{n} songs named by a number alone:",
+  "words": "Working words left out of names:",
+  "edit": "edit",
+  "rules": "The rules",
+  "titleRule": {
+    "label": "A song's title comes",
+    "hint": "Automatic: from the folder when it holds that song alone, else from the project. You can choose one.",
+    "auto": "Automatic",
+    "file": "From the project",
+    "folder": "From the folder"
+  },
+  "folder": {
+    "label": "A song folder holds",
+    "hint": "By name: each different project name is a song, its versions under it. One song: everything in a song folder makes one song (except folders holding other song folders).",
+    "names": "By name",
+    "all": "One song"
+  },
+  "multi": "{n} folders hold several songs. Tick the ones that are a single song:",
+  "multiNone": "No folder holds several songs.",
+  "oneSong": "one song",
+  "previewing": "Working out what it changes...",
+  "preview": "{now} songs today, {after} with these rules",
+  "previewFolders": {
+    "one": "{n} folder changes",
+    "other": "{n} folders change"
+  },
+  "apply": "Apply",
+  "undoable": "Ctrl+Z goes back.",
+  "settingsHint": "What Spool understood of the way you keep your projects, and the rules to change (titles, single-song folders).",
+  "open": "See and adjust",
+  "applying": "Arranging..."
+}

@@ -1,0 +1,74 @@
+{
+  "title": "Médias",
+  "count": "{n} fichiers dans {songs} morceaux",
+  "search": "Chercher un fichier, un morceau...",
+  "viewLabel": "Affichage",
+  "bySong": "Par morceau",
+  "tree": "Arborescence",
+  "kind": {
+    "all": "Tout",
+    "image": "Images",
+    "video": "Vidéos",
+    "font": "Polices",
+    "preset": "Presets",
+    "text": "Notes",
+    "other": "Autres",
+    "audio": "Audio",
+    "audioUnused": "Audio inutilisé"
+  },
+  "lede": "Ce que contiennent les moodboards et les dossiers des morceaux. L'étoile fait d'une image celle du morceau (Ctrl+Z l'annule) ; rien n'est déplacé sur ton disque.",
+  "none": "Aucun média trouvé : ni image, ni vidéo, ni police, ni preset dans les dossiers des morceaux ou leurs moodboards.",
+  "noneHere": "Rien pour ce filtre.",
+  "enlarge": "Agrandir {name}",
+  "coverSet": "En faire l'image du morceau",
+  "coverUnset": "Image choisie : clique pour revenir au choix de l'app",
+  "coverAuto": "Image choisie par l'app",
+  "isCover": "image du morceau",
+  "showAll": "Voir les {n} autres",
+  "audio": {
+    "lede": "Les audios des dossiers de morceaux qu'aucun morceau n'utilise : ni témoin, ni sample joué par un projet, ni référence. Souvent un rendu que l'app n'a pas relié par son nom : lie-le comme témoin. Rien n'est déplacé sur ton disque.",
+    "count": {
+      "one": "{n} fichier",
+      "other": "{n} fichiers"
+    },
+    "reveal": "Ouvrir le dossier",
+    "listen": "Écouter",
+    "near": "Nom proche de :",
+    "link": "Lier...",
+    "close": "Fermer",
+    "as": "Comme",
+    "asTemoin": "Témoin d'un morceau",
+    "asBoard": "Moodboard d'un morceau",
+    "asRef": "Référence",
+    "refSong": "d'un morceau",
+    "refArtist": "d'un artiste",
+    "refRelease": "d'une sortie",
+    "find": "Chercher...",
+    "suggested": "suggéré",
+    "noTarget": "Aucun résultat.",
+    "doneTemoin": "{name} est le témoin de {title}.",
+    "doneBoard": "{name} est sur le moodboard de {title}.",
+    "doneRef": "{name} est une référence pour {title}.",
+    "none": "Aucun audio inutilisé ici.",
+    "loadMore": "Voir {n} dossiers de plus"
+  },
+  "scopeLabel": "Source",
+  "scope": {
+    "songs": "Des morceaux ({n})",
+    "loose": "Hors projets ({n})"
+  },
+  "pick": {
+    "bar": "Sélection",
+    "count": {
+      "one": "{n} média sélectionné",
+      "other": "{n} médias sélectionnés"
+    },
+    "send": "Envoyer vers un moodboard...",
+    "clear": "Tout désélectionner",
+    "one": "Sélectionner {name}",
+    "folder": "Sélectionner tout le dossier"
+  },
+  "loose": {
+    "lede": "Les images, vidéos, sons et notes des dossiers sans projet, hors de tes dossiers de morceaux (les mêmes que le panneau « Médias hors projets » de la vue Dossiers). Coche-en plusieurs pour les envoyer d'un coup vers le moodboard d'un morceau, d'une sortie ou d'un artiste. Rien n'est déplacé sur ton disque."
+  }
+}

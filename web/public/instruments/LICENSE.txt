@@ -1,0 +1,13 @@
+Recorded instruments (piano, strings by section, pizzicato, harp, woodwinds, brass, timpani,
+glockenspiel)
+
+From VSCO 2 Community Edition by Versilian Studios LLC, released under CC0 1.0
+Universal (public domain dedication): https://github.com/sgossner/VSCO-2-CE
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Upright Piano sampled by Simon Dalzell of Ivy Audio. Credit to the original authors and
+Versilian Studios, encouraged by the library, is given here with thanks.
+
+Each note was trimmed, faded, normalised, made mono and encoded as Opus by
+tools/make_instruments.py and tools/make_orchestra.py (a held instrument's notes with a
+sustain loop crossfaded into them).

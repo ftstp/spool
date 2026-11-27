@@ -1,0 +1,41 @@
+{
+  "title": "References",
+  "add": "+ Add",
+  "pick": "A reference track",
+  "listen": "Listen",
+  "compare": "Compare",
+  "detach": "No longer a reference here (the file does not move)",
+  "missing": "not found",
+  "viaArtist": "from the artist {name}",
+  "viaRelease": "from the release {name}",
+  "none": {
+    "song": "No reference: a released track to hold this one against. Add one, or mark an audio file of the folder as a reference.",
+    "artist": "No reference for this artist: they will count for all their songs.",
+    "release": "No reference for this release: they will count for all its tracks."
+  },
+  "yours": "Yours",
+  "yourRender": "Your render",
+  "theRef": "The reference",
+  "lufs": "Loudness (LUFS)",
+  "peak": "Peak (dBFS)",
+  "rms": "Average level (dBFS)",
+  "lra": "Dynamics (LU)",
+  "format": "Format",
+  "mono": "mono",
+  "stereo": "stereo",
+  "spectrum": "Frequency balance",
+  "reading": "Reading both files…",
+  "spectrumFailed": "Spectrum unreadable: {error}",
+  "range": {
+    "sub": "Sub",
+    "bass": "Bass",
+    "lowmid": "Low mids",
+    "mid": "Mids",
+    "highmid": "High mids",
+    "air": "Highs"
+  },
+  "diffHint": "How your render differs from the reference, at equal loudness: + it has more, - it has less.",
+  "mark": "Reference",
+  "markTip": "This is a reference (a released track), not a render of this song: it is never taken for the reference render",
+  "marked": "\"{name}\" is a reference of this song"
+}

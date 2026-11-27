@@ -1,0 +1,177 @@
+{
+  "kind": {
+    "single": "Single",
+    "ep": "EP",
+    "lp": "Album",
+    "compil": "Compilation"
+  },
+  "todo": {
+    "blocked": {
+      "one": "{n} track blocked by a plugin to install",
+      "other": "{n} tracks blocked by a plugin to install"
+    },
+    "finishOne": "finish {a}",
+    "finishTwo": "finish {a} and {b}",
+    "toFinish": "{n} tracks to finish",
+    "noAudio": "{n} without an audio render",
+    "missing": {
+      "one": "{n} song not found",
+      "other": "{n} songs not found"
+    }
+  },
+  "countdown": {
+    "today": "out today",
+    "tomorrow": "out tomorrow",
+    "in": "in {n} days",
+    "ago": {
+      "one": "released {n} day ago",
+      "other": "released {n} days ago"
+    }
+  },
+  "hours": "{h}h {m}",
+  "minutes": "{n} min",
+  "nTracks": {
+    "one": "{n} track",
+    "other": "{n} tracks"
+  },
+  "title": "Releases",
+  "intro": "Your singles, EPs and albums: the tracks in order, where each one stands, what's left before the date.",
+  "new": "+ New release",
+  "newTitle": "New release",
+  "readyTitle": {
+    "one": "{n} of {total} tracks mastered or done",
+    "other": "{n} of {total} tracks mastered or done"
+  },
+  "ready": "{ready}/{count} ready",
+  "readyDate": "{ready}/{count} ready · {date}, {countdown}",
+  "firstTitle": "Your first release",
+  "firstText": "Group songs into a single, EP or album to follow where each track stands and what's left before the release date.",
+  "create": "Create a release",
+  "hintsTitle": "Your folders that look like releases",
+  "hintsText": "Their name says EP, LP or album. Making one a release takes its songs in the order of their names; you can reorder them afterwards.",
+  "inFolder": "in {path}",
+  "mainFolder": "the main folder",
+  "make": "Make it a release",
+  "page": {
+    "gone": "This release no longer exists.",
+    "all": "All releases",
+    "back": "‹ Releases",
+    "coverTitle": "Which track's artwork?",
+    "coverFirst": "Artwork: the first one found",
+    "coverOf": "Artwork from {title}",
+    "titleLabel": "Release title",
+    "artist": "Artist",
+    "date": "Release date",
+    "todo": "Still to do: {list}.",
+    "allReady": "Everything is ready.",
+    "allReadyFor": "Everything is ready for {date}.",
+    "addBelow": "Add songs below.",
+    "listen": {
+      "single": "▶ Play the single through",
+      "ep": "▶ Play the EP through",
+      "lp": "▶ Play the album through",
+      "compil": "▶ Play the compilation through",
+      "other": "▶ Play the {kind} through"
+    },
+    "arrangeTitle": "Shows first which folders would move and where. Nothing moves until you confirm.",
+    "arrange": "File on disk",
+    "delete": "Delete",
+    "physOff": "This release only exists in the app. To arrange its folders on disk too, turn on physical arranging in {link}.",
+    "settingsLink": "Settings",
+    "nothingAlready": "Nothing to move: its songs are already in \"{target}\".",
+    "nothingCant": "Nothing to move: no folder can be moved.",
+    "movesExisting": {
+      "one": "The folder of {n} song will go into the folder:",
+      "other": "The folders of {n} songs will go into the folder:"
+    },
+    "movesNew": {
+      "one": "The folder of {n} song will go into a new folder:",
+      "other": "The folders of {n} songs will go into a new folder:"
+    },
+    "already": "{n} already in it.",
+    "stay": "Staying put: {list}.",
+    "checked": "Every project is checked: a project that would lose a sample is not moved. Ctrl+Z puts everything back.",
+    "arranging": "Filing...",
+    "arrangeNow": "File now",
+    "otherFolder": "Choose another folder",
+    "suggested": "Suggested folder",
+    "computing": "Working it out...",
+    "pickParent": "Which folder should the release go in?",
+    "arrangedDone": {
+      "one": "{n} folder filed",
+      "other": "{n} folders filed"
+    },
+    "arrangedLeft": {
+      "one": "{n} left in place",
+      "other": "{n} left in place"
+    },
+    "arranged": "{done}, {left}: {why}",
+    "tracks": "Tracks",
+    "grip": "Drag to move",
+    "noRenderTitle": "No audio render",
+    "noRender": "no render",
+    "bad": "plugin to install",
+    "lost": "settings lost",
+    "missing": "Song not found (deleted or moved)",
+    "removeTitle": "Remove from the release",
+    "remove": "Remove",
+    "addPh": "+ Add a song: title, artist or folder",
+    "fromFolder": "Created from the folder {folder}",
+    "board": "Mood board",
+    "boardHint": "Drop files here from Explorer (pictures, sounds, MIDI), or send samples, MIDI files or renders: the \"Send to a mood board\" button on the Samples and MIDI pages, or a right-click on a file.",
+    "changeCover": "Change the picture",
+    "addCover": "Add a picture",
+    "coverPick": "Picture of \"{title}\"",
+    "coverBack": "Use a track's artwork again",
+    "notes": "Notes",
+    "notesPh": "Ideas, links, labels contacted...",
+    "col": {
+      "title": "Title",
+      "style": "Style",
+      "key": "Key",
+      "tempo": "BPM",
+      "stage": "Stage",
+      "saved": "Modified",
+      "len": "Length"
+    },
+    "previewNote": "Preview: nothing has moved yet.",
+    "whatHappens": "If you confirm, these song folders are moved (not copied) into this folder, with everything in them: projects, samples, renders. Live finds everything as before. Other files are not touched.",
+    "arrangeNowN": {
+      "one": "Move {n} folder",
+      "other": "Move {n} folders"
+    },
+    "ftPh": "+ with (collaborators) on every track",
+    "ftTip": "Collaborators on every track of the release: added here, they go on each one; taken away, they leave each one.",
+    "ftUndo": {
+      "one": "Collaborators on {n} track of {title}",
+      "other": "Collaborators on {n} tracks of {title}"
+    },
+    "reveal": "Open folder",
+    "revealTip": "Open \"{folder}\" in Explorer"
+  },
+  "filter": {
+    "q": "Filter releases",
+    "kind": "Format",
+    "kindAll": "All formats",
+    "when": "When",
+    "whenAll": "All",
+    "soon": "Upcoming",
+    "out": "Out already",
+    "undated": "No date",
+    "shown": "{n} of {total}",
+    "none": "No release matches."
+  },
+  "singles": {
+    "title": "Songs marked single",
+    "text": "Their type says \"Single\", but no release holds them yet. One click makes each a release (single), to date and follow like the others.",
+    "make": "Make it a release"
+  },
+  "dnd": {
+    "added": "\"{song}\" added to \"{release}\"",
+    "already": "\"{song}\" is already in \"{release}\""
+  },
+  "playAll": {
+    "one": "Play the release ({n} track)",
+    "other": "Play the whole release ({n} tracks)"
+  }
+}
